@@ -9,6 +9,7 @@ import {
 const contentfulClient = createClient({
   space: process.env.CONTENTFUL_SPACE_ID ?? '',
   accessToken: process.env.CONTENTFUL_TOKEN ?? '',
+  environment: process.env.CONTENTFUL_ENVIRONMENT ?? 'master',
 });
 
 const previewClient = createClient({
