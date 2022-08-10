@@ -54,20 +54,22 @@ Simply follow the instructions, which will guide you through the necessary steps
 
 ### Step 5. Deploy Your Personal Playground on Vercel
 
-- As the last step, click **Deploy**, and you will automatically be redirected to Vercel.
+- Click on **Deploy**, and you will automatically be redirected to Vercel.
 - Within the Vercel deployment wizard, simply create a repository and type in your saved credentials.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fninetailed-inc%2Fninetailed-examples%2Fmarketing-contentful-next&env=NEXT_PUBLIC_NINETAILED_CLIENT_ID,NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID,NEXT_PUBLIC_NINETAILED_MANAGEMENT_SECRET,CONTENTFUL_SPACE_ID,CONTENTFUL_TOKEN,CONTENTFUL_PREVIEW_TOKEN,CONTENTFUL_MANAGEMENT_TOKEN&project-name=ninetailed-contentful-next-starter&repository-name=ninetailed-contentful-next-starter&build-command=npm%20run%20build-and-setup)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fninetailed-inc%2Fninetailed-examples%2Fmarketing-contentful-next&env=NEXT_PUBLIC_NINETAILED_CLIENT_ID,NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID,NEXT_PUBLIC_NINETAILED_MANAGEMENT_SECRET,NEXT_PUBLIC_NINETAILED_ENVIRONMENT,CONTENTFUL_SPACE_ID,CONTENTFUL_TOKEN,CONTENTFUL_PREVIEW_TOKEN,CONTENTFUL_MANAGEMENT_TOKEN,CONTENTFUL_ENVIRONMENT&project-name=ninetailed-marketing-contentful-next&repository-name=ninetailed-marketing-contentful-next&build-command=npm%20run%20build-and-setup)
 
 Mnemonic for credential relatedness:
 ``` bash
 NEXT_PUBLIC_NINETAILED_CLIENT_ID = "API Key"
 NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID = "API Token - Client ID"
 NEXT_PUBLIC_NINETAILED_MANAGEMENT_SECRET = "API Token - Secret Key"
+NEXT_PUBLIC_NINETAILED_ENVIRONMENT = "Ninetailed Environment Name ('main' or 'developement')"
 CONTENTFUL_SPACE_ID = "Space ID"
 CONTENTFUL_TOKEN = "Content Delivery API - access token"
 CONTENTFUL_PREVIEW_TOKEN = "Content Preview API - access token"
 CONTENTFUL_MANAGEMENT_TOKEN= "Personal Access Token"
+CONTENTFUL_ENVIRONMENT = "Contenful Environment Name"
 ```
 
 ### Step 6. Connect Contentful With Ninetailed
@@ -101,7 +103,7 @@ yarn install
 Provide the required environment variables to your .env file:
 ```bash
 NEXT_PUBLIC_NINETAILED_CLIENT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-NEXT_PUBLIC_NINETAILED_ENVIRONMENT=main
+NEXT_PUBLIC_NINETAILED_ENVIRONMENT=main||development
 NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 NEXT_PUBLIC_NINETAILED_MANAGEMENT_SECRET=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 
@@ -109,8 +111,8 @@ CONTENTFUL_SPACE_ID=XXXXXXXXXXXX
 CONTENTFUL_TOKEN=XXXXXXXXXXXXX_XXXXXXXXXXXXXXXXXXXXXXXXXX_XX
 CONTENTFUL_PREVIEW_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 CONTENTFUL_MANAGEMENT_TOKEN=XXXXX-XXXXX-XXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-CONTENTFUL_ENVIRONMENT=master
-CONTENTFUL_SPACE_DATA_LOCATION=path/to/your/jsonData.json
+CONTENTFUL_ENVIRONMENT=nameOfYourEnvironment
+CONTENTFUL_SPACE_DATA_LOCATION=./path/to/your/jsonData.json
 ```
 
 Run the development server:
