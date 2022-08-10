@@ -13,6 +13,7 @@ const exportOptions = {
   managementToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN,
   /* deliveryToken: process.env.CONTENTFUL_TOKEN, */
   contentFile: process.env.CONTENTFUL_SPACE_DATA_LOCATION,
+  includeDrafts: true,
 };
 
 if (
