@@ -43,6 +43,9 @@ Simply follow the instructions, which will guide you through the necessary steps
   - **Content Preview API - access token** (CONTENTFUL_PREVIEW_TOKEN)
 - Go back and select the **Content management tokens** tab.
 - Generate a **Personal Access Token** (CONTENTFUL_MANAGEMENT_TOKEN) and copy it immediately to your note.
+- Because Contentful provides individual environments for you to work with, you must specify the environment name in the credentials. In case you don't use environments enter 'master' (without quotes) as the **Contentful Environment Name** (CONTENTFUL_ENVIRONMENT). Otherwise, provide your chosen environment in the credentials.
+
+
 
 ### Step 4. Create Ninetailed API Credentials
 > ⚠️ **HINT:** Save the created API credentials temporarily in a note or a separate file, as you will need to provide them in the last step.
@@ -51,6 +54,8 @@ Simply follow the instructions, which will guide you through the necessary steps
 - Next, in the sidebar, go to **Settings**. In the appearing modal, navigate to **API Tokens**.
 - Click on **Generate Token**, enter a descriptive phrase, and select **Read Only** as a role.
 - After creation, save the **Client ID** (NINETAILED_MANAGEMENT_CLIENT_ID) and the **Secret Key** (NINETAILED_MANAGEMENT_SECRET).
+
+
 
 ### Step 5. Deploy Your Personal Playground on Vercel
 
@@ -69,7 +74,7 @@ CONTENTFUL_SPACE_ID = "Space ID"
 CONTENTFUL_TOKEN = "Content Delivery API - access token"
 CONTENTFUL_PREVIEW_TOKEN = "Content Preview API - access token"
 CONTENTFUL_MANAGEMENT_TOKEN= "Personal Access Token"
-CONTENTFUL_ENVIRONMENT = "Contenful Environment Name"
+CONTENTFUL_ENVIRONMENT = "Contenful Environment Name (default = 'master')"
 ```
 
 ### Step 6. Connect Contentful With Ninetailed
