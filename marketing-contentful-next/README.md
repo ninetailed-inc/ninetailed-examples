@@ -43,7 +43,7 @@ Simply follow the instructions, which will guide you through the necessary steps
   - **Content Preview API - access token** (CONTENTFUL_PREVIEW_TOKEN)
 - Go back and select the **Content management tokens** tab.
 - Generate a **Personal Access Token** (CONTENTFUL_MANAGEMENT_TOKEN) and copy it immediately to your note.
-- Because Contentful provides individual environments for you to work with, you must specify the environment name in the credentials. In case you don't use environments enter 'master' (without quotes) as the **Contentful Environment Name** (CONTENTFUL_ENVIRONMENT). Otherwise, provide your chosen environment in the credentials.
+- At last, because Contentful provides individual environments for you to work with, you must specify the environment name in the credentials. In case you don't use environments enter 'master' (without quotes) as the **Contentful Environment Name** (CONTENTFUL_ENVIRONMENT). Otherwise, provide your chosen environmental name in the credentials.
 
 
 
@@ -54,7 +54,7 @@ Simply follow the instructions, which will guide you through the necessary steps
 - Next, in the sidebar, go to **Settings**. In the appearing modal, navigate to **API Tokens**.
 - Click on **Generate Token**, enter a descriptive phrase, and select **Read Only** as a role.
 - After creation, save the **Client ID** (NINETAILED_MANAGEMENT_CLIENT_ID) and the **Secret Key** (NINETAILED_MANAGEMENT_SECRET).
-
+- Similar to Contentful, Ninetailed offers two self-sufficient working environments. You can choose to work in the 'main' or 'development' environment. Please enter the name of the **Ninetailed Environment** of your choice in the credentials without quotes (NEXT_PUBLIC_NINETAILED_ENVIRONMENT).
 
 
 ### Step 5. Deploy Your Personal Playground on Vercel
@@ -82,12 +82,8 @@ CONTENTFUL_ENVIRONMENT = "Contenful Environment Name (default = 'master')"
 - On the next page, scroll down the provided list of available apps and click on the **Ninetailed Personalization** application.
 - Install the Ninetailed Personalization application and authorize access to your space (make sure to install ).
 - Afterward, click on connect, and you will be automatically redirected to your Ninetailed account.
-- Next, authenticate with Contentful.
+- Next, make sure you are in the desired **Ninetailed Environment**. If so authenticate with Contentful, otherwise switch to the wanted environment.
 - At last, select the Contentful space you want to connect to Ninetailed, provide a name for the connection and confirm with **create content source**.
-
-> **NOTE:** By default, deployment assumes that Contentful will be connected to your Ninetailed organization's **Main** environment.
-> To change this behavior, add the following environment variable `NEXT_PUBLIC_NINETAILED_ENVIRONMENT=otherEnvThanMain` to your project settings in Vercel.
-
 
 ### Step 7. Final Remark
 
@@ -108,7 +104,7 @@ yarn install
 Provide the required environment variables to your .env file:
 ```bash
 NEXT_PUBLIC_NINETAILED_CLIENT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-NEXT_PUBLIC_NINETAILED_ENVIRONMENT=main||development
+NEXT_PUBLIC_NINETAILED_ENVIRONMENT=main || development
 NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 NEXT_PUBLIC_NINETAILED_MANAGEMENT_SECRET=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 
