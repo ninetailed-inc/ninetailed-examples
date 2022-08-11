@@ -90,7 +90,7 @@ const BlockRenderer = ({ block }: BlockRendererProps) => {
       return ExperienceMapper.mapExperience(experience);
     });
 
-  /*console.log(experiences);*/
+  /* console.log(experiences); */
   return (
     <div key={`${contentTypeId}-${id}`}>
       <Experience
