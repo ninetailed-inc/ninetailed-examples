@@ -12,7 +12,7 @@
         "id": "nt_audience",
         "type": "ContentType",
         "createdAt": "2022-07-12T10:27:51.829Z",
-        "updatedAt": "2022-07-12T11:59:56.883Z",
+        "updatedAt": "2022-08-23T06:40:26.100Z",
         "environment": {
           "sys": {
             "id": "Do_Not_Delete_Template",
@@ -20,8 +20,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 3,
-        "publishedAt": "2022-07-12T11:59:56.883Z",
+        "publishedVersion": 11,
+        "publishedAt": "2022-08-23T06:40:26.100Z",
         "firstPublishedAt": "2022-07-12T10:27:54.235Z",
         "createdBy": {
           "sys": {
@@ -33,17 +33,17 @@
         "updatedBy": {
           "sys": {
             "type": "Link",
-            "linkType": "AppDefinition",
-            "id": "4QYnIIKna8TpXegJp3oSBi"
+            "linkType": "User",
+            "id": "6p22x7hCkF00U1I474UFkp"
           }
         },
-        "publishedCounter": 2,
-        "version": 4,
+        "publishedCounter": 6,
+        "version": 12,
         "publishedBy": {
           "sys": {
             "type": "Link",
-            "linkType": "AppDefinition",
-            "id": "4QYnIIKna8TpXegJp3oSBi"
+            "linkType": "User",
+            "id": "6p22x7hCkF00U1I474UFkp"
           }
         }
       },
@@ -2385,7 +2385,7 @@
         "id": "nt_experience",
         "type": "ContentType",
         "createdAt": "2022-07-12T11:59:58.743Z",
-        "updatedAt": "2022-08-10T08:50:54.865Z",
+        "updatedAt": "2022-08-23T06:40:11.409Z",
         "environment": {
           "sys": {
             "id": "Do_Not_Delete_Template",
@@ -2393,8 +2393,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 3,
-        "publishedAt": "2022-08-10T08:50:54.865Z",
+        "publishedVersion": 7,
+        "publishedAt": "2022-08-23T06:40:11.409Z",
         "firstPublishedAt": "2022-07-12T11:59:59.036Z",
         "createdBy": {
           "sys": {
@@ -2410,8 +2410,8 @@
             "id": "6p22x7hCkF00U1I474UFkp"
           }
         },
-        "publishedCounter": 2,
-        "version": 4,
+        "publishedCounter": 4,
+        "version": 8,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -2528,7 +2528,7 @@
             "linkType": "Space"
           }
         },
-        "version": 4,
+        "version": 11,
         "createdAt": "2022-07-12T10:27:54.318Z",
         "createdBy": {
           "sys": {
@@ -2537,12 +2537,12 @@
             "linkType": "User"
           }
         },
-        "updatedAt": "2022-07-12T12:00:00.087Z",
+        "updatedAt": "2022-08-23T06:40:26.674Z",
         "updatedBy": {
           "sys": {
-            "id": "4QYnIIKna8TpXegJp3oSBi",
+            "id": "6p22x7hCkF00U1I474UFkp",
             "type": "Link",
-            "linkType": "AppDefinition"
+            "linkType": "User"
           }
         },
         "contentType": {
@@ -2567,6 +2567,11 @@
           "widgetNamespace": "builtin"
         },
         {
+          "fieldId": "nt_description",
+          "widgetId": "multipleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
           "fieldId": "nt_rules",
           "widgetId": "4QYnIIKna8TpXegJp3oSBi",
           "widgetNamespace": "app"
@@ -2575,11 +2580,6 @@
           "fieldId": "nt_audience_id",
           "widgetId": "4QYnIIKna8TpXegJp3oSBi",
           "widgetNamespace": "app"
-        },
-        {
-          "fieldId": "nt_description",
-          "widgetId": "multipleLine",
-          "widgetNamespace": "builtin"
         }
       ]
     },
@@ -3623,7 +3623,7 @@
             "linkType": "Space"
           }
         },
-        "version": 4,
+        "version": 8,
         "createdAt": "2022-07-12T11:59:59.138Z",
         "createdBy": {
           "sys": {
@@ -3632,7 +3632,7 @@
             "linkType": "AppDefinition"
           }
         },
-        "updatedAt": "2022-08-10T08:50:55.409Z",
+        "updatedAt": "2022-08-23T06:40:11.972Z",
         "updatedBy": {
           "sys": {
             "id": "6p22x7hCkF00U1I474UFkp",
@@ -3673,8 +3673,8 @@
         },
         {
           "fieldId": "nt_config",
-          "widgetId": "objectEditor",
-          "widgetNamespace": "builtin"
+          "widgetId": "4QYnIIKna8TpXegJp3oSBi",
+          "widgetNamespace": "app"
         },
         {
           "fieldId": "nt_audience",
