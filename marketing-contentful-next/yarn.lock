@@ -1187,10 +1187,10 @@ contentful-import@8.3.0:
     p-queue "^6.6.2"
     yargs "^17.3.0"
 
-contentful-management@10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-10.3.1.tgz#924db409da961704ad77f62aa441229146e8efc0"
-  integrity sha512-WhpVdhWuOyCXEEXSTtoxbtD0lkDkHs0HDfDQPa+V8FTSbhn9c241jh2WvX1g8HiK/0Bh1pN9pjgymZ0HZ7L9dQ==
+contentful-management@^10.0.0:
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-10.4.0.tgz#97b62411b1228a042608448a7facd57f5b36bb3c"
+  integrity sha512-7u7Bh1Mkto2+6yQpTV2pEvofZYCuIRuysuACz0pZZzWh7JzH203OUsHvINXhd9D/qUZe9qXEoOrEoTxulKxShA==
   dependencies:
     "@types/json-patch" "0.0.30"
     axios "^0.27.1"
@@ -1198,10 +1198,10 @@ contentful-management@10.3.1:
     fast-copy "^2.1.1"
     lodash.isplainobject "^4.0.6"
 
-contentful-management@^10.0.0:
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-10.4.0.tgz#97b62411b1228a042608448a7facd57f5b36bb3c"
-  integrity sha512-7u7Bh1Mkto2+6yQpTV2pEvofZYCuIRuysuACz0pZZzWh7JzH203OUsHvINXhd9D/qUZe9qXEoOrEoTxulKxShA==
+contentful-management@^10.15.1:
+  version "10.15.1"
+  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-10.15.1.tgz#49127a33855ef52f6d9555597cc8f89298f3170a"
+  integrity sha512-YA4HEn+b3/thFW9m9ynZVBNbO6Ayl1ZGiqvTCr6rIlCvNxT/0yVosZ4MrJqtJ7cSXneghSwR1vRePMgifxnclQ==
   dependencies:
     "@types/json-patch" "0.0.30"
     axios "^0.27.1"
