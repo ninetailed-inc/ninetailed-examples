@@ -17,7 +17,8 @@
     "contentful-typescript-codegen": "PATH_TO_ENV_FILE=.env.local contentful-typescript-codegen --output types/contentful.d.ts",
     "setup": "PATH_TO_ENV_FILE=.env.local node ./contentful/setup.js",
     "export": "PATH_TO_ENV_FILE=.env.local node ./contentful/export.js",
-    "build-and-setup": "PATH_TO_ENV_FILE=.env node ./contentful/setup.js && next build"
+    "build-and-setup": "PATH_TO_ENV_FILE=.env node ./contentful/setup.js && next build",
+    "delete-entries": "PATH_TO_ENV_FILE=.env.local CONTENT_TYPE=testType LIMIT=1000 node ./contentful/deleteEntriesOfContentType.js"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "15.12.1",
