@@ -16,11 +16,8 @@ export interface IBannerFields {
   /** slug */
   slug: string;
 
-  /** Variants */
-  nt_variants?: IBanner[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
 }
 
 export interface IBanner extends Entry<IBannerFields> {
@@ -33,37 +30,6 @@ export interface IBanner extends Entry<IBannerFields> {
     contentType: {
       sys: {
         id: 'banner';
-        linkType: 'ContentType';
-        type: 'Link';
-      };
-    };
-  };
-}
-
-export interface IBlockParagraphFields {
-  /** Internal name */
-  internalName?: string | undefined;
-
-  /** Text */
-  text: Document;
-
-  /** Variants */
-  nt_variants?: IBlockParagraph[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
-}
-
-export interface IBlockParagraph extends Entry<IBlockParagraphFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: 'blockParagraph';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -124,11 +90,8 @@ export interface ICtaFields {
   /** Buttons */
   buttons?: IButton[] | undefined;
 
-  /** Variants */
-  nt_variants?: ICta[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
 }
 
 export interface ICta extends Entry<ICtaFields> {
@@ -167,11 +130,8 @@ export interface IFeatureFields {
   /** Image position */
   imagePosition?: 'right' | 'left' | undefined;
 
-  /** Variants */
-  nt_variants?: IFeature[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
 }
 
 export interface IFeature extends Entry<IFeatureFields> {
@@ -200,12 +160,6 @@ export interface IFooterFields {
 
   /** Copyright */
   copyright: Document;
-
-  /** Variants */
-  nt_variants?: IFooter[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
 }
 
 export interface IFooter extends Entry<IFooterFields> {
@@ -227,22 +181,7 @@ export interface IFooter extends Entry<IFooterFields> {
 
 export interface IFormFields {
   /** Internal Name */
-  internalName: string;
-
-  /** Hubspot Form ID */
-  hubspotFormId: string;
-
-  /** Hubspot Portal ID */
-  hubspotPortalId: string;
-
-  /** Hubspot Portal Region */
-  hubspotPortalRegion: string;
-
-  /** Variants */
-  nt_variants?: IForm[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
+  internalName?: string | undefined;
 }
 
 export interface IForm extends Entry<IFormFields> {
@@ -278,11 +217,8 @@ export interface IHeroFields {
   /** Image */
   image: Asset;
 
-  /** Variants */
-  nt_variants?: IHero[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
 }
 
 export interface IHero extends Entry<IHeroFields> {
@@ -302,6 +238,36 @@ export interface IHero extends Entry<IHeroFields> {
   };
 }
 
+export interface IHubspotFormFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Hubspot Form ID */
+  hubspotFormId: string;
+
+  /** Hubspot Portal ID */
+  hubspotPortalId: string;
+}
+
+/** Connect a Hubspot form using its unique GUID and portal ID. */
+
+export interface IHubspotForm extends Entry<IHubspotFormFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'hubspotForm';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export interface ILandingPageFields {
   /** Internal Name */
   name?: string | undefined;
@@ -313,7 +279,7 @@ export interface ILandingPageFields {
   navigation?: INavigation | undefined;
 
   /** Sections */
-  sections: (ICta | IFeature | IForm | IHero | IPricingTable)[];
+  sections: (ICta | IFeature | IForm | IHero | IHubspotForm | IPricingTable)[];
 
   /** Footer */
   footer?: IFooter | undefined;
@@ -342,52 +308,12 @@ export interface ILandingPage extends Entry<ILandingPageFields> {
   };
 }
 
-export interface IListElementFields {
-  /** Internal name */
-  internalName?: string | undefined;
-
-  /** Icon */
-  icon?: Asset | undefined;
-
-  /** Text */
-  text: Document;
-
-  /** Variants */
-  nt_variants?: IListElement[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
-}
-
-export interface IListElement extends Entry<IListElementFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: 'listElement';
-        linkType: 'ContentType';
-        type: 'Link';
-      };
-    };
-  };
-}
-
 export interface INavigationFields {
   /** Internal title */
   internalTitle?: string | undefined;
 
   /** Navigation links */
   navigationLinks: IButton[];
-
-  /** Variants */
-  nt_variants?: INavigation[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
 }
 
 export interface INavigation extends Entry<INavigationFields> {
@@ -440,6 +366,45 @@ export interface INtAudience extends Entry<INtAudienceFields> {
   };
 }
 
+export interface INtExperienceFields {
+  /** Name */
+  nt_name: string;
+
+  /** Description */
+  nt_description?: string | undefined;
+
+  /** Type */
+  nt_type: 'nt_experiment' | 'nt_personalization';
+
+  /** Config */
+  nt_config: Record<string, any>;
+
+  /** Audience */
+  nt_audience?: INtAudience | undefined;
+
+  /** Variants */
+  nt_variants?: Entry<{ [fieldId: string]: unknown }>[] | undefined;
+}
+
+/** Ninetailed Experience */
+
+export interface INtExperience extends Entry<INtExperienceFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'nt_experience';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export interface INtMergetagFields {
   /** Name */
   nt_name: string;
@@ -484,13 +449,7 @@ export interface IPageFields {
   seo?: ISeo | undefined;
 
   /** Content */
-  content: ILandingPage;
-
-  /** Variants */
-  nt_variants?: IPage[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
+  content: IPageLanding | IPageHelpCenterArticle | ILandingPage;
 }
 
 /** Represents a web page in Compose. DO NOT DELETE */
@@ -536,12 +495,6 @@ export interface IPricingPlanFields {
 
   /** Most popular */
   mostPopular?: boolean | undefined;
-
-  /** Variants */
-  nt_variants?: IPricingPlan[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
 }
 
 export interface IPricingPlan extends Entry<IPricingPlanFields> {
@@ -574,11 +527,8 @@ export interface IPricingTableFields {
   /** Pricing plans */
   pricingPlans: IPricingPlan[];
 
-  /** Variants */
-  nt_variants?: IPricingTable[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
 }
 
 export interface IPricingTable extends Entry<IPricingTableFields> {
@@ -616,12 +566,6 @@ export interface ISeoFields {
 
   /** Exclude links from search rankings? (nofollow) */
   no_follow?: boolean | undefined;
-
-  /** Variants */
-  nt_variants?: ISeo[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
 }
 
 /** SEO Metadata for web pages in Compose. DO NOT DELETE */
@@ -643,53 +587,24 @@ export interface ISeo extends Entry<ISeoFields> {
   };
 }
 
-export interface ITestFields {
-  /** title */
-  title?: string | undefined;
-
-  /** Variants */
-  nt_variants?: ITest[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
-}
-
-export interface ITest extends Entry<ITestFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: 'test';
-        linkType: 'ContentType';
-        type: 'Link';
-      };
-    };
-  };
-}
-
 export type CONTENT_TYPE =
   | 'banner'
-  | 'blockParagraph'
   | 'button'
   | 'cta'
   | 'feature'
   | 'footer'
   | 'form'
   | 'hero'
+  | 'hubspotForm'
   | 'landingPage'
-  | 'listElement'
   | 'navigation'
   | 'nt_audience'
+  | 'nt_experience'
   | 'nt_mergetag'
   | 'page'
   | 'pricingPlan'
   | 'pricingTable'
-  | 'seo'
-  | 'test';
+  | 'seo';
 
 export type LOCALE_CODE = 'en-US';
 

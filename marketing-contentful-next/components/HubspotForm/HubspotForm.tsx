@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHubspotForm } from '@aaronhayes/react-use-hubspot-form';
 import { useNinetailed, useProfile } from '@ninetailed/experience.js-next';
-import * as Contentful from 'contentful';
+import { IHubspotForm } from '@/types/contentful';
 
 import find from 'lodash/find';
-
-interface IHubspotFormFields {
-  hubspotFormId: Contentful.EntryFields.Symbol;
-  hubspotPortalId: Contentful.EntryFields.Symbol;
-  hubspotPortalRegion: Contentful.EntryFields.Symbol;
-}
-
-type IHubspotForm = Contentful.Entry<IHubspotFormFields>;
 
 export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
   const { loading, profile } = useProfile();
