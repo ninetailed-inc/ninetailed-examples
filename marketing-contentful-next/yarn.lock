@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@aaronhayes/react-use-hubspot-form@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@aaronhayes/react-use-hubspot-form/-/react-use-hubspot-form-2.1.1.tgz#978c1c6c2564ef104ce0b660bce629ff9b0802be"
+  integrity sha512-K1ybIAa6b49hTnr08OcYZWI9yqpI/bGzjh2Vnk+H3Lt1udpToa0wJnP9ONmfs+wUdefzX2v0BwQPxtZ7yE6E8A==
+
 "@analytics/cookie-utils@^0.2.10":
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/@analytics/cookie-utils/-/cookie-utils-0.2.10.tgz#94d1ad0766c58c4a294e5ca54f59b0a69bd574b4"

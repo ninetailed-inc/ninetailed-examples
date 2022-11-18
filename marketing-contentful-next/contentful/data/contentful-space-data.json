@@ -1945,7 +1945,7 @@
         "id": "landingPage",
         "type": "ContentType",
         "createdAt": "2022-11-17T23:01:48.701Z",
-        "updatedAt": "2022-11-17T23:16:21.421Z",
+        "updatedAt": "2022-11-18T19:39:50.747Z",
         "environment": {
           "sys": {
             "id": "experiments_2022-11-17",
@@ -1953,8 +1953,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 5,
-        "publishedAt": "2022-11-17T23:16:21.421Z",
+        "publishedVersion": 7,
+        "publishedAt": "2022-11-18T19:39:50.747Z",
         "firstPublishedAt": "2022-11-17T23:01:53.492Z",
         "createdBy": {
           "sys": {
@@ -1970,8 +1970,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 3,
-        "version": 6,
+        "publishedCounter": 4,
+        "version": 8,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -2048,6 +2048,7 @@
                   "feature",
                   "form",
                   "hero",
+                  "hubspotForm",
                   "pricingTable"
                 ]
               }
@@ -2125,7 +2126,7 @@
         "id": "form",
         "type": "ContentType",
         "createdAt": "2022-11-17T23:01:48.732Z",
-        "updatedAt": "2022-11-17T23:16:22.486Z",
+        "updatedAt": "2022-11-18T17:47:09.582Z",
         "environment": {
           "sys": {
             "id": "experiments_2022-11-17",
@@ -2133,8 +2134,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 5,
-        "publishedAt": "2022-11-17T23:16:22.486Z",
+        "publishedVersion": 7,
+        "publishedAt": "2022-11-18T17:47:09.582Z",
         "firstPublishedAt": "2022-11-17T23:01:54.632Z",
         "createdBy": {
           "sys": {
@@ -2150,8 +2151,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 3,
-        "version": 6,
+        "publishedCounter": 4,
+        "version": 8,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -2166,7 +2167,7 @@
       "fields": [
         {
           "id": "internalName",
-          "name": "InternalName",
+          "name": "Internal Name",
           "type": "Symbol",
           "localized": false,
           "required": false,
@@ -2428,6 +2429,99 @@
           "type": "Boolean",
           "localized": false,
           "required": false,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        }
+      ]
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kk1gqspcetbl"
+          }
+        },
+        "id": "hubspotForm",
+        "type": "ContentType",
+        "createdAt": "2022-11-18T17:52:03.335Z",
+        "updatedAt": "2022-11-18T19:59:48.538Z",
+        "environment": {
+          "sys": {
+            "id": "experiments_2022-11-17",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 7,
+        "publishedAt": "2022-11-18T19:59:48.538Z",
+        "firstPublishedAt": "2022-11-18T17:52:03.640Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "0kSCJNqwfy3USaGrGQ3HHA"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "0kSCJNqwfy3USaGrGQ3HHA"
+          }
+        },
+        "publishedCounter": 4,
+        "version": 8,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "0kSCJNqwfy3USaGrGQ3HHA"
+          }
+        }
+      },
+      "displayField": "internalName",
+      "name": "Hubspot Form",
+      "description": "Connect a Hubspot form using its unique GUID and portal ID.",
+      "fields": [
+        {
+          "id": "internalName",
+          "name": "Internal Name",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "hubspotFormId",
+          "name": "Hubspot Form ID",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [
+            {
+              "regexp": {
+                "pattern": "^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                "flags": null
+              },
+              "message": "A Hubspot form ID is a UUID of the format XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+            }
+          ],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "hubspotPortalId",
+          "name": "Hubspot Portal ID",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
           "validations": [
           ],
           "disabled": false,
@@ -3393,7 +3487,7 @@
             "linkType": "Space"
           }
         },
-        "version": 6,
+        "version": 8,
         "createdAt": "2022-11-17T23:01:53.647Z",
         "createdBy": {
           "sys": {
@@ -3402,7 +3496,7 @@
             "linkType": "User"
           }
         },
-        "updatedAt": "2022-11-17T23:16:26.089Z",
+        "updatedAt": "2022-11-18T19:39:51.322Z",
         "updatedBy": {
           "sys": {
             "id": "0kSCJNqwfy3USaGrGQ3HHA",
@@ -3450,6 +3544,16 @@
           "fieldId": "footer",
           "widgetId": "entryLinkEditor",
           "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "nt_variants",
+          "widgetId": "entryLinksEditor",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "nt_audience",
+          "widgetId": "entryLinkEditor",
+          "widgetNamespace": "builtin"
         }
       ]
     },
@@ -3464,7 +3568,7 @@
             "linkType": "Space"
           }
         },
-        "version": 6,
+        "version": 8,
         "createdAt": "2022-11-17T23:01:54.700Z",
         "createdBy": {
           "sys": {
@@ -3473,7 +3577,7 @@
             "linkType": "User"
           }
         },
-        "updatedAt": "2022-11-17T23:16:26.089Z",
+        "updatedAt": "2022-11-18T17:47:10.575Z",
         "updatedBy": {
           "sys": {
             "id": "0kSCJNqwfy3USaGrGQ3HHA",
@@ -3586,6 +3690,67 @@
         {
           "fieldId": "mostPopular",
           "widgetId": "boolean",
+          "widgetNamespace": "builtin"
+        }
+      ]
+    },
+    {
+      "sys": {
+        "id": "default",
+        "type": "EditorInterface",
+        "space": {
+          "sys": {
+            "id": "kk1gqspcetbl",
+            "type": "Link",
+            "linkType": "Space"
+          }
+        },
+        "version": 8,
+        "createdAt": "2022-11-18T17:52:03.761Z",
+        "createdBy": {
+          "sys": {
+            "id": "0kSCJNqwfy3USaGrGQ3HHA",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "updatedAt": "2022-11-18T19:59:49.142Z",
+        "updatedBy": {
+          "sys": {
+            "id": "0kSCJNqwfy3USaGrGQ3HHA",
+            "type": "Link",
+            "linkType": "User"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "id": "hubspotForm",
+            "type": "Link",
+            "linkType": "ContentType"
+          }
+        },
+        "environment": {
+          "sys": {
+            "id": "experiments_2022-11-17",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        }
+      },
+      "controls": [
+        {
+          "fieldId": "internalName",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "hubspotFormId",
+          "widgetId": "singleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "hubspotPortalId",
+          "widgetId": "singleLine",
           "widgetNamespace": "builtin"
         }
       ]
@@ -12033,70 +12198,6 @@
             "id": "kk1gqspcetbl"
           }
         },
-        "id": "6izYcxbk52ttCiiWj38rva",
-        "type": "Entry",
-        "createdAt": "2022-11-17T23:04:11.885Z",
-        "updatedAt": "2022-11-17T23:18:37.712Z",
-        "environment": {
-          "sys": {
-            "id": "experiments_2022-11-17",
-            "type": "Link",
-            "linkType": "Environment"
-          }
-        },
-        "publishedVersion": 5,
-        "publishedAt": "2022-11-17T23:18:37.712Z",
-        "firstPublishedAt": "2022-11-17T23:04:45.510Z",
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "0kSCJNqwfy3USaGrGQ3HHA"
-          }
-        },
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "0kSCJNqwfy3USaGrGQ3HHA"
-          }
-        },
-        "publishedCounter": 3,
-        "version": 6,
-        "publishedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "0kSCJNqwfy3USaGrGQ3HHA"
-          }
-        },
-        "contentType": {
-          "sys": {
-            "type": "Link",
-            "linkType": "ContentType",
-            "id": "form"
-          }
-        }
-      },
-      "fields": {
-        "internalName": {
-          "en-US": "Contact Field"
-        }
-      }
-    },
-    {
-      "metadata": {
-        "tags": [
-        ]
-      },
-      "sys": {
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "kk1gqspcetbl"
-          }
-        },
         "id": "3hjOk3vKOx71g08KsrO1yO",
         "type": "Entry",
         "createdAt": "2022-11-17T23:04:11.888Z",
@@ -12188,7 +12289,7 @@
         "id": "2lQ0c5YiWIacXuxX7ByWzd",
         "type": "Entry",
         "createdAt": "2022-11-17T23:04:11.899Z",
-        "updatedAt": "2022-11-17T23:18:38.068Z",
+        "updatedAt": "2022-11-18T20:00:53.804Z",
         "environment": {
           "sys": {
             "id": "experiments_2022-11-17",
@@ -12196,8 +12297,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 5,
-        "publishedAt": "2022-11-17T23:18:38.068Z",
+        "publishedVersion": 13,
+        "publishedAt": "2022-11-18T20:00:53.804Z",
         "firstPublishedAt": "2022-11-17T23:04:45.877Z",
         "createdBy": {
           "sys": {
@@ -12213,8 +12314,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 3,
-        "version": 6,
+        "publishedCounter": 6,
+        "version": 14,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -12265,7 +12366,7 @@
               "sys": {
                 "type": "Link",
                 "linkType": "Entry",
-                "id": "6izYcxbk52ttCiiWj38rva"
+                "id": "Ysjv5O1FTwbQhLXeoxkvn"
               }
             }
           ]
@@ -17697,6 +17798,70 @@
         },
         "nt_mergetag_id": {
           "en-US": "traits_ownername"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "kk1gqspcetbl"
+          }
+        },
+        "id": "Ysjv5O1FTwbQhLXeoxkvn",
+        "type": "Entry",
+        "createdAt": "2022-11-18T19:58:45.089Z",
+        "updatedAt": "2022-11-18T20:00:19.433Z",
+        "environment": {
+          "sys": {
+            "id": "experiments_2022-11-17",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 2,
+        "publishedAt": "2022-11-18T20:00:19.433Z",
+        "firstPublishedAt": "2022-11-18T20:00:19.433Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "0kSCJNqwfy3USaGrGQ3HHA"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "0kSCJNqwfy3USaGrGQ3HHA"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 3,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "0kSCJNqwfy3USaGrGQ3HHA"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "form"
+          }
+        }
+      },
+      "fields": {
+        "internalName": {
+          "en-US": "Contact Form"
         }
       }
     }

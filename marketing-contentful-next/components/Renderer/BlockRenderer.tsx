@@ -18,6 +18,7 @@ import { Footer } from '@/components/Footer';
 import { PricingTable } from '@/components/PricingTable';
 import { PricingPlan } from '@/components/PricingPlan';
 import { Form } from '@/components/Form';
+import { HubspotForm } from '@/components/HubspotForm';
 
 import { ComponentContentTypes } from '@/lib/constants';
 
@@ -31,6 +32,7 @@ const ContentTypeMap = {
   [ComponentContentTypes.PricingPlan]: PricingPlan,
   [ComponentContentTypes.PricingTable]: PricingTable,
   [ComponentContentTypes.Form]: Form,
+  [ComponentContentTypes.HubspotForm]: HubspotForm,
 };
 
 type PersonalizedFields<T> = T & {
