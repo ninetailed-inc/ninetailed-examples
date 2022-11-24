@@ -6,6 +6,38 @@ import { Hero } from "../components/Hero";
 import { Product } from "../components/Product";
 import { transformedExperiences } from "../utils/experienceMapper";
 import productEntry from "../../fixtures/contentful/product-with-experience.json";
+import { Profile } from "../components/Profile";
+
+const personalizationVariants = [
+  {
+    id: "1",
+    headline: (
+      <>
+        The Power of Personalization with{" "}
+        <a href="https://ninetailed.io/">Ninetailed</a> and{" "}
+        <a href="https://nextjs.org">Next.js!</a>
+      </>
+    ),
+    audience: {
+      id: process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_1 || "",
+      name: "Audience 1",
+    },
+  },
+  {
+    id: "2",
+    headline: (
+      <>
+        Enhance your Customer Experience with{" "}
+        <a href="https://ninetailed.io/">Ninetailed</a> and{" "}
+        <a href="https://nextjs.org">Next.js!</a>
+      </>
+    ),
+    audience: {
+      id: process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_2 || "",
+      name: "Audience 2",
+    },
+  },
+];
 
 export default function Home() {
   return (
@@ -17,87 +49,60 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Personalize
-          id={"personalizedHero"}
-          component={Hero}
-          holdout={0}
-          headline={
-            <>
-              Welcome to <a href="https://nextjs.org">Next.js!</a>
-            </>
-          }
-          variants={[
-            {
-              id: "1",
-              headline: (
-                <>
-                  This is your personalized{" "}
-                  <a href="https://nextjs.org">Next.js!</a> headline
-                </>
-              ),
-              audience: {
-                id: process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_1 || "",
-                name: "Audience 1",
-              },
-            },
-            {
-              id: "2",
-              headline: (
-                <>
-                  This is another personalizes{" "}
-                  <a href="https://nextjs.org">Next.js!</a> headline
-                </>
-              ),
-              audience: {
-                id: process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_2 || "",
-                name: "Audience 2",
-              },
-            },
-          ]}
-        />
+        <div className={styles.card}>
+          <h2 className={styles.h2}>Ninetailed Profile</h2>
+          <Profile />
+        </div>
 
-        <Experience
-          id={productEntry.sys.id}
-          component={Product}
-          experiences={transformedExperiences}
-          {...productEntry.fields}
-        />
+        <div className={styles.card}>
+          <h2 className={styles.h2}>Ninetailed Personalization</h2>
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <h3 className={styles.h3}>Non Personalized Hero</h3>
+          <Personalize
+            id={"nonPersonalizedHero"}
+            component={Hero}
+            holdout={100}
+            headline={
+              <>
+                Welcome to <a href="https://nextjs.org">Next.js!</a>
+              </>
+            }
+            variants={personalizationVariants}
+          />
+          <h3 className={styles.h3}>
+            Personalized Hero{" "}
+            <span className={styles.code}>
+              (Audience: {process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_1})
+            </span>
+          </h3>
+          <Personalize
+            id={"personalizedHero"}
+            component={Hero}
+            holdout={0}
+            headline={
+              <>
+                Welcome to <a href="https://nextjs.org">Next.js!</a>
+              </>
+            }
+            variants={personalizationVariants}
+          />
+        </div>
+        <div className={styles.card}>
+          <h2 className={styles.h2}>Ninetailed Experiments</h2>
+          <h3 className={styles.h3}>Experiment A</h3>
+          <Experience
+            id={productEntry.sys.id}
+            component={Product}
+            experiences={transformedExperiences}
+            {...productEntry.fields}
+          />
+          <h3 className={styles.h3}>Experiment B</h3>
+          <Experience
+            id={productEntry.sys.id}
+            component={Product}
+            experiences={transformedExperiences}
+            {...productEntry.fields}
+          />
         </div>
       </main>
 

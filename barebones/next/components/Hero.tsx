@@ -6,5 +6,5 @@ type HeroProps = {
 };
 
 export const Hero: React.FC<HeroProps> = ({ headline }) => {
-  return <h1 className={styles.title}>{headline}</h1>;
+  return <div className={styles.hero}>{headline}</div>;
 };
