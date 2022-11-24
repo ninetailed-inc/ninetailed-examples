@@ -1,6 +1,8 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import { Personalize } from "@ninetailed/experience.js-next";
+import { Hero } from "../components/Hero";
 
 export default function Home() {
   return (
@@ -12,12 +14,47 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <Personalize
+          id={"personalizedHero"}
+          component={Hero}
+          holdout={0}
+          headline={
+            <>
+              Welcome to <a href="https://nextjs.org">Next.js!</a>
+            </>
+          }
+          variants={[
+            {
+              id: "1",
+              headline: (
+                <>
+                  This is your personalized{" "}
+                  <a href="https://nextjs.org">Next.js!</a> headline
+                </>
+              ),
+              audience: {
+                id: process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_1 || "",
+                name: "Audience 1",
+              },
+            },
+            {
+              id: "2",
+              headline: (
+                <>
+                  This is another personalizes{" "}
+                  <a href="https://nextjs.org">Next.js!</a> headline
+                </>
+              ),
+              audience: {
+                id: process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_2 || "",
+                name: "Audience 2",
+              },
+            },
+          ]}
+        />
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
 
@@ -60,12 +97,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
