@@ -30,12 +30,9 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
                 if (!link.fields.slug) {
                   return (
                     <div key={link.sys.id} className="px-5 py-2">
-                      <a
-                        className="text-base font-medium text-gray-500 hover:text-gray-900"
-                        href="#"
-                      >
+                      <button className="text-base font-medium text-gray-500 hover:text-gray-900">
                         {link.fields.buttonText}
-                      </a>
+                      </button>
                     </div>
                   );
                 }
@@ -57,18 +54,12 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
 
           <div className="ml-10 space-x-4">
             {/* Buttons here */}
-            <a
-              href="#"
-              className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75"
-            >
+            <button className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75">
               Sign in
-            </a>
-            <a
-              href="#"
-              className="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50"
-            >
+            </button>
+            <button className="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50">
               Sign up
-            </a>
+            </button>
           </div>
         </div>
 
@@ -77,12 +68,9 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
             if (!link.fields.slug) {
               return (
                 <div key={link.sys.id} className="px-5 py-2">
-                  <a
-                    className="text-base font-medium text-gray-500 hover:text-gray-900"
-                    href="#"
-                  >
+                  <button className="text-base font-medium text-gray-500 hover:text-gray-900">
                     {link.fields.buttonText}
-                  </a>
+                  </button>
                 </div>
               );
             }

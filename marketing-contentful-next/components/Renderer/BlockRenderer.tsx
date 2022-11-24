@@ -45,7 +45,7 @@ type PersonalizedFields<T> = T & {
 };
 
 type Block = Contentful.Entry<PersonalizedFields<unknown>> & {
-  parent?: Contentful.Entry<any>;
+  parent?: Contentful.Entry<Contentful.ContentType>;
 };
 
 type BlockRendererProps = {

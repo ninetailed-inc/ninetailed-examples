@@ -449,7 +449,7 @@ export interface IPageFields {
   seo?: ISeo | undefined;
 
   /** Content */
-  content: IPageLanding | IPageHelpCenterArticle | ILandingPage;
+  content: ILandingPage;
 }
 
 /** Represents a web page in Compose. DO NOT DELETE */

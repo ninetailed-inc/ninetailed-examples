@@ -1,11 +1,26 @@
 import React from 'react';
 import '@/styles/globals.css';
-import { AppProps } from 'next/app';
-import { NinetailedProvider } from '@ninetailed/experience.js-next';
+import { AppProps as NextAppProps } from 'next/app';
+import {
+  ExperienceConfiguration,
+  NinetailedProvider,
+} from '@ninetailed/experience.js-next';
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { HubspotProvider } from '@aaronhayes/react-use-hubspot-form';
+import { IPage } from '@/types/contentful';
 
-const B2BDemoApp = ({ Component, pageProps }: AppProps) => {
+type AppProps<P = unknown> = {
+  pageProps: P;
+} & Omit<NextAppProps<P>, 'pageProps'>;
+
+interface CustomPageProps {
+  page: IPage;
+  ninetailed?: {
+    experiments: ExperienceConfiguration[];
+  };
+}
+
+const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
   return (
     <div className="app">
       <HubspotProvider>

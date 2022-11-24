@@ -1,3 +1,7 @@
+/* eslint-disable */
+// @ts-nocheck
+// TODO: Properly type this file
+
 import React, { useEffect, useState } from 'react';
 import { useHubspotForm } from '@aaronhayes/react-use-hubspot-form';
 import { useNinetailed, useProfile } from '@ninetailed/experience.js-next';
@@ -13,14 +17,11 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
   useEffect(() => {
     const listener: EventListener = (event) => {
       if (
-        // @ts-ignore
         event.data.type === 'hsFormCallback' &&
-        // @ts-ignore
         event.data.eventName === 'onFormReady'
       ) {
         const formIframe = document.querySelector('#form > iframe');
         if (formIframe) {
-          // @ts-expect-error
           const anonymousIdInputTemp = formIframe.contentDocument.querySelector(
             'input[name=ninetailedid]'
           );
@@ -29,31 +30,22 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
       }
 
       if (
-        // @ts-ignore
         event.data.type === 'hsFormCallback' &&
-        // @ts-ignore
         event.data.eventName === 'onFormSubmit'
       ) {
-        // @ts-ignore
         setSubmitData(event.data.data);
       }
 
       if (
-        // @ts-ignore
         event.data.type === 'hsFormCallback' &&
-        // @ts-ignore
         event.data.eventName === 'onFormSubmitted'
       ) {
         console.log(submitData);
-        // @ts-expect-error
         const anonymousId = find(submitData, { name: 'ninetailedid' }).value;
-        // @ts-expect-error
         const traits = submitData
-          // @ts-expect-error
           .filter(({ name }) => {
             return name !== 'ninetailedid';
           })
-          // @ts-expect-error
           .reduce((acc, curr) => {
             return { ...acc, [curr.name]: curr.value };
           }, {});
@@ -67,10 +59,8 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
     };
   }, [setAnonymousIdInput, setSubmitData, submitData]);
   useEffect(() => {
-    // @ts-expect-error
     if (anonymousIdInput && !loading && anonymousIdInput.value !== profile.id) {
       console.log('setting anonymousID');
-      // @ts-expect-error
       anonymousIdInput.value = profile.id;
     }
   }, [anonymousIdInput, loading, profile]);
