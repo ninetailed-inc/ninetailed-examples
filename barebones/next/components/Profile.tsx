@@ -13,8 +13,7 @@ export const Profile: React.FC = () => {
 
   return (
     <pre className={styles.code}>
-      {" "}
-      {JSON.stringify(JSON.parse(profile), null, 4)}
+      {profile && JSON.stringify(JSON.parse(profile), null, 4)}
     </pre>
   );
 };
