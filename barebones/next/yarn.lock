@@ -247,6 +247,16 @@
     ts-toolbelt "^9.6.0"
     zod "^3.18.0"
 
+"@ninetailed/experience.js-shared@2.2.11":
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-shared/-/experience.js-shared-2.2.11.tgz#dbdcc1fff88f5f22983da1c0267d75478f2bc721"
+  integrity sha512-gbxyRUAHAjAZrcFYNgOnDBVpPz+YMBsBBlcGIgRKRsfYWRR5V1se/xTDtBobDyUtrvlXPcELeDN94HgQzpPzuQ==
+  dependencies:
+    i18n-iso-countries "^7.3.0"
+    locale-enum "^1.1.1"
+    ts-toolbelt "^9.6.0"
+    uuid "^8.3.2"
+
 "@ninetailed/experience.js-shared@3.0.0-beta.11":
   version "3.0.0-beta.11"
   resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-shared/-/experience.js-shared-3.0.0-beta.11.tgz#6dced3ad9853fef68b4a3230f94c09f08d654142"
@@ -257,6 +267,56 @@
     locale-enum "^1.1.1"
     ts-toolbelt "^9.6.0"
     zod "^3.18.0"
+
+"@ninetailed/experience.js-utils-contentful@^2.2.11":
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-utils-contentful/-/experience.js-utils-contentful-2.2.11.tgz#de99bed3f4cdb5b6c195b75764e71d772d1c37a9"
+  integrity sha512-rmvkcW1t84A9jzYJlZFhBdvMooeKku2pI+EYZTVquA7Q2/hJI33/QJrTZICJEQdT2oRfEWnDfi+M8qW8B82quA==
+  dependencies:
+    "@ninetailed/experience.js" "2.2.11"
+    "@ninetailed/experience.js-shared" "2.2.11"
+    "@ninetailed/experience.js-utils" "2.2.11"
+    analytics "^0.8.0"
+    diary "^0.3.1"
+    i18n-iso-countries "^7.3.0"
+    locale-enum "^1.1.1"
+    lodash "^4.17.21"
+    murmurhash-js "^1.0.0"
+    ts-toolbelt "^9.6.0"
+    uuid "^8.3.2"
+    zod "^3.18.0"
+
+"@ninetailed/experience.js-utils@2.2.11":
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-utils/-/experience.js-utils-2.2.11.tgz#153ce3a639540ee5bc65e9573eaa97dd00644e05"
+  integrity sha512-gLHa/N6nxm1SJt8GMNehWqkPHJtHeciapZR1lG3VMMf1UVJHVs/JMbDd8BeL/7hmF0xFKhxqAoKSpnFdQAle2w==
+  dependencies:
+    "@ninetailed/experience.js" "2.2.11"
+    "@ninetailed/experience.js-shared" "2.2.11"
+    analytics "^0.8.0"
+    diary "^0.3.1"
+    i18n-iso-countries "^7.3.0"
+    locale-enum "^1.1.1"
+    lodash "^4.17.21"
+    murmurhash-js "^1.0.0"
+    ts-toolbelt "^9.6.0"
+    uuid "^8.3.2"
+    zod "^3.18.0"
+
+"@ninetailed/experience.js@2.2.11":
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js/-/experience.js-2.2.11.tgz#fe4d2eb760eb128c886490a8f4660799a825a764"
+  integrity sha512-o/IQLGFPl10Ih6QlfnwGuqaRL4Ht5wroklU3xDeH9hExhHqbPXWkgoPd7Dl968RjKKqDm20HXU5+4FDN4FvKfQ==
+  dependencies:
+    "@ninetailed/experience.js-shared" "2.2.11"
+    analytics "^0.8.0"
+    diary "^0.3.1"
+    i18n-iso-countries "^7.3.0"
+    locale-enum "^1.1.1"
+    lodash "^4.17.21"
+    murmurhash-js "^1.0.0"
+    ts-toolbelt "^9.6.0"
+    uuid "^8.3.2"
 
 "@ninetailed/experience.js@3.0.0-beta.11":
   version "3.0.0-beta.11"

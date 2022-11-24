@@ -1,8 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { Personalize } from "@ninetailed/experience.js-next";
+import { Personalize, Experience } from "@ninetailed/experience.js-next";
 import { Hero } from "../components/Hero";
+import { Product } from "../components/Product";
+import { transformedExperiences } from "../utils/experienceMapper";
+import productEntry from "../../fixtures/contentful/product-with-experience.json";
 
 export default function Home() {
   return (
@@ -51,6 +54,13 @@ export default function Home() {
               },
             },
           ]}
+        />
+
+        <Experience
+          id={productEntry.sys.id}
+          component={Product}
+          experiences={transformedExperiences}
+          {...productEntry.fields}
         />
 
         <p className={styles.description}>
