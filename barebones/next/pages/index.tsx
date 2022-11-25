@@ -4,8 +4,9 @@ import styles from "../styles/Home.module.css";
 import { Personalize, Experience } from "@ninetailed/experience.js-next";
 import { Hero } from "../components/Hero";
 import { Product } from "../components/Product";
-import { transformedExperiences } from "../utils/experienceMapper";
-import productEntry from "../../fixtures/contentful/product-with-experience.json";
+import { experienceMapper } from "../utils/experienceMapper";
+import productEntryA from "../../fixtures/contentful/product-with-experienceA.json";
+import productEntryB from "../../fixtures/contentful/product-with-experienceB.json";
 import { Profile } from "../components/Profile";
 
 const personalizationVariants = [
@@ -88,20 +89,20 @@ export default function Home() {
           />
         </div>
         <div className={styles.card}>
-          <h2 className={styles.h2}>Ninetailed Experiments</h2>
+          <h2 className={styles.h2}>Ninetailed Experiences</h2>
           <h3 className={styles.h3}>Experiment A</h3>
           <Experience
-            id={productEntry.sys.id}
+            id={productEntryA.sys.id}
             component={Product}
-            experiences={transformedExperiences}
-            {...productEntry.fields}
+            experiences={experienceMapper(productEntryA)}
+            {...productEntryA.fields}
           />
           <h3 className={styles.h3}>Experiment B</h3>
           <Experience
-            id={productEntry.sys.id}
+            id={productEntryB.sys.id}
             component={Product}
-            experiences={transformedExperiences}
-            {...productEntry.fields}
+            experiences={experienceMapper(productEntryB)}
+            {...productEntryB.fields}
           />
         </div>
       </main>
