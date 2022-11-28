@@ -2,11 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Personalize, Experience } from "@ninetailed/experience.js-next";
-import { Hero } from "../components/Hero";
-import { Product } from "../components/Product";
-import { transformedExperiences } from "../utils/experienceMapper";
-import productEntry from "../../fixtures/contentful/product-with-experience.json";
-import { Profile } from "../components/Profile";
+import { Hero, Product, Profile } from "../components";
+import { experienceMapper } from "../utils/experienceMapper";
+
+import productWithExperiment from "../../fixtures/contentful/product-with-experiment.json";
+import productWithPersonalization from "../../fixtures/contentful/product-with-personalization.json";
 
 const personalizationVariants = [
   {
@@ -40,6 +40,7 @@ const personalizationVariants = [
 ];
 
 export default function Home() {
+  console.log(experienceMapper(productWithPersonalization));
   return (
     <div className={styles.container}>
       <Head>
@@ -55,7 +56,9 @@ export default function Home() {
         </div>
 
         <div className={styles.card}>
-          <h2 className={styles.h2}>Ninetailed Personalization</h2>
+          <h2
+            className={styles.h2}
+          >{`Ninetailed <Personalize /> Component`}</h2>
 
           <h3 className={styles.h3}>Non Personalized Hero</h3>
           <Personalize
@@ -88,20 +91,27 @@ export default function Home() {
           />
         </div>
         <div className={styles.card}>
-          <h2 className={styles.h2}>Ninetailed Experiments</h2>
-          <h3 className={styles.h3}>Experiment A</h3>
+          <h2 className={styles.h2}>{`Ninetailed <Experience /> Component`}</h2>
+          <h3 className={styles.h3}>
+            {`<Experience /> Component with Experiment`}
+          </h3>
           <Experience
-            id={productEntry.sys.id}
+            id={productWithExperiment.sys.id}
             component={Product}
-            experiences={transformedExperiences}
-            {...productEntry.fields}
+            experiences={experienceMapper(productWithExperiment)}
+            {...productWithExperiment.fields}
           />
-          <h3 className={styles.h3}>Experiment B</h3>
+          <h3 className={styles.h3}>
+            {`Personalized <Experience /> Component`}
+            <span className={styles.code}>
+              (Audience: {process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_1})
+            </span>
+          </h3>
           <Experience
-            id={productEntry.sys.id}
+            id={productWithPersonalization.sys.id}
             component={Product}
-            experiences={transformedExperiences}
-            {...productEntry.fields}
+            experiences={experienceMapper(productWithPersonalization)}
+            {...productWithPersonalization.fields}
           />
         </div>
       </main>
