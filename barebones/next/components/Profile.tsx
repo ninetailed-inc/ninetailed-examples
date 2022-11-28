@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "../styles/Home.module.css";
+import { useNinetailed, useProfile } from "@ninetailed/experience.js-next";
 
 export const Profile: React.FC = () => {
-  const [profile, setProfile] = useState<string>("");
-
-  useEffect(() => {
-    const localProfile = localStorage.getItem("__nt_profile__");
-    if (localProfile) {
-      setProfile(localProfile);
-    }
-  }, []);
-
+  const { reset } = useNinetailed();
+  const { profile } = useProfile();
   return (
-    <pre className={styles.code}>
-      {profile && JSON.stringify(JSON.parse(profile), null, 4)}
-    </pre>
+    <>
+      <pre className={styles.code}>
+        {profile && JSON.stringify(profile, null, 4)}
+      </pre>
+      <button onClick={reset}>Reset Profile</button>
+    </>
   );
 };
