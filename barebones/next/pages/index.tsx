@@ -40,7 +40,6 @@ const personalizationVariants = [
 ];
 
 export default function Home() {
-  console.log(experienceMapper(productWithPersonalization));
   return (
     <div className={styles.container}>
       <Head>
