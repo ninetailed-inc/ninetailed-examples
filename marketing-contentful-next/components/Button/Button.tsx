@@ -61,3 +61,5 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
 Button.defaultProps = {
   as: 'a',
 };
+
+Button.displayName = 'Button';

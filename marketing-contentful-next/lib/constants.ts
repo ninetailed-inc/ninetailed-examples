@@ -8,6 +8,7 @@ export const ComponentContentTypes = {
   PricingTable: 'pricingTable',
   PricingPlan: 'pricingPlan',
   Form: 'form',
+  HubspotForm: 'hubspotForm',
 };
 
 export const PAGE_CONTENT_TYPES = {
