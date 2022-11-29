@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@ninetailed/experience.js-next": "^3.0.0-beta.14",
-    "@ninetailed/experience.js-utils-contentful": "^2.2.11",
+    "@ninetailed/experience.js-plugin-preview": "^3.0.0-beta.14",
+    "@ninetailed/experience.js-utils-contentful": "^3.0.0-beta.14",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
