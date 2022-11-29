@@ -6,6 +6,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <NinetailedProvider
       clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || ""}
+      environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT || "main"}
     >
       <Component {...pageProps} />
     </NinetailedProvider>

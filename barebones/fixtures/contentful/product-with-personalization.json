@@ -122,40 +122,8 @@
               "locale": "en-US"
             },
             "fields": {
-              "nt_name": "All Visitors",
-              "nt_rules": {
-                "any": [
-                  {
-                    "all": [
-                      {
-                        "type": "page",
-                        "count": "1",
-                        "value": "",
-                        "operator": "greaterThanInclusive",
-                        "conditions": [
-                          {
-                            "key": {
-                              "id": "context_page_url",
-                              "key": "context_page_url",
-                              "label": "URL",
-                              "value": "",
-                              "useOnce": true,
-                              "category": {
-                                "name": "url",
-                                "type": "string",
-                                "label": "URL"
-                              }
-                            },
-                            "value": "*",
-                            "operator": "equal"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              },
-              "nt_audience_id": "64ducOq8OgG6N0zK3SuRnq"
+              "nt_name": "AudienceName",
+              "nt_audience_id": "6PWkVDirbFw7HL60QlAOc3"
             }
           },
           "nt_variants": [

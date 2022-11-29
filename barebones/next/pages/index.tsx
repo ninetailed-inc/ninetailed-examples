@@ -71,12 +71,7 @@ export default function Home() {
             }
             variants={personalizationVariants}
           />
-          <h3 className={styles.h3}>
-            Personalized Hero{" "}
-            <span className={styles.code}>
-              (Audience: {process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_1})
-            </span>
-          </h3>
+          <h3 className={styles.h3}>Personalized Hero</h3>
           <Personalize
             id={"personalizedHero"}
             component={Hero}
@@ -91,21 +86,14 @@ export default function Home() {
         </div>
         <div className={styles.card}>
           <h2 className={styles.h2}>{`Ninetailed <Experience /> Component`}</h2>
-          <h3 className={styles.h3}>
-            {`<Experience /> Component with Experiment`}
-          </h3>
+          <h3 className={styles.h3}>with Experiment</h3>
           <Experience
             id={productWithExperiment.sys.id}
             component={Product}
             experiences={experienceMapper(productWithExperiment)}
             {...productWithExperiment.fields}
           />
-          <h3 className={styles.h3}>
-            {`Personalized <Experience /> Component`}
-            <span className={styles.code}>
-              (Audience: {process.env.NEXT_PUBLIC_PERSONALIZED_AUDIENCE_1})
-            </span>
-          </h3>
+          <h3 className={styles.h3}>with Personalization</h3>
           <Experience
             id={productWithPersonalization.sys.id}
             component={Product}
