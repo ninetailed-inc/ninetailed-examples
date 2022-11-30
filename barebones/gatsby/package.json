@@ -18,7 +18,9 @@
   "dependencies": {
     "gatsby": "^5.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "@ninetailed/experience.js-gatsby": "^3.0.0-beta.14"
+
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
