@@ -60,7 +60,7 @@ const IndexPage: React.FC<PageProps> = () => {
         />
         <h3 className={styles.h3}>Personalized Hero</h3>
         <Personalize
-          id={"nonPersonalizedHero"}
+          id={"personalizedHero"}
           component={Hero}
           holdout={0}
           headline={
