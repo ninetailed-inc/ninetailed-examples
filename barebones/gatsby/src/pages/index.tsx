@@ -12,7 +12,7 @@ const personalizationVariants = [
       <>
         The Power of Personalization with{" "}
         <a href="https://ninetailed.io/">Ninetailed</a> and{" "}
-        <a href="https://www.gatsbyjs.com/">Next.js!</a>
+          <a href="https://www.gatsbyjs.com/">Gatsby</a>
       </>
     ),
     audience: {
