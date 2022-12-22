@@ -1,0 +1,7 @@
+node_modules/
+.cache/
+public
+src/gatsby-types.d.ts
+
+# local env files
+.env*.local
