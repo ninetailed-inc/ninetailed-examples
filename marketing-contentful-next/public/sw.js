@@ -20,5 +20,7 @@ function customHeaderRequestFetch(event) {
       headers: headers,
     });
     return fetch(newRequest);
+  } else {
+    return fetch(event.request);
   }
 }
