@@ -12,7 +12,7 @@ function customHeaderRequestFetch(event) {
       '⚙ Intercepting Ninetailed event request, setting X-Real-IP header'
     );
     const headers = new Headers(event.request.headers);
-    headers.set('X-Real-IP', '17.254.0.91');
+    headers.set('X-Force-IP', '17.254.0.91');
 
     const newRequest = new Request(event.request, {
       mode: 'cors',
