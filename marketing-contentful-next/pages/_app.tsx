@@ -27,7 +27,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         <NinetailedProvider
           preview
           plugins={[
-            NinetailedPreviewPlugin({
+            new NinetailedPreviewPlugin({
               clientId:
                 process.env.NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID ?? '',
               secret:
