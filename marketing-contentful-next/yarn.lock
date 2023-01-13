@@ -30,7 +30,7 @@
   dependencies:
     "@analytics/type-utils" "^0.6.0"
 
-"@analytics/google-analytics@0.5.3", "@analytics/google-analytics@^0.5.3":
+"@analytics/google-analytics@0.5.3":
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/@analytics/google-analytics/-/google-analytics-0.5.3.tgz#08642f6e9ab9a76aceb53356ea66c53552eec9b7"
   integrity sha512-5ZH3hpM8W/rhBrF+3TNjD2ZjabW4A8k/maqF4IGmWWNq31Bd8xh3KAhifDs76xn8hTWKGapTORZLfo87mB+9Dw==
@@ -248,133 +248,117 @@
   resolved "https://registry.yarnpkg.com/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-12.1.6.tgz#a350caf42975e7197b24b495b8d764eec7e6a36e"
   integrity sha512-4ZEwiRuZEicXhXqmhw3+de8Z4EpOLQj/gp+D9fFWo6ii6W1kBkNNvvEx4A90ugppu+74pT1lIJnOuz3A9oQeJA==
 
-"@ninetailed/experience.js-next@2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-next/-/experience.js-next-2.0.0-beta.32.tgz#30feae261ad5cac8f854a61bffdddcc95a34cfff"
-  integrity sha512-4uxHEV3FSFZEsOxWUWc3Y6sr2649Xiu+VjpJ0BLZy1A1La1GgONrmP18Oc5RWvb7r/19dt26GFh8BXHs/bZF/g==
+"@ninetailed/experience.js-next@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-next/-/experience.js-next-3.0.0.tgz#b13ddb322493b5098789130e9e5425093755144c"
+  integrity sha512-6d0eVQfChO6+rNwjYPOq1f2u6knfx+2mJMlFD2c7KcaCwAFdpkHWRmAJR+LGD7NMOdvlfEHwsqTn+90HIgUhJw==
   dependencies:
-    "@analytics/google-analytics" "^0.5.3"
-    "@ninetailed/experience.js" "2.0.0-beta.32"
-    "@ninetailed/experience.js-plugin-ssr" "2.0.0-beta.32"
-    "@ninetailed/experience.js-react" "2.0.0-beta.32"
-    "@ninetailed/experience.js-shared" "2.0.0-beta.32"
-    analytics "^0.8.0"
-    i18n-iso-countries "^7.3.0"
-    js-cookie "^3.0.1"
-    locale-enum "^1.1.1"
-    lodash "^4.17.21"
-    loglevel "^1.8.0"
-    murmurhash-js "^1.0.0"
-    node-fetch "^3.2.3"
-    react-intersection-observer "^8.33.1"
-    ts-toolbelt "^9.6.0"
-    uuid "^8.3.2"
+    "@ninetailed/experience.js" "3.0.0"
+    "@ninetailed/experience.js-plugin-ssr" "3.0.0"
+    "@ninetailed/experience.js-react" "3.0.0"
+    "@ninetailed/experience.js-shared" "3.0.0"
 
-"@ninetailed/experience.js-plugin-google-analytics@2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-google-analytics/-/experience.js-plugin-google-analytics-2.0.0-beta.32.tgz#0e1be91ca2654d575b7ba06548fc999e0c4bcd86"
-  integrity sha512-ePifpleA/wQXgBgy9IKzya017C944lamzuqV/avB+awcZKzWO3fOkmXhMF+aQAMedNfDR51XtpkK/KveS7SinA==
+"@ninetailed/experience.js-plugin-analytics@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-analytics/-/experience.js-plugin-analytics-3.0.0.tgz#816bdd56a73d1f1bd08729a96926d6b759e04e13"
+  integrity sha512-ugYSaVjUzg7XLILDTfE7/msfHXdmnWUs5OPuzW76U6/gjQlSPkO4Wyhqb4sFXRxQr2DFB8MgXoS+8UxUGqBdPw==
   dependencies:
-    "@analytics/google-analytics" "^0.5.3"
-    "@ninetailed/experience.js-shared" "2.0.0-beta.32"
-    analytics "^0.8.0"
-    i18n-iso-countries "^7.3.0"
-    locale-enum "^1.1.1"
-    lodash "^4.17.21"
-    ts-toolbelt "^9.6.0"
-    uuid "^8.3.2"
+    "@ninetailed/experience.js-shared" "3.0.0"
+    analytics "0.8.1"
+    zod "3.20.2"
 
-"@ninetailed/experience.js-plugin-preview@2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-preview/-/experience.js-plugin-preview-2.0.0-beta.32.tgz#86b7570abb9f8d23d1bca7e4759019b793ceb443"
-  integrity sha512-DV/GbWcxwvPqtixZ1upEfco6I2TLwW7U52aKGkyLkHovmtwoK2D3gy0oRcvAvkRS+FXFxKOe+xurE0kXPN60oA==
+"@ninetailed/experience.js-plugin-google-analytics@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-google-analytics/-/experience.js-plugin-google-analytics-3.0.0.tgz#d91ec1c85a3be4553d172905d288c5015acc5913"
+  integrity sha512-O+iOeEabuOwjOsy9GtdgOJ3rXz/ZYBKmAxNiEJJbrbJAou5GAnzDkUz2V2XQIDGljoq4XKUnJ/3Ev9UOJlNyKQ==
   dependencies:
-    "@ninetailed/experience.js" "2.0.0-beta.32"
-    "@ninetailed/experience.js-preview-bridge" "2.0.0-beta.32"
-    "@ninetailed/experience.js-shared" "2.0.0-beta.32"
-    analytics "^0.8.0"
-    i18n-iso-countries "^7.3.0"
-    locale-enum "^1.1.1"
-    lodash "^4.17.21"
-    loglevel "^1.8.0"
-    murmurhash-js "^1.0.0"
-    ts-toolbelt "^9.6.0"
-    uuid "^8.3.2"
-    zoid "^9.0.86"
+    "@ninetailed/experience.js" "3.0.0"
+    "@ninetailed/experience.js-plugin-analytics" "3.0.0"
+    lodash "4.17.21"
 
-"@ninetailed/experience.js-plugin-ssr@2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-ssr/-/experience.js-plugin-ssr-2.0.0-beta.32.tgz#2c35558169b209c4fcfadaa67c5993c1a372ead7"
-  integrity sha512-7XKbpLhTvLIUEgCgkpFxlA9kTwCbvbTYI8vHPhrhxIr3UFsZaELmpM5fbHr+bu7cDqe/4NiFpacN8iuqaajsLA==
+"@ninetailed/experience.js-plugin-preview@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-preview/-/experience.js-plugin-preview-3.0.0.tgz#b6bf0d90bf40ea1229dce03b6a4f306f780f8cd0"
+  integrity sha512-HHnk4x60op4MDVi41jaiAs77D0MqZjVw1GtIdFC6/T5nEEY9a76q99MC6UaXVCeEuxCVeKJ5PwHhUpNwponKVw==
   dependencies:
-    "@ninetailed/experience.js" "2.0.0-beta.32"
-    "@ninetailed/experience.js-shared" "2.0.0-beta.32"
-    analytics "^0.8.0"
-    i18n-iso-countries "^7.3.0"
-    js-cookie "^3.0.1"
-    locale-enum "^1.1.1"
-    lodash "^4.17.21"
-    loglevel "^1.8.0"
-    murmurhash-js "^1.0.0"
-    node-fetch "^3.2.3"
-    ts-toolbelt "^9.6.0"
-    uuid "^8.3.2"
+    "@ninetailed/experience.js" "3.0.0"
+    "@ninetailed/experience.js-plugin-analytics" "3.0.0"
+    "@ninetailed/experience.js-preview-bridge" "3.0.0"
+    "@ninetailed/experience.js-shared" "3.0.0"
+    lodash "4.17.21"
 
-"@ninetailed/experience.js-preview-bridge@2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-preview-bridge/-/experience.js-preview-bridge-2.0.0-beta.32.tgz#eaccd496dbc3546738b681a436776c5cf99499c1"
-  integrity sha512-lY9f0NuMjuqFPzDBvG6cP2tj5/ssO5XHLOVlVBySrDlQnOpuRF5i0XkZSLlEHpoQjWnUO5NQ8SNX4gVOHhDaGQ==
+"@ninetailed/experience.js-plugin-ssr@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-ssr/-/experience.js-plugin-ssr-3.0.0.tgz#b91b81dd0b833e0b08fb964e32b63e972bc69aea"
+  integrity sha512-3xbAiWn5zENwX8eiYE10A6B4wSu6bvTNCMi2qUgBpURJu/w7p+7jZvA5IGwhWnPgNDH3jw+YXnpkQzupXZ6J4A==
   dependencies:
-    zoid "^9.0.86"
+    "@ninetailed/experience.js" "3.0.0"
+    "@ninetailed/experience.js-plugin-analytics" "3.0.0"
+    "@ninetailed/experience.js-shared" "3.0.0"
+    js-cookie "3.0.1"
+    uuid "9.0.0"
 
-"@ninetailed/experience.js-react@2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-react/-/experience.js-react-2.0.0-beta.32.tgz#4a5828de6535cf7aed3929c962e667b5ce30ed33"
-  integrity sha512-N0jefz9C+O9DY1wruaR+wDYrKfSEYL2g6IM1JknUChu2B4Xh6EQU2pMILYlIJYGlRNgcCLLbWCA3bkZmz0eHfQ==
+"@ninetailed/experience.js-preview-bridge@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-preview-bridge/-/experience.js-preview-bridge-3.0.0.tgz#9826849c8ea3e93a1a7773b95be6b57750c844bc"
+  integrity sha512-C3jgXDwwGpOjsFPiWsSdTLAdbfG7k6waSG8Aec7Ip8S6bgZO7nhGkMvEBWKhNzFeaZZA/onwqQeY7YB7TY8Skg==
+  dependencies:
+    zoid "9.0.86"
+
+"@ninetailed/experience.js-react@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-react/-/experience.js-react-3.0.0.tgz#28d203a502b58d151ed2f906cb645775a4d30c47"
+  integrity sha512-1GwNasJjAT5fKK0oLzwbPa0eyiNGGS/bZP8AI99bAOj3xd1Dlj/O/krvp5D+898a2EQ08BJHs6DIftpxAix8QA==
   dependencies:
     "@analytics/google-analytics" "0.5.3"
-    "@ninetailed/experience.js" "2.0.0-beta.32"
-    "@ninetailed/experience.js-shared" "2.0.0-beta.32"
-    analytics "^0.8.0"
-    i18n-iso-countries "^7.3.0"
-    locale-enum "^1.1.1"
-    lodash "^4.17.21"
-    loglevel "^1.8.0"
-    murmurhash-js "^1.0.0"
-    react-intersection-observer "^8.33.1"
+    "@ninetailed/experience.js" "3.0.0"
+    "@ninetailed/experience.js-shared" "3.0.0"
+    analytics "0.8.1"
+    lodash "4.17.21"
+    react-intersection-observer "8.34.0"
     react-visibility-sensor "5.1.1"
-    ts-toolbelt "^9.6.0"
-    uuid "^8.3.2"
 
-"@ninetailed/experience.js-shared@2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-shared/-/experience.js-shared-2.0.0-beta.32.tgz#5f8a74e542ac6d60932c4d789b56efe59070f38a"
-  integrity sha512-v85jroZP2oHnADLM3GYj7eUIOrvjxTQUIAXBvTizYEPZajvtVmOs5BhVtYtflEzxnIjv4fjNcGlH/79iLWxP0g==
+"@ninetailed/experience.js-shared@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-shared/-/experience.js-shared-3.0.0.tgz#cbf3ca4f6287c484da57de5ad2e3234c765e368c"
+  integrity sha512-iykJIkfZqTAGuZ2iW3kPeq8R3mtDKQ8mwQEW4YwUcpt1Xne5t+KHh5VU6V2Dmae9E0+VFX/u/9uEyy5fWk1J1w==
   dependencies:
-    i18n-iso-countries "^7.3.0"
-    locale-enum "^1.1.1"
-    ts-toolbelt "^9.6.0"
-    uuid "^8.3.2"
+    async-retry "1.3.3"
+    diary "0.3.1"
+    i18n-iso-countries "7.5.0"
+    locale-enum "1.1.1"
+    ts-toolbelt "9.6.0"
+    zod "3.20.2"
 
-"@ninetailed/experience.js-utils-contentful@2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-utils-contentful/-/experience.js-utils-contentful-2.0.0-beta.32.tgz#1eea8fd52812658226362bf44251506f1c954a9a"
-  integrity sha512-3T6xJLoaX8PmJxRctNDQYrDKJ6/yFhDry0zh/TN22BJGAhHb21tY8kMLWemLs5nMNdeVSuyfzNiUAKKfXPEYNg==
-
-"@ninetailed/experience.js@2.0.0-beta.32":
-  version "2.0.0-beta.32"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js/-/experience.js-2.0.0-beta.32.tgz#b74c586113930915dbd764f25ec1895e879c1c1b"
-  integrity sha512-sH1nh2CiDfx6oGQwkiJ2BSoWrmiE3QwuolbzpZFbLLMh+TiOlFQZwWiFdmsEyiJ+fXeQceM9SFepSE1p71RV9A==
+"@ninetailed/experience.js-utils-contentful@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-utils-contentful/-/experience.js-utils-contentful-3.0.0.tgz#9f3ff8768930a2d6d06b5a49b45a05c61d04c676"
+  integrity sha512-qEpjkmeIEcfOoIGAg0YGLaw0Dj02WTsgDN6jKq1nFxF0nop/wFxzNWNZ8OAN5nImYruhE9g6Ucn9rEAaUIkUZQ==
   dependencies:
-    "@ninetailed/experience.js-shared" "2.0.0-beta.32"
-    analytics "^0.8.0"
-    i18n-iso-countries "^7.3.0"
-    locale-enum "^1.1.1"
-    lodash "^4.17.21"
-    loglevel "^1.8.0"
-    murmurhash-js "^1.0.0"
-    ts-toolbelt "^9.6.0"
-    uuid "^8.3.2"
+    "@ninetailed/experience.js" "3.0.0"
+    "@ninetailed/experience.js-shared" "3.0.0"
+    "@ninetailed/experience.js-utils" "3.0.0"
+    zod "3.20.2"
+
+"@ninetailed/experience.js-utils@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-utils/-/experience.js-utils-3.0.0.tgz#a0248b3381bbb283f5014f1a01801639fde5efd2"
+  integrity sha512-Hl0oY/nNAxGlD67uHxL4ukLN4XtLfqkpW1xbksiA05GOG8rapbWou1a69WivZISyxl4Yqcsl3yho6/qH6Ucjhw==
+  dependencies:
+    "@ninetailed/experience.js" "3.0.0"
+    "@ninetailed/experience.js-shared" "3.0.0"
+    zod "3.20.2"
+
+"@ninetailed/experience.js@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js/-/experience.js-3.0.0.tgz#367106241f95485ca29913ec5616c45b020f4df0"
+  integrity sha512-RZaXGoxl8i4j5hWYrNuI4nCUeecRP4mdWwYkM2pkWAugGdgroNhXnKSbBKG9wvIcK7rI6x+wvzD2xq12/Iedyw==
+  dependencies:
+    "@ninetailed/experience.js-plugin-analytics" "3.0.0"
+    "@ninetailed/experience.js-shared" "3.0.0"
+    analytics "0.8.1"
+    lodash "4.17.21"
+    murmurhash-js "1.0.0"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -681,7 +665,7 @@ analytics-utils@^1.0.10:
     "@analytics/type-utils" "^0.6.0"
     dlv "^1.1.3"
 
-analytics@^0.8.0:
+analytics@0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/analytics/-/analytics-0.8.1.tgz#e8ed0d5e729e666c1ab64dc5bdaa5f8231f05a1b"
   integrity sha512-mXOe8zTGDfiYqw9MZsgul8HrOBmHsIwk/0xbrkGZr75yvWqAcyKfZA0WjOalwI9tzIKv8WNfHV5yhnrtQcXJpw==
@@ -817,6 +801,13 @@ ast-types-flow@^0.0.7:
   resolved "https://registry.yarnpkg.com/ast-types-flow/-/ast-types-flow-0.0.7.tgz#f70b735c6bca1a5c9c22d982c3e39e7feba3bdad"
   integrity sha512-eBvWn1lvIApYMhzQMsu9ciLfkBY499mFZlNqG+/9WR7PVlroQw0vG30cOQQbaKz3sCEc44TAOu2ykzqXSNnwag==
 
+async-retry@1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/async-retry/-/async-retry-1.3.3.tgz#0e7f36c04d8478e7a58bdbed80cedf977785f280"
+  integrity sha512-wfr/jstw9xNi/0teMHrRW7dsz3Lt5ARhYNZ2ewpadnhaIp5mbALhOAP+EAdsC7t4Z6wqsDVv9+W6gm1Dk9mEyw==
+  dependencies:
+    retry "0.13.1"
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -860,13 +851,6 @@ axios@^0.21.4:
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
-
-axios@^0.26.0:
-  version "0.26.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.1.tgz#1ede41c51fcf51bbbd6fd43669caaa4f0495aaa9"
-  integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
-  dependencies:
-    follow-redirects "^1.14.8"
 
 axios@^0.27.0, axios@^0.27.1:
   version "0.27.2"
@@ -1214,6 +1198,13 @@ contentful-resolve-response@^1.3.0:
   dependencies:
     fast-copy "^3.0.0"
 
+contentful-resolve-response@^1.3.12:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/contentful-resolve-response/-/contentful-resolve-response-1.6.2.tgz#2fa6b4edc56d7a6220d06ba35d099a7e25c2d9b3"
+  integrity sha512-C4j/VA+SPjgVa7IxeuUagE++B/3WG+P6meFLu7u5DKDU1Tizayc4f2Y7Pb8ZN7yx+wEOoaGZvmlV/zePPnXmRQ==
+  dependencies:
+    fast-copy "^2.1.7"
+
 contentful-sdk-core@^6.10.4:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/contentful-sdk-core/-/contentful-sdk-core-6.11.0.tgz#0e2bf5a7270ac1f8937ae49e798bee614e20d087"
@@ -1236,6 +1227,17 @@ contentful-sdk-core@^7.0.1:
     p-throttle "^4.1.1"
     qs "^6.9.4"
 
+contentful-sdk-core@^7.0.4:
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/contentful-sdk-core/-/contentful-sdk-core-7.0.4.tgz#9d9aa420f6036c72701327c5d47df4beae139292"
+  integrity sha512-HwYdXmTsVh9rJOq+TA8CsY+vt6ivqkyJZpiEyVboZKIXAa83QmeVLAeBxK75+IiI9KpaPz7LCjVBXTGoTrhV7A==
+  dependencies:
+    fast-copy "^2.1.7"
+    lodash.isplainobject "^4.0.6"
+    lodash.isstring "^4.0.1"
+    p-throttle "^4.1.1"
+    qs "^6.9.4"
+
 contentful-typescript-codegen@3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/contentful-typescript-codegen/-/contentful-typescript-codegen-3.2.3.tgz#5f94c04128254c17e102cf6a0c80e10b00e976f8"
@@ -1245,15 +1247,15 @@ contentful-typescript-codegen@3.2.3:
     lodash "^4.17.21"
     meow "^9.0.0"
 
-contentful@9.1.18:
-  version "9.1.18"
-  resolved "https://registry.yarnpkg.com/contentful/-/contentful-9.1.18.tgz#81eeb30b28b5e578f13fdf9459dd57d09089efba"
-  integrity sha512-Hi4IyW2EIfypSgICYZcDUvn0dqAFhwp64h+VpWUsiEULdtxnyBdHxxh9utlgpv4sW0sj74SU3ChNgYAMxaH2+g==
+contentful@9.2.15:
+  version "9.2.15"
+  resolved "https://registry.yarnpkg.com/contentful/-/contentful-9.2.15.tgz#7d41343ddf962df75750b0097dd27b69237ea9fb"
+  integrity sha512-/1pxNzLI1qe2JI5zxSfBJkHUM45UtaCthOzu8t65Bni/n0F+nZV8Aowjo76iJIqp1X03tesQqenriEsOWRbcNg==
   dependencies:
-    axios "^0.26.0"
-    contentful-resolve-response "^1.3.0"
-    contentful-sdk-core "^7.0.1"
-    fast-copy "^2.1.0"
+    axios "^0.27.0"
+    contentful-resolve-response "^1.3.12"
+    contentful-sdk-core "^7.0.4"
+    fast-copy "^2.1.7"
     json-stringify-safe "^5.0.1"
 
 contentful@^9.0.0:
@@ -1332,11 +1334,6 @@ dashdash@^1.12.0:
   integrity sha512-jRFi8UDGo6j+odZiEpjazZaWqEal3w/basFjQHQEwVtZJGDpxbH1MeYluwCS8Xq5wmLJooDlMgvVarmWfGM44g==
   dependencies:
     assert-plus "^1.0.0"
-
-data-uri-to-buffer@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-4.0.0.tgz#b5db46aea50f6176428ac05b73be39a57701a64b"
-  integrity sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==
 
 date-fns@^1.27.2:
   version "1.30.1"
@@ -1418,6 +1415,11 @@ diacritics@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/diacritics/-/diacritics-1.3.0.tgz#3efa87323ebb863e6696cebb0082d48ff3d6f7a1"
   integrity sha512-wlwEkqcsaxvPJML+rDh/2iS824jbREk6DUMUKkEaSlxdYHeS43cClJtsWglvw2RfeXGm6ohKDqsXteJ5sP5enA==
+
+diary@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/diary/-/diary-0.3.1.tgz#8fb44e8d66f91d77c45c6aa0a6134f3280c34360"
+  integrity sha512-efOiQYa4S0fNbXs00dDq6wGPIlTCs2TCKDglL+bPhFnmV/4aPfv2mHJ6K3BXey5Fy+4mXNob7QtJYQVIxBpxQA==
 
 didyoumean@^1.2.2:
   version "1.2.2"
@@ -1848,7 +1850,7 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.1.tgz#8d172c064867f235c0c84a596806d279bf4bcc07"
   integrity sha512-Wrk35e8ydCKDj/ArClo1VrPVmN8zph5V4AtHwIuHhvMXsKf73UT3BOD+azBIW+3wOJ4FhEH7zyaJCFvChjYvMA==
 
-fast-copy@^2.1.0, fast-copy@^2.1.1:
+fast-copy@^2.1.0, fast-copy@^2.1.1, fast-copy@^2.1.7:
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/fast-copy/-/fast-copy-2.1.7.tgz#affc9475cb4b555fb488572b2a44231d0c9fa39e"
   integrity sha512-ozrGwyuCTAy7YgFCua8rmqmytECYk/JYAMXcswOcm0qvGoE3tPb7ivBeIHTOK2DiapBhDZgacIhzhQIKU5TCfA==
@@ -1895,14 +1897,6 @@ fastq@^1.6.0:
   integrity sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==
   dependencies:
     reusify "^1.0.4"
-
-fetch-blob@^3.1.2, fetch-blob@^3.1.4:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/fetch-blob/-/fetch-blob-3.2.0.tgz#f09b8d4bbd45adc6f0c20b7e787e793e309dcce9"
-  integrity sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==
-  dependencies:
-    node-domexception "^1.0.0"
-    web-streams-polyfill "^3.0.3"
 
 figures@^1.7.0:
   version "1.7.0"
@@ -1976,7 +1970,7 @@ flatted@^3.1.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.7.tgz#609f39207cb614b89d0765b477cb2d437fbf9787"
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
 
-follow-redirects@^1.14.0, follow-redirects@^1.14.8, follow-redirects@^1.14.9:
+follow-redirects@^1.14.0, follow-redirects@^1.14.9:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
@@ -2003,13 +1997,6 @@ form-data@~2.3.2:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
-
-formdata-polyfill@^4.0.10:
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/formdata-polyfill/-/formdata-polyfill-4.0.10.tgz#24807c31c9d402e002ab3d8c720144ceb8848423"
-  integrity sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==
-  dependencies:
-    fetch-blob "^3.1.2"
 
 fraction.js@^4.2.0:
   version "4.2.0"
@@ -2252,7 +2239,7 @@ https-proxy-agent@^3.0.0:
     agent-base "^4.3.0"
     debug "^3.1.0"
 
-i18n-iso-countries@^7.3.0:
+i18n-iso-countries@7.5.0:
   version "7.5.0"
   resolved "https://registry.yarnpkg.com/i18n-iso-countries/-/i18n-iso-countries-7.5.0.tgz#74fedd72619526a195cfb2e768fe1d82eed2123f"
   integrity sha512-PtfKJNWLVhhU0KBX/8asmywjAcuyQk07mmmMwxFJcddTNBJJ1yvpY2qxVmyxbtVF+9+6eg9phgpv83XPUKU5CA==
@@ -2490,7 +2477,7 @@ joi@^17.5.0:
     "@sideway/formula" "^3.0.0"
     "@sideway/pinpoint" "^2.0.0"
 
-js-cookie@^3.0.1:
+js-cookie@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
   integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
@@ -2698,7 +2685,7 @@ listr@^0.14.1:
     p-map "^2.0.0"
     rxjs "^6.3.3"
 
-locale-enum@^1.1.1:
+locale-enum@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/locale-enum/-/locale-enum-1.1.1.tgz#618b301564f250230799a63dcfdf2dc4270abea3"
   integrity sha512-gkqMmpdD0lPLUtCx32t8bM2ltP3N+yCvD2RskLIAYUeXb+wPkb6iUEWTKSUd6F9TYgjIt67B/48qVaeeSjJVDQ==
@@ -2792,11 +2779,6 @@ log-update@^2.3.0:
     ansi-escapes "^3.0.0"
     cli-cursor "^2.0.0"
     wrap-ansi "^3.0.1"
-
-loglevel@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.8.0.tgz#e7ec73a57e1e7b419cb6c6ac06bf050b67356114"
-  integrity sha512-G6A/nJLRgWOuuwdNuA6koovfEV1YpqqAG4pRUlFaz3jj2QNZ8M4vBqnVA+HBTmU/AMNUtlOsMmSpF6NyOjztbA==
 
 loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
@@ -2921,7 +2903,7 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-murmurhash-js@^1.0.0:
+murmurhash-js@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha512-TvmkNhkv8yct0SVBSy+o8wYzXjE4Zz3PCesbfs8HiCXXdcTuocApFv11UWlNFWKYsP2okqrhb7JNlSm9InBhIw==
@@ -2974,26 +2956,12 @@ next@12.1.6:
     "@next/swc-win32-ia32-msvc" "12.1.6"
     "@next/swc-win32-x64-msvc" "12.1.6"
 
-node-domexception@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
-  integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
-
 node-fetch@^2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
   dependencies:
     whatwg-url "^5.0.0"
-
-node-fetch@^3.2.3:
-  version "3.2.10"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-3.2.10.tgz#e8347f94b54ae18b57c9c049ef641cef398a85c8"
-  integrity sha512-MhuzNwdURnZ1Cp4XTazr69K0BTizsBroX7Zx3UgDSVcZYKF/6p0CBe4EUb/hLqmzVhl0UpYfgRljQ4yxE+iCxA==
-  dependencies:
-    data-uri-to-buffer "^4.0.0"
-    fetch-blob "^3.1.4"
-    formdata-polyfill "^4.0.10"
 
 node-releases@^2.0.6:
   version "2.0.6"
@@ -3407,7 +3375,7 @@ react-final-form@6.5.9:
   dependencies:
     "@babel/runtime" "^7.15.4"
 
-react-intersection-observer@^8.33.1:
+react-intersection-observer@8.34.0:
   version "8.34.0"
   resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-8.34.0.tgz#6f6e67831c52e6233f6b6cc7eb55814820137c42"
   integrity sha512-TYKh52Zc0Uptp5/b4N91XydfSGKubEhgZRtcg1rhTKABXijc4Sdr1uTp5lJ8TN27jwUsdXxjHXtHa0kPj704sw==
@@ -3545,6 +3513,11 @@ restore-cursor@^2.0.0:
   dependencies:
     onetime "^2.0.0"
     signal-exit "^3.0.2"
+
+retry@0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/retry/-/retry-0.13.1.tgz#185b1587acf67919d63b357349e03537b2484658"
+  integrity sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==
 
 reusify@^1.0.4:
   version "1.0.4"
@@ -3894,7 +3867,7 @@ tryer@^1.0.1:
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
-ts-toolbelt@^9.6.0:
+ts-toolbelt@9.6.0:
   version "9.6.0"
   resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-9.6.0.tgz#50a25426cfed500d4a09bd1b3afb6f28879edfd5"
   integrity sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==
@@ -4019,6 +3992,11 @@ util-deprecate@^1.0.2:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
+uuid@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
+
 uuid@^3.0.0, uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
@@ -4045,11 +4023,6 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
-
-web-streams-polyfill@^3.0.3:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.1.tgz#71c2718c52b45fd49dbeee88634b3a60ceab42a6"
-  integrity sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
@@ -4175,7 +4148,12 @@ zalgo-promise@^1, zalgo-promise@^1.0.11, zalgo-promise@^1.0.3, zalgo-promise@^1.
   resolved "https://registry.yarnpkg.com/zalgo-promise/-/zalgo-promise-1.0.48.tgz#9e33eef502d5ed9f5a09fc5728c833c3e87afa2e"
   integrity sha512-LLHANmdm53+MucY9aOFIggzYtUdkSBFxUsy4glTTQYNyK6B3uCPWTbfiGvSrEvLojw0mSzyFJ1/RRLv+QMNdzQ==
 
-zoid@^9.0.86:
+zod@3.20.2:
+  version "3.20.2"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.20.2.tgz#068606642c8f51b3333981f91c0a8ab37dfc2807"
+  integrity sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==
+
+zoid@9.0.86:
   version "9.0.86"
   resolved "https://registry.yarnpkg.com/zoid/-/zoid-9.0.86.tgz#0f18ba8841e57bfac97a83b9afe158e1eca5cc12"
   integrity sha512-hWcLj0s4cHKErUUn0Nz2bvuCStA9/y3sz/0gFxvAhompu9v54i+Pik0Kx39pWPB8qbiEN7MRyHohv1ZERlHeSg==
