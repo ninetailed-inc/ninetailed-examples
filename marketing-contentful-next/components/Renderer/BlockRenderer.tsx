@@ -4,7 +4,9 @@ import * as Contentful from 'contentful';
 import get from 'lodash/get';
 import { Experience } from '@ninetailed/experience.js-next';
 import {
+  BaselineWithExperiencesEntry,
   ExperienceEntry,
+  ExperienceEntryLike,
   ExperienceMapper,
   isEntry,
 } from '@ninetailed/experience.js-utils-contentful';
@@ -35,17 +37,8 @@ const ContentTypeMap = {
   [ComponentContentTypes.HubspotForm]: HubspotForm,
 };
 
-type PersonalizedFields<T> = T & {
-  nt_variants?: Contentful.Entry<{
-    nt_audience?: Contentful.Entry<{
-      id: Contentful.EntryFields.Symbol;
-    }>;
-  }>[];
-  nt_experiences?: ExperienceEntry[];
-};
-
-type Block = Contentful.Entry<PersonalizedFields<unknown>> & {
-  parent?: Contentful.Entry<Contentful.ContentType>;
+type Block = BaselineWithExperiencesEntry & {
+  parent?: Contentful.Entry<unknown>;
 };
 
 type BlockRendererProps = {
@@ -86,19 +79,14 @@ const BlockRenderer = ({ block }: BlockRendererProps) => {
   };
 
   const experiences = (componentProps.fields.nt_experiences || [])
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    .filter(isEntry)
-    .map((experience) => {
-      return ExperienceMapper.mapExperience(experience);
-    });
+    .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
+    .map((experience) => ExperienceMapper.mapExperience(experience));
 
-  /* console.log(experiences); */
   return (
     <div key={`${contentTypeId}-${id}`}>
       <Experience
         {...componentProps}
         id={id}
-        // @ts-ignore
         component={ComponentRenderer}
         experiences={experiences}
       />
