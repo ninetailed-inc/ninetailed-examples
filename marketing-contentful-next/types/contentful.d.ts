@@ -48,16 +48,10 @@ export interface IButtonFields {
   icon?: Asset | undefined;
 
   /** Variant */
-  variant: 'primary' | 'secondary';
+  variant: 'primary' | 'secondary' | 'loud';
 
   /** slug */
   slug: string;
-
-  /** Variants */
-  nt_variants?: IButton[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
 }
 
 export interface IButton extends Entry<IButtonFields> {
@@ -283,12 +277,6 @@ export interface ILandingPageFields {
 
   /** Footer */
   footer?: IFooter | undefined;
-
-  /** Variants */
-  nt_variants?: ILandingPage[] | undefined;
-
-  /** Audience */
-  nt_audience?: INtAudience | undefined;
 }
 
 export interface ILandingPage extends Entry<ILandingPageFields> {
