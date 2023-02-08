@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import * as Contentful from 'contentful';
 import get from 'lodash/get';
 import { Experience } from '@ninetailed/experience.js-next';
 import {
   BaselineWithExperiencesEntry,
-  ExperienceEntry,
-  ExperienceEntryLike,
   ExperienceMapper,
-  isEntry,
 } from '@ninetailed/experience.js-utils-contentful';
 
 import { Hero } from '@/components/Hero';
@@ -56,6 +52,7 @@ const ComponentRenderer: React.FC<ComponentRendererProps> = (props) => {
     return null;
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   return <Component {...props} />;
 };
