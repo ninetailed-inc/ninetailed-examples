@@ -16,10 +16,10 @@ export const PricingTable: React.FC<IPricingTable> = ({ fields }) => {
       />
 
       {/* Tiers */}
-      <div className="mt-24 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
+      <div className="mt-24 space-y-12 lg:space-y-0 flex flex-col lg:flex-row lg:gap-x-8">
         {fields.pricingPlans.map((plan) => {
           return (
-            <div key={plan.sys.id}>
+            <div key={plan.sys.id} className="flex-1">
               <PricingPlan {...plan} />
             </div>
           );
