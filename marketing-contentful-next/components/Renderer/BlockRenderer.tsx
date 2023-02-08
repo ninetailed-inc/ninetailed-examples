@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import * as Contentful from 'contentful';
 import get from 'lodash/get';
 import { Experience } from '@ninetailed/experience.js-next';
 import {
-  ExperienceEntry,
+  BaselineWithExperiencesEntry,
   ExperienceMapper,
-  isEntry,
 } from '@ninetailed/experience.js-utils-contentful';
 
 import { Hero } from '@/components/Hero';
@@ -18,6 +16,7 @@ import { Footer } from '@/components/Footer';
 import { PricingTable } from '@/components/PricingTable';
 import { PricingPlan } from '@/components/PricingPlan';
 import { Form } from '@/components/Form';
+import { HubspotForm } from '@/components/HubspotForm';
 
 import { ComponentContentTypes } from '@/lib/constants';
 
@@ -31,19 +30,11 @@ const ContentTypeMap = {
   [ComponentContentTypes.PricingPlan]: PricingPlan,
   [ComponentContentTypes.PricingTable]: PricingTable,
   [ComponentContentTypes.Form]: Form,
+  [ComponentContentTypes.HubspotForm]: HubspotForm,
 };
 
-type PersonalizedFields<T> = T & {
-  nt_variants?: Contentful.Entry<{
-    nt_audience?: Contentful.Entry<{
-      id: Contentful.EntryFields.Symbol;
-    }>;
-  }>[];
-  nt_experiences?: ExperienceEntry[];
-};
-
-type Block = Contentful.Entry<PersonalizedFields<unknown>> & {
-  parent?: Contentful.Entry<any>;
+type Block = BaselineWithExperiencesEntry & {
+  parent?: Contentful.Entry<unknown>;
 };
 
 type BlockRendererProps = {
@@ -61,6 +52,7 @@ const ComponentRenderer: React.FC<ComponentRendererProps> = (props) => {
     return null;
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   return <Component {...props} />;
 };
@@ -84,19 +76,14 @@ const BlockRenderer = ({ block }: BlockRendererProps) => {
   };
 
   const experiences = (componentProps.fields.nt_experiences || [])
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    .filter(isEntry)
-    .map((experience) => {
-      return ExperienceMapper.mapExperience(experience);
-    });
+    .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
+    .map((experience) => ExperienceMapper.mapExperience(experience));
 
-  /* console.log(experiences); */
   return (
     <div key={`${contentTypeId}-${id}`}>
       <Experience
         {...componentProps}
         id={id}
-        // @ts-ignore
         component={ComponentRenderer}
         experiences={experiences}
       />

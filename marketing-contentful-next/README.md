@@ -41,7 +41,7 @@ Simply follow the instructions, which will guide you through the necessary steps
   - **Space ID** (CONTENTFUL_SPACE_ID)
   - **Content Delivery API - access token** (CONTENTFUL_TOKEN)
   - **Content Preview API - access token** (CONTENTFUL_PREVIEW_TOKEN)
-- Go back and select the **Content management tokens** tab.
+- Go back to the main API configuration page and select the **Content management tokens** tab.
 - Generate a **Personal Access Token** (CONTENTFUL_MANAGEMENT_TOKEN) and copy it immediately to your note.
 - At last, since Contentful provides individual environments for you to work with, you must specify the environment name in the credentials. In case you don't use environments enter 'master' (without quotes) as the **Contentful Environment Name** (CONTENTFUL_ENVIRONMENT). Otherwise, provide your chosen environmental name in the credentials and enable the API key to this environment in the settings.
 

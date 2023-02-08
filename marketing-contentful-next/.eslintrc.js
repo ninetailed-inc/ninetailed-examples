@@ -1,66 +1,41 @@
-/**
- * Typescript-eslint: https://typescript-eslint.io/docs/linting/type-linting/
- * Airbnb: https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb#eslint-config-airbnbhooks
- * Airbnb Typescript: https://github.com/iamturns/eslint-config-airbnb-typescript
- *
- * */
 module.exports = {
-  root: true,
-  extends: ['eslint:recommended', 'next/core-web-vitals', 'airbnb', 'prettier'],
-  plugins: ['prettier'],
-  parser: '@typescript-eslint/parser',
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:import/errors',
+    'plugin:jsx-a11y/recommended',
+    'next/core-web-vitals',
+    'prettier',
+  ],
+  rules: {
+    'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
+  },
+  plugins: ['import', 'jsx-a11y'],
   parserOptions: {
+    ecmaVersion: 'latest',
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 'latest',
-  },
-  rules: {
-    'no-console': 'off',
-    'arrow-body-style': ['error', 'always'],
-    'import/prefer-default-export': 'off',
-    'react/jsx-props-no-spreading': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/destructuring-assignment': 'off',
-    'react/function-component-definition': [
-      'error',
-      { namedComponents: 'arrow-function' },
-    ],
-    'jsx-a11y/anchor-is-valid': 'off',
-    'jsx-a11y/label-has-associated-control': [
-      'error',
-      {
-        required: {
-          some: ['id'],
-        },
-      },
-    ],
-    'prettier/prettier': ['error'],
+    sourceType: 'module',
   },
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
+      excludedFiles: 'types/contentful.d.ts',
       extends: [
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'airbnb-typescript',
-        'prettier',
+        'plugin:import/typescript',
       ],
+      plugins: ['@typescript-eslint'],
       parserOptions: {
-        tsconfigRootDir: '.',
-        project: ['tsconfig.json'],
-      },
-      rules: {
-        'import/no-unresolved': 'error',
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/naming-convention': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-        '@typescript-eslint/no-misused-promises': [
-          'error',
-          { checksVoidReturn: false },
-        ],
-        'prettier/prettier': 'error',
+        parser: '@typescript-eslint/parser',
+        project: ['./tsconfig.json'],
       },
     },
   ],

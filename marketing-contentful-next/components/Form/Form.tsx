@@ -45,6 +45,8 @@ export const Form: React.FC = () => {
           render={({ handleSubmit }) => {
             return (
               <form
+                // TODO: Investigate react-final-form API
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises
                 onSubmit={handleSubmit}
                 className="flex flex-col space-y-4 items-start"
               >
