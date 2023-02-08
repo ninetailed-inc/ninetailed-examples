@@ -21,7 +21,7 @@ export const PricingPlan: React.FC<IPricingPlan> = (props) => {
 
   return (
     <div className="relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
-      <div className="flex-1">
+      <div className="mb-5">
         <RichText
           className="text-xl font-semibold text-gray-900"
           richTextDocument={title}
@@ -63,7 +63,7 @@ export const PricingPlan: React.FC<IPricingPlan> = (props) => {
         />
       </div>
       {button.fields.slug && (
-        <div className="mt-10">
+        <div className="mt-auto">
           <Link passHref href={button.fields.slug}>
             <Button
               as="a"
