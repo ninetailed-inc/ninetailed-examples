@@ -5,7 +5,10 @@ import Link from 'next/link';
 import { INavigation } from '@/types/contentful';
 import Logo from '@/public/logo.svg';
 
+import { useNinetailed } from '@ninetailed/experience.js-next';
+
 export const Navigation: React.FC<INavigation> = ({ fields }) => {
+  const { identify } = useNinetailed();
   return (
     <header className="bg-white">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
@@ -54,7 +57,10 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
 
           <div className="ml-10 space-x-4">
             {/* Buttons here */}
-            <button className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75">
+            <button
+              onClick={() => identify('', { pricingplan: 'lite' })}
+              className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75"
+            >
               Sign in
             </button>
             <button className="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50">
