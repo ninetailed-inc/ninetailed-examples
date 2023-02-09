@@ -96,8 +96,6 @@ Otherwise, the template content is populated with each build and eventually over
 
 Install all packages first:
 ```bash
-npm install
-# or
 yarn install
 ```
 
@@ -118,19 +116,13 @@ CONTENTFUL_SPACE_DATA_LOCATION=./path/to/your/jsonData.json
 
 Run the development server:
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
 ### Import and Export Data to Contentful
 
 ```bash
-npm run setup
-# or
 yarn setup
 
-npm run export
-# or
 yarn export
 ```
