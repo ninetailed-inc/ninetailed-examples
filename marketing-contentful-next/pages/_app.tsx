@@ -6,6 +6,7 @@ import {
   NinetailedProvider,
 } from '@ninetailed/experience.js-next';
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
+import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { HubspotProvider } from '@aaronhayes/react-use-hubspot-form';
 import { IPage } from '@/types/contentful';
 
@@ -27,6 +28,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         <NinetailedProvider
           preview
           plugins={[
+            new NinetailedGoogleTagmanagerPlugin(),
             new NinetailedPreviewPlugin({
               clientId:
                 process.env.NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID ?? '',
