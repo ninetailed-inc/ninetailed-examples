@@ -78,8 +78,8 @@ CONTENTFUL_ENVIRONMENT = "Contenful Environment Name (default = 'master')"
 ```
 
 ### Step 6. Connect Contentful With Ninetailed
-- Within your Contentful space, navigate to **Apps** in the navbar and click on **manage apps** in the dropdown.
-- On the next page, scroll down the provided list of available apps and click on the **Ninetailed Personalization** application.
+- Within your Contentful space, navigate to **Apps** in the navbar and click on **Marketplace** in the dropdown.
+- On the next page, scroll down the provided list of available apps and click on the **Ninetailed Personalization and Experimentation** application.
 - Install the Ninetailed Personalization application and authorize access to your space (make sure to install ).
 - Afterward, click on connect, and you will be automatically redirected to your Ninetailed account.
 - Next, make sure you are in the desired **Ninetailed Environment**. If so authenticate with Contentful, otherwise switch to the wanted environment.
