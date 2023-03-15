@@ -12,11 +12,18 @@ import { useNinetailed } from '@ninetailed/experience.js-next';
 
 export const Navigation: React.FC<INavigation> = ({ fields }) => {
   const [loggingIn, setLoggingIn] = React.useState<boolean>(false);
-  const { identify } = useNinetailed();
+  const [registering, setRegistering] = React.useState<boolean>(false);
+  const { track, identify } = useNinetailed();
   const handleLogin = handleErrors(async () => {
     setLoggingIn(true);
     await identify('', { pricingplan: 'lite' });
     setLoggingIn(false);
+  });
+
+  const handleRegistration = handleErrors(async () => {
+    setRegistering(true);
+    await track('registered');
+    setRegistering(false);
   });
 
   return (
@@ -77,7 +84,14 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
             >
               Sign in
             </button>
-            <button className="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50">
+            <button
+              onClick={handleRegistration}
+              className={classNames(
+                'inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50',
+                { 'bg-opacity-20': registering }
+              )}
+              disabled={registering}
+            >
               Sign up
             </button>
           </div>
