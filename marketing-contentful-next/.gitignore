@@ -1,9 +1,7 @@
-# Custom ignores
+# Created by https://www.toptal.com/developers/gitignore/api/nextjs,vercel,webstorm,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=nextjs,vercel,webstorm,visualstudiocode
 
-/archive-local
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+### NextJS ###
 # dependencies
 /node_modules
 /.pnp
@@ -31,20 +29,36 @@ yarn-error.log*
 
 # local env files
 .env*.local
-.env*.local*
-!.env*.local.example
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
+next-env.d.ts
 
+### Vercel ###
 
-# Created by https://www.toptal.com/developers/gitignore/api/webstorm+all
-# Edit at https://www.toptal.com/developers/gitignore?templates=webstorm+all
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
 
-### WebStorm+all ###
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+### WebStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
@@ -123,15 +137,38 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
-### WebStorm+all Patch ###
-# Ignore everything but code style settings and run configurations
-# that are supposed to be shared within teams.
+### WebStorm Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-.idea/*
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
 
-#!.idea/codeStyles
-.idea/codeStyles
-#!.idea/runConfigurations
-.idea/runConfigurations
+# Sonarlint plugin
+# https://plugins.jetbrains.com/plugin/7973-sonarlint
+.idea/**/sonarlint/
 
-# End of https://www.toptal.com/developers/gitignore/api/webstorm+all
+# SonarQube Plugin
+# https://plugins.jetbrains.com/plugin/7238-sonarqube-community-plugin
+.idea/**/sonarIssues.xml
+
+# Markdown Navigator plugin
+# https://plugins.jetbrains.com/plugin/7896-markdown-navigator-enhanced
+.idea/**/markdown-navigator.xml
+.idea/**/markdown-navigator-enh.xml
+.idea/**/markdown-navigator/
+
+# Cache file creation bug
+# See https://youtrack.jetbrains.com/issue/JBR-2257
+.idea/$CACHE_FILE$
+
+# CodeStream plugin
+# https://plugins.jetbrains.com/plugin/12206-codestream
+.idea/codestream.xml
+
+# Azure Toolkit for IntelliJ plugin
+# https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij
+.idea/**/azureSettings.xml
+
+# End of https://www.toptal.com/developers/gitignore/api/nextjs,vercel,webstorm,visualstudiocode
