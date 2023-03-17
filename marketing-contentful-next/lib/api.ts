@@ -83,15 +83,9 @@ export async function getExperiments() {
 
   console.log(experiments);
 
-  const mappedExperiments = (experiments || [])
-    .filter(isEntry)
-    .map((entry) => {
-      return ExperienceMapper.mapExperience(entry);
-    })
-    // FIXME: Temporary fix for "undefined" mapped description
-    .map(({ description, ...experimentAttrs }) => {
-      return experimentAttrs;
-    });
+  const mappedExperiments = (experiments || []).filter(isEntry).map((entry) => {
+    return ExperienceMapper.mapExperiment(entry);
+  });
 
   console.log(mappedExperiments);
   return mappedExperiments;
