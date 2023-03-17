@@ -81,12 +81,9 @@ export async function getExperiments() {
   const entries = await client.getEntries(query);
   const experiments = entries.items as ExperimentEntry[];
 
-  console.log(experiments);
-
   const mappedExperiments = (experiments || []).filter(isEntry).map((entry) => {
     return ExperienceMapper.mapExperiment(entry);
   });
 
-  console.log(mappedExperiments);
   return mappedExperiments;
 }
