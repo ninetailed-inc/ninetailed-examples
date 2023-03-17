@@ -3,6 +3,7 @@ import { IPage, IPageFields } from '@/types/contentful';
 import {
   ExperienceEntry,
   ExperienceMapper,
+  ExperimentEntry,
   isEntry,
 } from '@ninetailed/experience.js-utils-contentful';
 
@@ -78,9 +79,20 @@ export async function getExperiments() {
   };
   const client = getClient(false);
   const entries = await client.getEntries(query);
-  const experiments = entries.items as ExperienceEntry[];
+  const experiments = entries.items as ExperimentEntry[];
 
-  return (experiments || []).filter(isEntry).map((entry) => {
-    return ExperienceMapper.mapExperiment(entry);
-  });
+  console.log(experiments);
+
+  const mappedExperiments = (experiments || [])
+    .filter(isEntry)
+    .map((entry) => {
+      return ExperienceMapper.mapExperience(entry);
+    })
+    // FIXME: Temporary fix for "undefined" mapped description
+    .map(({ description, ...experimentAttrs }) => {
+      return experimentAttrs;
+    });
+
+  console.log(mappedExperiments);
+  return mappedExperiments;
 }
