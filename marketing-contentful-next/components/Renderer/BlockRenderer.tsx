@@ -33,18 +33,14 @@ const ContentTypeMap = {
   [ComponentContentTypes.HubspotForm]: HubspotForm,
 };
 
-type Block = BaselineWithExperiencesEntry & {
-  parent?: Contentful.Entry<unknown>;
-};
-
 type BlockRendererProps = {
-  block: Block | Block[];
+  block: BaselineWithExperiencesEntry | BaselineWithExperiencesEntry[];
 };
 
 type ComponentRendererProps = Contentful.Entry<unknown>;
 
 const ComponentRenderer: React.FC<ComponentRendererProps> = (props) => {
-  const contentTypeId = get(props, 'sys.contentType.sys.id') as string;
+  const contentTypeId = get(props, 'sys.contentType.sys.id');
   const Component = ContentTypeMap[contentTypeId];
 
   if (!Component) {
@@ -52,8 +48,6 @@ const ComponentRenderer: React.FC<ComponentRendererProps> = (props) => {
     return null;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   return <Component {...props} />;
 };
 
@@ -70,19 +64,15 @@ const BlockRenderer = ({ block }: BlockRendererProps) => {
 
   const contentTypeId = get(block, 'sys.contentType.sys.id') as string;
   const { id } = block.sys;
-  const componentProps = {
-    ...block,
-    parent: block.parent,
-  };
 
-  const experiences = (componentProps.fields.nt_experiences || [])
+  const experiences = (block.fields.nt_experiences || [])
     .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
     .map((experience) => ExperienceMapper.mapExperience(experience));
 
   return (
     <div key={`${contentTypeId}-${id}`}>
       <Experience
-        {...componentProps}
+        {...block}
         id={id}
         component={ComponentRenderer}
         experiences={experiences}
