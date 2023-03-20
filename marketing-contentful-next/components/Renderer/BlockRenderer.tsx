@@ -40,7 +40,7 @@ type BlockRendererProps = {
 type ComponentRendererProps = Contentful.Entry<unknown>;
 
 const ComponentRenderer: React.FC<ComponentRendererProps> = (props) => {
-  const contentTypeId = get(props, 'sys.contentType.sys.id');
+  const contentTypeId = get(props, 'sys.contentType.sys.id') as string;
   const Component = ContentTypeMap[contentTypeId];
 
   if (!Component) {
