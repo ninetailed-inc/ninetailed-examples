@@ -33,12 +33,8 @@ const ContentTypeMap = {
   [ComponentContentTypes.HubspotForm]: HubspotForm,
 };
 
-type Block = BaselineWithExperiencesEntry & {
-  parent?: Contentful.Entry<unknown>;
-};
-
 type BlockRendererProps = {
-  block: Block | Block[];
+  block: BaselineWithExperiencesEntry | BaselineWithExperiencesEntry[];
 };
 
 type ComponentRendererProps = Contentful.Entry<unknown>;
@@ -70,19 +66,15 @@ const BlockRenderer = ({ block }: BlockRendererProps) => {
 
   const contentTypeId = get(block, 'sys.contentType.sys.id') as string;
   const { id } = block.sys;
-  const componentProps = {
-    ...block,
-    parent: block.parent,
-  };
 
-  const experiences = (componentProps.fields.nt_experiences || [])
+  const experiences = (block.fields.nt_experiences || [])
     .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
     .map((experience) => ExperienceMapper.mapExperience(experience));
 
   return (
     <div key={`${contentTypeId}-${id}`}>
       <Experience
-        {...componentProps}
+        {...block}
         id={id}
         component={ComponentRenderer}
         experiences={experiences}
