@@ -19,6 +19,7 @@ import { Form } from '@/components/Form';
 import { HubspotForm } from '@/components/HubspotForm';
 
 import { ComponentContentTypes } from '@/lib/constants';
+import { IHeroFields } from '@/types/contentful';
 
 const ContentTypeMap = {
   [ComponentContentTypes.Hero]: Hero,
@@ -48,6 +49,7 @@ const ComponentRenderer: React.FC<ComponentRendererProps> = (props) => {
     return null;
   }
 
+  // @ts-ignore
   return <Component {...props} />;
 };
 
