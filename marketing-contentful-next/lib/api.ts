@@ -1,7 +1,6 @@
 import { ContentfulClientApi, createClient } from 'contentful';
 import { IPage, IPageFields } from '@/types/contentful';
 import {
-  ExperienceEntry,
   ExperienceMapper,
   ExperimentEntry,
   isEntry,
