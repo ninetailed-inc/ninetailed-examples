@@ -3,38 +3,38 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { RichText } from '@/components/RichText';
 import { Button, ButtonVariant } from '@/components/Button';
-import { ContentfulImageLoader } from '@/lib/helperfunctions';
+import { ContentstackImageLoader } from '@/lib/helperfunctions';
 
 import { IFeature } from '@/types/contentful';
 
-export const Feature: React.FC<IFeature> = ({ fields }) => {
+export const Feature: React.FC<IFeature> = (props) => {
   return (
     <div className="relative max-w-xl mx-auto lg:max-w-7xl px-4 sm:max-w-3xl sm:px-6 sm:py-6 lg:px-12">
       <div className="relative mt-2 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
         <div
           className={`relative${
-            fields.imagePosition !== 'right' ? '' : ' order-last'
+            props.image_position !== 'right' ? '' : ' order-last'
           }`}
         >
           <RichText
             className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
-            richTextDocument={fields.headline}
+            richTextHtml={props.headline}
           />
           <RichText
             className="mt-6 text-xl text-gray-500"
-            richTextDocument={fields.subline}
+            richTextHtml={props.subline}
           />
           <div className="mt-5 mx-auto flex flex-col sm:flex-row md:mt-8 sm:w-full">
-            {fields.button && fields.button[0].fields.slug && (
+            {props.buttons && props.buttons[0]?.button_link.href && (
               <div>
-                <Link passHref href={fields.button[0].fields.slug}>
+                <Link passHref href={props.buttons[0].button_link.href}>
                   <Button
                     as="a"
                     type="button"
-                    variant={fields.button[0].fields.variant as ButtonVariant}
+                    variant={props.buttons[0].button_variant as ButtonVariant}
                     size="large"
                   >
-                    {fields.button[0].fields.buttonText}
+                    {props.buttons[0].button_link.title}
                   </Button>
                 </Link>
               </div>
@@ -76,22 +76,12 @@ export const Feature: React.FC<IFeature> = ({ fields }) => {
               fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)"
             />
           </svg>
-          {fields.image.fields?.file.details.image && (
+          {props.image && (
             <Image
-              loader={ContentfulImageLoader}
-              src={`https:${fields.image.fields.file.url}`}
-              width={
-                (fields.image.fields.file.details.image.width *
-                  Math.min(
-                    320,
-                    fields.image.fields.file.details.image.height
-                  )) /
-                fields.image.fields.file.details.image.height
-              }
-              height={Math.min(
-                320,
-                fields.image.fields.file.details.image.height
-              )}
+              loader={ContentstackImageLoader}
+              src={props.image.url}
+              width={480}
+              height={320}
               className="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none"
               alt=""
             />

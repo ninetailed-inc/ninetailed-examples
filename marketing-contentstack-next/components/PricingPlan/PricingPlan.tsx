@@ -6,17 +6,15 @@ import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { IPricingPlan } from '@/types/contentful';
 
-export const PricingPlan: React.FC<IPricingPlan> = (props) => {
+export const PricingPlan = (props) => {
   const {
-    fields: {
-      title,
-      price,
-      frequency,
-      discountedPrice,
-      description,
-      button,
-      mostPopular,
-    },
+    display_title,
+    price,
+    frequency,
+    discounted_price,
+    description,
+    button,
+    most_popular,
   } = props;
 
   return (
@@ -24,9 +22,9 @@ export const PricingPlan: React.FC<IPricingPlan> = (props) => {
       <div className="mb-5">
         <RichText
           className="text-xl font-semibold text-gray-900"
-          richTextDocument={title}
+          richTextHtml={display_title}
         />
-        {mostPopular ? (
+        {most_popular ? (
           <p className="absolute top-0 py-1.5 px-4 bg-indigo-500 rounded-full text-xs font-semibold uppercase tracking-wide text-white transform -translate-y-1/2">
             Most popular
           </p>
@@ -34,44 +32,26 @@ export const PricingPlan: React.FC<IPricingPlan> = (props) => {
         <div className="mt-4 mb-2 flex items-baseline text-gray-900">
           <RichText
             className="text-5xl font-extrabold tracking-tight"
-            richTextDocument={price}
+            richTextHtml={price}
           />
           <p className="text-xl font-semibold">{frequency}</p>
           <RichText
             className="line-through text-red-500 ml-1 font-semibold text-2xl"
-            richTextDocument={discountedPrice}
+            richTextHtml={discounted_price}
           />
         </div>
-        <RichText
-          richTextDocument={description}
-          classNames={{
-            ul: 'mt-6 space-y-6',
-          }}
-          renderNode={{
-            [BLOCKS.LIST_ITEM]: (node, children) => {
-              return (
-                <li className="flex">
-                  <CheckIcon
-                    className="flex-shrink-0 w-6 h-6 text-indigo-500"
-                    aria-hidden="true"
-                  />
-                  <span className="ml-3 text-gray-500">{children}</span>
-                </li>
-              );
-            },
-          }}
-        />
+        <RichText richTextHtml={description} />
       </div>
-      {button.fields.slug && (
+      {button.button_link.href && (
         <div className="mt-auto">
-          <Link passHref href={button.fields.slug}>
+          <Link passHref href={button.button_link.href}>
             <Button
               as="a"
               type="button"
-              variant={button.fields.variant as ButtonVariant}
+              variant={button.button_variant as ButtonVariant}
               size="large"
             >
-              {button.fields.buttonText}
+              {button.button_link.title}
             </Button>
           </Link>
         </div>

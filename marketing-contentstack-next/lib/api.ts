@@ -1,5 +1,4 @@
 import * as contentstack from 'contentstack';
-import * as Utils from '@contentstack/utils';
 
 import getConfig from 'next/config';
 
@@ -42,7 +41,7 @@ function getEntriesOfTypeQuery({
       .then(
         (result) => {
           jsonRtePath &&
-            Utils.jsonToHTML({
+            contentstack.Utils.jsonToHTML({
               entry: result,
               paths: jsonRtePath,
             });
@@ -69,7 +68,7 @@ function getLandingPageByUrlQuery({
     data.then(
       (result) => {
         jsonRtePath &&
-          Utils.jsonToHTML({
+          contentstack.Utils.jsonToHTML({
             entry: result,
             paths: jsonRtePath,
           });
@@ -105,7 +104,18 @@ export const getLandingPage = async (entryUrl: string) => {
       'footer',
       'footer.footer_links.page_reference',
     ],
-    jsonRtePath: undefined,
+    jsonRtePath: [
+      'banner.text',
+      'footer.copyright',
+      'sections.headline',
+      'sections.subline',
+      'sections.pricing_plans.headline',
+      'sections.pricing_plans.subline',
+      'sections.pricing_plans.price',
+      'sections.pricing_plans.discounted_price',
+      'sections.pricing_plans.description',
+      'sections.pricing_plans.display_title',
+    ],
   });
   return response[0];
 };

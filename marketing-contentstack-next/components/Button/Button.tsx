@@ -7,7 +7,7 @@ export type ButtonType = 'button' | 'submit' | 'reset';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'loud';
+export type ButtonVariant = 'Primary' | 'Secondary' | 'Tertiary';
 
 export interface ButtonProps {
   as?: React.ElementType;
@@ -40,15 +40,15 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
             items-center justify-center`,
           {
             'text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded shadow-sm':
-              variant === 'primary',
+              variant === 'Primary',
           },
           {
             'text-indigo-700 bg-indigo-100 hover:bg-indigo-200 font-medium rounded shadow-sm':
-              variant === 'secondary',
+              variant === 'Secondary',
           },
           {
             'text-white bg-amber-600 hover:bg-amber-700 font-medium rounded shadow-sm':
-              variant === 'loud',
+              variant === 'Tertiary',
           },
           // {"text-gray-300 hover:text-white font-light": props.variant === "footerLink"},
           // {"text-gray-300 hover:text-white font-medium": props.variant === "navLink"},

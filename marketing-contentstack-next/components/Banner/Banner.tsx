@@ -7,7 +7,7 @@ import { IBanner } from '@/types/contentful';
 
 export type Handler = () => void;
 
-export const Banner: React.FC<IBanner> = ({ fields }) => {
+export const Banner: React.FC<IBanner> = (props) => {
   const [show, setShow] = React.useState<boolean>(true);
 
   const handleCloseBanner: Handler = () => {
@@ -19,16 +19,16 @@ export const Banner: React.FC<IBanner> = ({ fields }) => {
       <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
         <div className="pr-16 sm:text-center sm:px-16">
           <div className="font-medium text-white">
-            <RichText className="inline" richTextDocument={fields.text} />
-            {fields.slug && fields.linkText && (
+            <RichText className="inline" richTextHtml={props.text} />
+            {props.link && (
               <>
                 <span className="block sm:ml-2 sm:inline-block">
-                  <Link href={fields.slug}>
+                  <Link href={props.link.href}>
                     <a
                       className="text-white font-bold underline"
-                      href={fields.slug}
+                      href={props.link.href}
                     >
-                      {fields.linkText}
+                      {props.link.title}
                     </a>
                   </Link>
                 </span>

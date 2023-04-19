@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { handleErrors } from '@/lib/helperfunctions';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 
-export const Navigation: React.FC<INavigation> = ({ fields }) => {
+export const Navigation: React.FC<INavigation> = (props) => {
   const [loggingIn, setLoggingIn] = React.useState<boolean>(false);
   const [registering, setRegistering] = React.useState<boolean>(false);
   const { track, identify } = useNinetailed();
@@ -46,24 +46,24 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
 
           <div className="flex justify-start">
             <div className="hidden lg:flex">
-              {fields.navigationLinks.map((link) => {
-                if (!link.fields.slug) {
+              {props.navigation_items.map((link) => {
+                if (link.page_reference.length === 0) {
                   return (
-                    <div key={link.sys.id} className="px-5 py-2">
+                    <div key={link._metadata.uid} className="px-5 py-2">
                       <button className="text-base font-medium text-gray-500 hover:text-gray-900">
-                        {link.fields.buttonText}
+                        {link.title}
                       </button>
                     </div>
                   );
                 }
                 return (
-                  <div key={link.sys.id} className="px-5 py-2">
-                    <Link href={link.fields.slug}>
+                  <div key={link._metadata.uid} className="px-5 py-2">
+                    <Link href={link.page_reference[0].url}>
                       <a
                         className="text-base font-medium text-gray-500 hover:text-gray-900"
-                        href={link.fields.slug}
+                        href={link.page_reference[0].url}
                       >
-                        {link.fields.buttonText}
+                        {link.title}
                       </a>
                     </Link>
                   </div>
@@ -98,24 +98,24 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
         </div>
 
         <div className="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
-          {fields.navigationLinks.map((link) => {
-            if (!link.fields.slug) {
+          {props.navigation_items.map((link) => {
+            if (link.page_reference.length === 0) {
               return (
-                <div key={link.sys.id} className="px-5 py-2">
+                <div key={link._metadata.uid} className="px-5 py-2">
                   <button className="text-base font-medium text-gray-500 hover:text-gray-900">
-                    {link.fields.buttonText}
+                    {link.title}
                   </button>
                 </div>
               );
             }
             return (
-              <div key={link.sys.id} className="px-5 py-2">
-                <Link href={link.fields.slug}>
+              <div key={link._metadata.uid} className="px-5 py-2">
+                <Link href={link.page_reference[0].url}>
                   <a
                     className="text-base font-medium text-gray-500 hover:text-gray-900"
-                    href={link.fields.slug}
+                    href={link.page_reference[0].url}
                   >
-                    {link.fields.buttonText}
+                    {link.title}
                   </a>
                 </Link>
               </div>

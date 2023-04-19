@@ -11,18 +11,19 @@ import {
   getLandingPage,
 } from '@/lib/api';
 import { PAGE_CONTENT_TYPES } from '@/lib/constants';
-import { IPage } from '@/types/contentful';
 
-function Page(props) {
+function Page({ slug, page }) {
+  const { banner, navigation, sections, footer } = page;
+
   return (
     <>
-      <h1>Howdy! You hit the {props.slug} page.</h1>
-      <pre>{JSON.stringify(props, null, 2)}</pre>
-      {/* <NextSeo
-        title={page.fields.seo?.fields.title || page.fields.title}
-        description={page.fields.seo?.fields.description}
-        nofollow={page.fields.seo?.fields.no_follow as boolean}
-        noindex={page.fields.seo?.fields.no_index as boolean}
+      {/* <h1>Howdy! You hit the {slug} page.</h1>
+      <pre>{JSON.stringify(page, null, 2)}</pre> */}
+      <NextSeo
+        title={page.seo.meta_title}
+        description={page.seo.meta_description}
+        nofollow={!page.seo.enable_link_following as boolean}
+        noindex={!page.seo.enable_search_indexing as boolean}
       />
       <div className="w-full h-full flex flex-col">
         {banner && <BlockRenderer block={banner} />}
@@ -31,7 +32,7 @@ function Page(props) {
           <BlockRenderer block={sections} />
         </main>
         {footer && <BlockRenderer block={footer} />}
-      </div> */}
+      </div>
     </>
   );
 }
@@ -71,7 +72,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       };
     });
 
-  // TODO: Make dynamic by fetching from CMS
   return {
     paths: [...paths, { params: { slug: [''] } }],
     fallback: false,

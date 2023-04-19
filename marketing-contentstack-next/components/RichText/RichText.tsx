@@ -1,45 +1,33 @@
-import React from 'react';
-import { Document } from '@contentful/rich-text-types';
-import {
-  isRichText,
-  renderRichText,
-  RenderRichTextOptions,
-} from '@/lib/rich-text';
+import parse, { domToReact } from 'html-react-parser';
 
-export interface RichTextProps {
-  richTextDocument: Document | undefined;
-  classNames?: RenderRichTextOptions['classNames'];
-  renderNode?: RenderRichTextOptions['renderNode'];
-  className?: string;
-}
+import { CheckIcon } from '@heroicons/react/solid';
 
-export const RichText: React.FC<RichTextProps> = ({
-  richTextDocument,
-  classNames,
-  renderNode,
-  ...rest
-}) => {
-  if (isRichText(richTextDocument)) {
-    const component = renderRichText(richTextDocument, {
-      classNames,
-      renderNode,
-    });
-    return (
-      <>
-        {React.Children.map(component, (child) => {
-          if (React.isValidElement(child)) {
-            return React.cloneElement(child, rest);
-          }
-          return null;
-        })}
-      </>
-    );
-  }
-  return null;
-};
+export const RichText = ({ richTextHtml, className }) => {
+  const options = {
+    replace: (domNode) => {
+      if (domNode.name) {
+        const NodeTag = `${domNode.name}`;
+        if (NodeTag === 'li') {
+          return (
+            <li className="flex">
+              <CheckIcon
+                className="flex-shrink-0 w-6 h-6 text-indigo-500"
+                aria-hidden="true"
+              />
+              <span className="ml-3 text-gray-500">
+                {domToReact(domNode.children, options)}
+              </span>
+            </li>
+          );
+        }
+        return (
+          <NodeTag className={className}>
+            {domToReact(domNode.children, options)}
+          </NodeTag>
+        );
+      }
+    },
+  };
 
-RichText.defaultProps = {
-  classNames: {},
-  renderNode: {},
-  className: '',
+  return parse(richTextHtml, options);
 };

@@ -3,10 +3,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
-import { ContentfulImageLoader } from '@/lib/helperfunctions';
+import { ContentstackImageLoader } from '@/lib/helperfunctions';
 import { IHero } from '@/types/contentful';
 
-export const Hero: React.FC<IHero> = ({ fields }) => {
+export const Hero = (props) => {
   return (
     <div className="bg-white pb-8 sm:pb-12 lg:pb-12">
       <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
@@ -17,29 +17,29 @@ export const Hero: React.FC<IHero> = ({ fields }) => {
               <div className="mt-6 sm:max-w-2xl">
                 <RichText
                   className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
-                  richTextDocument={fields.headline}
+                  richTextHtml={props.headline}
                 />
                 <RichText
                   className="mt-6 text-xl text-gray-500"
-                  richTextDocument={fields.subline}
+                  richTextHtml={props.subline}
                 />
               </div>
               <div className="mt-5 mx-auto flex flex-col sm:flex-row justify-start md:mt-8 space-y-5 sm:w-full sm:space-x-5 sm:space-y-0">
-                {fields.buttons?.map((button) => {
-                  if (!button.fields.slug) {
+                {props.buttons?.map((button) => {
+                  if (!button.button_link.href) {
                     return null;
                   }
 
                   return (
-                    <div key={button.sys.id} className="shadow">
-                      <Link passHref href={button.fields.slug}>
+                    <div key={button._metadata.uid} className="shadow">
+                      <Link passHref href={button.button_link.href}>
                         <Button
                           as="a"
                           type="button"
-                          variant={button.fields.variant as ButtonVariant}
+                          variant={button.button_variant as ButtonVariant}
                           size="large"
                         >
-                          {button.fields.buttonText}
+                          {button.button_link.title}
                         </Button>
                       </Link>
                     </div>
@@ -90,23 +90,13 @@ export const Hero: React.FC<IHero> = ({ fields }) => {
             </div>
 
             <div className="hidden relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl lg:max-w-none lg:pl-12 md:block">
-              {fields.image.fields?.file.details.image && (
+              {props.image && (
                 <Image
-                  loader={ContentfulImageLoader}
+                  loader={ContentstackImageLoader}
                   layout="fixed"
-                  src={`https:${fields.image.fields.file.url}`}
-                  width={
-                    (fields.image.fields.file.details.image.width *
-                      Math.min(
-                        590,
-                        fields.image.fields.file.details.image.height
-                      )) /
-                    fields.image.fields.file.details.image.height
-                  }
-                  height={Math.min(
-                    590,
-                    fields.image.fields.file.details.image.height
-                  )}
+                  src={props.image.url}
+                  width={865}
+                  height={590}
                   className="w-full rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 lg:w-auto lg:max-w-none"
                   alt=""
                 />
@@ -114,22 +104,12 @@ export const Hero: React.FC<IHero> = ({ fields }) => {
             </div>
 
             <div className="relative px-4 sm:mx-auto sm:max-w-3xl lg:max-w-none lg:pl-12 md:hidden">
-              {fields.image.fields?.file.details.image && (
+              {props.image && (
                 <Image
-                  loader={ContentfulImageLoader}
-                  src={`https:${fields.image.fields.file.url}`}
-                  width={
-                    (fields.image.fields.file.details.image.width *
-                      Math.min(
-                        320,
-                        fields.image.fields.file.details.image.height
-                      )) /
-                    fields.image.fields.file.details.image.height
-                  }
-                  height={Math.min(
-                    320,
-                    fields.image.fields.file.details.image.height
-                  )}
+                  loader={ContentstackImageLoader}
+                  src={props.image.url}
+                  width={470}
+                  height={320}
                   className="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none"
                   alt=""
                 />

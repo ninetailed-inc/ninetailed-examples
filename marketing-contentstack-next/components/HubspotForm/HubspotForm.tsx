@@ -9,7 +9,7 @@ import { IHubspotForm } from '@/types/contentful';
 
 import find from 'lodash/find';
 
-export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
+export const HubspotForm: React.FC<IHubspotForm> = (props) => {
   const { loading, profile } = useProfile();
   const { identify } = useNinetailed();
   const [anonymousIdInput, setAnonymousIdInput] = useState(null);
@@ -67,8 +67,8 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
 
   useHubspotForm({
     target: '#form',
-    portalId: fields.hubspotPortalId,
-    formId: fields.hubspotFormId,
+    portalId: props.hubspot_portal_id,
+    formId: props.hubspot_form_id,
   });
 
   return (
