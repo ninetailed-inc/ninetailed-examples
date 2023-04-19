@@ -5,7 +5,7 @@ import { Experience } from '@ninetailed/experience.js-next';
 import {
   BaselineWithExperiencesEntryLike,
   ExperienceMapper,
-} from '@ninetailed/experience.js-utils-contentful';
+} from '@ninetailed/experience.js-utils';
 
 import { Hero } from '@/components/Hero';
 import { CTA } from '@/components/Cta';
@@ -59,7 +59,24 @@ const BlockRenderer = ({ block }) => {
   const contentTypeId = get(block, '_content_type_uid') as string;
   const id = block.uid;
 
-  const experiences = (block.fields?.nt_experiences || [])
+  const experiences = (block.nt_experiences_manual || []) // TODO: Change field name
+    .map((experience) => {
+      return {
+        name: experience.nt_name,
+        type: experience.nt_type,
+        config: experience.nt_config,
+        audience: {
+          id: experience.nt_audience[0].nt_audience_id,
+        },
+        id: experience.uid,
+        variants: experience.nt_variants?.map((variant) => {
+          return {
+            id: variant.uid,
+            ...variant,
+          };
+        }),
+      };
+    })
     .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
     .map((experience) => ExperienceMapper.mapExperience(experience));
 

@@ -4,21 +4,20 @@ import get from 'lodash/get';
 
 import { BlockRenderer } from '@/components/Renderer';
 import {
-  getPagesOfType,
-  getPage,
-  getExperiments,
+  getAllExperiments,
   getAllLandingPages,
   getLandingPage,
 } from '@/lib/api';
 import { PAGE_CONTENT_TYPES } from '@/lib/constants';
 
-function Page({ slug, page }) {
+function Page({ slug, page, ninetailed }) {
   const { banner, navigation, sections, footer } = page;
 
   return (
     <>
       {/* <h1>Howdy! You hit the {slug} page.</h1>
       <pre>{JSON.stringify(page, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(ninetailed.experiments, null, 2)}</pre> */}
       <NextSeo
         title={page.seo.meta_title}
         description={page.seo.meta_description}
@@ -40,20 +39,16 @@ function Page({ slug, page }) {
 export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = '/' + rawSlug.join('/');
-  const page = await getLandingPage(slug);
-  // TODO: Get Experiments
-  //   getPage({
-  //     preview,
-  //     slug: slug === '' ? '/' : slug,
-  //     pageContentType: PAGE_CONTENT_TYPES.PAGE,
-  //     childPageContentType: PAGE_CONTENT_TYPES.LANDING_PAGE,
-  //   }),
-  //   getExperiments(),
-  // ]);
+  const [page, experiments] = await Promise.all([
+    getLandingPage(slug),
+    getAllExperiments(),
+  ]);
+
   return {
     props: {
       slug,
       page,
+      ninetailed: { experiments },
     },
     revalidate: 5,
   };
