@@ -1,11 +1,6 @@
 import * as contentstack from 'contentstack';
 
-import getConfig from 'next/config';
-
-import {
-  ExperienceMapper,
-  ExperimentEntry,
-} from '@ninetailed/experience.js-utils';
+import { ExperienceMapper } from '@ninetailed/experience.js-utils';
 
 type GetEntry = {
   contentTypeUid: string;
@@ -138,8 +133,8 @@ export const getLandingPage = async (entryUrl: string) => {
       'navigation.navigation_items.page_reference',
       // 'navigation.nt_experiences_manual.nt_variants.navigation_items.page_reference', // TODO: Does this work?
       'sections.pricing_plans',
-      'sections.nt_experiences_manual.nt_variants',
-      'sections.nt_experiences_manual.nt_audience',
+      'sections.nt_experiences.nt_variants',
+      'sections.nt_experiences.nt_audience',
       'footer.footer_links.page_reference',
     ],
     jsonRtePath: [
@@ -153,8 +148,8 @@ export const getLandingPage = async (entryUrl: string) => {
       'sections.pricing_plans.discounted_price',
       'sections.pricing_plans.description',
       'sections.pricing_plans.display_title',
-      'sections.nt_experiences_manual.nt_variants.headline',
-      'sections.nt_experiences_manual.nt_variants.subline',
+      'sections.nt_experiences.nt_variants.headline',
+      'sections.nt_experiences.nt_variants.subline',
     ],
   });
   return response[0];

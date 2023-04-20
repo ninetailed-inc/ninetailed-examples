@@ -59,7 +59,7 @@ const BlockRenderer = ({ block }) => {
   const contentTypeId = get(block, '_content_type_uid') as string;
   const id = block.uid;
 
-  const experiences = (block.nt_experiences_manual || []) // TODO: Change field name
+  const experiences = (block.nt_experiences || [])
     .map((experience) => {
       return {
         name: experience.nt_name,
@@ -79,6 +79,10 @@ const BlockRenderer = ({ block }) => {
     })
     .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
     .map((experience) => ExperienceMapper.mapExperience(experience));
+
+  if (contentTypeId === 'hero') {
+    console.log(experiences);
+  }
 
   return (
     <div key={`${contentTypeId}-${id}`}>

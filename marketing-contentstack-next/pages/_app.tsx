@@ -42,6 +42,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
           clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
           environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
           experiments={pageProps.ninetailed?.experiments || []}
+          maximumActiveExperiments={10}
         >
           <Script
             id="gtm-base"

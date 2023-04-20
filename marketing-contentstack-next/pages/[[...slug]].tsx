@@ -10,14 +10,11 @@ import {
 } from '@/lib/api';
 import { PAGE_CONTENT_TYPES } from '@/lib/constants';
 
-function Page({ slug, page, ninetailed }) {
+function Page({ page, ninetailed }) {
   const { banner, navigation, sections, footer } = page;
 
   return (
     <>
-      {/* <h1>Howdy! You hit the {slug} page.</h1>
-      <pre>{JSON.stringify(page, null, 2)}</pre> */}
-      {/* <pre>{JSON.stringify(ninetailed.experiments, null, 2)}</pre> */}
       <NextSeo
         title={page.seo.meta_title}
         description={page.seo.meta_description}
@@ -46,7 +43,6 @@ export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
 
   return {
     props: {
-      slug,
       page,
       ninetailed: { experiments },
     },

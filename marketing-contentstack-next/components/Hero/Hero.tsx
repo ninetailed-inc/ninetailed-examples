@@ -31,7 +31,7 @@ export const Hero = (props) => {
                   }
 
                   return (
-                    <div key={button._metadata.uid} className="shadow">
+                    <div key={button.button_link.href} className="shadow">
                       <Link passHref href={button.button_link.href}>
                         <Button
                           as="a"

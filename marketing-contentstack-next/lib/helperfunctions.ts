@@ -5,7 +5,7 @@ export const ContentstackImageLoader: ImageLoader = ({
   width,
   quality,
 }) => {
-  return `${src}?width=${width}&quality=${quality || 25}`;
+  return `${src}?width=${width}&quality=${quality || 50}&format=webply`;
 };
 
 export function handleErrors<A extends unknown[]>(

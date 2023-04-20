@@ -13,7 +13,7 @@ export const Feature: React.FC<IFeature> = (props) => {
       <div className="relative mt-2 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
         <div
           className={`relative${
-            props.image_position !== 'right' ? '' : ' order-last'
+            props.image_position !== 'left' ? '' : ' order-last'
           }`}
         >
           <RichText
