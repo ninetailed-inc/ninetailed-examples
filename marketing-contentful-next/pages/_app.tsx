@@ -26,9 +26,8 @@ interface CustomPageProps {
   };
 }
 
-void ContentfulLivePreview.init();
-
 const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
+  void ContentfulLivePreview.init();
   return (
     <div className="app">
       <HubspotProvider>
