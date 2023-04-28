@@ -6,7 +6,9 @@ import { RichText } from '@/components/RichText';
 import { ContentfulImageLoader } from '@/lib/helperfunctions';
 import { IHero } from '@/types/contentful';
 
-export const Hero: React.FC<IHero> = ({ fields }) => {
+import { ContentfulLivePreview } from '@contentful/live-preview';
+
+export const Hero: React.FC<IHero> = ({ fields, sys }) => {
   return (
     <div className="bg-white pb-8 sm:pb-12 lg:pb-12">
       <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
@@ -16,6 +18,13 @@ export const Hero: React.FC<IHero> = ({ fields }) => {
             <div className="mt-20">
               <div className="mt-6 sm:max-w-2xl">
                 <RichText
+                  // eslint-disable-next-line
+                  // @ts-ignore
+                  // eslint-disable-next-line
+                  {...ContentfulLivePreview.getProps({
+                    entryId: sys.id,
+                    fieldId: 'headline',
+                  })}
                   className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
                   richTextDocument={fields.headline}
                 />

@@ -11,6 +11,10 @@ import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plug
 import { HubspotProvider } from '@aaronhayes/react-use-hubspot-form';
 import { IPage } from '@/types/contentful';
 
+// Live preview
+import '@contentful/live-preview/style.css';
+import { ContentfulLivePreview } from '@contentful/live-preview';
+
 type AppProps<P = unknown> = {
   pageProps: P;
 } & Omit<NextAppProps<P>, 'pageProps'>;
@@ -21,6 +25,8 @@ interface CustomPageProps {
     experiments: ExperienceConfiguration[];
   };
 }
+
+void ContentfulLivePreview.init();
 
 const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
   return (
