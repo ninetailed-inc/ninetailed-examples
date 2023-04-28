@@ -4,7 +4,7 @@ import { PAGE_CONTENT_TYPES } from '@/lib/constants';
 export default async function preview(req, res) {
   const { secret, slug } = req.query;
 
-  if (secret !== process.env.CONTENTFUL_PREVIEW_SECRET || !slug) {
+  if (secret !== process.env.CONTENTFUL_PREVIEW_SECRET) {
     return res.status(401).json({ message: 'Invalid token' });
   }
 
@@ -16,8 +16,6 @@ export default async function preview(req, res) {
     childPageContentType: PAGE_CONTENT_TYPES.LANDING_PAGE,
   });
 
-  console.log(page);
-
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!page) {
     return res.status(401).json({ message: 'Invalid slug' });
@@ -26,10 +24,13 @@ export default async function preview(req, res) {
   // Enable Preview Mode by setting the cookies
   res.setPreviewData({});
 
+  const formattedSlug = page.slug === '/' ? '' : slug;
+
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  // res.writeHead(307, { Location: `/posts/${post.slug}` })
-  const url = `/${page.slug === '/' ? '' : slug}`;
+  res.writeHead(307, { Location: formattedSlug });
+  const url = formattedSlug;
+  console.log(url);
   res.setHeader('Content-Type', 'text/html');
   res.write(
     `<!DOCTYPE html><html><head><meta http-equiv="Refresh" content="0; url=${url}" />
