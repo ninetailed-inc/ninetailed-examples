@@ -114,7 +114,7 @@ export const Hero = (props) => {
                 <Image
                   loader={ContentstackImageLoader}
                   layout="fixed"
-                  src={props.image.url}
+                  src={heroProps.image.url}
                   width={865}
                   height={590}
                   className="w-full rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 lg:w-auto lg:max-w-none"
