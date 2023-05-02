@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
@@ -8,18 +9,36 @@ import {
   getAllLandingPages,
   getLandingPage,
 } from '@/lib/api';
-import { PAGE_CONTENT_TYPES } from '@/lib/constants';
+
+import { onEntryChange } from '@/lib/api';
+
+// For live preview
+async function updateData(url: string) {
+  const page = await getLandingPage(url);
+  return {
+    page,
+  };
+}
 
 function Page({ page, ninetailed }) {
-  const { banner, navigation, sections, footer } = page;
+  const [pageData, setPageData] = useState(page);
+
+  const { url, banner, navigation, sections, footer } = pageData;
+
+  useEffect(() => {
+    onEntryChange(async () => {
+      const newData = await updateData(url);
+      setPageData(newData.page);
+    });
+  }, [url]);
 
   return (
     <>
       <NextSeo
-        title={page.seo.meta_title}
-        description={page.seo.meta_description}
-        nofollow={!page.seo.enable_link_following as boolean}
-        noindex={!page.seo.enable_search_indexing as boolean}
+        title={pageData.seo.meta_title}
+        description={pageData.seo.meta_description}
+        nofollow={!pageData.seo.enable_link_following as boolean}
+        noindex={!pageData.seo.enable_search_indexing as boolean}
       />
       <div className="w-full h-full flex flex-col">
         {banner && <BlockRenderer block={banner} />}

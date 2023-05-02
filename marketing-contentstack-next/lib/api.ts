@@ -1,4 +1,6 @@
 import * as contentstack from 'contentstack';
+import ContentstackLivePreview from '@contentstack/live-preview-utils';
+import { addEditableTags } from '@contentstack/utils';
 
 import { ExperienceMapper } from '@ninetailed/experience.js-utils';
 
@@ -16,16 +18,32 @@ type GetExperiment = {
 type GetEntryByWhereQuery = {
   contentTypeUid: string;
   fieldName: string;
-  fieldValue: string | undefined;
+  fieldValue: string;
   referenceFieldPath: string[] | undefined;
   jsonRtePath: string[] | undefined;
 };
 
 const Stack = contentstack.Stack({
-  api_key: process.env.CONTENTSTACK_API_KEY || '',
-  delivery_token: process.env.CONTENTSTACK_DELIVERY_TOKEN || '',
-  environment: process.env.CONTENTSTACK_ENVIRONMENT || '',
+  api_key: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY || '',
+  delivery_token: process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN || '',
+  environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT || '',
+  live_preview: {
+    management_token:
+      process.env.NEXT_PUBLIC_CONTENTSTACK_MANAGEMENT_TOKEN || '',
+    enable: process.env.NEXT_PUBLIC_CONTENTSTACK_ENABLE_LIVE_PREVIEW === 'true',
+    host: 'api.contentstack.io',
+  },
 });
+
+console.log(Stack);
+
+ContentstackLivePreview.init({
+  // @ts-ignore
+  stackSdk: Stack,
+  ssr: false,
+});
+
+export const onEntryChange = ContentstackLivePreview.onEntryChange;
 
 function getEntriesOfTypeQuery({
   contentTypeUid,
@@ -54,34 +72,32 @@ function getEntriesOfTypeQuery({
   });
 }
 
-function getEntryByWhereQuery({
+async function getEntryByWhereQuery({
   contentTypeUid,
   fieldName,
   fieldValue,
   referenceFieldPath,
   jsonRtePath,
 }: GetEntryByWhereQuery) {
-  return new Promise((resolve, reject) => {
-    const landingPageQuery = Stack.ContentType(contentTypeUid).Query();
-    if (referenceFieldPath)
-      landingPageQuery.includeReference(referenceFieldPath);
-    landingPageQuery.toJSON();
-    const data = landingPageQuery.where(fieldName, fieldValue).find();
-    data.then(
-      (result) => {
-        jsonRtePath &&
-          contentstack.Utils.jsonToHTML({
-            entry: result,
-            paths: jsonRtePath,
-          });
-        resolve(result[0]);
-      },
-      (error) => {
-        console.error(error);
-        reject(error);
-      }
-    );
-  });
+  const landingPageQuery = Stack.ContentType(contentTypeUid).Query();
+  if (referenceFieldPath) landingPageQuery.includeReference(referenceFieldPath);
+  landingPageQuery.toJSON();
+  try {
+    const result = await landingPageQuery.where(fieldName, fieldValue).find();
+    jsonRtePath &&
+      contentstack.Utils.jsonToHTML({
+        entry: result,
+        paths: jsonRtePath,
+      });
+
+    if (result?.[0]?.[0]) {
+      addEditableTags(result[0][0], contentTypeUid, true);
+    }
+    return result[0];
+  } catch (err) {
+    console.log('getEntryByUrl Error:', err);
+    throw err;
+  }
 }
 
 function getExperimentsQuery({
@@ -131,7 +147,6 @@ export const getLandingPage = async (entryUrl: string) => {
     referenceFieldPath: [
       'banner',
       'navigation.navigation_items.page_reference',
-      // 'navigation.nt_experiences_manual.nt_variants.navigation_items.page_reference', // TODO: Does this work?
       'sections.pricing_plans',
       'sections.nt_experiences.nt_variants',
       'sections.nt_experiences.nt_audience',
@@ -150,36 +165,6 @@ export const getLandingPage = async (entryUrl: string) => {
       'sections.pricing_plans.display_title',
       'sections.nt_experiences.nt_variants.headline',
       'sections.nt_experiences.nt_variants.subline',
-    ],
-  });
-  return response[0];
-};
-
-// If we need to fetch experiences sequentially
-export const getExperience = async (entryUrl: string) => {
-  const response = await getEntryByWhereQuery({
-    contentTypeUid: 'landing_page',
-    fieldName: 'url',
-    fieldValue: entryUrl,
-    referenceFieldPath: [
-      'banner',
-      'navigation',
-      'navigation.navigation_items.page_reference',
-      'sections.pricing_plans',
-      'footer',
-      'footer.footer_links.page_reference',
-    ],
-    jsonRtePath: [
-      'banner.text',
-      'footer.copyright',
-      'sections.headline',
-      'sections.subline',
-      'sections.pricing_plans.headline',
-      'sections.pricing_plans.subline',
-      'sections.pricing_plans.price',
-      'sections.pricing_plans.discounted_price',
-      'sections.pricing_plans.description',
-      'sections.pricing_plans.display_title',
     ],
   });
   return response[0];
