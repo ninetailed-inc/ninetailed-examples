@@ -2,7 +2,7 @@ import parse, { domToReact } from 'html-react-parser';
 
 import { CheckIcon } from '@heroicons/react/solid';
 
-export const RichText = ({ richTextHtml, className }) => {
+export const RichText = ({ richTextHtml, className, ...rest }) => {
   const options = {
     replace: (domNode) => {
       if (domNode.name) {
@@ -21,7 +21,7 @@ export const RichText = ({ richTextHtml, className }) => {
           );
         }
         return (
-          <NodeTag className={className}>
+          <NodeTag className={className} {...rest}>
             {domToReact(domNode.children, options)}
           </NodeTag>
         );

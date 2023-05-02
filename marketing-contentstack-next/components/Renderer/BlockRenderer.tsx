@@ -80,10 +80,6 @@ const BlockRenderer = ({ block }) => {
     .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
     .map((experience) => ExperienceMapper.mapExperience(experience));
 
-  // if (contentTypeId === 'hero') {
-  //   console.log(experiences);
-  // }
-
   return (
     <div key={`${contentTypeId}-${id}`}>
       <Experience

@@ -35,11 +35,17 @@ const Stack = contentstack.Stack({
   },
 });
 
-console.log(Stack);
-
 ContentstackLivePreview.init({
   // @ts-ignore
   stackSdk: Stack,
+  stackDetails: {
+    apiKey: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY || '',
+  },
+  clientUrlParams: {
+    protocol: 'https',
+    host: 'app.contentstack.com',
+    port: 443,
+  },
   ssr: false,
 });
 
@@ -166,6 +172,21 @@ export const getLandingPage = async (entryUrl: string) => {
       'sections.nt_experiences.nt_variants.headline',
       'sections.nt_experiences.nt_variants.subline',
     ],
+  });
+  return response[0];
+};
+
+export const getHeroEntryById = async (
+  uid: string,
+  referenceFieldPath: any[],
+  jsonRtePath: any[]
+) => {
+  const response = await getEntryByWhereQuery({
+    contentTypeUid: 'hero',
+    fieldName: 'uid',
+    fieldValue: uid,
+    referenceFieldPath,
+    jsonRtePath,
   });
   return response[0];
 };

@@ -10,6 +10,7 @@ import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-previe
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { HubspotProvider } from '@aaronhayes/react-use-hubspot-form';
 import { IPage } from '@/types/contentful';
+import '@contentstack/live-preview-utils/dist/main.css';
 
 type AppProps<P = unknown> = {
   pageProps: P;

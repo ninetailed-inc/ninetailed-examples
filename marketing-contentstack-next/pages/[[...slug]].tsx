@@ -20,17 +20,17 @@ async function updateData(url: string) {
   };
 }
 
-function Page({ page, ninetailed }) {
-  const [pageData, setPageData] = useState(page);
+function Page({ page: pageData, ninetailed }) {
+  // const [pageData, setPageData] = useState(page);
 
   const { url, banner, navigation, sections, footer } = pageData;
 
-  useEffect(() => {
-    onEntryChange(async () => {
-      const newData = await updateData(url);
-      setPageData(newData.page);
-    });
-  }, [url]);
+  // useEffect(() => {
+  //   onEntryChange(async () => {
+  //     const newData = await updateData(url);
+  //     setPageData(newData.page);
+  //   });
+  // }, [url]);
 
   return (
     <>
