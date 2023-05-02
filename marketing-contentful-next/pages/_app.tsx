@@ -26,9 +26,8 @@ interface CustomPageProps {
   };
 }
 
-const livePreview = async () => {
-  await ContentfulLivePreview.init({ debugMode: true });
-};
+// eslint-disable-next-line
+ContentfulLivePreview.init();
 
 const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
   return (
