@@ -8,10 +8,7 @@ import { getHeroEntryById, onEntryChange } from '@/lib/api';
 
 export const Hero = (props) => {
   const [heroProps, setHeroProps] = useState(props);
-
   const { uid } = props;
-
-  console.log(heroProps);
 
   // For live preview
   async function updateData(uid: string) {
@@ -128,7 +125,7 @@ export const Hero = (props) => {
             </div>
 
             <div className="relative px-4 sm:mx-auto sm:max-w-3xl lg:max-w-none lg:pl-12 md:hidden">
-              {props.image && (
+              {heroProps.image && (
                 <Image
                   loader={ContentstackImageLoader}
                   src={heroProps.image.url}
