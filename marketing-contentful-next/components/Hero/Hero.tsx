@@ -24,6 +24,7 @@ export const Hero: React.FC<IHero> = ({ fields, sys }) => {
                   {...ContentfulLivePreview.getProps({
                     entryId: sys.id,
                     fieldId: 'headline',
+                    locale: 'en-US',
                   })}
                   className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
                   richTextDocument={fields.headline}
