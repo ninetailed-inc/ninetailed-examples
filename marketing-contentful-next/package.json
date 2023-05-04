@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@aaronhayes/react-use-hubspot-form": "^2.1.1",
-    "@contentful/live-preview": "^1.13.0",
+    "@contentful/live-preview": "^1.14.1",
     "@contentful/rich-text-react-renderer": "15.12.1",
     "@contentful/rich-text-types": "15.14.1",
     "@heroicons/react": "1.0.6",

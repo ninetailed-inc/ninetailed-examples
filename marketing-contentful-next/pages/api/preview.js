@@ -24,7 +24,7 @@ export default async function preview(req, res) {
   // Enable Preview Mode by setting the cookies
   res.setPreviewData({});
 
-  const formattedSlug = page.slug === '/' ? '' : slug;
+  const formattedSlug = page.slug === '/' ? '' : `/${slug}`;
 
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities

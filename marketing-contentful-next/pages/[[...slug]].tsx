@@ -12,6 +12,7 @@ const Page = ({ page }: { page: IPage }) => {
   if (!page) {
     return null;
   }
+
   const {
     banner,
     navigation,

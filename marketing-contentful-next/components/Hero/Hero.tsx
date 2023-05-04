@@ -7,8 +7,13 @@ import { ContentfulImageLoader } from '@/lib/helperfunctions';
 import { IHero } from '@/types/contentful';
 
 import { ContentfulLivePreview } from '@contentful/live-preview';
+import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 
-export const Hero: React.FC<IHero> = ({ fields, sys }) => {
+export const Hero: React.FC<IHero> = ({ sys, fields }) => {
+  const updatedHero = useContentfulLiveUpdates(
+    { sys, fields },
+    'en-US'
+  ) as IHero;
   return (
     <div className="bg-white pb-8 sm:pb-12 lg:pb-12">
       <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
@@ -22,20 +27,28 @@ export const Hero: React.FC<IHero> = ({ fields, sys }) => {
                   // @ts-ignore
                   // eslint-disable-next-line
                   {...ContentfulLivePreview.getProps({
-                    entryId: sys.id,
+                    entryId: updatedHero.sys.id,
                     fieldId: 'headline',
                     locale: 'en-US',
                   })}
                   className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
-                  richTextDocument={fields.headline}
+                  richTextDocument={updatedHero.fields.headline}
                 />
                 <RichText
+                  // eslint-disable-next-line
+                  // @ts-ignore
+                  // eslint-disable-next-line
+                  {...ContentfulLivePreview.getProps({
+                    entryId: updatedHero.sys.id,
+                    fieldId: 'subline',
+                    locale: 'en-US',
+                  })}
                   className="mt-6 text-xl text-gray-500"
-                  richTextDocument={fields.subline}
+                  richTextDocument={updatedHero.fields.subline}
                 />
               </div>
               <div className="mt-5 mx-auto flex flex-col sm:flex-row justify-start md:mt-8 space-y-5 sm:w-full sm:space-x-5 sm:space-y-0">
-                {fields.buttons?.map((button) => {
+                {updatedHero.fields.buttons?.map((button) => {
                   if (!button.fields.slug) {
                     return null;
                   }
@@ -99,23 +112,31 @@ export const Hero: React.FC<IHero> = ({ fields, sys }) => {
               </svg>
             </div>
 
-            <div className="hidden relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl lg:max-w-none lg:pl-12 md:block">
-              {fields.image.fields?.file.details.image && (
+            <div
+              className="hidden relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl lg:max-w-none lg:pl-12 md:block"
+              {...ContentfulLivePreview.getProps({
+                entryId: updatedHero.sys.id,
+                fieldId: 'image',
+                locale: 'en-US',
+              })}
+            >
+              {updatedHero.fields.image.fields?.file.details.image && (
                 <Image
                   loader={ContentfulImageLoader}
                   layout="fixed"
-                  src={`https:${fields.image.fields.file.url}`}
+                  src={`https:${updatedHero.fields.image.fields.file.url}`}
                   width={
-                    (fields.image.fields.file.details.image.width *
+                    (updatedHero.fields.image.fields.file.details.image.width *
                       Math.min(
                         590,
-                        fields.image.fields.file.details.image.height
+                        updatedHero.fields.image.fields.file.details.image
+                          .height
                       )) /
-                    fields.image.fields.file.details.image.height
+                    updatedHero.fields.image.fields.file.details.image.height
                   }
                   height={Math.min(
                     590,
-                    fields.image.fields.file.details.image.height
+                    updatedHero.fields.image.fields.file.details.image.height
                   )}
                   className="w-full rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 lg:w-auto lg:max-w-none"
                   alt=""
@@ -124,21 +145,22 @@ export const Hero: React.FC<IHero> = ({ fields, sys }) => {
             </div>
 
             <div className="relative px-4 sm:mx-auto sm:max-w-3xl lg:max-w-none lg:pl-12 md:hidden">
-              {fields.image.fields?.file.details.image && (
+              {updatedHero.fields.image.fields?.file.details.image && (
                 <Image
                   loader={ContentfulImageLoader}
-                  src={`https:${fields.image.fields.file.url}`}
+                  src={`https:${updatedHero.fields.image.fields.file.url}`}
                   width={
-                    (fields.image.fields.file.details.image.width *
+                    (updatedHero.fields.image.fields.file.details.image.width *
                       Math.min(
                         320,
-                        fields.image.fields.file.details.image.height
+                        updatedHero.fields.image.fields.file.details.image
+                          .height
                       )) /
-                    fields.image.fields.file.details.image.height
+                    updatedHero.fields.image.fields.file.details.image.height
                   }
                   height={Math.min(
                     320,
-                    fields.image.fields.file.details.image.height
+                    updatedHero.fields.image.fields.file.details.image.height
                   )}
                   className="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none"
                   alt=""
