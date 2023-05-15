@@ -151,15 +151,18 @@ export const getLandingPage = async (entryUrl: string) => {
     fieldName: 'url',
     fieldValue: entryUrl,
     referenceFieldPath: [
-      'banner',
+      'banner.nt_experiences.nt_variants',
       'navigation.navigation_items.page_reference',
+      'navigation.nt_experiences.nt_variants.navigation_items.page_reference',
       'sections.pricing_plans',
-      'sections.nt_experiences.nt_variants',
       'sections.nt_experiences.nt_audience',
+      'sections.nt_experiences.nt_variants',
+      'sections.nt_experiences.nt_variants.pricing_plans',
       'footer.footer_links.page_reference',
     ],
     jsonRtePath: [
       'banner.text',
+      'banner.nt_experiences.nt_variants.text',
       'footer.copyright',
       'sections.headline',
       'sections.subline',
@@ -171,6 +174,12 @@ export const getLandingPage = async (entryUrl: string) => {
       'sections.pricing_plans.display_title',
       'sections.nt_experiences.nt_variants.headline',
       'sections.nt_experiences.nt_variants.subline',
+      'sections.nt_experiences.nt_variants.pricing_plans.headline',
+      'sections.nt_experiences.nt_variants.pricing_plans.subline',
+      'sections.nt_experiences.nt_variants.pricing_plans.price',
+      'sections.nt_experiences.nt_variants.pricing_plans.discounted_price',
+      'sections.nt_experiences.nt_variants.pricing_plans.description',
+      'sections.nt_experiences.nt_variants.pricing_plans.display_title',
     ],
   });
   return response[0];

@@ -46,10 +46,10 @@ export const Navigation: React.FC<INavigation> = (props) => {
 
           <div className="flex justify-start">
             <div className="hidden lg:flex">
-              {props.navigation_items.map((link) => {
+              {props.navigation_items.map((link, i) => {
                 if (link.page_reference.length === 0) {
                   return (
-                    <div key={link._metadata.uid} className="px-5 py-2">
+                    <div key={i} className="px-5 py-2">
                       <button className="text-base font-medium text-gray-500 hover:text-gray-900">
                         {link.title}
                       </button>
@@ -57,7 +57,7 @@ export const Navigation: React.FC<INavigation> = (props) => {
                   );
                 }
                 return (
-                  <div key={link._metadata.uid} className="px-5 py-2">
+                  <div key={i} className="px-5 py-2">
                     <Link href={link.page_reference[0].url}>
                       <a
                         className="text-base font-medium text-gray-500 hover:text-gray-900"
@@ -98,10 +98,10 @@ export const Navigation: React.FC<INavigation> = (props) => {
         </div>
 
         <div className="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
-          {props.navigation_items.map((link) => {
+          {props.navigation_items.map((link, i) => {
             if (link.page_reference.length === 0) {
               return (
-                <div key={link._metadata.uid} className="px-5 py-2">
+                <div key={i} className="px-5 py-2">
                   <button className="text-base font-medium text-gray-500 hover:text-gray-900">
                     {link.title}
                   </button>
@@ -109,7 +109,7 @@ export const Navigation: React.FC<INavigation> = (props) => {
               );
             }
             return (
-              <div key={link._metadata.uid} className="px-5 py-2">
+              <div key={i} className="px-5 py-2">
                 <Link href={link.page_reference[0].url}>
                   <a
                     className="text-base font-medium text-gray-500 hover:text-gray-900"

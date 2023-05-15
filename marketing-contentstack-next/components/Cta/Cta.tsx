@@ -17,12 +17,12 @@ export const CTA: React.FC<ICta> = (props) => {
           richTextHtml={props.subline}
         />
         <div className="mt-5 mx-auto flex flex-col sm:flex-row lg:w-6/12 sm:w-full items-center justify-center space-y-5 sm:space-y-0 sm:space-x-5">
-          {props.buttons?.map((button) => {
+          {props.buttons?.map((button, i) => {
             if (!button.button_link.href) {
               return null;
             }
             return (
-              <div key={button._metadata.uid} className="shadow w-full">
+              <div key={i} className="shadow w-full">
                 <Link passHref href={button.button_link.href}>
                   <Button
                     as="a"
