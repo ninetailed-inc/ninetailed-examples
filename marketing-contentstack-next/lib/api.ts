@@ -51,24 +51,14 @@ ContentstackLivePreview.init({
 
 export const onEntryChange = ContentstackLivePreview.onEntryChange;
 
-function getEntriesOfTypeQuery({
-  contentTypeUid,
-  referenceFieldPath,
-  jsonRtePath,
-}: GetEntry) {
+function getEntriesOfTypeQuery({ contentTypeUid }: GetEntry) {
   return new Promise((resolve, reject) => {
     const query = Stack.ContentType(contentTypeUid).Query();
-    if (referenceFieldPath) query.includeReference(referenceFieldPath);
     query
       .toJSON()
       .find()
       .then(
         (result) => {
-          jsonRtePath &&
-            contentstack.Utils.jsonToHTML({
-              entry: result,
-              paths: jsonRtePath,
-            });
           resolve(result);
         },
         (error) => {
@@ -86,8 +76,9 @@ async function getEntryByWhereQuery({
   jsonRtePath,
 }: GetEntryByWhereQuery) {
   const landingPageQuery = Stack.ContentType(contentTypeUid).Query();
-  if (referenceFieldPath) landingPageQuery.includeReference(referenceFieldPath);
-  landingPageQuery.toJSON();
+  if (referenceFieldPath) {
+    landingPageQuery.includeReference(referenceFieldPath).toJSON();
+  }
   try {
     const result = await landingPageQuery.where(fieldName, fieldValue).find();
     jsonRtePath &&
@@ -112,12 +103,9 @@ function getExperimentsQuery({
 }: GetExperiment) {
   return new Promise((resolve, reject) => {
     const landingPageQuery = Stack.ContentType('nt_experience').Query();
-    landingPageQuery.includeReference([
-      'nt_audience',
-      'nt_variants',
-      ...referenceFieldPath,
-    ]);
-    landingPageQuery.toJSON();
+    landingPageQuery
+      .includeReference(['nt_audience', 'nt_variants', ...referenceFieldPath])
+      .toJSON();
     const data = landingPageQuery.where('nt_type', 'nt_experiment').find();
     data.then(
       (result) => {

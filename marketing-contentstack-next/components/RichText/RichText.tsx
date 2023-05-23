@@ -1,5 +1,5 @@
 import parse, { domToReact } from 'html-react-parser';
-
+import { MergeTag } from '@ninetailed/experience.js-next';
 import { CheckIcon } from '@heroicons/react/solid';
 
 export const RichText = ({ richTextHtml, className, ...rest }) => {
@@ -19,6 +19,9 @@ export const RichText = ({ richTextHtml, className, ...rest }) => {
               </span>
             </li>
           );
+        }
+        if (NodeTag === 'mergetag') {
+          return <MergeTag id={domNode.children[0].data} />;
         }
         return (
           <NodeTag className={className} {...rest}>
