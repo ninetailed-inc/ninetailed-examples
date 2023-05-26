@@ -1,6 +1,7 @@
 import { ContentfulClientApi, createClient } from 'contentful';
 import { IPage, IPageFields } from '@/types/contentful';
 import {
+  ExperienceEntryLike,
   ExperienceMapper,
   ExperimentEntry,
   isEntry,
@@ -85,4 +86,22 @@ export async function getExperiments() {
   });
 
   return mappedExperiments;
+}
+
+export async function getAllExperiences() {
+  const query = {
+    content_type: 'nt_experience',
+    include: 1,
+  };
+
+  const client = getClient(true);
+
+  const entries = await client.getEntries(query);
+  const experiences = entries.items as ExperienceEntryLike[];
+
+  const mappedExperiences = (experiences || []).filter(isEntry).map((entry) => {
+    return ExperienceMapper.mapExperience(entry);
+  });
+
+  return mappedExperiences;
 }
