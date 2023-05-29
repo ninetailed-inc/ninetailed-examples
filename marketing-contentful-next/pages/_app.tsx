@@ -6,6 +6,7 @@ import {
   ExperienceConfiguration,
   NinetailedProvider,
 } from '@ninetailed/experience.js-next';
+import { NinetailedPrivacyPlugin } from '@ninetailed/experience.js-plugin-privacy';
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { HubspotProvider } from '@aaronhayes/react-use-hubspot-form';
