@@ -124,6 +124,33 @@ function getExperimentsQuery({
   });
 }
 
+function getAllExperiencesQuery({
+  referenceFieldPath = [],
+  jsonRtePath,
+}: GetExperiment) {
+  return new Promise((resolve, reject) => {
+    const landingPageQuery = Stack.ContentType('nt_experience').Query();
+    landingPageQuery
+      .includeReference(['nt_audience', 'nt_variants', ...referenceFieldPath])
+      .toJSON();
+    const data = landingPageQuery.find();
+    data.then(
+      (result) => {
+        jsonRtePath &&
+          contentstack.Utils.jsonToHTML({
+            entry: result,
+            paths: jsonRtePath,
+          });
+        resolve(result);
+      },
+      (error) => {
+        console.error(error);
+        reject(error);
+      }
+    );
+  });
+}
+
 export const getAllLandingPages = async () => {
   const response = await getEntriesOfTypeQuery({
     contentTypeUid: 'landing_page',
@@ -230,4 +257,48 @@ export const getAllExperiments = async () => {
     });
 
   return mappedExperiments;
+};
+
+export const getAllExperiences = async () => {
+  const response = await getAllExperiencesQuery({
+    jsonRtePath: [
+      'nt_variants.text',
+      'nt_variants.copyright',
+      'nt_variants.headline',
+      'nt_variants.subline',
+      'nt_variants.pricing_plans.headline',
+      'nt_variants.pricing_plans.subline',
+      'nt_variants.pricing_plans.price',
+      'nt_variants.pricing_plans.discounted_price',
+      'nt_variants.pricing_plans.description',
+      'nt_variants.pricing_plans.display_title',
+    ],
+  });
+
+  const mappedExperiences = (response[0] || [])
+    .map((experience) => {
+      return {
+        name: experience.nt_name,
+        type: experience.nt_type,
+        config: experience.nt_config,
+        audience: {
+          id: experience.nt_audience[0].nt_audience_id,
+        },
+        id: experience.uid,
+        variants: experience.nt_variants?.map((variant) => {
+          return {
+            id: variant.uid,
+            ...variant,
+          };
+        }),
+      };
+    })
+    .filter(ExperienceMapper.isExperienceEntry)
+    .map(ExperienceMapper.mapExperience)
+    // FIXME: Description undefined bug
+    .map(({ description, ...experimentAttrs }) => {
+      return experimentAttrs;
+    });
+
+  return mappedExperiences;
 };

@@ -5,6 +5,7 @@ import get from 'lodash/get';
 
 import { BlockRenderer } from '@/components/Renderer';
 import {
+  getAllExperiences,
   getAllExperiments,
   getAllLandingPages,
   getLandingPage,
@@ -55,15 +56,21 @@ function Page({ page: pageData, ninetailed }) {
 export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = '/' + rawSlug.join('/');
-  const [page, experiments] = await Promise.all([
+  const [page, experiments, experiences] = await Promise.all([
     getLandingPage(slug),
     getAllExperiments(),
+    getAllExperiences(),
   ]);
 
   return {
     props: {
       page,
-      ninetailed: { experiments },
+      ninetailed: {
+        experiments,
+        preview: {
+          experiences,
+        },
+      },
     },
     revalidate: 5,
   };
