@@ -20,7 +20,7 @@ export const Footer: React.FC<IFooter> = (props) => {
                 <Link href={link.page_reference[0].url || '#'}>
                   <a
                     className="text-base text-gray-300 hover:text-white"
-                    href={link?.page_reference[0].url}
+                    href={link.page_reference[0].url}
                   >
                     {link.title}
                   </a>
