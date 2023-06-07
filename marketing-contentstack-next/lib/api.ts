@@ -3,6 +3,7 @@ import ContentstackLivePreview from '@contentstack/live-preview-utils';
 import { addEditableTags } from '@contentstack/utils';
 
 import { ExperienceMapper } from '@ninetailed/experience.js-utils';
+import { EmbeddedItem } from '@contentstack/utils/dist/types/Models/embedded-object';
 
 type GetEntry = {
   contentTypeUid: string;
@@ -35,8 +36,10 @@ const Stack = contentstack.Stack({
   },
 });
 
+// eslint-disable-next-line
 ContentstackLivePreview.init({
-  // @ts-ignore
+  // eslint-disable-next-line
+  //@ts-ignore
   stackSdk: Stack,
   stackDetails: {
     apiKey: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY || '',
@@ -49,9 +52,14 @@ ContentstackLivePreview.init({
   ssr: false,
 });
 
+// eslint-disable-next-line
 export const onEntryChange = ContentstackLivePreview.onEntryChange;
 
-function getEntriesOfTypeQuery({ contentTypeUid }: GetEntry) {
+// TODO: Here and throughout this file, provide better typing on CS Delivery API return values
+// eslint-disable-next-line
+function getEntriesOfTypeQuery<T = any>({
+  contentTypeUid,
+}: GetEntry): Promise<T> {
   return new Promise((resolve, reject) => {
     const query = Stack.ContentType(contentTypeUid).Query();
     query
@@ -59,7 +67,7 @@ function getEntriesOfTypeQuery({ contentTypeUid }: GetEntry) {
       .find()
       .then(
         (result) => {
-          resolve(result);
+          resolve(result as T);
         },
         (error) => {
           reject(error);
@@ -88,7 +96,7 @@ async function getEntryByWhereQuery({
       });
 
     if (result?.[0]?.[0]) {
-      addEditableTags(result[0][0], contentTypeUid, true);
+      addEditableTags(result[0][0] as EmbeddedItem, contentTypeUid, true);
     }
     return result[0];
   } catch (err) {
@@ -100,7 +108,7 @@ async function getEntryByWhereQuery({
 function getExperimentsQuery({
   referenceFieldPath = [],
   jsonRtePath,
-}: GetExperiment) {
+}: GetExperiment): Promise<any> {
   return new Promise((resolve, reject) => {
     const landingPageQuery = Stack.ContentType('nt_experience').Query();
     landingPageQuery
@@ -127,7 +135,7 @@ function getExperimentsQuery({
 function getAllExperiencesQuery({
   referenceFieldPath = [],
   jsonRtePath,
-}: GetExperiment) {
+}: GetExperiment): Promise<any> {
   return new Promise((resolve, reject) => {
     const landingPageQuery = Stack.ContentType('nt_experience').Query();
     landingPageQuery
@@ -138,7 +146,7 @@ function getAllExperiencesQuery({
       (result) => {
         jsonRtePath &&
           contentstack.Utils.jsonToHTML({
-            entry: result,
+            entry: result as T,
             paths: jsonRtePath,
           });
         resolve(result);
@@ -202,8 +210,8 @@ export const getLandingPage = async (entryUrl: string) => {
 
 export const getHeroEntryById = async (
   uid: string,
-  referenceFieldPath: any[],
-  jsonRtePath: any[]
+  referenceFieldPath: string[],
+  jsonRtePath: string[]
 ) => {
   const response = await getEntryByWhereQuery({
     contentTypeUid: 'hero',
@@ -232,7 +240,7 @@ export const getAllExperiments = async () => {
   });
 
   const mappedExperiments = (response[0] || [])
-    .map((experiment) => {
+    .map((experiment: any) => {
       return {
         name: experiment.nt_name,
         type: experiment.nt_type,
@@ -241,7 +249,7 @@ export const getAllExperiments = async () => {
           id: experiment.nt_audience[0].nt_audience_id,
         },
         id: experiment.uid,
-        variants: experiment.nt_variants?.map((variant) => {
+        variants: experiment.nt_variants?.map((variant: any) => {
           return {
             id: variant.uid,
             ...variant,
@@ -252,7 +260,8 @@ export const getAllExperiments = async () => {
     .filter(ExperienceMapper.isExperimentEntry)
     .map(ExperienceMapper.mapExperiment)
     // FIXME: Description undefined bug
-    .map(({ description, ...experimentAttrs }) => {
+    // eslint-disable-next-line
+    .map(({ description, ...experimentAttrs }: { description: string }) => {
       return experimentAttrs;
     });
 
@@ -276,7 +285,7 @@ export const getAllExperiences = async () => {
   });
 
   const mappedExperiences = (response[0] || [])
-    .map((experience) => {
+    .map((experience: any) => {
       return {
         name: experience.nt_name,
         type: experience.nt_type,
@@ -285,7 +294,7 @@ export const getAllExperiences = async () => {
           id: experience.nt_audience[0].nt_audience_id,
         },
         id: experience.uid,
-        variants: experience.nt_variants?.map((variant) => {
+        variants: experience.nt_variants?.map((variant: any) => {
           return {
             id: variant.uid,
             ...variant,
@@ -296,7 +305,8 @@ export const getAllExperiences = async () => {
     .filter(ExperienceMapper.isExperienceEntry)
     .map(ExperienceMapper.mapExperience)
     // FIXME: Description undefined bug
-    .map(({ description, ...experimentAttrs }) => {
+    // eslint-disable-next-line
+    .map(({ description, ...experimentAttrs }: { description: string }) => {
       return experimentAttrs;
     });
 

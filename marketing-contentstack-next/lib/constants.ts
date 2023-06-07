@@ -7,11 +7,5 @@ export const ComponentContentTypes = {
   Footer: 'footer' as const,
   PricingTable: 'pricing_table' as const,
   PricingPlan: 'pricing_plan' as const,
-  Form: 'form' as const,
   HubspotForm: 'hubspot_form' as const,
-};
-
-export const PAGE_CONTENT_TYPES = {
-  LANDING_PAGE: 'landingPage',
-  PAGE: 'page',
 };

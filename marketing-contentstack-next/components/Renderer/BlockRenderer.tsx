@@ -1,11 +1,8 @@
 import React from 'react';
-import * as Contentful from 'contentful';
 import get from 'lodash/get';
+import { ExperienceMapper } from '@ninetailed/experience.js-utils';
+
 import { Experience } from '@ninetailed/experience.js-next';
-import {
-  BaselineWithExperiencesEntryLike,
-  ExperienceMapper,
-} from '@ninetailed/experience.js-utils';
 
 import { Hero } from '@/components/Hero';
 import { CTA } from '@/components/Cta';
@@ -15,7 +12,6 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { PricingTable } from '@/components/PricingTable';
 import { PricingPlan } from '@/components/PricingPlan';
-import { Form } from '@/components/Form';
 import { HubspotForm } from '@/components/HubspotForm';
 
 import { ComponentContentTypes } from '@/lib/constants';
@@ -30,11 +26,12 @@ const ContentTypeMap = {
   [ComponentContentTypes.PricingPlan]: PricingPlan,
   [ComponentContentTypes.PricingTable]: PricingTable,
   [ComponentContentTypes.HubspotForm]: HubspotForm,
-  // [ComponentContentTypes.Form]: Form,
 };
 
-const ComponentRenderer = (props) => {
-  const contentTypeId = props._content_type_uid;
+const ComponentRenderer = (props: any) => {
+  const contentTypeId: string = props._content_type_uid;
+  // eslint-disable-next-line
+  // @ts-ignore
   const Component = ContentTypeMap[contentTypeId];
 
   if (!Component) {
@@ -45,7 +42,7 @@ const ComponentRenderer = (props) => {
   return <Component {...props} />;
 };
 
-const BlockRenderer = ({ block }) => {
+const BlockRenderer = ({ block }: { block: any }) => {
   if (Array.isArray(block)) {
     return (
       <>
@@ -60,7 +57,7 @@ const BlockRenderer = ({ block }) => {
   const id = block.uid;
 
   const experiences = (block.nt_experiences || [])
-    .map((experience) => {
+    .map((experience: any) => {
       return {
         name: experience.nt_name,
         type: experience.nt_type,
@@ -69,7 +66,7 @@ const BlockRenderer = ({ block }) => {
           id: experience.nt_audience[0].nt_audience_id,
         },
         id: experience.uid,
-        variants: experience.nt_variants?.map((variant) => {
+        variants: experience.nt_variants?.map((variant: any) => {
           return {
             id: variant.uid,
             ...variant,
@@ -77,8 +74,8 @@ const BlockRenderer = ({ block }) => {
         }),
       };
     })
-    .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
-    .map((experience) => ExperienceMapper.mapExperience(experience));
+    .filter((experience: any) => ExperienceMapper.isExperienceEntry(experience))
+    .map((experience: any) => ExperienceMapper.mapExperience(experience));
 
   return (
     <div key={`${contentTypeId}-${id}`}>

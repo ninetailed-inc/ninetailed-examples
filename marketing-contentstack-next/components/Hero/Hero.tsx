@@ -6,7 +6,7 @@ import { RichText } from '@/components/RichText';
 import { ContentstackImageLoader } from '@/lib/helperfunctions';
 import { getHeroEntryById, onEntryChange } from '@/lib/api';
 
-export const Hero = (props) => {
+export const Hero = (props: any) => {
   const [heroProps, setHeroProps] = useState(props);
   const { uid } = props;
 
@@ -45,7 +45,7 @@ export const Hero = (props) => {
                 />
               </div>
               <div className="mt-5 mx-auto flex flex-col sm:flex-row justify-start md:mt-8 space-y-5 sm:w-full sm:space-x-5 sm:space-y-0">
-                {heroProps.buttons?.map((button) => {
+                {heroProps.buttons?.map((button: any) => {
                   if (!button.button_link.href) {
                     return null;
                   }

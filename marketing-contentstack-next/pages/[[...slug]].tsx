@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
@@ -10,36 +9,18 @@ import {
   getAllLandingPages,
   getLandingPage,
 } from '@/lib/api';
+import { ILandingPage } from '@/types/contentstack';
 
-import { onEntryChange } from '@/lib/api';
-
-// For live preview
-async function updateData(url: string) {
-  const page = await getLandingPage(url);
-  return {
-    page,
-  };
-}
-
-function Page({ page: pageData, ninetailed }) {
-  // const [pageData, setPageData] = useState(page);
-
-  const { url, banner, navigation, sections, footer } = pageData;
-
-  // useEffect(() => {
-  //   onEntryChange(async () => {
-  //     const newData = await updateData(url);
-  //     setPageData(newData.page);
-  //   });
-  // }, [url]);
+function Page({ page: pageData }: { page: ILandingPage }) {
+  const { seo, banner, navigation, sections, footer } = pageData;
 
   return (
     <>
       <NextSeo
-        title={pageData.seo.meta_title}
-        description={pageData.seo.meta_description}
-        nofollow={!pageData.seo.enable_link_following as boolean}
-        noindex={!pageData.seo.enable_search_indexing as boolean}
+        title={seo?.meta_title}
+        description={seo?.meta_description}
+        nofollow={!seo?.enable_link_following || true}
+        noindex={!seo?.enable_search_indexing || true}
       />
       <div className="w-full h-full flex flex-col">
         {banner && <BlockRenderer block={banner} />}
@@ -53,7 +34,7 @@ function Page({ page: pageData, ninetailed }) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = '/' + rawSlug.join('/');
   const [page, experiments, experiences] = await Promise.all([
@@ -80,10 +61,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pages = await getAllLandingPages();
 
   const paths = pages
-    .filter((page) => {
+    .filter((page: any) => {
       return page.url !== '/';
     })
-    .map((page) => {
+    .map((page: any) => {
       return {
         params: { slug: page.url.replace(/^\/+/g, '').split('/') },
       };

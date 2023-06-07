@@ -15,7 +15,6 @@ export interface ButtonProps {
   size: ButtonSize;
   variant: ButtonVariant;
   children: string;
-  /* icon: (props: IconProps) => JSX.Element; */
 }
 
 export const Button: React.FC<ButtonProps> = React.forwardRef(

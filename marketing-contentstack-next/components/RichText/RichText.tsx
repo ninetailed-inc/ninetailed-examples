@@ -2,9 +2,16 @@ import parse, { domToReact } from 'html-react-parser';
 import { MergeTag } from '@ninetailed/experience.js-next';
 import { CheckIcon } from '@heroicons/react/solid';
 
-export const RichText = ({ richTextHtml, className, ...rest }) => {
+export const RichText = ({
+  richTextHtml,
+  className,
+  ...rest
+}: {
+  richTextHtml: string;
+  className?: string;
+}) => {
   const options = {
-    replace: (domNode) => {
+    replace: (domNode: any) => {
       if (domNode.name) {
         const NodeTag = `${domNode.name}`;
         if (NodeTag === 'li') {
@@ -24,6 +31,8 @@ export const RichText = ({ richTextHtml, className, ...rest }) => {
           return <MergeTag id={domNode.children[0].data} />;
         }
         return (
+          // eslint-disable-next-line
+          // @ts-ignore
           <NodeTag className={className} {...rest}>
             {domToReact(domNode.children, options)}
           </NodeTag>
@@ -32,5 +41,5 @@ export const RichText = ({ richTextHtml, className, ...rest }) => {
     },
   };
 
-  return parse(richTextHtml, options);
+  return parse(richTextHtml, options) as JSX.Element;
 };

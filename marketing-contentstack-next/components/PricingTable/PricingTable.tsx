@@ -1,6 +1,6 @@
 import React from 'react';
 import { PricingPlan } from '@/components/PricingPlan';
-import { IPricingTable } from '@/types/contentful';
+import { IPricingTable } from '@/types/contentstack';
 import { RichText } from '../RichText/RichText';
 
 export const PricingTable: React.FC<IPricingTable> = (props) => {
@@ -17,9 +17,9 @@ export const PricingTable: React.FC<IPricingTable> = (props) => {
 
       {/* Tiers */}
       <div className="mt-24 space-y-12 lg:space-y-0 flex flex-col lg:flex-row lg:gap-x-8">
-        {props.pricing_plans.map((plan) => {
+        {props.pricing_plans?.map((plan, i) => {
           return (
-            <div key={plan.uid} className="flex-1">
+            <div key={i} className="flex-1">
               <PricingPlan {...plan} />
             </div>
           );

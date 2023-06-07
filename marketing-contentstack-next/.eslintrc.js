@@ -26,16 +26,19 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
-      excludedFiles: 'types/contentful.d.ts',
+      excludedFiles: 'types/contentstack.d.ts',
       extends: [
         'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'plugin:import/typescript',
       ],
       plugins: ['@typescript-eslint'],
       parserOptions: {
         parser: '@typescript-eslint/parser',
         project: ['./tsconfig.json'],
+      },
+      rules: {
+        // TODO: Add better CS API response types to lib/api.ts, then remove `any` typing from components
+        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
   ],

@@ -1,12 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { BLOCKS } from '@contentful/rich-text-types';
-import { CheckIcon } from '@heroicons/react/solid';
 import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
-import { IPricingPlan } from '@/types/contentful';
+import { IPricingPlan } from '@/types/contentstack';
 
-export const PricingPlan = (props) => {
+export const PricingPlan = (props: IPricingPlan) => {
   const {
     display_title,
     price,
@@ -42,7 +40,7 @@ export const PricingPlan = (props) => {
         </div>
         <RichText richTextHtml={description} />
       </div>
-      {button.button_link.href && (
+      {button?.button_link.href && (
         <div className="mt-auto">
           <Link passHref href={button.button_link.href}>
             <Button

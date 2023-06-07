@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { XIcon } from '@heroicons/react/solid';
 
 import { RichText } from '@/components/RichText';
-import { IBanner } from '@/types/contentful';
+import { IBanner } from '@/types/contentstack';
 
 export type Handler = () => void;
 

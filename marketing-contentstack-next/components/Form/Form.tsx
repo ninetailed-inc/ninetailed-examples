@@ -63,7 +63,7 @@ export const Form: React.FC = () => {
                             {...input}
                             type="text"
                             placeholder="First Name"
-                            className="border-2 bg-[#f5f8fa] h-[40px] px-[15px] border-[1px] rounded-[3px] border-[#cbd6e2] focus:outline-indigo-600"
+                            className="bg-[#f5f8fa] h-[40px] px-[15px] border-[1px] rounded-[3px] border-[#cbd6e2] focus:outline-indigo-600"
                           />
                           {meta.error && meta.touched && (
                             <span className="text-[#f2545b] text-[14px]">
@@ -85,7 +85,7 @@ export const Form: React.FC = () => {
                             {...input}
                             type="text"
                             placeholder="Last Name"
-                            className="border-2 bg-[#f5f8fa] h-[40px] px-[15px] focus:outline-indigo-600 border-[1px] rounded-[3px] border-[#cbd6e2]"
+                            className="bg-[#f5f8fa] h-[40px] px-[15px] focus:outline-indigo-600 border-[1px] rounded-[3px] border-[#cbd6e2]"
                           />
                           {meta.error && meta.touched && (
                             <span className="text-[#f2545b] text-[14px]">
@@ -110,7 +110,7 @@ export const Form: React.FC = () => {
                             {...input}
                             type="text"
                             placeholder="Company name"
-                            className="border-2 bg-[#f5f8fa] h-[40px] px-[15px] focus:outline-indigo-600 border-[1px] rounded-[3px] border-[#cbd6e2]"
+                            className="bg-[#f5f8fa] h-[40px] px-[15px] focus:outline-indigo-600 border-[1px] rounded-[3px] border-[#cbd6e2]"
                           />
                           {meta.error && meta.touched && (
                             <span className="text-[#f2545b] text-[14px]">
@@ -133,7 +133,7 @@ export const Form: React.FC = () => {
                         <>
                           <select
                             {...input}
-                            className={` border-2 bg-[#f5f8fa] h-[40px] px-[15px] focus:outline-indigo-600 border-[1px] rounded-[3px] border-[#cbd6e2] ${
+                            className={` bg-[#f5f8fa] h-[40px] px-[15px] focus:outline-indigo-600 border-[1px] rounded-[3px] border-[#cbd6e2] ${
                               input.value === '' ? 'text-gray-400' : ''
                             }`}
                           >
@@ -172,7 +172,7 @@ export const Form: React.FC = () => {
                             {...input}
                             type="text"
                             placeholder="Business Email"
-                            className="border-2 bg-[#f5f8fa] h-[40px] px-[15px] focus:outline-indigo-600 border-[1px] rounded-[3px] border-[#cbd6e2]"
+                            className="bg-[#f5f8fa] h-[40px] px-[15px] focus:outline-indigo-600 border-[1px] rounded-[3px] border-[#cbd6e2]"
                           />
                           {meta.error && meta.touched && (
                             <span className="text-[#f2545b] text-[14px]">

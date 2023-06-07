@@ -9,7 +9,7 @@ import {
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { HubspotProvider } from '@aaronhayes/react-use-hubspot-form';
-import { IPage } from '@/types/contentful';
+import { ILandingPage } from '@/types/contentstack';
 import '@contentstack/live-preview-utils/dist/main.css';
 
 type AppProps<P = unknown> = {
@@ -17,7 +17,7 @@ type AppProps<P = unknown> = {
 } & Omit<NextAppProps<P>, 'pageProps'>;
 
 interface CustomPageProps {
-  page: IPage;
+  page: ILandingPage;
   ninetailed?: {
     experiments: ExperienceConfiguration[];
     preview: {

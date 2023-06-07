@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { INavigation } from '@/types/contentful';
+import { INavigation } from '@/types/contentstack';
 import Logo from '@/public/logo.svg';
 
 import classNames from 'classnames';
@@ -46,7 +46,7 @@ export const Navigation: React.FC<INavigation> = (props) => {
 
           <div className="flex justify-start">
             <div className="hidden lg:flex">
-              {props.navigation_items.map((link, i) => {
+              {props.navigation_items?.map((link, i) => {
                 if (link.page_reference.length === 0) {
                   return (
                     <div key={i} className="px-5 py-2">
@@ -98,7 +98,7 @@ export const Navigation: React.FC<INavigation> = (props) => {
         </div>
 
         <div className="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
-          {props.navigation_items.map((link, i) => {
+          {props.navigation_items?.map((link, i) => {
             if (link.page_reference.length === 0) {
               return (
                 <div key={i} className="px-5 py-2">

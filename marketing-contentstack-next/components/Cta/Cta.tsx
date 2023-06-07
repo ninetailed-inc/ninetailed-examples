@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
-import { ICta } from '@/types/contentful';
+import { ICta } from '@/types/contentstack';
 
 export const CTA: React.FC<ICta> = (props) => {
   return (
@@ -17,7 +17,7 @@ export const CTA: React.FC<ICta> = (props) => {
           richTextHtml={props.subline}
         />
         <div className="mt-5 mx-auto flex flex-col sm:flex-row lg:w-6/12 sm:w-full items-center justify-center space-y-5 sm:space-y-0 sm:space-x-5">
-          {props.buttons?.map((button, i) => {
+          {props.buttons?.map((button: any, i: number) => {
             if (!button.button_link.href) {
               return null;
             }
