@@ -67,7 +67,7 @@ function getEntriesOfTypeQuery<T = any>({
       .find()
       .then(
         (result) => {
-          resolve(result as T);
+          resolve(result);
         },
         (error) => {
           reject(error);
@@ -146,7 +146,7 @@ function getAllExperiencesQuery({
       (result) => {
         jsonRtePath &&
           contentstack.Utils.jsonToHTML({
-            entry: result as T,
+            entry: result,
             paths: jsonRtePath,
           });
         resolve(result);

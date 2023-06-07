@@ -110,7 +110,7 @@ export const Navigation: React.FC<INavigation> = (props) => {
             }
             return (
               <div key={i} className="px-5 py-2">
-                <Link href={link.page_reference[0].url}>
+                <Link href={link.page_reference[0].url || '#'}>
                   <a
                     className="text-base font-medium text-gray-500 hover:text-gray-900"
                     href={link.page_reference[0].url}
