@@ -166,7 +166,7 @@ export interface IHero {
   /** Subline */
   subline?: any;
   /** Buttons */
-  buttons?: IButton[];
+  buttons?: IButton;
   /** Image */
   image?: IFile;
   /** Ninetailed */
@@ -202,9 +202,9 @@ export interface IFooter {
   /** Footer Links */
   footer_links?: {
     /** Title */
-    title?: string;
+    title: string;
     /** Page Reference */
-    page_reference?: ILandingPage[];
+    page_reference: ILandingPage[];
   }[];
   /** Copyright */
   copyright?: any;

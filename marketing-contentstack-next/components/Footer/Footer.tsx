@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 
 import { RichText } from '@/components/RichText';
-import { IFooter } from '@/types/contentful';
+import { IFooter } from '@/types/contentstack';
 
 export const Footer: React.FC<IFooter> = (props) => {
   const { reset } = useNinetailed();
@@ -14,13 +14,13 @@ export const Footer: React.FC<IFooter> = (props) => {
           className="-mx-1 -my-2 flex flex-wrap justify-center"
           aria-label="Footer"
         >
-          {props.footer_links.map((link) => {
+          {props.footer_links?.map((link, i) => {
             return (
-              <div key={link._metadata.uid} className="px-5 py-2">
-                <Link href={link.page_reference[0].url}>
+              <div key={i} className="px-5 py-2">
+                <Link href={link.page_reference[0].url || '#'}>
                   <a
                     className="text-base text-gray-300 hover:text-white"
-                    href={link.page_reference[0].url}
+                    href={link?.page_reference[0].url}
                   >
                     {link.title}
                   </a>

@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHubspotForm } from '@aaronhayes/react-use-hubspot-form';
 import { useNinetailed, useProfile } from '@ninetailed/experience.js-next';
-import { IHubspotForm } from '@/types/contentful';
+import { IHubspotForm } from '@/types/contentstack';
 
 import find from 'lodash/find';
 
