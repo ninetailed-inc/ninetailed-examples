@@ -28,6 +28,7 @@ const Stack = contentstack.Stack({
   api_key: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY || '',
   delivery_token: process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN || '',
   environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT || '',
+  branch: process.env.NEXT_PUBLIC_CONTENTSTACK_BRANCH || '',
   live_preview: {
     management_token:
       process.env.NEXT_PUBLIC_CONTENTSTACK_MANAGEMENT_TOKEN || '',
