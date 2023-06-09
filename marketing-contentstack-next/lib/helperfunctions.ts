@@ -5,7 +5,10 @@ export const ContentstackImageLoader: ImageLoader = ({
   width,
   quality,
 }) => {
-  return `${src}?width=${width}&quality=${quality || 50}&format=webply`;
+  const [url, existingQueryString] = src.split('?');
+  return `${url}?width=${width}&quality=${quality || 50}&format=webply${
+    existingQueryString ? `&${existingQueryString}` : ''
+  }`;
 };
 
 export function handleErrors<A extends unknown[]>(
