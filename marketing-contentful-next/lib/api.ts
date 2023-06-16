@@ -100,8 +100,6 @@ export async function getAllExperiences() {
   const entries = await client.getEntries(query);
   const experiences = entries.items as ExperienceEntryLike[];
 
-  console.log(experiences);
-
   const mappedExperiences = (experiences || [])
     .filter((entry) => ExperienceMapper.isExperienceEntry(entry))
     .map((entry) => ExperienceMapper.mapExperience(entry));
