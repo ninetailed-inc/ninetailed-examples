@@ -4,7 +4,12 @@ import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
 
 import { BlockRenderer } from '@/components/Renderer';
-import { getPagesOfType, getPage, getExperiments } from '@/lib/api';
+import {
+  getPagesOfType,
+  getPage,
+  getExperiments,
+  getAllExperiences,
+} from '@/lib/api';
 import { PAGE_CONTENT_TYPES } from '@/lib/constants';
 import { IPage } from '@/types/contentful';
 
@@ -47,7 +52,7 @@ const Page = ({ page }: { page: IPage }) => {
 export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
-  const [page, experiments] = await Promise.all([
+  const [page, publishedExperiments, allExperiences] = await Promise.all([
     getPage({
       preview,
       slug: slug === '' ? '/' : slug,
@@ -55,9 +60,18 @@ export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
       childPageContentType: PAGE_CONTENT_TYPES.LANDING_PAGE,
     }),
     getExperiments(),
+    getAllExperiences(),
   ]);
   return {
-    props: { page, ninetailed: { experiments } },
+    props: {
+      page,
+      ninetailed: {
+        experiments: publishedExperiments,
+        preview: {
+          allExperiences,
+        },
+      },
+    },
     revalidate: 5,
   };
 };

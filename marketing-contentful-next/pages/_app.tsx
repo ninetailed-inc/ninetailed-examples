@@ -19,6 +19,9 @@ interface CustomPageProps {
   page: IPage;
   ninetailed?: {
     experiments: ExperienceConfiguration[];
+    preview: {
+      allExperiences: ExperienceConfiguration[];
+    };
   };
 }
 
@@ -31,12 +34,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
           plugins={[
             new NinetailedGoogleTagmanagerPlugin(),
             new NinetailedPreviewPlugin({
-              clientId:
-                process.env.NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID ?? '',
-              secret:
-                process.env.NEXT_PUBLIC_NINETAILED_MANAGEMENT_SECRET ?? '',
-              environment:
-                process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main',
+              experiences: pageProps.ninetailed?.preview.allExperiences || [],
             }),
           ]}
           clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
