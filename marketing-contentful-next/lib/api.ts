@@ -16,6 +16,7 @@ const contentfulClient = createClient({
 const previewClient = createClient({
   space: process.env.CONTENTFUL_SPACE_ID ?? '',
   accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN ?? '',
+  environment: process.env.CONTENTFUL_ENVIRONMENT ?? 'master',
   host: 'preview.contentful.com',
 });
 
@@ -98,6 +99,8 @@ export async function getAllExperiences() {
 
   const entries = await client.getEntries(query);
   const experiences = entries.items as ExperienceEntryLike[];
+
+  console.log(experiences);
 
   const mappedExperiences = (experiences || [])
     .filter((entry) => ExperienceMapper.isExperienceEntry(entry))
