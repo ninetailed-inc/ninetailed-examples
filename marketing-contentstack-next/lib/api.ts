@@ -293,6 +293,7 @@ export const getAllExperiences = async () => {
         config: experience.nt_config,
         audience: {
           id: experience.nt_audience[0].nt_audience_id,
+          name: experience.nt_audience[0].title,
         },
         id: experience.uid,
         variants: experience.nt_variants?.map((variant: any) => {
@@ -311,5 +312,6 @@ export const getAllExperiences = async () => {
       return experimentAttrs;
     });
 
+  console.log(mappedExperiences[0]);
   return mappedExperiences;
 };
