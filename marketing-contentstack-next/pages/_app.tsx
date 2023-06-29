@@ -36,6 +36,18 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
             new NinetailedGoogleTagmanagerPlugin(),
             new NinetailedPreviewPlugin({
               experiences: pageProps.ninetailed?.preview.experiences || [],
+              audiences:
+                pageProps.ninetailed?.preview.experiences
+                  .map((experience) => experience.audience)
+                  .filter(
+                    (
+                      audience
+                    ): audience is {
+                      id: string;
+                      name?: string | undefined;
+                      description: string | undefined;
+                    } => !!audience
+                  ) || [],
             }),
           ]}
           clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
