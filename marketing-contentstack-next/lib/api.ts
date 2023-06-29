@@ -312,6 +312,5 @@ export const getAllExperiences = async () => {
       return experimentAttrs;
     });
 
-  console.log(mappedExperiences[0]);
   return mappedExperiences;
 };
