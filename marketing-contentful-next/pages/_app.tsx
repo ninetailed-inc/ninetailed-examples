@@ -30,11 +30,22 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
     <div className="app">
       <HubspotProvider>
         <NinetailedProvider
-          preview
           plugins={[
             new NinetailedGoogleTagmanagerPlugin(),
             new NinetailedPreviewPlugin({
               experiences: pageProps.ninetailed?.preview.allExperiences || [],
+              audiences:
+                pageProps.ninetailed?.preview.allExperiences
+                  .map((experience) => experience.audience)
+                  .filter(
+                    (
+                      audience
+                    ): audience is {
+                      id: string;
+                      description?: string | undefined;
+                      name?: string | undefined;
+                    } => !!audience
+                  ) || [],
             }),
           ]}
           clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
