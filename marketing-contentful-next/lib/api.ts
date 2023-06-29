@@ -4,7 +4,6 @@ import {
   ExperienceEntryLike,
   ExperienceMapper,
   ExperimentEntry,
-  isEntry,
 } from '@ninetailed/experience.js-utils-contentful';
 
 const contentfulClient = createClient({
@@ -81,9 +80,11 @@ export async function getExperiments() {
   const entries = await client.getEntries(query);
   const experiments = entries.items as ExperimentEntry[];
 
-  const mappedExperiments = (experiments || []).filter(isEntry).map((entry) => {
-    return ExperienceMapper.mapExperiment(entry);
-  });
+  const mappedExperiments = (experiments || [])
+    .filter((entry) => ExperienceMapper.isExperiment(entry))
+    .map((entry) => {
+      return ExperienceMapper.mapExperiment(entry);
+    });
 
   return mappedExperiments;
 }
@@ -99,9 +100,11 @@ export async function getAllExperiences() {
   const entries = await client.getEntries(query);
   const experiences = entries.items as ExperienceEntryLike[];
 
-  const mappedExperiences = (experiences || []).filter(isEntry).map((entry) => {
-    return ExperienceMapper.mapExperience(entry);
-  });
+  const mappedExperiences = (experiences || [])
+    .filter((entry) => ExperienceMapper.isExperienceEntry(entry))
+    .map((entry) => {
+      return ExperienceMapper.mapExperience(entry);
+    });
 
   return mappedExperiences;
 }
