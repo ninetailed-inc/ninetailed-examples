@@ -21,7 +21,7 @@ type AppProps<P = unknown> = {
 
 interface CustomPageProps {
   page: IPage;
-  ninetailed: {
+  ninetailed?: {
     experiments: ExperienceConfiguration[];
     preview: {
       allExperiences: ExperienceConfiguration[];
@@ -40,23 +40,24 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
           plugins={[
             new NinetailedGoogleTagmanagerPlugin(),
             new NinetailedPreviewPlugin({
-              experiences: pageProps.ninetailed.preview.allExperiences,
-              audiences: pageProps.ninetailed.preview.allExperiences
-                .map((experience) => experience.audience)
-                .filter(
-                  (
-                    audience
-                  ): audience is {
-                    id: string;
-                    name?: string | undefined;
-                    description?: string | undefined;
-                  } => !!audience
-                ),
+              experiences: pageProps.ninetailed?.preview.allExperiences || [],
+              audiences:
+                pageProps.ninetailed?.preview.allExperiences
+                  .map((experience) => experience.audience)
+                  .filter(
+                    (
+                      audience
+                    ): audience is {
+                      id: string;
+                      name?: string | undefined;
+                      description?: string | undefined;
+                    } => !!audience
+                  ) || [],
             }),
           ]}
           clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
           environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
-          experiments={pageProps.ninetailed.experiments}
+          experiments={pageProps.ninetailed?.experiments || []}
         >
           <Script
             id="gtm-base"
