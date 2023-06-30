@@ -10,10 +10,7 @@ import { ContentfulLivePreview } from '@contentful/live-preview';
 import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 
 export const Hero: React.FC<IHero> = ({ sys, fields }) => {
-  const updatedHero = useContentfulLiveUpdates(
-    { sys, fields },
-    'en-US'
-  ) as IHero;
+  const updatedHero = useContentfulLiveUpdates({ sys, fields }) as IHero;
   return (
     <div className="bg-white pb-8 sm:pb-12 lg:pb-12">
       <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
