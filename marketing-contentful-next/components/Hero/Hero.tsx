@@ -6,7 +6,7 @@ import { RichText } from '@/components/RichText';
 import { ContentfulImageLoader } from '@/lib/helperfunctions';
 import { IHero } from '@/types/contentful';
 
-export const Hero: React.FC<IHero> = ({ fields }) => {
+export const Hero = ({ fields }: IHero) => {
   return (
     <div className="bg-white pb-8 sm:pb-12 lg:pb-12">
       <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">

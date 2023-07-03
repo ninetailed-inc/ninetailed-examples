@@ -25,7 +25,6 @@
     "@contentful/rich-text-types": "15.14.1",
     "@heroicons/react": "1.0.6",
     "@ninetailed/experience.js-next": "4.2.0-beta.3",
-    "@ninetailed/experience.js-plugin-google-analytics": "4.2.0-beta.3",
     "@ninetailed/experience.js-plugin-google-tagmanager": "4.2.0-beta.3",
     "@ninetailed/experience.js-plugin-preview": "4.2.0-beta.3",
     "@ninetailed/experience.js-utils-contentful": "4.2.0-beta.3",
@@ -62,6 +61,6 @@
     "postcss": "8.4.12",
     "prettier": "2.6.2",
     "tailwindcss": "3.0.23",
-    "typescript": "4.9.3"
+    "typescript": "5.1.6"
   }
 }

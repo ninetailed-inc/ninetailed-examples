@@ -3,7 +3,7 @@ import { PricingPlan } from '@/components/PricingPlan';
 import { IPricingTable } from '@/types/contentful';
 import { RichText } from '../RichText/RichText';
 
-export const PricingTable: React.FC<IPricingTable> = ({ fields }) => {
+export const PricingTable = ({ fields }: IPricingTable) => {
   return (
     <div className="max-w-7xl mx-auto py-24 px-4 bg-white sm:px-6 lg:px-8">
       <RichText

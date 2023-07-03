@@ -7,7 +7,7 @@ import { IBanner } from '@/types/contentful';
 
 export type Handler = () => void;
 
-export const Banner: React.FC<IBanner> = ({ fields }) => {
+export const Banner = ({ fields }: IBanner) => {
   const [show, setShow] = React.useState<boolean>(true);
 
   const handleCloseBanner: Handler = () => {

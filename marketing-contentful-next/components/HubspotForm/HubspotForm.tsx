@@ -12,7 +12,7 @@ type FormValues = {
   ninetailedid: string;
 };
 
-export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
+export const HubspotForm = ({ fields }: IHubspotForm) => {
   const { profile } = useProfile();
   const { identify } = useNinetailed();
 

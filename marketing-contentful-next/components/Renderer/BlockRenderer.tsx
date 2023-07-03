@@ -1,11 +1,12 @@
 import React from 'react';
-import * as Contentful from 'contentful';
-import get from 'lodash/get';
 import { Experience } from '@ninetailed/experience.js-next';
 import {
   BaselineWithExperiencesEntry,
   ExperienceMapper,
+  Entry,
 } from '@ninetailed/experience.js-utils-contentful';
+
+import { get, set } from 'lodash';
 
 import { Hero } from '@/components/Hero';
 import { CTA } from '@/components/Cta';
@@ -15,8 +16,18 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { PricingTable } from '@/components/PricingTable';
 import { PricingPlan } from '@/components/PricingPlan';
-// import { Form } from '@/components/Form';
 import { HubspotForm } from '@/components/HubspotForm';
+
+import {
+  IBanner,
+  ICta,
+  IFooter,
+  IHero,
+  IHubspotForm,
+  INavigation,
+  IPricingPlan,
+  IPricingTable,
+} from '@/types/contentful';
 
 import { ComponentContentTypes } from '@/lib/constants';
 
@@ -29,18 +40,37 @@ const ContentTypeMap = {
   [ComponentContentTypes.Footer]: Footer,
   [ComponentContentTypes.PricingPlan]: PricingPlan,
   [ComponentContentTypes.PricingTable]: PricingTable,
-  // [ComponentContentTypes.Form]: Form,
   [ComponentContentTypes.HubspotForm]: HubspotForm,
 };
 
 type BlockRendererProps = {
-  block: BaselineWithExperiencesEntry | BaselineWithExperiencesEntry[];
+  block:
+    | Entry
+    | Entry[]
+    | BaselineWithExperiencesEntry
+    | BaselineWithExperiencesEntry[];
 };
 
-type ComponentRendererProps = Contentful.Entry<unknown>;
+type Component =
+  | IHero
+  | ICta
+  | IBanner
+  | INavigation
+  | IFooter
+  | IPricingTable
+  | IPricingPlan
+  | IHubspotForm;
 
-const ComponentRenderer: React.FC<ComponentRendererProps> = (props) => {
-  const contentTypeId = get(props, 'sys.contentType.sys.id') as string;
+const hasExperiences = (
+  entry: Entry | BaselineWithExperiencesEntry
+): entry is BaselineWithExperiencesEntry => {
+  return (
+    (entry as BaselineWithExperiencesEntry).fields.nt_experiences !== undefined
+  );
+};
+
+const ComponentRenderer = (props: Component) => {
+  const contentTypeId = props.sys.contentType.sys.id;
   const Component = ContentTypeMap[contentTypeId];
 
   if (!Component) {
@@ -48,12 +78,12 @@ const ComponentRenderer: React.FC<ComponentRendererProps> = (props) => {
     return null;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // eslint-disable-next-line
   // @ts-ignore
   return <Component {...props} />;
 };
 
-const BlockRenderer = ({ block }: BlockRendererProps) => {
+export const BlockRenderer = ({ block }: BlockRendererProps) => {
   if (Array.isArray(block)) {
     return (
       <>
@@ -67,9 +97,11 @@ const BlockRenderer = ({ block }: BlockRendererProps) => {
   const contentTypeId = get(block, 'sys.contentType.sys.id') as string;
   const { id } = block.sys;
 
-  const experiences = (block.fields.nt_experiences || [])
-    .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
-    .map((experience) => ExperienceMapper.mapExperience(experience));
+  const mappedExperiences = hasExperiences(block)
+    ? block.fields.nt_experiences
+        .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
+        .map((experience) => ExperienceMapper.mapExperience(experience))
+    : [];
 
   return (
     <div key={`${contentTypeId}-${id}`}>
@@ -77,10 +109,8 @@ const BlockRenderer = ({ block }: BlockRendererProps) => {
         {...block}
         id={id}
         component={ComponentRenderer}
-        experiences={experiences}
+        experiences={mappedExperiences}
       />
     </div>
   );
 };
-
-export { BlockRenderer };

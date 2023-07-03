@@ -7,7 +7,7 @@ import { ContentfulImageLoader } from '@/lib/helperfunctions';
 
 import { IFeature } from '@/types/contentful';
 
-export const Feature: React.FC<IFeature> = ({ fields }) => {
+export const Feature = ({ fields }: IFeature) => {
   return (
     <div className="relative max-w-xl mx-auto lg:max-w-7xl px-4 sm:max-w-3xl sm:px-6 sm:py-6 lg:px-12">
       <div className="relative mt-2 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">

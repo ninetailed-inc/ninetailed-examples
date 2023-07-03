@@ -5,7 +5,7 @@ import { useNinetailed } from '@ninetailed/experience.js-next';
 import { RichText } from '@/components/RichText';
 import { IFooter } from '@/types/contentful';
 
-export const Footer: React.FC<IFooter> = ({ fields }) => {
+export const Footer = ({ fields }: IFooter) => {
   const { reset } = useNinetailed();
   return (
     <footer className="bg-gray-800">
