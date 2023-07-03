@@ -1,7 +1,7 @@
 import { useNinetailed, useProfile } from '@ninetailed/experience.js-next';
 import { IHubspotForm } from '@/types/contentful';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { handleErrors } from '@/lib/helperfunctions';
+import classNames from 'classnames';
 
 type FormValues = {
   firstname: string;
@@ -19,11 +19,12 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setError,
+    formState: { isSubmitSuccessful, isSubmitting, errors },
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = handleErrors(
-    async (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
       await fetch(
         `https://api.hsforms.com/submissions/v3/integration/submit/${fields.hubspotPortalId}/${fields.hubspotFormId}`,
         {
@@ -70,19 +71,34 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
       // eslint-disable-next-line
       const { ninetailedid, ...traitData } = data;
       await identify('', traitData);
+    } catch (e) {
+      setError('root.submissionError', {
+        message: 'Submission error, see console',
+      });
+      console.error(e);
     }
-  );
+  };
 
   return (
     <div className="mx-auto max-w-md -mt-10 px-4 sm:max-w-3xl sm:px-6 lg:px-12 lg:max-w-7xl">
-      {profile && (
+      {isSubmitSuccessful && (
+        <p className="p-2 w-full text-center bg-green-200 rounded border-green-400 border-2">
+          Thanks for your submission!
+        </p>
+      )}
+      {errors.root?.submissionError && (
+        <p className="p-2 mb-10 w-full text-center bg-red-200 rounded border-red-400 border-2">
+          {errors.root.submissionError.message}
+        </p>
+      )}
+      {!isSubmitSuccessful && profile && (
         <form
           onSubmit={(...args) => void handleSubmit(onSubmit)(...args)}
           className="flex flex-col space-y-4 items-start"
         >
           <fieldset className="flex flex-row w-full gap-4 flex-wrap">
             <div className="flex flex-col flex-1">
-              <label htmlFor="firstname" className="text-lg">
+              <label htmlFor="firstname" className="text-sm font-bold">
                 First Name
               </label>
               <input
@@ -97,7 +113,7 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
               )}
             </div>
             <div className="flex flex-col flex-1">
-              <label htmlFor="lastname" className="text-lg">
+              <label htmlFor="lastname" className="text-sm font-bold">
                 Last Name
               </label>
               <input
@@ -113,7 +129,7 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
             </div>
           </fieldset>
           <fieldset className="flex flex-col w-full">
-            <label htmlFor="companyname" className="text-lg">
+            <label htmlFor="companyname" className="text-sm font-bold">
               Company Name
             </label>
             <input
@@ -128,7 +144,7 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
             )}
           </fieldset>
           <fieldset className="flex flex-col w-full">
-            <label htmlFor="companysize" className="text-lg">
+            <label htmlFor="companysize" className="text-sm font-bold">
               Company Size
             </label>
             <select
@@ -154,7 +170,7 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
             )}
           </fieldset>
           <fieldset className="flex flex-col w-full">
-            <label htmlFor="email" className="text-lg">
+            <label htmlFor="email" className="text-sm font-bold">
               Business Email
             </label>
             <input
@@ -180,7 +196,11 @@ export const HubspotForm: React.FC<IHubspotForm> = ({ fields }) => {
           />
           <input
             type="submit"
-            className="inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75"
+            value={isSubmitting ? 'Submitting...' : 'Submit'}
+            className={classNames(
+              'inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75',
+              { 'bg-opacity-20 hover:bg-opacity-20': isSubmitting }
+            )}
           />
         </form>
       )}
