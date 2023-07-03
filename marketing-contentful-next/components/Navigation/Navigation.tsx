@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { handleErrors } from '@/lib/helperfunctions';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 
-export const Navigation: React.FC<INavigation> = ({ fields }) => {
+export const Navigation = ({ fields }: INavigation) => {
   const [loggingIn, setLoggingIn] = React.useState<boolean>(false);
   const [registering, setRegistering] = React.useState<boolean>(false);
   const { track, identify } = useNinetailed();

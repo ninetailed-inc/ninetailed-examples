@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@aaronhayes/react-use-hubspot-form@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@aaronhayes/react-use-hubspot-form/-/react-use-hubspot-form-2.1.1.tgz#978c1c6c2564ef104ce0b660bce629ff9b0802be"
-  integrity sha512-K1ybIAa6b49hTnr08OcYZWI9yqpI/bGzjh2Vnk+H3Lt1udpToa0wJnP9ONmfs+wUdefzX2v0BwQPxtZ7yE6E8A==
-
 "@analytics/cookie-utils@^0.2.12":
   version "0.2.12"
   resolved "https://registry.yarnpkg.com/@analytics/cookie-utils/-/cookie-utils-0.2.12.tgz#acc38dd76ead968050776fb8e57e571e6d37cbc7"
@@ -96,7 +91,7 @@
     core-js-pure "^3.30.2"
     regenerator-runtime "^0.13.11"
 
-"@babel/runtime@^7.10.0", "@babel/runtime@^7.10.2", "@babel/runtime@^7.15.4", "@babel/runtime@^7.16.3", "@babel/runtime@^7.20.7", "@babel/runtime@^7.21.0":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.15.4", "@babel/runtime@^7.16.3", "@babel/runtime@^7.20.7", "@babel/runtime@^7.21.0":
   version "7.22.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.5.tgz#8564dd588182ce0047d55d7a75e93921107b57ec"
   integrity sha512-ecjvYlnAaZ/KVneE/OdKYBYfgXV3Ptu6zQWmgEF7vwKhQnvVS6bjMD2XYgj+SNvQ1GfK/pjgokfPkC/2CO8CuA==
@@ -288,15 +283,6 @@
     "@ninetailed/experience.js" "4.2.0-beta.2"
     "@ninetailed/experience.js-shared" "4.2.0-beta.3"
     analytics "0.8.1"
-    lodash "4.17.21"
-
-"@ninetailed/experience.js-plugin-google-analytics@4.2.0-beta.3":
-  version "4.2.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-google-analytics/-/experience.js-plugin-google-analytics-4.2.0-beta.3.tgz#3f25e1d2af581f3295c97d280194ed503e027602"
-  integrity sha512-DvPfOyYgtDC/qLQaBtwhaUMxNj8ilqZ68V5GoZwKu3iLe3mquHCJQy/sBkvS1DT/cuFuL+iNqVy69B+HEuus2Q==
-  dependencies:
-    "@ninetailed/experience.js" "4.2.0-beta.3"
-    "@ninetailed/experience.js-plugin-analytics" "4.2.0-beta.3"
     lodash "4.17.21"
 
 "@ninetailed/experience.js-plugin-google-tagmanager@4.2.0-beta.3":
@@ -2081,13 +2067,6 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-final-form@4.20.7:
-  version "4.20.7"
-  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.20.7.tgz#e7e2eb5fd952951d4fe6153d46043da2d68b207e"
-  integrity sha512-ii3X9wNfyBYFnDPunYN5jh1/HAvtOZ9aJI/TVk0MB86hZuOeYkb+W5L3icgwW9WWNztZR6MDU3En6eoZTUoFPg==
-  dependencies:
-    "@babel/runtime" "^7.10.0"
-
 find-up@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-4.1.0.tgz#97afe7d6cdc0bc5928584b7c8d7b16e8a9aa5d19"
@@ -3564,12 +3543,10 @@ react-dom@18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-final-form@6.5.9:
-  version "6.5.9"
-  resolved "https://registry.yarnpkg.com/react-final-form/-/react-final-form-6.5.9.tgz#644797d4c122801b37b58a76c87761547411190b"
-  integrity sha512-x3XYvozolECp3nIjly+4QqxdjSSWfcnpGEL5K8OBT6xmGrq5kBqbA6+/tOqoom9NwqIPPbxPNsOViFlbKgowbA==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
+react-hook-form@^7.45.1:
+  version "7.45.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.45.1.tgz#e352c7f4dbc7540f0756abbb4dcfd1122fecc9bb"
+  integrity sha512-6dWoFJwycbuFfw/iKMcl+RdAOAOHDiF11KWYhNDRN/OkUt+Di5qsZHwA0OwsVnu9y135gkHpTw9DJA+WzCeR9w==
 
 react-intersection-observer@8.34.0:
   version "8.34.0"
@@ -4162,10 +4139,10 @@ typed-array-length@^1.0.4:
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
 
-typescript@4.9.3:
-  version "4.9.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.3.tgz#3aea307c1746b8c384435d8ac36b8a2e580d85db"
-  integrity sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==
+typescript@5.1.6:
+  version "5.1.6"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.1.6.tgz#02f8ac202b6dad2c0dd5e0913745b47a37998274"
+  integrity sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
