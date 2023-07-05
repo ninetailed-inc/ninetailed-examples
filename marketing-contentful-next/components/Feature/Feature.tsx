@@ -27,7 +27,7 @@ export const Feature: React.FC<IFeature> = ({ fields }) => {
           <div className="mt-5 mx-auto flex flex-col sm:flex-row md:mt-8 sm:w-full">
             {fields.button && fields.button[0].fields.slug && (
               <div>
-                <Link passHref href={fields.button[0].fields.slug}>
+                <Link passHref href={fields.button[0].fields.slug} legacyBehavior>
                   <Button
                     as="a"
                     type="button"

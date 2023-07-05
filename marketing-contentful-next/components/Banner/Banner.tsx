@@ -23,13 +23,10 @@ export const Banner: React.FC<IBanner> = ({ fields }) => {
             {fields.slug && fields.linkText && (
               <>
                 <span className="block sm:ml-2 sm:inline-block">
-                  <Link href={fields.slug}>
-                    <a
-                      className="text-white font-bold underline"
-                      href={fields.slug}
-                    >
-                      {fields.linkText}
-                    </a>
+                  <Link href={fields.slug} className="text-white font-bold underline">
+
+                    {fields.linkText}
+
                   </Link>
                 </span>
                 <span aria-hidden="true"> &rarr;</span>

@@ -52,7 +52,7 @@ export const Hero: React.FC<IHero> = ({ sys, fields }) => {
 
                   return (
                     <div key={button.sys.id} className="shadow">
-                      <Link passHref href={button.fields.slug}>
+                      <Link passHref href={button.fields.slug} legacyBehavior>
                         <Button
                           as="a"
                           type="button"
