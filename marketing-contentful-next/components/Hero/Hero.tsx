@@ -12,67 +12,59 @@ import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 export const Hero: React.FC<IHero> = ({ sys, fields }) => {
   const updatedHero = useContentfulLiveUpdates({ sys, fields }) as IHero;
   return (
-    <div className="bg-white pb-8 sm:pb-12 lg:pb-12">
+    <div className="bg-white lg:pb-12">
       <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
         {/* Hero section */}
         <div className="mx-auto max-w-md px-4 sm:max-w-3xl lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
-          <div>
-            <div className="mt-20">
-              <div className="mt-6 sm:max-w-2xl">
-                <RichText
-                  // eslint-disable-next-line
-                  // @ts-ignore
-                  // eslint-disable-next-line
-                  {...ContentfulLivePreview.getProps({
-                    entryId: updatedHero.sys.id,
-                    fieldId: 'headline',
-                    locale: 'en-US',
-                  })}
-                  className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
-                  richTextDocument={updatedHero.fields.headline}
-                />
-                <RichText
-                  // eslint-disable-next-line
-                  // @ts-ignore
-                  // eslint-disable-next-line
-                  {...ContentfulLivePreview.getProps({
-                    entryId: updatedHero.sys.id,
-                    fieldId: 'subline',
-                    locale: 'en-US',
-                  })}
-                  className="mt-6 text-xl text-gray-500"
-                  richTextDocument={updatedHero.fields.subline}
-                />
-              </div>
-              <div className="mt-5 mx-auto flex flex-col sm:flex-row justify-start md:mt-8 space-y-5 sm:w-full sm:space-x-5 sm:space-y-0">
-                {updatedHero.fields.buttons?.map((button) => {
-                  if (!button.fields.slug) {
-                    return null;
-                  }
-
-                  return (
-                    <div key={button.sys.id} className="shadow">
-                      <Link passHref href={button.fields.slug} legacyBehavior>
-                        <Button
-                          as="a"
-                          type="button"
-                          variant={button.fields.variant as ButtonVariant}
-                          size="large"
-                        >
-                          {button.fields.buttonText}
-                        </Button>
-                      </Link>
-                    </div>
-                  );
+          <div className="mt-20">
+            <div className="mt-6 sm:max-w-2xl">
+              <RichText
+                {...ContentfulLivePreview.getProps({
+                  entryId: updatedHero.sys.id,
+                  fieldId: 'headline',
+                  locale: 'en-US',
                 })}
-              </div>
+                className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
+                richTextDocument={updatedHero.fields.headline}
+              />
+              <RichText
+                {...ContentfulLivePreview.getProps({
+                  entryId: updatedHero.sys.id,
+                  fieldId: 'subline',
+                  locale: 'en-US',
+                })}
+                className="mt-6 text-xl text-gray-500"
+                richTextDocument={updatedHero.fields.subline}
+              />
+            </div>
+            <div className="mt-5 mx-auto flex flex-col sm:flex-row justify-start md:mt-8 space-y-5 sm:w-full sm:space-x-5 sm:space-y-0">
+              {updatedHero.fields.buttons?.map((button) => {
+                if (!button.fields.slug) {
+                  return null;
+                }
+
+                return (
+                  <div key={button.sys.id} className="shadow">
+                    <Link passHref href={button.fields.slug} legacyBehavior>
+                      <Button
+                        as="a"
+                        type="button"
+                        variant={button.fields.variant as ButtonVariant}
+                        size="large"
+                      >
+                        {button.fields.buttonText}
+                      </Button>
+                    </Link>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
 
         {/* Image section */}
         <div className="sm:mx-auto sm:max-w-3xl sm:px-6">
-          <div className="py-12 sm:relative sm:mt-12 sm:py-16 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          <div className="pt-12 sm:relative sm:mt-12 sm:pt-16 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
             <div className="hidden sm:block">
               <div className="absolute inset-y-0 left-1/2 w-screen bg-gray-50 rounded-l-3xl lg:left-80 lg:right-0 lg:w-full" />
               <svg
@@ -110,7 +102,7 @@ export const Hero: React.FC<IHero> = ({ sys, fields }) => {
             </div>
 
             <div
-              className="hidden relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl lg:max-w-none lg:pl-12 md:block"
+              className="relative sm:mx-auto lg:pl-12 max-w-full"
               {...ContentfulLivePreview.getProps({
                 entryId: updatedHero.sys.id,
                 fieldId: 'image',
@@ -120,7 +112,6 @@ export const Hero: React.FC<IHero> = ({ sys, fields }) => {
               {updatedHero.fields.image.fields?.file.details.image && (
                 <Image
                   loader={ContentfulImageLoader}
-                  layout="fixed"
                   src={`https:${updatedHero.fields.image.fields.file.url}`}
                   width={
                     (updatedHero.fields.image.fields.file.details.image.width *
@@ -135,31 +126,18 @@ export const Hero: React.FC<IHero> = ({ sys, fields }) => {
                     590,
                     updatedHero.fields.image.fields.file.details.image.height
                   )}
-                  className="w-full rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 lg:w-auto lg:max-w-none"
-                  alt=""
-                />
-              )}
-            </div>
-
-            <div className="relative px-4 sm:mx-auto sm:max-w-3xl lg:max-w-none lg:pl-12 md:hidden">
-              {updatedHero.fields.image.fields?.file.details.image && (
-                <Image
-                  loader={ContentfulImageLoader}
-                  src={`https:${updatedHero.fields.image.fields.file.url}`}
-                  width={
-                    (updatedHero.fields.image.fields.file.details.image.width *
-                      Math.min(
-                        320,
-                        updatedHero.fields.image.fields.file.details.image
-                          .height
-                      )) /
-                    updatedHero.fields.image.fields.file.details.image.height
-                  }
-                  height={Math.min(
-                    320,
-                    updatedHero.fields.image.fields.file.details.image.height
-                  )}
-                  className="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none"
+                  className="w-full rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 lg:w-auto lg:max-w-none object-cover"
+                  style={{
+                    width:
+                      (updatedHero.fields.image.fields.file.details.image
+                        .width *
+                        Math.min(
+                          590,
+                          updatedHero.fields.image.fields.file.details.image
+                            .height
+                        )) /
+                      updatedHero.fields.image.fields.file.details.image.height,
+                  }}
                   alt=""
                 />
               )}

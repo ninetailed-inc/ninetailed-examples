@@ -7,7 +7,7 @@ import { ICta } from '@/types/contentful';
 export const CTA: React.FC<ICta> = ({ fields }) => {
   return (
     <div className="bg-white">
-      <div className="max-w-7xl mx-auto my-20 text-center py-4 lg:py-2 px-4 sm:px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto my-10 lg:my-20 text-center py-4 lg:py-2 px-4 sm:px-6 lg:px-12">
         <RichText
           className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
           richTextDocument={fields.headline}
