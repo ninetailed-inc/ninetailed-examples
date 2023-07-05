@@ -21,7 +21,7 @@
     "delete-entries": "PATH_TO_ENV_FILE=.env.local CONTENT_TYPE=testType LIMIT=1000 node ./contentful/deleteEntriesOfContentType.js"
   },
   "dependencies": {
-    "@contentful/live-preview": "^2.4.5",
+    "@contentful/live-preview": "2.4.5",
     "@contentful/rich-text-react-renderer": "15.12.1",
     "@contentful/rich-text-types": "15.14.1",
     "@heroicons/react": "1.0.6",
