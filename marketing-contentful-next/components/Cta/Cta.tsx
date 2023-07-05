@@ -4,7 +4,7 @@ import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { ICta } from '@/types/contentful';
 
-export const CTA: React.FC<ICta> = ({ fields }) => {
+export const CTA = ({ fields }: ICta) => {
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto my-10 lg:my-20 text-center py-4 lg:py-2 px-4 sm:px-6 lg:px-12">

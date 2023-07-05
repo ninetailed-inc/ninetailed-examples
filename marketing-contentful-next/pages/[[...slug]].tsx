@@ -34,16 +34,11 @@ const Page = ({ page }: { page: IPage }) => {
         noindex={page.fields.seo?.fields.no_index as boolean}
       />
       <div className="w-full h-full flex flex-col">
-        {/* @ts-ignore */}
         {banner && <BlockRenderer block={banner} />}
-        {/* @ts-ignore */}
         {navigation && <BlockRenderer block={navigation} />}
         <main className="grow">
-          {/* @ts-ignore */}
           <BlockRenderer block={sections} />
         </main>
-        {/* @ts-ignore */}
-
         {footer && <BlockRenderer block={footer} />}
       </div>
     </>

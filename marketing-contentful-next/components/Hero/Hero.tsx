@@ -9,7 +9,7 @@ import { IHero } from '@/types/contentful';
 import { ContentfulLivePreview } from '@contentful/live-preview';
 import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 
-export const Hero: React.FC<IHero> = ({ sys, fields }) => {
+export const Hero = ({ sys, fields }: IHero) => {
   const updatedHero = useContentfulLiveUpdates({ sys, fields }) as IHero;
   return (
     <div className="bg-white lg:pb-12">
