@@ -17,6 +17,7 @@ const Page = ({ page }: { page: IPage }) => {
   if (!page) {
     return null;
   }
+
   const {
     banner,
     navigation,
@@ -88,7 +89,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     });
   return {
     paths: [...paths, { params: { slug: [''] } }],
-    fallback: true,
+    fallback: false,
   };
 };
 

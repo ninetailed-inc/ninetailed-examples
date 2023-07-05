@@ -62,7 +62,7 @@ export const PricingPlan = ({ fields }: IPricingPlan) => {
       </div>
       {button.fields.slug && (
         <div className="mt-auto">
-          <Link passHref href={button.fields.slug}>
+          <Link passHref href={button.fields.slug} legacyBehavior>
             <Button
               as="a"
               type="button"

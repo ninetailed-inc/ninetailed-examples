@@ -30,13 +30,12 @@ export const Footer = ({ fields }: IFooter) => {
 
             return (
               <div key={link.sys.id} className="px-5 py-2">
-                <Link href={link.fields.slug}>
-                  <a
-                    className="text-base text-gray-300 hover:text-white"
-                    href={link.fields.slug}
-                  >
-                    {link.fields.buttonText}
-                  </a>
+                <Link
+                  href={link.fields.slug}
+                  className="text-base text-gray-300 hover:text-white">
+
+                  {link.fields.buttonText}
+
                 </Link>
               </div>
             );
