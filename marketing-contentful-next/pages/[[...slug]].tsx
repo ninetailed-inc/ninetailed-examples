@@ -45,12 +45,12 @@ const Page = ({ page }: { page: IPage }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
+export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
   const [page, publishedExperiments, allExperiences] = await Promise.all([
     getPage({
-      preview,
+      preview: draftMode,
       slug: slug === '' ? '/' : slug,
       pageContentType: PAGE_CONTENT_TYPES.PAGE,
       childPageContentType: PAGE_CONTENT_TYPES.LANDING_PAGE,
