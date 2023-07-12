@@ -10,8 +10,3 @@ export const ComponentContentTypes = {
   Form: 'form',
   HubspotForm: 'hubspotForm',
 };
-
-export const PAGE_CONTENT_TYPES = {
-  LANDING_PAGE: 'landingPage',
-  PAGE: 'page',
-};

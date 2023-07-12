@@ -4,12 +4,11 @@ import get from 'lodash/get';
 
 import { BlockRenderer } from '@/components/Renderer';
 import {
-  getPagesOfType,
+  getPages,
   getPage,
   getExperiments,
   getAllExperiences,
 } from '@/lib/api';
-import { PAGE_CONTENT_TYPES } from '@/lib/constants';
 import { IPage } from '@/types/contentful';
 
 const Page = ({ page }: { page: IPage }) => {
@@ -17,17 +16,12 @@ const Page = ({ page }: { page: IPage }) => {
     return null;
   }
 
-  const {
-    banner,
-    navigation,
-    sections = [],
-    footer,
-  } = page.fields.content.fields;
+  const { seo, banner, navigation, sections = [], footer } = page.fields;
 
   return (
     <>
       <NextSeo
-        title={page.fields.seo?.fields.title || page.fields.title}
+        title={page.fields.seo?.fields.title}
         description={page.fields.seo?.fields.description}
         nofollow={page.fields.seo?.fields.no_follow as boolean}
         noindex={page.fields.seo?.fields.no_index as boolean}
@@ -47,21 +41,19 @@ const Page = ({ page }: { page: IPage }) => {
 export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
-  const [page, publishedExperiments, allExperiences] = await Promise.all([
+  const [page, experiments, allExperiences] = await Promise.all([
     getPage({
       preview: draftMode,
       slug: slug === '' ? '/' : slug,
-      pageContentType: PAGE_CONTENT_TYPES.PAGE,
-      childPageContentType: PAGE_CONTENT_TYPES.LANDING_PAGE,
     }),
-    getExperiments(),
+    getExperiments({ preview: draftMode }),
     getAllExperiences(),
   ]);
   return {
     props: {
       page,
       ninetailed: {
-        experiments: publishedExperiments,
+        experiments: experiments,
         preview: {
           allExperiences,
         },
@@ -72,10 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pages = await getPagesOfType({
-    pageContentType: PAGE_CONTENT_TYPES.PAGE,
-    childPageContentType: PAGE_CONTENT_TYPES.LANDING_PAGE,
-  });
+  const pages = await getPages({ preview: false });
 
   const paths = pages
     .filter((page) => {

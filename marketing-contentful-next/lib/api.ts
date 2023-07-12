@@ -23,11 +23,11 @@ const getClient = (preview: boolean): ContentfulClientApi => {
   return preview ? previewClient : contentfulClient;
 };
 
-interface IPageQueryParams {
-  slug: string;
-  pageContentType: string;
-  childPageContentType: string;
+interface IQueryParams {
   preview?: boolean;
+}
+interface IPageQueryParams extends IQueryParams {
+  slug: string;
 }
 
 const getPageQuery = (pageParams: IPageQueryParams) => {
@@ -35,49 +35,33 @@ const getPageQuery = (pageParams: IPageQueryParams) => {
     limit: 1,
     include: 10,
     'fields.slug': pageParams.slug,
-    content_type: pageParams.pageContentType,
-    'fields.content.sys.contentType.sys.id': pageParams.childPageContentType,
+    content_type: 'page',
   };
 };
 
 export async function getPage(pageParams: IPageQueryParams): Promise<IPage> {
   const query = getPageQuery(pageParams);
-  const client = getClient(!!pageParams.preview);
+  const client = getClient(pageParams.preview as boolean);
   const entries = await client.getEntries<IPageFields>(query);
   const [page] = entries.items as IPage[];
   return page;
 }
 
-interface IPagesOfTypeQueryParams {
-  pageContentType: string;
-  childPageContentType: string;
-  preview?: boolean;
-}
-const getTypesOfPageQuery = (pageParams: IPagesOfTypeQueryParams) => {
-  return {
-    limit: 100,
-    content_type: pageParams.pageContentType,
-    'fields.content.sys.contentType.sys.id': pageParams.childPageContentType,
-  };
-};
-
-export async function getPagesOfType(
-  pageParams: IPagesOfTypeQueryParams
-): Promise<IPage[]> {
-  const query = getTypesOfPageQuery(pageParams);
-  const client = getClient(!!pageParams.preview);
+export async function getPages(QueryParams: IQueryParams): Promise<IPage[]> {
+  const query = { content_type: 'page' };
+  const client = getClient(QueryParams.preview as boolean);
   const entries = await client.getEntries<IPageFields>(query);
   const pages = entries.items as IPage[];
 
   return pages || [];
 }
 
-export async function getExperiments() {
+export async function getExperiments(QueryParams: IQueryParams) {
   const query = {
     content_type: 'nt_experience',
     'fields.nt_type': 'nt_experiment',
   };
-  const client = getClient(false);
+  const client = getClient(QueryParams.preview as boolean);
   const entries = await client.getEntries(query);
   const experiments = entries.items as ExperimentEntry[];
 
