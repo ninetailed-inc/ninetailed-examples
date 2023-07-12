@@ -21,10 +21,10 @@ const Page = ({ page }: { page: IPage }) => {
   return (
     <>
       <NextSeo
-        title={page.fields.seo?.fields.title}
-        description={page.fields.seo?.fields.description}
-        nofollow={page.fields.seo?.fields.no_follow as boolean}
-        noindex={page.fields.seo?.fields.no_index as boolean}
+        title={seo?.fields.title}
+        description={seo?.fields.description}
+        nofollow={seo?.fields.no_follow as boolean}
+        noindex={seo?.fields.no_index as boolean}
       />
       <div className="w-full h-full flex flex-col">
         {banner && <BlockRenderer block={banner} />}
