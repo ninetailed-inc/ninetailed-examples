@@ -6,7 +6,7 @@ import {
   Entry,
 } from '@ninetailed/experience.js-utils-contentful';
 
-import { get } from 'lodash';
+import get from 'lodash/get';
 
 import { Hero } from '@/components/Hero';
 import { CTA } from '@/components/Cta';

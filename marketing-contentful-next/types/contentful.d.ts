@@ -173,28 +173,6 @@ export interface IFooter extends Entry<IFooterFields> {
   };
 }
 
-export interface IFormFields {
-  /** Internal Name */
-  internalName?: string | undefined;
-}
-
-export interface IForm extends Entry<IFormFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: 'form';
-        linkType: 'ContentType';
-        type: 'Link';
-      };
-    };
-  };
-}
-
 export interface IHeroFields {
   /** Internal name */
   internalName?: string | undefined;
@@ -262,46 +240,15 @@ export interface IHubspotForm extends Entry<IHubspotFormFields> {
   };
 }
 
-export interface ILandingPageFields {
-  /** Internal Name */
-  name?: string | undefined;
-
-  /** Banner */
-  banner?: IBanner | undefined;
-
-  /** Navigation */
-  navigation?: INavigation | undefined;
-
-  /** Sections */
-  sections: (ICta | IFeature | IForm | IHero | IHubspotForm | IPricingTable)[];
-
-  /** Footer */
-  footer?: IFooter | undefined;
-}
-
-export interface ILandingPage extends Entry<ILandingPageFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: 'landingPage';
-        linkType: 'ContentType';
-        type: 'Link';
-      };
-    };
-  };
-}
-
 export interface INavigationFields {
   /** Internal title */
   internalTitle?: string | undefined;
 
   /** Navigation links */
   navigationLinks: IButton[];
+
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
 }
 
 export interface INavigation extends Entry<INavigationFields> {
@@ -424,23 +371,27 @@ export interface INtMergetag extends Entry<INtMergetagFields> {
 }
 
 export interface IPageFields {
-  /** Internal name */
+  /** Internal Name */
   name: string;
-
-  /** Page title */
-  title: string;
 
   /** Slug */
   slug: string;
 
-  /** SEO metadata */
+  /** SEO */
   seo?: ISeo | undefined;
 
-  /** Content */
-  content: ILandingPage;
-}
+  /** Banner */
+  banner?: IBanner | undefined;
 
-/** Represents a web page in Compose. DO NOT DELETE */
+  /** Navigation */
+  navigation?: INavigation | undefined;
+
+  /** Sections */
+  sections: (ICta | IFeature | IHero | IHubspotForm | IPricingTable)[];
+
+  /** Footer */
+  footer?: IFooter | undefined;
+}
 
 export interface IPage extends Entry<IPageFields> {
   sys: {
@@ -537,17 +488,14 @@ export interface IPricingTable extends Entry<IPricingTableFields> {
 }
 
 export interface ISeoFields {
-  /** Internal name */
+  /** Internal Name */
   name: string;
 
-  /** SEO title */
-  title?: string | undefined;
+  /** SEO Title */
+  title: string;
 
-  /** Description */
+  /** SEO Description */
   description?: string | undefined;
-
-  /** Keywords */
-  keywords?: string[] | undefined;
 
   /** Hide page from search engines (noindex) */
   no_index?: boolean | undefined;
@@ -555,8 +503,6 @@ export interface ISeoFields {
   /** Exclude links from search rankings? (nofollow) */
   no_follow?: boolean | undefined;
 }
-
-/** SEO Metadata for web pages in Compose. DO NOT DELETE */
 
 export interface ISeo extends Entry<ISeoFields> {
   sys: {
@@ -581,10 +527,8 @@ export type CONTENT_TYPE =
   | 'cta'
   | 'feature'
   | 'footer'
-  | 'form'
   | 'hero'
   | 'hubspotForm'
-  | 'landingPage'
   | 'navigation'
   | 'nt_audience'
   | 'nt_experience'

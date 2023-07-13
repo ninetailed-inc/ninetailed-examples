@@ -1,5 +1,4 @@
 import { getPage } from '../../lib/api';
-import { PAGE_CONTENT_TYPES } from '@/lib/constants';
 
 export default async function handler(req, res) {
   const { secret, slug } = req.query;
@@ -12,8 +11,6 @@ export default async function handler(req, res) {
   const page = await getPage({
     preview: true,
     slug,
-    pageContentType: PAGE_CONTENT_TYPES.PAGE,
-    childPageContentType: PAGE_CONTENT_TYPES.LANDING_PAGE,
   });
 
   // If the slug doesn't exist prevent draft mode from being enabled
