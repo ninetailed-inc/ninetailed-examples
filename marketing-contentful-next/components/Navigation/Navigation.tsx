@@ -13,7 +13,7 @@ import { useNinetailed } from '@ninetailed/experience.js-next';
 export const Navigation = ({ fields }: INavigation) => {
   const [loggingIn, setLoggingIn] = React.useState<boolean>(false);
   const [registering, setRegistering] = React.useState<boolean>(false);
-  const { track, identify } = useNinetailed();
+  const { identify } = useNinetailed();
   const handleLogin = handleErrors(async () => {
     setLoggingIn(true);
     await identify('', { pricingplan: 'lite' });
@@ -23,7 +23,7 @@ export const Navigation = ({ fields }: INavigation) => {
   const handleRegistration = handleErrors(async () => {
     setRegistering(true);
     // This is a hard-coded Segment user_id for demo purposes
-    identify('6468b4e5', { pricingplan: 'growth' });
+    await identify('6468b4e5', { pricingplan: 'growth' });
     setRegistering(false);
   });
 
