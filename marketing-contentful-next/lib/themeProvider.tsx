@@ -9,7 +9,7 @@ export const ThemeContext = createContext<'default' | 'alternate'>('default');
 export default function ThemeProvider(
   props: PropsWithChildren<{ config: IConfig }>
 ) {
-  const { settings } = props.config.fields;
+  const { settings } = props.config?.fields || {};
   const heroLayoutSetting = find(settings, 'fields.value.heroLayout');
   const { variant } = useExperience({
     baseline: {
