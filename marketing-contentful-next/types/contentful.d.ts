@@ -71,6 +71,31 @@ export interface IButton extends Entry<IButtonFields> {
   };
 }
 
+export interface IConfigFields {
+  /** Internal Name */
+  name: 'Global Configuration';
+
+  /** Settings */
+  settings?: ISetting[] | undefined;
+}
+
+export interface IConfig extends Entry<IConfigFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'config';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export interface ICtaFields {
   /** Internal name */
   internalName: string;
@@ -521,9 +546,38 @@ export interface ISeo extends Entry<ISeoFields> {
   };
 }
 
+export interface ISettingFields {
+  /** Internal Name */
+  name: string;
+
+  /** Value */
+  value?: Record<string, any> | undefined;
+
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
+}
+
+export interface ISetting extends Entry<ISettingFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'setting';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export type CONTENT_TYPE =
   | 'banner'
   | 'button'
+  | 'config'
   | 'cta'
   | 'feature'
   | 'footer'
@@ -536,7 +590,8 @@ export type CONTENT_TYPE =
   | 'page'
   | 'pricingPlan'
   | 'pricingTable'
-  | 'seo';
+  | 'seo'
+  | 'setting';
 
 export type LOCALE_CODE = 'en-US';
 

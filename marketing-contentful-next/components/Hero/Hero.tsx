@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button, ButtonVariant } from '@/components/Button';
@@ -8,16 +8,35 @@ import { IHero } from '@/types/contentful';
 
 import { ContentfulLivePreview } from '@contentful/live-preview';
 import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
+import { ThemeContext } from '@/lib/themeProvider';
+import classNames from 'classnames';
 
 export const Hero = ({ sys, fields }: IHero) => {
+  const layout = useContext(ThemeContext);
   const updatedHero = useContentfulLiveUpdates({ sys, fields }) as IHero;
+  const layoutStyles = {
+    default: {
+      direction: 'lg:flex-row',
+      transform: '',
+    },
+    alternate: {
+      direction: 'lg:flex-row-reverse',
+      transform: 'lg:-scale-x-100',
+    },
+  };
+
   return (
     <div className="bg-white lg:pb-12">
-      <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
+      <div className="pt-8 sm:pt-12 lg:relative lg:py-6">
         {/* Hero section */}
-        <div className="mx-auto max-w-md px-4 sm:max-w-3xl lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
-          <div className="mt-20">
-            <div className="mt-6 sm:max-w-2xl">
+        <div
+          className={classNames(
+            'mx-auto max-w-md px-4 sm:max-w-3xl lg:px-8 lg:max-w-7xl flex flex-col items-center lg:flex-row lg:gap-24',
+            layoutStyles[layout].direction
+          )}
+        >
+          <div className="lg:mt-20 lg:w-1/2">
+            <div className="mt-6">
               <RichText
                 {...ContentfulLivePreview.getProps({
                   entryId: updatedHero.sys.id,
@@ -58,13 +77,15 @@ export const Hero = ({ sys, fields }: IHero) => {
               })}
             </div>
           </div>
-        </div>
-
-        {/* Image section */}
-        <div className="sm:mx-auto sm:max-w-3xl sm:px-6">
-          <div className="pt-12 sm:relative sm:mt-12 sm:pt-16 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          {/* Image */}
+          <div
+            className={classNames(
+              'py-12 sm:relative sm:mt-12 sm:pt-16 lg:inset-y-0 lg:right-0 lg:w-1/2',
+              layoutStyles[layout].transform
+            )}
+          >
             <div className="hidden sm:block">
-              <div className="absolute inset-y-0 left-1/2 w-screen bg-gray-50 rounded-l-3xl lg:left-80 lg:right-0 lg:w-full" />
+              <div className="absolute inset-y-0 left-1/2 w-screen bg-gray-50 rounded-l-3xl lg:left-80 lg:right-0" />
               <svg
                 className="absolute top-8 right-1/2 -mr-3 lg:m-0 lg:left-0"
                 width={404}
@@ -141,6 +162,8 @@ export const Hero = ({ sys, fields }: IHero) => {
             </div>
           </div>
         </div>
+
+        {/* Image section */}
       </div>
     </div>
   );

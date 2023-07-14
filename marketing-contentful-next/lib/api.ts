@@ -1,5 +1,5 @@
 import { ContentfulClientApi, createClient } from 'contentful';
-import { IPage, IPageFields } from '@/types/contentful';
+import { IConfig, IPage, IPageFields } from '@/types/contentful';
 import {
   ExperienceEntryLike,
   ExperienceMapper,
@@ -90,4 +90,15 @@ export async function getAllExperiences() {
     .map((entry) => ExperienceMapper.mapExperience(entry));
 
   return mappedExperiences;
+}
+
+export async function getGlobalConfig(QueryParams: IQueryParams) {
+  const query = {
+    content_type: 'config',
+    limit: 1,
+    include: 3, // Config [0] => Setting [1] => NT Experience [2] => NT Variants [3]
+  };
+  const client = getClient(QueryParams.preview as boolean);
+  const entries = await client.getEntries(query);
+  return entries.items[0] as IConfig;
 }

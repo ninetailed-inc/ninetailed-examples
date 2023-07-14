@@ -1,10 +1,5 @@
 import React from 'react';
 import { Experience } from '@ninetailed/experience.js-next';
-import {
-  BaselineWithExperiencesEntry,
-  ExperienceMapper,
-  Entry,
-} from '@ninetailed/experience.js-utils-contentful';
 
 import get from 'lodash/get';
 
@@ -30,6 +25,7 @@ import {
 } from '@/types/contentful';
 
 import { ComponentContentTypes } from '@/lib/constants';
+import { parseExperiences, singularOrArrayBlock } from '@/lib/experiences';
 
 const ContentTypeMap = {
   [ComponentContentTypes.Hero]: Hero,
@@ -43,14 +39,6 @@ const ContentTypeMap = {
   [ComponentContentTypes.HubspotForm]: HubspotForm,
 };
 
-type BlockRendererProps = {
-  block:
-    | Entry
-    | Entry[]
-    | BaselineWithExperiencesEntry
-    | BaselineWithExperiencesEntry[];
-};
-
 type Component =
   | IHero
   | ICta
@@ -60,14 +48,6 @@ type Component =
   | IPricingTable
   | IPricingPlan
   | IHubspotForm;
-
-const hasExperiences = (
-  entry: Entry | BaselineWithExperiencesEntry
-): entry is BaselineWithExperiencesEntry => {
-  return (
-    (entry as BaselineWithExperiencesEntry).fields.nt_experiences !== undefined
-  );
-};
 
 const ComponentRenderer = (props: Component) => {
   const contentTypeId = props.sys.contentType.sys.id;
@@ -83,7 +63,7 @@ const ComponentRenderer = (props: Component) => {
   return <Component {...props} />;
 };
 
-export const BlockRenderer = ({ block }: BlockRendererProps) => {
+export const BlockRenderer = ({ block }: { block: singularOrArrayBlock }) => {
   if (Array.isArray(block)) {
     return (
       <>
@@ -97,11 +77,7 @@ export const BlockRenderer = ({ block }: BlockRendererProps) => {
   const contentTypeId = get(block, 'sys.contentType.sys.id') as string;
   const { id } = block.sys;
 
-  const mappedExperiences = hasExperiences(block)
-    ? block.fields.nt_experiences
-        .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
-        .map((experience) => ExperienceMapper.mapExperience(experience))
-    : [];
+  const parsedExperiences = parseExperiences(block);
 
   return (
     <div key={`${contentTypeId}-${id}`}>
@@ -109,7 +85,7 @@ export const BlockRenderer = ({ block }: BlockRendererProps) => {
         {...block}
         id={id}
         component={ComponentRenderer}
-        experiences={mappedExperiences}
+        experiences={parsedExperiences}
       />
     </div>
   );
