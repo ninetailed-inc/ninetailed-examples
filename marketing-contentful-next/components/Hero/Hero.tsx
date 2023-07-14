@@ -22,7 +22,6 @@ export const Hero = ({ sys, fields }: IHero) => {
                 {...ContentfulLivePreview.getProps({
                   entryId: updatedHero.sys.id,
                   fieldId: 'headline',
-                  locale: 'en-US',
                 })}
                 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
                 richTextDocument={updatedHero.fields.headline}
@@ -31,7 +30,6 @@ export const Hero = ({ sys, fields }: IHero) => {
                 {...ContentfulLivePreview.getProps({
                   entryId: updatedHero.sys.id,
                   fieldId: 'subline',
-                  locale: 'en-US',
                 })}
                 className="mt-6 text-xl text-gray-500"
                 richTextDocument={updatedHero.fields.subline}
@@ -106,7 +104,6 @@ export const Hero = ({ sys, fields }: IHero) => {
               {...ContentfulLivePreview.getProps({
                 entryId: updatedHero.sys.id,
                 fieldId: 'image',
-                locale: 'en-US',
               })}
             >
               {updatedHero.fields.image.fields?.file.details.image && (
