@@ -42,7 +42,10 @@ export const Hero = ({ sys, fields }: IHero) => {
                   entryId: updatedHero.sys.id,
                   fieldId: 'headline',
                 })}
-                className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
+                className={classNames(
+                  'font-extrabold text-gray-900 tracking-tight text-5xl',
+                  { 'lg:text-6xl': layout === 'alternate' }
+                )}
                 richTextDocument={updatedHero.fields.headline}
               />
               <RichText
@@ -85,9 +88,17 @@ export const Hero = ({ sys, fields }: IHero) => {
             )}
           >
             <div className="hidden sm:block">
-              <div className="absolute inset-y-0 left-1/2 w-screen bg-gray-50 rounded-l-3xl lg:left-80 lg:right-0" />
+              <div
+                className={classNames(
+                  'absolute inset-y-0 left-1/2 w-screen bg-gray-50 rounded-l-3xl lg:left-80 lg:right-0',
+                  { 'bg-indigo-200 blur-2xl m-20': layout === 'alternate' }
+                )}
+              />
               <svg
-                className="absolute top-8 right-1/2 -mr-3 lg:m-0 lg:left-0"
+                className={classNames(
+                  'absolute top-8 right-1/2 -mr-3 lg:m-0 lg:left-0',
+                  { hidden: layout === 'alternate' }
+                )}
                 width={404}
                 height={392}
                 fill="none"
@@ -118,6 +129,12 @@ export const Hero = ({ sys, fields }: IHero) => {
                   fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"
                 />
               </svg>
+              <div
+                className={classNames(
+                  'absolute w-[440px] h-[440px] rounded-full bg-gradient-to-br from-indigo-600 to-indigo-100 bg-blend-normal blur-2xl',
+                  { hidden: layout === 'default' }
+                )}
+              />
             </div>
 
             <div
