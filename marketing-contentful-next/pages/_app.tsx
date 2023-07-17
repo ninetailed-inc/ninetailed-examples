@@ -12,7 +12,7 @@ import { IConfig, IPage } from '@/types/contentful';
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import '@contentful/live-preview/style.css';
-import ThemeProvider from '@/lib/themeProvider';
+import SettingsProviderWrapper from '@/lib/themeProvider';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -55,7 +55,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
         experiments={pageProps.ninetailed?.experiments || []}
       >
-        <ThemeProvider config={pageProps.config}>
+        <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
             <Script
               id="gtm-base"
@@ -72,7 +72,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
             />
             <Component {...pageProps} />
           </ContentfulLivePreviewProvider>
-        </ThemeProvider>
+        </SettingsProviderWrapper>
       </NinetailedProvider>
     </div>
   );
