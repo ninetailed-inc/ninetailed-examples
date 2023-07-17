@@ -90,8 +90,13 @@ export const Hero = ({ sys, fields }: IHero) => {
             <div className="hidden sm:block">
               <div
                 className={classNames(
-                  'absolute inset-y-0 left-1/2 w-screen bg-gray-50 rounded-l-3xl lg:left-80 lg:right-0',
-                  { 'bg-indigo-200 blur-2xl m-20': layout === 'alternate' }
+                  'absolute inset-y-0 left-1/2  rounded-l-3xl lg:left-80 lg:right-0',
+                  {
+                    'bg-gray-50 w-screen': layout === 'default',
+                  },
+                  {
+                    'bg-amber-200 blur-2xl m-20 w-full': layout === 'alternate',
+                  }
                 )}
               />
               <svg
