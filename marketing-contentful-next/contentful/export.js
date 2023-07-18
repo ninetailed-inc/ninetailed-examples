@@ -8,8 +8,8 @@ dotEnv.config({ path: `${process.env.PATH_TO_ENV_FILE}` });
  * just the latest published versions of your content
  * */
 const exportOptions = {
-  spaceId: process.env.CONTENTFUL_SPACE_ID,
-  environmentId: process.env.CONTENTFUL_ENVIRONMENT,
+  spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
+  environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
   managementToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN,
   /* deliveryToken: process.env.CONTENTFUL_TOKEN, */
   contentFile: process.env.CONTENTFUL_SPACE_DATA_LOCATION,
@@ -17,7 +17,7 @@ const exportOptions = {
 };
 
 if (
-  !process.env.CONTENTFUL_SPACE_ID ||
+  !process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ||
   !process.env.CONTENTFUL_MANAGEMENT_TOKEN ||
   !process.env.CONTENTFUL_SPACE_DATA_LOCATION
 ) {
@@ -25,7 +25,7 @@ if (
     [
       'Parameters missing...',
       'Please insert the following credentials into your .env.local file:',
-      '- CONTENTFUL_SPACE_ID=XXX',
+      '- NEXT_PUBLIC_CONTENTFUL_SPACE_ID=XXX',
       '- CONTENTFUL_MANAGEMENT_TOKEN=CFPAT-XXX',
       '- CONTENTFUL_SPACE_DATA_LOCATION="PATH TO STORAGE DIRECTORY"',
       'Afterwards run the export command as follows:',

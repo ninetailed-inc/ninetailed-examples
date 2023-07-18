@@ -8,8 +8,8 @@ module.exports = async function () {
   });
 
   const space = await contentfulClient.getSpace(
-    process.env.CONTENTFUL_SPACE_ID
+    process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
   );
 
-  return space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT);
+  return space.getEnvironment(process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT);
 };

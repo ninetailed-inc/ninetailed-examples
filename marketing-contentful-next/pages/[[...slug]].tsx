@@ -1,74 +1,68 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
 
 import { BlockRenderer } from '@/components/Renderer';
 import {
-  getPagesOfType,
+  getPages,
   getPage,
   getExperiments,
   getAllExperiences,
+  getGlobalConfig,
+  getAllAudiences,
 } from '@/lib/api';
-import { PAGE_CONTENT_TYPES } from '@/lib/constants';
 import { IPage } from '@/types/contentful';
 
 const Page = ({ page }: { page: IPage }) => {
   if (!page) {
     return null;
   }
-  const {
-    banner,
-    navigation,
-    sections = [],
-    footer,
-  } = page.fields.content.fields;
+
+  const { seo, banner, navigation, sections = [], footer } = page.fields;
 
   return (
     <>
       <NextSeo
-        title={page.fields.seo?.fields.title || page.fields.title}
-        description={page.fields.seo?.fields.description}
-        nofollow={page.fields.seo?.fields.no_follow as boolean}
-        noindex={page.fields.seo?.fields.no_index as boolean}
+        title={seo?.fields.title}
+        description={seo?.fields.description}
+        nofollow={seo?.fields.no_follow as boolean}
+        noindex={seo?.fields.no_index as boolean}
       />
       <div className="w-full h-full flex flex-col">
-        {/* @ts-ignore */}
         {banner && <BlockRenderer block={banner} />}
-        {/* @ts-ignore */}
         {navigation && <BlockRenderer block={navigation} />}
         <main className="grow">
-          {/* @ts-ignore */}
           <BlockRenderer block={sections} />
         </main>
-        {/* @ts-ignore */}
-
         {footer && <BlockRenderer block={footer} />}
       </div>
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
+export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
-  const [page, publishedExperiments, allExperiences] = await Promise.all([
-    getPage({
-      preview,
-      slug: slug === '' ? '/' : slug,
-      pageContentType: PAGE_CONTENT_TYPES.PAGE,
-      childPageContentType: PAGE_CONTENT_TYPES.LANDING_PAGE,
-    }),
-    getExperiments(),
-    getAllExperiences(),
-  ]);
+  const [page, config, experiments, allExperiences, allAudiences] =
+    await Promise.all([
+      getPage({
+        preview: draftMode,
+        slug: slug === '' ? '/' : slug,
+      }),
+      getGlobalConfig({ preview: draftMode }),
+      getExperiments({ preview: draftMode }),
+      getAllExperiences(),
+      getAllAudiences(),
+    ]);
   return {
     props: {
       page,
+      config,
       ninetailed: {
-        experiments: publishedExperiments,
+        experiments: experiments,
         preview: {
           allExperiences,
+          allAudiences,
         },
       },
     },
@@ -77,10 +71,7 @@ export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pages = await getPagesOfType({
-    pageContentType: PAGE_CONTENT_TYPES.PAGE,
-    childPageContentType: PAGE_CONTENT_TYPES.LANDING_PAGE,
-  });
+  const pages = await getPages({ preview: false });
 
   const paths = pages
     .filter((page) => {
@@ -93,7 +84,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     });
   return {
     paths: [...paths, { params: { slug: [''] } }],
-    fallback: true,
+    fallback: false,
   };
 };
 

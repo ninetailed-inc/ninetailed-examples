@@ -6,18 +6,16 @@ import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { IPricingPlan } from '@/types/contentful';
 
-export const PricingPlan: React.FC<IPricingPlan> = (props) => {
+export const PricingPlan = ({ fields }: IPricingPlan) => {
   const {
-    fields: {
-      title,
-      price,
-      frequency,
-      discountedPrice,
-      description,
-      button,
-      mostPopular,
-    },
-  } = props;
+    title,
+    price,
+    frequency,
+    discountedPrice,
+    description,
+    button,
+    mostPopular,
+  } = fields;
 
   return (
     <div className="relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
@@ -64,7 +62,7 @@ export const PricingPlan: React.FC<IPricingPlan> = (props) => {
       </div>
       {button.fields.slug && (
         <div className="mt-auto">
-          <Link passHref href={button.fields.slug}>
+          <Link passHref href={button.fields.slug} legacyBehavior>
             <Button
               as="a"
               type="button"

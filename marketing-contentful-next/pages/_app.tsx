@@ -8,19 +8,30 @@ import {
 } from '@ninetailed/experience.js-next';
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
-import { HubspotProvider } from '@aaronhayes/react-use-hubspot-form';
-import { IPage } from '@/types/contentful';
+import { IConfig, IPage } from '@/types/contentful';
+
+import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
+import '@contentful/live-preview/style.css';
+import SettingsProviderWrapper from '@/lib/themeProvider';
 
 type AppProps<P = unknown> = {
   pageProps: P;
 } & Omit<NextAppProps<P>, 'pageProps'>;
 
+// FIXME: Re-export this type from utils-contentful
+type Audience = {
+  name?: string | undefined;
+  description?: string | undefined;
+  id: string;
+};
 interface CustomPageProps {
   page: IPage;
+  config: IConfig;
   ninetailed?: {
     experiments: ExperienceConfiguration[];
     preview: {
       allExperiences: ExperienceConfiguration[];
+      allAudiences: Audience[];
     };
   };
 }
@@ -28,46 +39,49 @@ interface CustomPageProps {
 const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
   return (
     <div className="app">
-      <HubspotProvider>
-        <NinetailedProvider
-          plugins={[
-            new NinetailedGoogleTagmanagerPlugin(),
-            new NinetailedPreviewPlugin({
-              experiences: pageProps.ninetailed?.preview.allExperiences || [],
-              audiences:
-                pageProps.ninetailed?.preview.allExperiences
-                  .map((experience) => experience.audience)
-                  .filter(
-                    (
-                      audience
-                    ): audience is {
-                      id: string;
-                      description?: string | undefined;
-                      name?: string | undefined;
-                    } => !!audience
-                  ) || [],
-            }),
-          ]}
-          clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
-          environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
-          experiments={pageProps.ninetailed?.experiments || []}
-        >
-          <Script
-            id="gtm-base"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${
-                process.env.NEXT_PUBLIC_GTM_ID || ''
-              }');`,
-            }}
-          />
-          <Component {...pageProps} />
-        </NinetailedProvider>
-      </HubspotProvider>
+      <NinetailedProvider
+        plugins={[
+          new NinetailedGoogleTagmanagerPlugin(),
+          new NinetailedPreviewPlugin({
+            experiences: pageProps.ninetailed?.preview.allExperiences || [],
+            audiences: pageProps.ninetailed?.preview.allAudiences || [],
+            onOpenExperienceEditor: (experience) => {
+              if (process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID) {
+                window.open(
+                  `https://app.contentful.com/spaces/${
+                    process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+                  }/environments/${
+                    process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master'
+                  }/entries/${experience.id}`,
+                  '_blank'
+                );
+              }
+            },
+          }),
+        ]}
+        clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
+        environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
+        experiments={pageProps.ninetailed?.experiments || []}
+      >
+        <SettingsProviderWrapper config={pageProps.config}>
+          <ContentfulLivePreviewProvider locale="en-US">
+            <Script
+              id="gtm-base"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${
+    process.env.NEXT_PUBLIC_GTM_ID || ''
+  }');`,
+              }}
+            />
+            <Component {...pageProps} />
+          </ContentfulLivePreviewProvider>
+        </SettingsProviderWrapper>
+      </NinetailedProvider>
     </div>
   );
 };

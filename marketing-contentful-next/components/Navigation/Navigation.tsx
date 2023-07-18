@@ -10,10 +10,10 @@ import classNames from 'classnames';
 import { handleErrors } from '@/lib/helperfunctions';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 
-export const Navigation: React.FC<INavigation> = ({ fields }) => {
+export const Navigation = ({ fields }: INavigation) => {
   const [loggingIn, setLoggingIn] = React.useState<boolean>(false);
   const [registering, setRegistering] = React.useState<boolean>(false);
-  const { track, identify } = useNinetailed();
+  const { identify } = useNinetailed();
   const handleLogin = handleErrors(async () => {
     setLoggingIn(true);
     await identify('', { pricingplan: 'lite' });
@@ -22,7 +22,8 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
 
   const handleRegistration = handleErrors(async () => {
     setRegistering(true);
-    await track('registered');
+    // This is a hard-coded Segment user_id for demo purposes
+    await identify('6468b4e5', { pricingplan: 'growth' });
     setRegistering(false);
   });
 
@@ -32,15 +33,8 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
         <div className="flex justify-between items-center w-full py-6 border-b-2 border-gray-100 ">
           <div className="flex justify-start">
             <Link href="/">
-              <a href="/">
-                <span className="sr-only">Workflow</span>
-                <Image
-                  src={Logo as string}
-                  width={175}
-                  height={57}
-                  alt="Logo"
-                />
-              </a>
+              <span className="sr-only">Workflow</span>
+              <Image src={Logo as string} width={175} height={57} alt="Logo" />
             </Link>
           </div>
 
@@ -58,13 +52,11 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
                 }
                 return (
                   <div key={link.sys.id} className="px-5 py-2">
-                    <Link href={link.fields.slug}>
-                      <a
-                        className="text-base font-medium text-gray-500 hover:text-gray-900"
-                        href={link.fields.slug}
-                      >
-                        {link.fields.buttonText}
-                      </a>
+                    <Link
+                      href={link.fields.slug}
+                      className="text-base font-medium text-gray-500 hover:text-gray-900"
+                    >
+                      {link.fields.buttonText}
                     </Link>
                   </div>
                 );
@@ -110,13 +102,11 @@ export const Navigation: React.FC<INavigation> = ({ fields }) => {
             }
             return (
               <div key={link.sys.id} className="px-5 py-2">
-                <Link href={link.fields.slug}>
-                  <a
-                    className="text-base font-medium text-gray-500 hover:text-gray-900"
-                    href={link.fields.slug}
-                  >
-                    {link.fields.buttonText}
-                  </a>
+                <Link
+                  href={link.fields.slug}
+                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  {link.fields.buttonText}
                 </Link>
               </div>
             );

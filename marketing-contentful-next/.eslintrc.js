@@ -17,7 +17,7 @@ module.exports = {
   },
   plugins: ['import', 'jsx-a11y'],
   parserOptions: {
-    ecmaVersion: 'latest',
+    ecmaVersion: '6',
     ecmaFeatures: {
       jsx: true,
     },
