@@ -5,8 +5,8 @@ const dotEnv = require('dotenv');
 dotEnv.config({ path: `${process.env.PATH_TO_ENV_FILE}` });
 
 const importOptions = {
-  spaceId: process.env.CONTENTFUL_SPACE_ID,
-  environmentId: process.env.CONTENTFUL_ENVIRONMENT || 'master',
+  spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
+  environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master',
   managementToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN,
   contentFile:
     process.env.CONTENTFUL_SPACE_DATA_LOCATION ||
@@ -14,14 +14,14 @@ const importOptions = {
 };
 
 if (
-  !process.env.CONTENTFUL_SPACE_ID ||
+  !process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ||
   !process.env.CONTENTFUL_MANAGEMENT_TOKEN
 ) {
   throw new Error(
     [
       'Parameters missing...',
       'Please insert the following credentials into your .env.local file:',
-      '- CONTENTFUL_SPACE_ID=XXX',
+      '- NEXT_PUBLIC_CONTENTFUL_SPACE_ID=XXX',
       '- CONTENTFUL_MANAGEMENT_TOKEN=CFPAT-XXX',
       '- CONTENTFUL_SPACE_DATA_LOCATION="PATH TO STORAGE DIRECTORY"',
       'Afterwards run the setup command as follows:',

@@ -9,6 +9,7 @@ import {
   getExperiments,
   getAllExperiences,
   getGlobalConfig,
+  getAllAudiences,
 } from '@/lib/api';
 import { IPage } from '@/types/contentful';
 
@@ -42,15 +43,17 @@ const Page = ({ page }: { page: IPage }) => {
 export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
-  const [page, config, experiments, allExperiences] = await Promise.all([
-    getPage({
-      preview: draftMode,
-      slug: slug === '' ? '/' : slug,
-    }),
-    getGlobalConfig({ preview: draftMode }),
-    getExperiments({ preview: draftMode }),
-    getAllExperiences(),
-  ]);
+  const [page, config, experiments, allExperiences, allAudiences] =
+    await Promise.all([
+      getPage({
+        preview: draftMode,
+        slug: slug === '' ? '/' : slug,
+      }),
+      getGlobalConfig({ preview: draftMode }),
+      getExperiments({ preview: draftMode }),
+      getAllExperiences(),
+      getAllAudiences(),
+    ]);
   return {
     props: {
       page,
@@ -59,6 +62,7 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
         experiments: experiments,
         preview: {
           allExperiences,
+          allAudiences,
         },
       },
     },

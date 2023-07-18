@@ -6,9 +6,11 @@ const contentfulManagementClient = () => {
     accessToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN,
   });
   return contentfulClient
-    .getSpace(process.env.CONTENTFUL_SPACE_ID)
+    .getSpace(process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID)
     .then((space) => {
-      return space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT);
+      return space.getEnvironment(
+        process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT
+      );
     });
 };
 module.exports = contentfulManagementClient;

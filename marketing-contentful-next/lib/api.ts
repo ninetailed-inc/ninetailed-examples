@@ -1,21 +1,23 @@
 import { ContentfulClientApi, createClient } from 'contentful';
 import { IConfig, IPage, IPageFields } from '@/types/contentful';
 import {
+  AudienceEntryLike,
+  AudienceMapper,
   ExperienceEntryLike,
   ExperienceMapper,
   ExperimentEntry,
 } from '@ninetailed/experience.js-utils-contentful';
 
 const contentfulClient = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID ?? '',
+  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ?? '',
   accessToken: process.env.CONTENTFUL_TOKEN ?? '',
-  environment: process.env.CONTENTFUL_ENVIRONMENT ?? 'master',
+  environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT ?? 'master',
 });
 
 const previewClient = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID ?? '',
+  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ?? '',
   accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN ?? '',
-  environment: process.env.CONTENTFUL_ENVIRONMENT ?? 'master',
+  environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT ?? 'master',
   host: 'preview.contentful.com',
 });
 
@@ -90,6 +92,23 @@ export async function getAllExperiences() {
     .map((entry) => ExperienceMapper.mapExperience(entry));
 
   return mappedExperiences;
+}
+
+export async function getAllAudiences() {
+  const query = {
+    content_type: 'nt_audience',
+  };
+
+  const client = getClient(true);
+
+  const entries = await client.getEntries(query);
+  const audiences = entries.items as AudienceEntryLike[];
+
+  const mappedAudiences = (audiences || [])
+    .filter((entry) => AudienceMapper.isAudienceEntry(entry))
+    .map((entry) => AudienceMapper.mapAudience(entry));
+
+  return mappedAudiences;
 }
 
 export async function getGlobalConfig(QueryParams: IQueryParams) {
