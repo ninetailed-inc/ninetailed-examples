@@ -8,10 +8,11 @@ import {
 } from '@ninetailed/experience.js-next';
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
-import { IPage } from '@/types/contentful';
+import { IConfig, IPage } from '@/types/contentful';
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import '@contentful/live-preview/style.css';
+import SettingsProviderWrapper from '@/lib/themeProvider';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -19,6 +20,7 @@ type AppProps<P = unknown> = {
 
 interface CustomPageProps {
   page: IPage;
+  config: IConfig;
   ninetailed?: {
     experiments: ExperienceConfiguration[];
     preview: {
@@ -53,22 +55,24 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
         experiments={pageProps.ninetailed?.experiments || []}
       >
-        <ContentfulLivePreviewProvider locale="en-US">
-          <Script
-            id="gtm-base"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        <SettingsProviderWrapper config={pageProps.config}>
+          <ContentfulLivePreviewProvider locale="en-US">
+            <Script
+              id="gtm-base"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','${
     process.env.NEXT_PUBLIC_GTM_ID || ''
   }');`,
-            }}
-          />
-          <Component {...pageProps} />
-        </ContentfulLivePreviewProvider>
+              }}
+            />
+            <Component {...pageProps} />
+          </ContentfulLivePreviewProvider>
+        </SettingsProviderWrapper>
       </NinetailedProvider>
     </div>
   );
