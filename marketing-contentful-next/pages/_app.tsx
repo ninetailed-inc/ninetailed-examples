@@ -18,6 +18,12 @@ type AppProps<P = unknown> = {
   pageProps: P;
 } & Omit<NextAppProps<P>, 'pageProps'>;
 
+// FIXME: Re-export this type from utils-contentful
+type Audience = {
+  name?: string | undefined;
+  description?: string | undefined;
+  id: string;
+};
 interface CustomPageProps {
   page: IPage;
   config: IConfig;
@@ -25,6 +31,7 @@ interface CustomPageProps {
     experiments: ExperienceConfiguration[];
     preview: {
       allExperiences: ExperienceConfiguration[];
+      allAudiences: Audience[];
     };
   };
 }
@@ -37,18 +44,13 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
           new NinetailedGoogleTagmanagerPlugin(),
           new NinetailedPreviewPlugin({
             experiences: pageProps.ninetailed?.preview.allExperiences || [],
-            audiences:
-              pageProps.ninetailed?.preview.allExperiences
-                .map((experience) => experience.audience)
-                .filter(
-                  (
-                    audience
-                  ): audience is {
-                    id: string;
-                    description?: string | undefined;
-                    name?: string | undefined;
-                  } => !!audience
-                ) || [],
+            audiences: pageProps.ninetailed?.preview.allAudiences || [],
+            onOpenExperienceEditor: (experience) => {
+              window.open(
+                `https://app.contentful.com/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/${process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT}/entries/${experience.id}`,
+                '_blank'
+              );
+            },
           }),
         ]}
         clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
