@@ -10,6 +10,8 @@ type FormValues = {
   companysize: string;
   email: string;
   ninetailedid: string;
+  ninetailed_organization_id: string;
+  ninetailed_environment: string;
 };
 
 export const HubspotForm = ({ fields }: IHubspotForm) => {
@@ -64,12 +66,29 @@ export const HubspotForm = ({ fields }: IHubspotForm) => {
                 name: 'ninetailedid',
                 value: data.ninetailedid,
               },
+              {
+                objectTypeId: '0-1',
+                name: 'ninetailed_organization_id',
+                value: data.ninetailed_organization_id,
+              },
+              {
+                objectTypeId: '0-1',
+                name: 'ninetailed_environment',
+                value: data.ninetailed_environment,
+              },
             ],
           }),
         }
       );
-      // eslint-disable-next-line
-      const { ninetailedid, ...traitData } = data;
+      const {
+        // eslint-disable-next-line
+        ninetailedid,
+        // eslint-disable-next-line
+        ninetailed_organization_id,
+        // eslint-disable-next-line
+        ninetailed_environment,
+        ...traitData
+      } = data;
       await identify('', traitData);
     } catch (e) {
       setError('root.submissionError', {
@@ -192,6 +211,22 @@ export const HubspotForm = ({ fields }: IHubspotForm) => {
             {...register('ninetailedid', {
               required: true,
               value: profile.id,
+            })}
+          />
+          <input
+            id="ninetailed_organization_id"
+            className="hidden"
+            {...register('ninetailed_organization_id', {
+              required: true,
+              value: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID,
+            })}
+          />
+          <input
+            id="ninetailed_environment"
+            className="hidden"
+            {...register('ninetailed_environment', {
+              required: true,
+              value: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT || 'main',
             })}
           />
           <input
