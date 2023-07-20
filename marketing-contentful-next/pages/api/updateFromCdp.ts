@@ -54,7 +54,7 @@ export default async function handler(
   const ninetailedResponse = await upsertProfileViaIdentify(apiClient, {
     id: request.body.ninetailedid,
     traits: {
-      leadstage: request.body.lifecyclestage,
+      lifecyclestage: request.body.lifecyclestage,
       ownername: request.body.ownername,
     },
   });
