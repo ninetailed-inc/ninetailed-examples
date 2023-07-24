@@ -1,44 +1,36 @@
-// TODO:  Remove hardcoded hero layout reads, make generic
-
-import { IConfig, ISetting } from '@/types/contentful';
-import { Experience } from '@ninetailed/experience.js-next';
+import { IConfig } from '@/types/contentful';
+import { useExperience } from '@ninetailed/experience.js-next';
 import { PropsWithChildren, createContext } from 'react';
+import find from 'lodash/find';
 import { parseExperiences } from './experiences';
 
-type HeroLayoutOption = 'default' | 'alternate';
+type HeroLayoutSetting = 'default' | 'alternate';
 
-export const ThemeContext = createContext<HeroLayoutOption>('default');
+export const ThemeContext = createContext<HeroLayoutSetting>('default');
 
-export function ThemeProvider(props: PropsWithChildren<Partial<ISetting>>) {
-  return (
-    <ThemeContext.Provider
-      value={(props.fields?.value?.heroLayout as HeroLayoutOption) || 'default'}
-    >
-      {props.children}
-    </ThemeContext.Provider>
-  );
-}
-
-export default function SettingsProviderWrapper(
+export default function ThemeProvider(
   props: PropsWithChildren<{ config: IConfig }>
 ) {
   const { settings } = props.config?.fields || {};
+  const heroLayoutSetting = find(settings, 'fields.value.heroLayout');
+  const { variant } = useExperience({
+    baseline: {
+      id: heroLayoutSetting?.sys.id ?? '',
+      ...heroLayoutSetting,
+    },
+    experiences: heroLayoutSetting ? parseExperiences(heroLayoutSetting) : [],
+  });
   return (
-    <>
-      {settings ? (
-        <Experience
-          id={settings[0].sys.id}
-          {...settings[0]}
-          component={ThemeProvider}
-          // TODO: fix passthrough props
-          // eslint-disable-next-line
-          // @ts-ignore
-          passthroughProps={{ children: props.children }}
-          experiences={parseExperiences(settings[0])}
-        />
-      ) : (
-        <ThemeProvider />
-      )}
-    </>
+    <ThemeContext.Provider
+      value={
+        // eslint-disable-next-line
+        // @ts-ignore
+        // eslint-disable-next-line
+        (variant && (variant.fields.value.heroLayout as HeroLayoutSetting)) ||
+        'default'
+      }
+    >
+      {props.children}
+    </ThemeContext.Provider>
   );
 }
