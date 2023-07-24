@@ -26,7 +26,8 @@ export default function ThemeProvider(
         // eslint-disable-next-line
         // @ts-ignore
         // eslint-disable-next-line
-        (variant.fields.value.heroLayout as HeroLayoutSetting) || 'default'
+        (variant && (variant.fields.value.heroLayout as HeroLayoutSetting)) ||
+        'default'
       }
     >
       {props.children}
