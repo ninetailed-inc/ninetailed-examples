@@ -26,7 +26,7 @@ export const Hero = ({ sys, fields }: IHero) => {
   };
 
   return (
-    <div className="bg-white lg:pb-12">
+    <div className="bg-white lg:pb-12 mySuperCoolClass">
       <div className="pt-8 sm:pt-12 lg:relative lg:py-6">
         {/* Hero section */}
         <div

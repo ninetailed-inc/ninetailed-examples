@@ -77,6 +77,9 @@ export interface IConfigFields {
 
   /** Settings */
   settings?: ISetting[] | undefined;
+
+  /** Styles */
+  styles: IStyle[];
 }
 
 export interface IConfig extends Entry<IConfigFields> {
@@ -574,6 +577,34 @@ export interface ISetting extends Entry<ISettingFields> {
   };
 }
 
+export interface IStyleFields {
+  /** Internal Name */
+  name: string;
+
+  /** CSS */
+  css?: string | undefined;
+
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
+}
+
+export interface IStyle extends Entry<IStyleFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'style';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export type CONTENT_TYPE =
   | 'banner'
   | 'button'
@@ -591,7 +622,8 @@ export type CONTENT_TYPE =
   | 'pricingPlan'
   | 'pricingTable'
   | 'seo'
-  | 'setting';
+  | 'setting'
+  | 'style';
 
 export type LOCALE_CODE = 'en-US';
 
