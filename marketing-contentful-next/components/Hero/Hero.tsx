@@ -26,7 +26,7 @@ export const Hero = ({ sys, fields }: IHero) => {
   };
 
   return (
-    <div className="bg-white lg:pb-12 mySuperCoolClass">
+    <div className="bg-white lg:pb-12 hero">
       <div className="pt-8 sm:pt-12 lg:relative lg:py-6">
         {/* Hero section */}
         <div
@@ -43,8 +43,7 @@ export const Hero = ({ sys, fields }: IHero) => {
                   fieldId: 'headline',
                 })}
                 className={classNames(
-                  'font-extrabold text-gray-900 tracking-tight text-5xl',
-                  { 'lg:text-6xl': layout === 'alternate' }
+                  'font-extrabold text-gray-900 tracking-tight hero__headline'
                 )}
                 richTextDocument={updatedHero.fields.headline}
               />
