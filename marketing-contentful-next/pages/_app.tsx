@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import { AppProps as NextAppProps } from 'next/app';
 import Script from 'next/script';
 import {
+  Experience,
   ExperienceConfiguration,
   NinetailedProvider,
 } from '@ninetailed/experience.js-next';
@@ -13,6 +14,8 @@ import { IConfig, IPage } from '@/types/contentful';
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import '@contentful/live-preview/style.css';
 import SettingsProviderWrapper from '@/lib/themeProvider';
+import Style from '@/components/Style/Style';
+import { parseExperiences } from '@/lib/experiences';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -65,6 +68,20 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
       >
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
+            {pageProps.config &&
+              pageProps.config.fields.styles?.length &&
+              pageProps.config.fields.styles.map((styleEntry) => {
+                return (
+                  <Experience
+                    key={styleEntry.sys.id}
+                    id={styleEntry.sys.id}
+                    {...styleEntry}
+                    component={Style}
+                    experiences={parseExperiences(styleEntry || [])}
+                  />
+                );
+              })}
+
             <Script
               id="gtm-base"
               strategy="afterInteractive"
