@@ -553,6 +553,12 @@ export interface ISettingFields {
   /** Internal Name */
   name: string;
 
+  /** Setting Key */
+  settingKey: string;
+
+  /** Setting Value */
+  settingValue: string;
+
   /** Value */
   value?: Record<string, any> | undefined;
 
