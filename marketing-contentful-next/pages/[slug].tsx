@@ -41,13 +41,12 @@ const Page = ({ page }: { page: IPage }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
-  const rawSlug = get(params, 'slug', []) as string[];
-  const slug = rawSlug.join('/');
+  const rawSlug = get(params, 'slug') as string;
   const [page, config, experiments, allExperiences, allAudiences] =
     await Promise.all([
       getPage({
         preview: draftMode,
-        slug: slug === '' ? '/' : slug,
+        slug: rawSlug === 'home' ? '/' : rawSlug,
       }),
       getGlobalConfig({ preview: draftMode }),
       getExperiments({ preview: draftMode }),
@@ -79,11 +78,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
     })
     .map((page) => {
       return {
-        params: { slug: page.fields.slug.split('/') },
+        params: { slug: page.fields.slug },
       };
     });
   return {
-    paths: [...paths, { params: { slug: [''] } }],
+    paths: [...paths, { params: { slug: 'home' } }],
     fallback: false,
   };
 };

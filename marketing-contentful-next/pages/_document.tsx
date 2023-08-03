@@ -1,10 +1,12 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document';
-
+import { Head, Html, Main, NextScript } from 'next/document';
+import { Document, PreviewModeScript } from '@makeswift/runtime/next';
 class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <PreviewModeScript isPreview={this.props.__NEXT_DATA__.isPreview} />
+        </Head>
         <body className="loading">
           <noscript>
             <iframe

@@ -1,12 +1,7 @@
-/**
- * @type {import('next').NextConfig}
- * */
-module.exports = (phase, { defaultConfig }) => {
-  return {
-    ...defaultConfig,
-    webpack: (config) => {
-      return config;
-    },
-    reactStrictMode: true,
-  };
+const withMakeswift = require('@makeswift/runtime/next/plugin')();
+
+const nextConfig = {
+  reactStrictMode: true,
 };
+
+module.exports = withMakeswift(nextConfig);
