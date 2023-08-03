@@ -20,18 +20,21 @@ import {
 import { ExperienceConfiguration } from '@ninetailed/experience.js-next';
 import { IConfig } from '@/types/contentful';
 
-type ParsedUrlQuery = { path?: string[] };
+type ParsedUrlQuery = { path?: string };
 
 export async function getStaticPaths(): Promise<
   GetStaticPathsResult<ParsedUrlQuery>
 > {
-  const makeswift = new Makeswift(process.env.MAKESWIFT_SITE_API_KEY!);
+  const makeswift = new Makeswift(process.env.MAKESWIFT_SITE_API_KEY || '');
   const pages = await makeswift.getPages();
-  const paths = pages.map((page) => ({
-    params: {
-      path: page.path.split('makeswift').filter((segment) => segment !== ''),
-    },
-  }));
+  console.log('pages', pages);
+  const paths = pages.map((page) => {
+    return {
+      params: {
+        path: page.path.replace('/makeswift/', ''),
+      },
+    };
+  });
 
   return {
     paths,
@@ -59,14 +62,13 @@ type Props = MakeswiftPageProps & {
 export async function getStaticProps(
   ctx: GetStaticPropsContext<ParsedUrlQuery>
 ): Promise<GetStaticPropsResult<Props>> {
-  const makeswift = new Makeswift(process.env.MAKESWIFT_SITE_API_KEY!);
-  const path = 'makeswift/' + ctx.params?.path;
+  const makeswift = new Makeswift(process.env.MAKESWIFT_SITE_API_KEY || '');
+  const path = `makeswift/${ctx.params?.path || ''}`;
   const snapshot = await makeswift.getPageSnapshot(path, {
     preview: ctx.draftMode,
   });
 
   if (snapshot == null) return { notFound: true };
-  console.log(snapshot);
 
   const [config, experiments, allExperiences, allAudiences] = await Promise.all(
     [
