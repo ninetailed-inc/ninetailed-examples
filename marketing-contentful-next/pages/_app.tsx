@@ -13,7 +13,7 @@ import { IConfig, IPage } from '@/types/contentful';
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import '@contentful/live-preview/style.css';
-import SettingsProviderWrapper from '@/lib/themeProvider';
+import SettingsProviderWrapper from '@/lib/SettingsProvider';
 import Style from '@/components/Style/Style';
 import { parseExperiences } from '@/lib/experiences';
 
