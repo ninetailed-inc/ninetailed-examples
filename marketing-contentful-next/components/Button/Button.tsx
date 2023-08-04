@@ -15,7 +15,6 @@ export interface ButtonProps {
   size: ButtonSize;
   variant: ButtonVariant;
   children: string;
-  /* icon: (props: IconProps) => JSX.Element; */
 }
 
 export const Button: React.FC<ButtonProps> = React.forwardRef(
@@ -50,8 +49,6 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
             'text-white bg-amber-600 hover:bg-amber-700 font-medium rounded shadow-sm':
               variant === 'loud',
           },
-          // {"text-gray-300 hover:text-white font-light": props.variant === "footerLink"},
-          // {"text-gray-300 hover:text-white font-medium": props.variant === "navLink"},
           { 'px-3 py-1 text-sm': size === 'small' },
           { 'px-4 py-2 text-base': size === 'medium' },
           { 'px-6 py-3 text-base': size === 'large' }

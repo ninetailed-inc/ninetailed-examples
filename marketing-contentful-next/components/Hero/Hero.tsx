@@ -70,7 +70,6 @@ export const Hero = ({ sys, fields }: IHero) => {
                       if (!button.fields.slug) {
                         return null;
                       }
-
                       return (
                         <div key={button.sys.id} className="shadow">
                           <Link
@@ -92,7 +91,6 @@ export const Hero = ({ sys, fields }: IHero) => {
                     })}
                   </div>
                 </div>
-                {/* Image */}
                 <div
                   className={classNames(
                     'py-12 sm:relative sm:mt-12 sm:pt-16 lg:inset-y-0 lg:right-0 lg:w-1/2',
@@ -154,7 +152,6 @@ export const Hero = ({ sys, fields }: IHero) => {
                       )}
                     />
                   </div>
-
                   <div
                     className="relative sm:mx-auto lg:pl-12 max-w-full"
                     {...ContentfulLivePreview.getProps({

@@ -1,10 +1,8 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
-import get from 'lodash/get';
 
 import { BlockRenderer } from '@/components/Renderer';
 import {
-  getPages,
   getPage,
   getExperiments,
   getAllExperiences,
@@ -40,13 +38,12 @@ const Page = ({ page }: { page: IPage }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
-  const rawSlug = get(params, 'slug') as string;
+export const getStaticProps: GetStaticProps = async ({ draftMode }) => {
   const [page, config, experiments, allExperiences, allAudiences] =
     await Promise.all([
       getPage({
         preview: draftMode,
-        slug: rawSlug === 'home' ? '/' : rawSlug,
+        slug: '/',
       }),
       getGlobalConfig({ preview: draftMode }),
       getExperiments({ preview: draftMode }),
@@ -66,24 +63,6 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
       },
     },
     revalidate: 5,
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const pages = await getPages({ preview: false });
-
-  const paths = pages
-    .filter((page) => {
-      return page.fields.slug !== '/';
-    })
-    .map((page) => {
-      return {
-        params: { slug: page.fields.slug },
-      };
-    });
-  return {
-    paths,
-    fallback: false,
   };
 };
 

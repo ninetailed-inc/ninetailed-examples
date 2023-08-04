@@ -15,8 +15,3 @@ body,
 .app {
   flex-grow: 1;
 }
-
-/* Hack for Ninetailed tab in Makeswift UI */
-[id*='zoid-ninetailed'] {
-  z-index: 10000000;
-}

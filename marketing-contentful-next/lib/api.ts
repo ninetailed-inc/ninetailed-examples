@@ -1,5 +1,11 @@
 import { ContentfulClientApi, createClient } from 'contentful';
-import { IConfig, IPage, IPageFields } from '@/types/contentful';
+import {
+  IConfig,
+  IHero,
+  IHeroFields,
+  IPage,
+  IPageFields,
+} from '@/types/contentful';
 import {
   AudienceEntryLike,
   AudienceMapper,
@@ -10,13 +16,13 @@ import {
 
 const contentfulClient = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ?? '',
-  accessToken: process.env.CONTENTFUL_TOKEN ?? '',
+  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_TOKEN ?? '',
   environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT ?? 'master',
 });
 
 const previewClient = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ?? '',
-  accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN ?? '',
+  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW_TOKEN ?? '',
   environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT ?? 'master',
   host: 'preview.contentful.com',
 });
@@ -56,6 +62,21 @@ export async function getPages(QueryParams: IQueryParams): Promise<IPage[]> {
   const pages = entries.items as IPage[];
 
   return pages || [];
+}
+
+export async function getBaselineHeroes(
+  QueryParams: IQueryParams
+): Promise<IHero[]> {
+  const query = {
+    content_type: 'hero',
+    include: 10,
+    'metadata.tags.sys.id[all]': 'baseline',
+  }; //FIXME: include param down
+  const client = getClient(QueryParams.preview as boolean);
+  const entries = await client.getEntries<IHeroFields>(query);
+  const heroes = entries.items as IHero[];
+
+  return heroes || [];
 }
 
 export async function getExperiments(QueryParams: IQueryParams) {

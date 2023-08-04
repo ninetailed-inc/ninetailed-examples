@@ -27,7 +27,7 @@ export async function getStaticPaths(): Promise<
 > {
   const makeswift = new Makeswift(process.env.MAKESWIFT_SITE_API_KEY || '');
   const pages = await makeswift.getPages();
-  console.log('pages', pages);
+
   const paths = pages.map((page) => {
     return {
       params: {
