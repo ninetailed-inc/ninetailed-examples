@@ -18,12 +18,12 @@ export const Footer = ({ fields }: IFooter) => {
             if (!link.fields.slug) {
               return (
                 <div key={link.sys.id} className="px-5 py-2">
-                  <a
+                  <Link
                     className="text-base text-gray-300 hover:text-white"
                     href="/"
                   >
                     {link.fields.buttonText}
-                  </a>
+                  </Link>
                 </div>
               );
             }
@@ -32,10 +32,9 @@ export const Footer = ({ fields }: IFooter) => {
               <div key={link.sys.id} className="px-5 py-2">
                 <Link
                   href={link.fields.slug}
-                  className="text-base text-gray-300 hover:text-white">
-
+                  className="text-base text-gray-300 hover:text-white"
+                >
                   {link.fields.buttonText}
-
                 </Link>
               </div>
             );
