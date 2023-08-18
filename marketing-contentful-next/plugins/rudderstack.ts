@@ -52,7 +52,6 @@ export class NinetailedRudderstackPlugin extends NinetailedAnalyticsPlugin {
     hasSeenExperienceEventPayload: Record<string, string>
   ): Promise<void> {
     if (!isRudderstackInitialized()) {
-      console.log('ding');
       return;
     }
 
