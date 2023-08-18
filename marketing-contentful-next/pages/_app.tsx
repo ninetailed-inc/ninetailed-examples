@@ -17,6 +17,9 @@ import SettingsProviderWrapper from '@/lib/SettingsProvider';
 import Style from '@/components/Style/Style';
 import { parseExperiences } from '@/lib/experiences';
 
+import { NinetailedRudderstackPlugin } from '@/plugins/rudderstack';
+import { rudderInitialize } from '@/lib/rudderInitialize';
+
 type AppProps<P = unknown> = {
   pageProps: P;
 } & Omit<NextAppProps<P>, 'pageProps'>;
@@ -45,6 +48,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
       <NinetailedProvider
         plugins={[
           new NinetailedGoogleTagmanagerPlugin(),
+          new NinetailedRudderstackPlugin(),
           new NinetailedPreviewPlugin({
             experiences: pageProps.ninetailed?.preview.allExperiences || [],
             audiences: pageProps.ninetailed?.preview.allAudiences || [],
@@ -93,6 +97,17 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
   })(window,document,'script','dataLayer','${
     process.env.NEXT_PUBLIC_GTM_ID || ''
   }');`,
+              }}
+            />
+            <Script
+              id="rudderstack"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `!function(){var e=window.rudderanalytics=window.rudderanalytics||[];e.methods=["load","page","track","identify","alias","group","ready","reset","getAnonymousId","setAnonymousId","getUserId","getUserTraits","getGroupId","getGroupTraits","startSession","endSession"],e.factory=function(t){return function(){e.push([t].concat(Array.prototype.slice.call(arguments)))}};for(var t=0;t<e.methods.length;t++){var r=e.methods[t];e[r]=e.factory(r)}e.loadJS=function(e,t){var r=document.createElement("script");r.type="text/javascript",r.async=!0,r.src="https://cdn.rudderlabs.com/v1.1/rudder-analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(r,a)},e.loadJS(),
+                e.load("${process.env.NEXT_PUBLIC_RUDDERSTACK_ID || ''}","${
+                  process.env.NEXT_PUBLIC_DATAPLANE_URL || ''
+                }"),
+                e.page()}();`,
               }}
             />
             <Component {...pageProps} />

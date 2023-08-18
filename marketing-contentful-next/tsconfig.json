@@ -35,6 +35,7 @@
       "@/lib/*": ["lib/*"],
       "@/styles/*": ["styles/*"],
       "@/types/*": ["types/*"],
+      "@/plugins/*": ["plugins/*"],
       "@/public/*": ["public/*"]
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
@@ -103,6 +104,11 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "noEmit": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "lib/rudderInitialize.js"
+  ],
   "exclude": ["node_modules"]
 }
