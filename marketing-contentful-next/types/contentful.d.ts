@@ -73,7 +73,7 @@ export interface IButton extends Entry<IButtonFields> {
 
 export interface IConfigFields {
   /** Internal Name */
-  name: 'Global Configuration';
+  name: 'Configuration';
 
   /** Settings */
   settings?: ISetting[] | undefined;
@@ -203,7 +203,7 @@ export interface IFooter extends Entry<IFooterFields> {
 
 export interface IHeroFields {
   /** Internal name */
-  internalName?: string | undefined;
+  internalName: string;
 
   /** Headline */
   headline: Document;
@@ -308,6 +308,9 @@ export interface INtAudienceFields {
 
   /** Audience Id */
   nt_audience_id: string;
+
+  /** Metadata */
+  nt_metadata?: Record<string, any> | undefined;
 }
 
 /** Ninetailed Audience */
