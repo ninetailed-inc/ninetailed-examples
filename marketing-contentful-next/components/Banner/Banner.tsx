@@ -4,6 +4,7 @@ import { XIcon } from '@heroicons/react/solid';
 
 import { RichText } from '@/components/RichText';
 import { IBanner } from '@/types/contentful';
+import { useProfile } from '@ninetailed/experience.js-next';
 
 export type Handler = () => void;
 
@@ -23,10 +24,11 @@ export const Banner = ({ fields }: IBanner) => {
             {fields.slug && fields.linkText && (
               <>
                 <span className="block sm:ml-2 sm:inline-block">
-                  <Link href={fields.slug} className="text-white font-bold underline">
-
+                  <Link
+                    href={fields.slug}
+                    className="text-white font-bold underline"
+                  >
                     {fields.linkText}
-
                   </Link>
                 </span>
                 <span aria-hidden="true"> &rarr;</span>
