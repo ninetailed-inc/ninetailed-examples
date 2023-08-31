@@ -90,6 +90,12 @@ export const HubspotForm = ({ fields }: IHubspotForm) => {
         ...traitData
       } = data;
       await identify('', traitData);
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'contact_form',
+          company_size: data.companysize,
+        });
+      }
     } catch (e) {
       setError('root.submissionError', {
         message: 'Submission error, see console',
@@ -112,6 +118,8 @@ export const HubspotForm = ({ fields }: IHubspotForm) => {
       )}
       {!isSubmitSuccessful && profile && (
         <form
+          id="contactForm"
+          name="contactForm"
           onSubmit={(...args) => void handleSubmit(onSubmit)(...args)}
           className="flex flex-col space-y-4 items-start"
         >
