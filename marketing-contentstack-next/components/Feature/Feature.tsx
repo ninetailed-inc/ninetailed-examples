@@ -5,7 +5,7 @@ import { RichText } from '@/components/RichText';
 import { Button, ButtonVariant } from '@/components/Button';
 import { ContentstackImageLoader } from '@/lib/helperfunctions';
 
-import { IFeature } from '@/types/contentstack';
+import { Feature as IFeature } from '@/types/contentstack';
 
 export const Feature: React.FC<IFeature> = (props) => {
   return (

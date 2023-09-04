@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { INavigation } from '@/types/contentstack';
+import { Navigation as INavigation } from '@/types/contentstack';
 import Logo from '@/public/logo.svg';
 
 import classNames from 'classnames';

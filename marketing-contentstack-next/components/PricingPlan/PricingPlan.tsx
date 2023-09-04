@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
-import { IPricingPlan } from '@/types/contentstack';
+import { PricingPlan as IPricingPlan } from '@/types/contentstack';
 
 export const PricingPlan = (props: IPricingPlan) => {
   const {

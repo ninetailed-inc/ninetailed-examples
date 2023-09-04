@@ -1,6 +1,6 @@
 import React from 'react';
 import { PricingPlan } from '@/components/PricingPlan';
-import { IPricingTable } from '@/types/contentstack';
+import { PricingTable as IPricingTable } from '@/types/contentstack';
 import { RichText } from '../RichText/RichText';
 
 export const PricingTable: React.FC<IPricingTable> = (props) => {
