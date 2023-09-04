@@ -9,7 +9,7 @@ import {
   getAllLandingPages,
   getLandingPage,
 } from '@/lib/api';
-import { ILandingPage } from '@/types/contentstack';
+import { LandingPage as ILandingPage } from '@/types/contentstack';
 
 function Page({ page: pageData }: { page: ILandingPage }) {
   const { seo, banner, navigation, sections, footer } = pageData;

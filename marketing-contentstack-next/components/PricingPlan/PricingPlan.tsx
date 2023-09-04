@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
-import { IPricingPlan } from '@/types/contentstack';
+import { PricingPlan as IPricingPlan } from '@/types/contentstack';
 
 export const PricingPlan = (props: IPricingPlan) => {
   const {
@@ -42,7 +42,7 @@ export const PricingPlan = (props: IPricingPlan) => {
       </div>
       {button?.button_link.href && (
         <div className="mt-auto">
-          <Link passHref href={button.button_link.href}>
+          <Link passHref href={button.button_link.href} legacyBehavior>
             <Button
               as="a"
               type="button"

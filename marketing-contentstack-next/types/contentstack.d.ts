@@ -1,4 +1,4 @@
-export interface IFile {
+export interface File {
   uid: string;
   created_at: string;
   updated_at: string;
@@ -22,19 +22,19 @@ export interface IFile {
   };
 }
 
-export interface ILink {
+export interface Link {
   title: string;
   href: string;
 }
 
-export interface IButton {
+export interface Button {
   /** Button Link */
-  button_link: ILink;
+  button_link: Link;
   /** Button Variant */
   button_variant?: 'Primary' | 'Secondary' | 'Tertiary';
 }
 
-export interface ISeo {
+export interface Seo {
   /** Meta Title */
   meta_title?: string;
   /** Meta Description */
@@ -46,32 +46,25 @@ export interface ISeo {
 }
 
 /** Ninetailed Experience */
-export interface INtExperience {
+export interface NtExperience {
   /** Name */
   nt_name: string;
   /** Description */
   nt_description?: string;
   /** Type */
   nt_type: 'nt_experiment' | 'nt_personalization';
+  /** Audience */
+  nt_audience?: NtAudience[];
   /** Config */
   nt_config: any;
-  /** Audience */
-  nt_audience?: INtAudience[];
   /** Variants */
-  nt_variants?: (
-    | IPricingTable
-    | INavigation
-    | IHero
-    | IBanner
-    | IFeature
-    | ICta
-  )[];
+  nt_variants?: (PricingTable | Navigation | Hero | Feature | Cta | Banner)[];
   /** Title */
   title: string;
 }
 
 /** Ninetailed Merge Tag */
-export interface INtMergetag {
+export interface NtMergetag {
   /** Name */
   nt_name: string;
   /** Fallback */
@@ -83,7 +76,7 @@ export interface INtMergetag {
 }
 
 /** Ninetailed Audience */
-export interface INtAudience {
+export interface NtAudience {
   /** Title */
   title?: string;
   /** Name */
@@ -96,7 +89,7 @@ export interface INtAudience {
   nt_audience_id: string;
 }
 
-export interface IPricingPlan {
+export interface PricingPlan {
   /** Internal Title */
   title: string;
   /** Title */
@@ -110,12 +103,12 @@ export interface IPricingPlan {
   /** Description */
   description?: any;
   /** Button */
-  button?: IButton;
+  button?: Button;
   /** Most Popular */
   most_popular?: boolean;
 }
 
-export interface IPricingTable {
+export interface PricingTable {
   /** Title */
   title: string;
   /** Headline */
@@ -123,12 +116,12 @@ export interface IPricingTable {
   /** Subline */
   subline?: any;
   /** Pricing Plans */
-  pricing_plans?: IPricingPlan[];
+  pricing_plans?: PricingPlan[];
   /** Ninetailed */
-  nt_experiences?: INtExperience[];
+  nt_experiences?: NtExperience[];
 }
 
-export interface IFeature {
+export interface Feature {
   /** Title */
   title: string;
   /** Headline */
@@ -136,16 +129,16 @@ export interface IFeature {
   /** Subline */
   subline?: any;
   /** Buttons */
-  buttons?: IButton[];
+  buttons?: Button[];
   /** Image */
-  image?: IFile;
+  image?: File;
   /** Image Position */
   image_position?: 'left' | 'right';
   /** Ninetailed */
-  nt_experiences?: INtExperience[];
+  nt_experiences?: NtExperience[];
 }
 
-export interface ICta {
+export interface Cta {
   /** Title */
   title: string;
   /** Headline */
@@ -153,12 +146,12 @@ export interface ICta {
   /** Subline */
   subline?: any;
   /** Buttons */
-  buttons?: IButton[];
+  buttons?: Button[];
   /** Ninetailed */
-  nt_experiences?: INtExperience[];
+  nt_experiences?: NtExperience[];
 }
 
-export interface IHero {
+export interface Hero {
   /** Internal Title */
   title: string;
   /** Headline */
@@ -166,14 +159,14 @@ export interface IHero {
   /** Subline */
   subline?: any;
   /** Buttons */
-  buttons?: IButton;
+  buttons?: Button[];
   /** Image */
-  image?: IFile;
+  image?: File;
   /** Ninetailed */
-  nt_experiences?: INtExperience[];
+  nt_experiences?: NtExperience[];
 }
 
-export interface INavigation {
+export interface Navigation {
   /** Title */
   title: string;
   /** Navigation Items */
@@ -181,13 +174,13 @@ export interface INavigation {
     /** Title */
     title?: string;
     /** Page Reference */
-    page_reference: ILandingPage[];
+    page_reference: LandingPage[];
   }[];
   /** Ninetailed */
-  nt_experiences?: INtExperience[];
+  nt_experiences?: NtExperience[];
 }
 
-export interface IHubspotForm {
+export interface HubspotForm {
   /** Title */
   title: string;
   /** Hubspot Form ID */
@@ -196,44 +189,44 @@ export interface IHubspotForm {
   hubspot_portal_id?: string;
 }
 
-export interface IFooter {
+export interface Footer {
   /** Title */
   title: string;
   /** Footer Links */
   footer_links?: {
     /** Title */
-    title: string;
+    title?: string;
     /** Page Reference */
-    page_reference: ILandingPage[];
+    page_reference?: LandingPage[];
   }[];
   /** Copyright */
   copyright?: any;
 }
 
-export interface ILandingPage {
+export interface LandingPage {
   /** Title */
   title: string;
   /** SEO */
-  seo?: ISeo;
+  seo?: Seo;
   /** URL */
   url?: string;
   /** Banner */
-  banner?: IBanner[];
+  banner?: Banner[];
   /** Navigation */
-  navigation?: INavigation[];
+  navigation?: Navigation[];
   /** Sections */
-  sections?: (ICta | IFeature | IHero | IHubspotForm | IPricingTable)[];
+  sections?: (Cta | Feature | Hero | HubspotForm | PricingTable)[];
   /** Footer */
-  footer?: IFooter[];
+  footer?: Footer[];
 }
 
-export interface IBanner {
+export interface Banner {
   /** Title */
   title: string;
   /** Text */
   text?: any;
   /** Link */
-  link?: ILink;
+  link?: Link;
   /** Ninetailed */
-  nt_experiences?: INtExperience[];
+  nt_experiences?: NtExperience[];
 }
