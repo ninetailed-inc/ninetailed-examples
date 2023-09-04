@@ -64,6 +64,7 @@ const BlockRenderer = ({ block }: { block: any }) => {
         config: experience.nt_config,
         audience: {
           id: experience.nt_audience[0].nt_audience_id,
+          name: experience.nt_audience[0].nt_name,
         },
         id: experience.uid,
         variants: experience.nt_variants?.map((variant: any) => {
