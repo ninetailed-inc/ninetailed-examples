@@ -42,7 +42,7 @@ export const PricingPlan = (props: IPricingPlan) => {
       </div>
       {button?.button_link.href && (
         <div className="mt-auto">
-          <Link passHref href={button.button_link.href}>
+          <Link passHref href={button.button_link.href} legacyBehavior>
             <Button
               as="a"
               type="button"

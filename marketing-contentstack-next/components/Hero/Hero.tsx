@@ -52,7 +52,11 @@ export const Hero = (props: any) => {
 
                   return (
                     <div key={button.button_link.href} className="shadow">
-                      <Link passHref href={button.button_link.href}>
+                      <Link
+                        passHref
+                        href={button.button_link.href}
+                        legacyBehavior
+                      >
                         <Button
                           as="a"
                           type="button"
@@ -113,7 +117,6 @@ export const Hero = (props: any) => {
               {heroProps.image && (
                 <Image
                   loader={ContentstackImageLoader}
-                  layout="fixed"
                   src={heroProps.image.url}
                   width={865}
                   height={590}

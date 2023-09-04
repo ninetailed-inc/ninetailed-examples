@@ -23,13 +23,11 @@ export const Banner: React.FC<IBanner> = (props) => {
             {props.link && (
               <>
                 <span className="block sm:ml-2 sm:inline-block">
-                  <Link href={props.link.href}>
-                    <a
-                      className="text-white font-bold underline"
-                      href={props.link.href}
-                    >
-                      {props.link.title}
-                    </a>
+                  <Link
+                    href={props.link.href}
+                    className="text-white font-bold underline"
+                  >
+                    {props.link.title}
                   </Link>
                 </span>
                 <span aria-hidden="true"> &rarr;</span>

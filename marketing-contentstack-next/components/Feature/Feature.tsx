@@ -27,7 +27,11 @@ export const Feature: React.FC<IFeature> = (props) => {
           <div className="mt-5 mx-auto flex flex-col sm:flex-row md:mt-8 sm:w-full">
             {props.buttons && props.buttons[0]?.button_link.href && (
               <div>
-                <Link passHref href={props.buttons[0].button_link.href}>
+                <Link
+                  passHref
+                  href={props.buttons[0].button_link.href}
+                  legacyBehavior
+                >
                   <Button
                     as="a"
                     type="button"
