@@ -31,7 +31,6 @@ interface CustomPageProps {
   page: IPage;
   config: IConfig;
   ninetailed?: {
-    experiments: ExperienceConfiguration[];
     preview: {
       allExperiences: ExperienceConfiguration[];
       allAudiences: Audience[];
@@ -68,7 +67,6 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         ]}
         clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
-        experiments={pageProps.ninetailed?.experiments || []}
       >
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
