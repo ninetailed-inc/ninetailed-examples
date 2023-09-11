@@ -44,7 +44,11 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
     <div className="app">
       <NinetailedProvider
         plugins={[
-          new NinetailedGoogleTagmanagerPlugin(),
+          new NinetailedGoogleTagmanagerPlugin({
+            template: {
+              ninetailed_audience_name: '{{ audience.name }}',
+            },
+          }),
           new NinetailedPreviewPlugin({
             experiences: pageProps.ninetailed?.preview.allExperiences || [],
             audiences: pageProps.ninetailed?.preview.allAudiences || [],
