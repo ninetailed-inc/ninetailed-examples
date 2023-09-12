@@ -8,6 +8,8 @@ import {
 } from '@ninetailed/experience.js-next';
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
+import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights';
+
 import { LandingPage as ILandingPage } from '@/types/contentstack';
 import '@contentstack/live-preview-utils/dist/main.css';
 
@@ -42,25 +44,31 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
               ninetailed_audience_name: '{{ audience.name }}',
             },
           }),
-          new NinetailedPreviewPlugin({
-            // TODO: Pull draft experiences and audiences from Management API
-            experiences: pageProps.ninetailed?.preview.experiences || [],
-            audiences:
-              pageProps.ninetailed?.preview.experiences
-                .map((experience) => experience.audience)
-                .filter(
-                  (
-                    audience
-                  ): audience is {
-                    id: string;
-                    name?: string | undefined;
-                    description: string | undefined;
-                  } => !!audience
-                ) || [],
-          }),
+          new NinetailedInsightsPlugin(),
+          ...(pageProps.ninetailed?.preview
+            ? [
+                new NinetailedPreviewPlugin({
+                  // TODO: Pull draft experiences and audiences from Management API
+                  experiences: pageProps.ninetailed?.preview.experiences || [],
+                  audiences:
+                    pageProps.ninetailed?.preview.experiences
+                      .map((experience) => experience.audience)
+                      .filter(
+                        (
+                          audience
+                        ): audience is {
+                          id: string;
+                          name?: string | undefined;
+                          description: string | undefined;
+                        } => !!audience
+                      ) || [],
+                }),
+              ]
+            : []),
         ]}
         clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
+        componentViewTrackingThreshold={2000} // Default = 2000
       >
         <Script
           id="gtm-base"

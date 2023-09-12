@@ -9,6 +9,7 @@ import {
 } from '@ninetailed/experience.js-next';
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
+import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights';
 import { IConfig, IPage } from '@/types/contentful';
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
@@ -48,25 +49,33 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
               ninetailed_audience_name: '{{ audience.name }}',
             },
           }),
-          new NinetailedPreviewPlugin({
-            experiences: pageProps.ninetailed?.preview.allExperiences || [],
-            audiences: pageProps.ninetailed?.preview.allAudiences || [],
-            onOpenExperienceEditor: (experience) => {
-              if (process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID) {
-                window.open(
-                  `https://app.contentful.com/spaces/${
-                    process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
-                  }/environments/${
-                    process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master'
-                  }/entries/${experience.id}`,
-                  '_blank'
-                );
-              }
-            },
-          }),
+          new NinetailedInsightsPlugin(),
+          ...(pageProps.ninetailed?.preview
+            ? [
+                new NinetailedPreviewPlugin({
+                  experiences:
+                    pageProps.ninetailed?.preview.allExperiences || [],
+                  audiences: pageProps.ninetailed?.preview.allAudiences || [],
+                  onOpenExperienceEditor: (experience) => {
+                    if (process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID) {
+                      window.open(
+                        `https://app.contentful.com/spaces/${
+                          process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+                        }/environments/${
+                          process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT ||
+                          'master'
+                        }/entries/${experience.id}`,
+                        '_blank'
+                      );
+                    }
+                  },
+                }),
+              ]
+            : []),
         ]}
         clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
+        componentViewTrackingThreshold={2000} // Default = 2000
       >
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
