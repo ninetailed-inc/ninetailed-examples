@@ -5,7 +5,7 @@ import {
   AudienceMapper,
   ExperienceEntryLike,
   ExperienceMapper,
-  ExperimentEntry,
+  // ExperimentEntry,
 } from '@ninetailed/experience.js-utils-contentful';
 
 const contentfulClient = createClient({
