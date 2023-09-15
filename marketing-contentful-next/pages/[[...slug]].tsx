@@ -6,7 +6,6 @@ import { BlockRenderer } from '@/components/Renderer';
 import {
   getPages,
   getPage,
-  getExperiments,
   getAllExperiences,
   getGlobalConfig,
   getAllAudiences,
@@ -43,23 +42,20 @@ const Page = ({ page }: { page: IPage }) => {
 export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
-  const [page, config, experiments, allExperiences, allAudiences] =
-    await Promise.all([
-      getPage({
-        preview: draftMode,
-        slug: slug === '' ? '/' : slug,
-      }),
-      getGlobalConfig({ preview: draftMode }),
-      getExperiments({ preview: draftMode }),
-      getAllExperiences(),
-      getAllAudiences(),
-    ]);
+  const [page, config, allExperiences, allAudiences] = await Promise.all([
+    getPage({
+      preview: draftMode,
+      slug: slug === '' ? '/' : slug,
+    }),
+    getGlobalConfig({ preview: draftMode }),
+    getAllExperiences(),
+    getAllAudiences(),
+  ]);
   return {
     props: {
       page,
       config,
       ninetailed: {
-        experiments: experiments,
         preview: {
           allExperiences,
           allAudiences,

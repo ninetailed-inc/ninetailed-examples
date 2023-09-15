@@ -5,7 +5,7 @@ import {
   AudienceMapper,
   ExperienceEntryLike,
   ExperienceMapper,
-  ExperimentEntry,
+  // ExperimentEntry,
 } from '@ninetailed/experience.js-utils-contentful';
 
 const contentfulClient = createClient({
@@ -58,23 +58,23 @@ export async function getPages(QueryParams: IQueryParams): Promise<IPage[]> {
   return pages || [];
 }
 
-export async function getExperiments(QueryParams: IQueryParams) {
-  const query = {
-    content_type: 'nt_experience',
-    'fields.nt_type': 'nt_experiment',
-  };
-  const client = getClient(QueryParams.preview as boolean);
-  const entries = await client.getEntries(query);
-  const experiments = entries.items as ExperimentEntry[];
+// export async function getExperiments(QueryParams: IQueryParams) {
+//   const query = {
+//     content_type: 'nt_experience',
+//     'fields.nt_type': 'nt_experiment',
+//   };
+//   const client = getClient(QueryParams.preview as boolean);
+//   const entries = await client.getEntries(query);
+//   const experiments = entries.items as ExperimentEntry[];
 
-  const mappedExperiments = (experiments || [])
-    .filter((entry) => ExperienceMapper.isExperiment(entry))
-    .map((entry) => {
-      return ExperienceMapper.mapExperiment(entry);
-    });
+//   const mappedExperiments = (experiments || [])
+//     .filter((entry) => ExperienceMapper.isExperiment(entry))
+//     .map((entry) => {
+//       return ExperienceMapper.mapExperiment(entry);
+//     });
 
-  return mappedExperiments;
-}
+//   return mappedExperiments;
+// }
 
 export async function getAllExperiences() {
   const query = {

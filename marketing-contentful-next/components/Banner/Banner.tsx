@@ -4,7 +4,6 @@ import { XIcon } from '@heroicons/react/solid';
 
 import { RichText } from '@/components/RichText';
 import { IBanner } from '@/types/contentful';
-import { useProfile } from '@ninetailed/experience.js-next';
 
 export type Handler = () => void;
 
