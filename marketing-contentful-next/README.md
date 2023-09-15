@@ -39,16 +39,18 @@ This project is deployed live [here](https://b2b.demo.ninetailed.io/).
 
 - Within your Contentful space, navigate to the navigation bar, go to **Settings** and click on **API keys** in the dropdown.
 - Click on **Add API key**.
-- Enter a name for your API key and save it.
-- Copy the following credentials to your note for later use:
+- Enter a name for your API key.
+- Determine which Contentful environment or environment alias you will use (NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT) and enable their access on the API key (at the bottom)
+  - In a new Contentful space, you will start with one environment called **master**.
+  - You may also create your own environment and/or opt in to environment aliases; be sure to enable the API key to your environment or environment alias in the API key settings.
+- Copy the following credentials for later use from the API key:
+
   - **Space ID** (NEXT_PUBLIC_CONTENTFUL_SPACE_ID)
   - **Content Delivery API - access token** (CONTENTFUL_TOKEN)
   - **Content Preview API - access token** (CONTENTFUL_PREVIEW_TOKEN)
-- Go back to the main API configuration page and select the **Content management tokens** tab.
-- Generate a **Personal Access Token** (CONTENTFUL_MANAGEMENT_TOKEN). This will be used to import the demo content model.
-- Finally, determine which Contentful environment or environment alias you will use (NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT)
-  - In a fresh Contentful space, you will start with one environment called **master**.
-  - You may also create your own environment or environment alias to use; be sure to enable the API key to your environment or environment alias in the API key settings.
+
+- From the **Settings** menu, select the **CMA Tokens** link.
+- Generate a **Personal Access Token** (CONTENTFUL_MANAGEMENT_TOKEN) using the "Create Personal Access Token" button in the upper right. This will be used to import the demo content model. Copy this token down immediately because it cannot not be shown again.
 
 ### Step 4. Gather Ninetailed API Credentials
 
