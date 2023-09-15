@@ -11,15 +11,13 @@ const exportOptions = {
   spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
   environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
   managementToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN,
-  /* deliveryToken: process.env.CONTENTFUL_TOKEN, */
-  contentFile: process.env.CONTENTFUL_SPACE_DATA_LOCATION,
+  contentFile: './contentful/data/contentful-space-data.json',
   includeDrafts: true,
 };
 
 if (
   !process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ||
   !process.env.CONTENTFUL_MANAGEMENT_TOKEN ||
-  !process.env.CONTENTFUL_SPACE_DATA_LOCATION
 ) {
   throw new Error(
     [
@@ -27,7 +25,6 @@ if (
       'Please insert the following credentials into your .env.local file:',
       '- NEXT_PUBLIC_CONTENTFUL_SPACE_ID=XXX',
       '- CONTENTFUL_MANAGEMENT_TOKEN=CFPAT-XXX',
-      '- CONTENTFUL_SPACE_DATA_LOCATION="PATH TO STORAGE DIRECTORY"',
       'Afterwards run the export command as follows:',
       '"npm run export" or "yarn export"',
     ].join('\n')

@@ -8,9 +8,7 @@ const importOptions = {
   spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
   environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master',
   managementToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN,
-  contentFile:
-    process.env.CONTENTFUL_SPACE_DATA_LOCATION ||
-    './contentful/data/contentful-space-data.json',
+  contentFile: './contentful/data/contentful-space-data.json',
 };
 
 if (
@@ -23,7 +21,6 @@ if (
       'Please insert the following credentials into your .env.local file:',
       '- NEXT_PUBLIC_CONTENTFUL_SPACE_ID=XXX',
       '- CONTENTFUL_MANAGEMENT_TOKEN=CFPAT-XXX',
-      '- CONTENTFUL_SPACE_DATA_LOCATION="PATH TO STORAGE DIRECTORY"',
       'Afterwards run the setup command as follows:',
       '"npm run setup" or "yarn setup"',
     ].join('\n')

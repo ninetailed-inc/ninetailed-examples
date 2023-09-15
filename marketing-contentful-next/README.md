@@ -1,4 +1,4 @@
-# A Website Template for Personalization with Ninetailed, Contentful, and Next.js
+# Personalizations and Experiments with Ninetailed, Contentful, and Next.js
 
 ![](docs/marketing-contentful-next.png)
 
@@ -10,8 +10,8 @@ The illustrated website example demonstrates the Ninetailed content personalizat
   - [Step 2. Create a Contentful Account and Space](#step-2-create-a-contentful-account-and-space)
   - [Step 3. Create Contentful API Credentials](#step-3-create-contentful-api-credentials)
   - [Step 4. Create Ninetailed API Credentials](#step-4-create-ninetailed-api-credentials)
-  - [Step 5. Deploy Your Personal Playground on Vercel](#step-5-deploy-your-personal-playground-on-vercel)
-  - [Step 6. Connect Contentful With Ninetailed](#step-6-connect-contentful-with-ninetailed)
+  - [Step 5. Connect Contentful With Ninetailed](#step-5-connect-contentful-with-ninetailed)
+  - [Step 6. Deploy Your Personal Playground on Vercel](#step-6-deploy-your-personal-playground-on-vercel)
   - [Step 7. Final Remark](#step-7-final-remark)
 - [Developer Section](#developer-section)
   - [Getting Started](#getting-started)
@@ -19,21 +19,18 @@ The illustrated website example demonstrates the Ninetailed content personalizat
 
 ## Live Demo
 
-If you like to discover how content personalization can be applied to a website, visit our [live demo](https://b2b-marketing-website-nextjs-ninetailed.vercel.app/).
+This project is deployed live [at this link](https://b2b.demo.ninetailed.io/).
 
-## Deploy Your Own Playground Without Code
-
-If you are interested in exploring content personalization capabilities with Ninetailed and Contentful in more depth, you can deploy your own environment.\
-Simply follow the instructions, which will guide you through the necessary steps.
+## Deploy Your Own Starter
 
 ### Step 1. Create a Ninetailed Account
 
-- [Click here to sign-up on Ninetailed](https://app.ninetailed.io/account/sign-up).
+- [Click here to sign up for a Ninetailed account](https://app.ninetailed.io/account/sign-up).
 
 ### Step 2. Create a Contentful Account and Space
 
-- First, [sign-up on Contentful](https://www.contentful.com/sign-up/).
-- Next, create a new empty **space** from the Contentful dashboard. You can choose any name of your liking for the space.
+- If you haven't already, [sign up for a Contentful account](https://www.contentful.com/sign-up/).
+- Next, create a new empty **space** from the Contentful dashboard.
 
 ### Step 3. Create Contentful API Credentials
 
@@ -47,49 +44,45 @@ Simply follow the instructions, which will guide you through the necessary steps
   - **Content Delivery API - access token** (CONTENTFUL_TOKEN)
   - **Content Preview API - access token** (CONTENTFUL_PREVIEW_TOKEN)
 - Go back to the main API configuration page and select the **Content management tokens** tab.
-- Generate a **Personal Access Token** (CONTENTFUL_MANAGEMENT_TOKEN) and copy it immediately to your note.
-- At last, since Contentful provides individual environments for you to work with, you must specify the environment name in the credentials. In case you don't use environments enter 'master' (without quotes) as the **Contentful Environment Name** (NERXT_PUBLIC_CONTENTFUL_ENVIRONMENT). Otherwise, provide your chosen environmental name in the credentials and enable the API key to this environment in the settings.
+- Generate a **Personal Access Token** (CONTENTFUL_MANAGEMENT_TOKEN) and copy it immediately to your note. This will be used to import the demo content model.
+- Finally, specify the Contentful environment or environment alias name as the **Contentful Environment Name** (NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT). Otherwise, provide your chosen environment name in the credentials and enable the API key to this environment in the settings.
 
-### Step 4. Create Ninetailed API Credentials
+### Step 4. Gather Ninetailed API Credentials
 
 > ⚠️ **HINT:** Save the created API credentials temporarily in a note or a separate file, as you will need to provide them in the last step.
 
 - Within your Ninetailed account, click on **API Key** in the sidebar.
-- Save the shown **API Key** (NINETAILED_CLIENT_ID) to your notes.
-- Next, in the sidebar, go to **Settings**. In the appearing modal, navigate to **API Tokens**.
-- Click on **Generate Token**, enter a descriptive phrase, and select **Read Only** as a role.
-- After creation, save the **Client ID** (NINETAILED_MANAGEMENT_CLIENT_ID) and the **Secret Key** (NINETAILED_MANAGEMENT_SECRET).
-- Similar to Contentful, Ninetailed offers two self-sufficient working environments. You can choose to work in the 'main' or 'development' environment. Please enter the name of the **Ninetailed Environment** of your choice in the credentials without quotes (NEXT_PUBLIC_NINETAILED_ENVIRONMENT).
+- Save the shown **API Key** (NEXT_PUBLIC_NINETAILED_CLIENT_ID) to your notes.
+- Similar to Contentful, Ninetailed offers two self-sufficient working environments. You can choose to work in the 'main' or 'development' environment. Please enter the name of the **Ninetailed Environment** of your choice in the credentials without quotes (NEXT_PUBLIC_NINETAILED_ENVIRONMENT). You can switch environments using the dropdown in t
 
-### Step 5. Deploy Your Personal Playground on Vercel
+### Step 5. Connect Contentful With Ninetailed
+
+- Within your Contentful space, navigate to **Apps** in the navbar and click on **Marketplace** in the dropdown.
+- On the next page, scroll down the provided list of available apps and click on the **Ninetailed Personalization and Experimentation** application.
+- Install the Ninetailed application and authorize access to your space (make sure to install ).
+- Afterward, click on connect, and you will be automatically redirected to your Ninetailed account.
+- Next, make sure you are in the desired **Ninetailed Environment**. If so authenticate with Contentful, otherwise switch to the wanted environment.
+- At last, select the Contentful space you want to connect to Ninetailed, provide a name for the connection and confirm with **create content source**.
+
+### Step 6. Deploy Your Personal Playground on Vercel
 
 - Click on **Deploy**, and you will automatically be redirected to Vercel.
 - Within the Vercel deployment wizard, simply create a repository and type in your saved credentials.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fninetailed-inc%2Fninetailed-examples%2Ftree%2Fmain%2Fmarketing-contentful-next&env=NEXT_PUBLIC_NINETAILED_CLIENT_ID,NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID,NEXT_PUBLIC_NINETAILED_MANAGEMENT_SECRET,NEXT_PUBLIC_NINETAILED_ENVIRONMENT,CONTENTFUL_SPACE_ID,CONTENTFUL_TOKEN,CONTENTFUL_PREVIEW_TOKEN,CONTENTFUL_MANAGEMENT_TOKEN,CONTENTFUL_ENVIRONMENT&project-name=ninetailed-marketing-contentful-next&repository-name=ninetailed-marketing-contentful-next&build-command=npm%20run%20build-and-setup)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fninetailed-inc%2Fninetailed-examples%2Ftree%2Fmain%2Fmarketing-contentful-next&env=NEXT_PUBLIC_NINETAILED_CLIENT_ID,NEXT_PUBLIC_NINETAILED_ENVIRONMENT,NEXT_PUBLIC_CONTENTFUL_SPACE_ID,NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,CONTENTFUL_TOKEN,CONTENTFUL_PREVIEW_TOKEN,CONTENTFUL_MANAGEMENT_TOKEN&project-name=ninetailed-marketing-contentful-next&repository-name=ninetailed-marketing-contentful-next&build-command=npm%20run%20build-and-setup)
 
 Mnemonic for credential relatedness:
 
 ```bash
 NEXT_PUBLIC_NINETAILED_CLIENT_ID = "API Key"
-NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID = "API Token - Client ID"
-NEXT_PUBLIC_NINETAILED_MANAGEMENT_SECRET = "API Token - Secret Key"
 NEXT_PUBLIC_NINETAILED_ENVIRONMENT = "Ninetailed Environment Name ('main' or 'development')"
 NEXT_PUBLIC_CONTENTFUL_SPACE_ID = "Space ID"
+NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT = "Contentful Environment Name (default = 'master')"
 CONTENTFUL_TOKEN = "Content Delivery API - access token"
 CONTENTFUL_PREVIEW_TOKEN = "Content Preview API - access token"
 CONTENTFUL_MANAGEMENT_TOKEN= "Personal Access Token"
-NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT = "Contenyful Environment Name (default = 'master')"
+NEXT_PUBLIC_GTM_ID="(Optional) GTM Container ID"
 ```
-
-### Step 6. Connect Contentful With Ninetailed
-
-- Within your Contentful space, navigate to **Apps** in the navbar and click on **Marketplace** in the dropdown.
-- On the next page, scroll down the provided list of available apps and click on the **Ninetailed Personalization and Experimentation** application.
-- Install the Ninetailed Personalization application and authorize access to your space (make sure to install ).
-- Afterward, click on connect, and you will be automatically redirected to your Ninetailed account.
-- Next, make sure you are in the desired **Ninetailed Environment**. If so authenticate with Contentful, otherwise switch to the wanted environment.
-- At last, select the Contentful space you want to connect to Ninetailed, provide a name for the connection and confirm with **create content source**.
 
 ### Step 7. Final Remark
 
@@ -111,15 +104,14 @@ Provide the required environment variables to your .env file:
 ```bash
 NEXT_PUBLIC_NINETAILED_CLIENT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 NEXT_PUBLIC_NINETAILED_ENVIRONMENT=main || development
-NEXT_PUBLIC_NINETAILED_MANAGEMENT_CLIENT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-NEXT_PUBLIC_NINETAILED_MANAGEMENT_SECRET=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 
-CONTENTFUL_SPACE_ID=XXXXXXXXXXXX
+NEXT_PUBLIC_CONTENTFUL_SPACE_ID=XXXXXXXXXXXX
+NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT=nameOfYourEnvironment
+
 CONTENTFUL_TOKEN=XXXXXXXXXXXXX_XXXXXXXXXXXXXXXXXXXXXXXXXX_XX
 CONTENTFUL_PREVIEW_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 CONTENTFUL_MANAGEMENT_TOKEN=XXXXX-XXXXX-XXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-CONTENTFUL_ENVIRONMENT=nameOfYourEnvironment
-CONTENTFUL_SPACE_DATA_LOCATION=./path/to/your/jsonData.json
 ```
 
 Run the development server:
