@@ -10,27 +10,28 @@ The illustrated website example demonstrates the Ninetailed content personalizat
   - [Step 2. Create a Contentful Account and Space](#step-2-create-a-contentful-account-and-space)
   - [Step 3. Create Contentful API Credentials](#step-3-create-contentful-api-credentials)
   - [Step 4. Create Ninetailed API Credentials](#step-4-create-ninetailed-api-credentials)
-  - [Step 5. Connect Contentful With Ninetailed](#step-5-connect-contentful-with-ninetailed)
-  - [Step 6. Deploy Your Personal Playground on Vercel](#step-6-deploy-your-personal-playground-on-vercel)
-  - [Step 7. Final Remark](#step-7-final-remark)
+  - [Step 5. Connect Ninetailed to Contentful](#step-5-connect-ninetailed-to-contentful)
+  - [Step 6. Deploy As A Vercel Project](#step-6-deploy-your-personal-playground-on-vercel)
+  - [Step 7. Final Remarks](#step-7-final-remarks)
 - [Developer Section](#developer-section)
   - [Getting Started](#getting-started)
   - [Import and Export Data to Contentful](#import-and-export-data-to-contentful)
 
 ## Live Demo
 
-This project is deployed live [at this link](https://b2b.demo.ninetailed.io/).
+This project is deployed live [here](https://b2b.demo.ninetailed.io/).
 
 ## Deploy Your Own Starter
 
 ### Step 1. Create a Ninetailed Account
 
-- [Click here to sign up for a Ninetailed account](https://app.ninetailed.io/account/sign-up).
+- [Sign up for a Ninetailed account](https://app.ninetailed.io/account/sign-up).
+- Hold onto the link [https://app.ninetailed.io](https://app.ninetailed.io) for your future reference. This is the Ninetailed dashboard.
 
 ### Step 2. Create a Contentful Account and Space
 
-- If you haven't already, [sign up for a Contentful account](https://www.contentful.com/sign-up/).
-- Next, create a new empty **space** from the Contentful dashboard.
+- If you don't have one, [sign up for a Contentful account](https://www.contentful.com/sign-up/).
+- Next, create a new empty **space** from your Contentful admin.
 
 ### Step 3. Create Contentful API Credentials
 
@@ -44,8 +45,10 @@ This project is deployed live [at this link](https://b2b.demo.ninetailed.io/).
   - **Content Delivery API - access token** (CONTENTFUL_TOKEN)
   - **Content Preview API - access token** (CONTENTFUL_PREVIEW_TOKEN)
 - Go back to the main API configuration page and select the **Content management tokens** tab.
-- Generate a **Personal Access Token** (CONTENTFUL_MANAGEMENT_TOKEN) and copy it immediately to your note. This will be used to import the demo content model.
-- Finally, specify the Contentful environment or environment alias name as the **Contentful Environment Name** (NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT). Otherwise, provide your chosen environment name in the credentials and enable the API key to this environment in the settings.
+- Generate a **Personal Access Token** (CONTENTFUL_MANAGEMENT_TOKEN). This will be used to import the demo content model.
+- Finally, determine which Contentful environment or environment alias you will use (NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT)
+  - In a fresh Contentful space, you will start with one environment called **master**.
+  - You may also create your own environment or environment alias to use; be sure to enable the API key to your environment or environment alias in the API key settings.
 
 ### Step 4. Gather Ninetailed API Credentials
 
@@ -53,47 +56,45 @@ This project is deployed live [at this link](https://b2b.demo.ninetailed.io/).
 
 - Within your Ninetailed account, click on **API Key** in the sidebar.
 - Save the shown **API Key** (NEXT_PUBLIC_NINETAILED_CLIENT_ID) to your notes.
-- Similar to Contentful, Ninetailed offers two self-sufficient working environments. You can choose to work in the 'main' or 'development' environment. Please enter the name of the **Ninetailed Environment** of your choice in the credentials without quotes (NEXT_PUBLIC_NINETAILED_ENVIRONMENT). You can switch environments using the dropdown in t
+- Similar to Contentful, Ninetailed offers two self-sufficient working environments. You can choose to work in the 'main' or 'development' environment by selecting either one from the droptown in the upper left of the interface. Choose either one, then note down your choice of either `main` or `development` as your **Ninetailed Environment Name** (NEXT_PUBLIC_NINETAILED_ENVIRONMENT).
 
-### Step 5. Connect Contentful With Ninetailed
+### Step 5. Install Ninetailed in Contentful
 
-- Within your Contentful space, navigate to **Apps** in the navbar and click on **Marketplace** in the dropdown.
-- On the next page, scroll down the provided list of available apps and click on the **Ninetailed Personalization and Experimentation** application.
-- Install the Ninetailed application and authorize access to your space (make sure to install ).
-- Afterward, click on connect, and you will be automatically redirected to your Ninetailed account.
-- Next, make sure you are in the desired **Ninetailed Environment**. If so authenticate with Contentful, otherwise switch to the wanted environment.
-- At last, select the Contentful space you want to connect to Ninetailed, provide a name for the connection and confirm with **create content source**.
+- Within the Ninetailed dashboard, select **Content Sources** in the left sidebar, then the **New Content Source** button in the upper right.
+- Select **Contentful** as your CMS and click **Authenticate** on the following screen. Finally, click **Authorize** in the pop up dialogue.
+- Select the space and environment or environment alias for which you created your Contentful API key in steps 2 and 3.
+- Click **Create Content Source**. Ninetailed will add the necessary content types and the Ninetailed app to Contentful.
 
-### Step 6. Deploy Your Personal Playground on Vercel
+### Step 6. Deploy As A Vercel Project
 
-- Click on **Deploy**, and you will automatically be redirected to Vercel.
-- Within the Vercel deployment wizard, simply create a repository and type in your saved credentials.
+- Click on **Deploy with Vercel** below and populate the required environment variables.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fninetailed-inc%2Fninetailed-examples%2Ftree%2Fmain%2Fmarketing-contentful-next&env=NEXT_PUBLIC_NINETAILED_CLIENT_ID,NEXT_PUBLIC_NINETAILED_ENVIRONMENT,NEXT_PUBLIC_CONTENTFUL_SPACE_ID,NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,CONTENTFUL_TOKEN,CONTENTFUL_PREVIEW_TOKEN,CONTENTFUL_MANAGEMENT_TOKEN&project-name=ninetailed-marketing-contentful-next&repository-name=ninetailed-marketing-contentful-next&build-command=npm%20run%20build-and-setup)
 
-Mnemonic for credential relatedness:
-
 ```bash
-NEXT_PUBLIC_NINETAILED_CLIENT_ID = "API Key"
-NEXT_PUBLIC_NINETAILED_ENVIRONMENT = "Ninetailed Environment Name ('main' or 'development')"
-NEXT_PUBLIC_CONTENTFUL_SPACE_ID = "Space ID"
-NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT = "Contentful Environment Name (default = 'master')"
-CONTENTFUL_TOKEN = "Content Delivery API - access token"
-CONTENTFUL_PREVIEW_TOKEN = "Content Preview API - access token"
-CONTENTFUL_MANAGEMENT_TOKEN= "Personal Access Token"
-NEXT_PUBLIC_GTM_ID="(Optional) GTM Container ID"
+NEXT_PUBLIC_NINETAILED_CLIENT_ID = "API Key" # Gathered in step 4
+NEXT_PUBLIC_NINETAILED_ENVIRONMENT = "Ninetailed Environment Name" # 'main' or 'development', depending on your choice in step 4
+NEXT_PUBLIC_CONTENTFUL_SPACE_ID = "Space ID" # Availabe by inspecting your API key created in step 3
+NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT = "Contentful Environment Name" # Default will be 'master' unless, from step 3
+CONTENTFUL_TOKEN = "Content Delivery API - access token" # From API key created in step 3
+CONTENTFUL_PREVIEW_TOKEN = "Content Preview API - access token" # From API key created in step 3
+CONTENTFUL_MANAGEMENT_TOKEN= "Personal Access Token" # From Personal Access Token created in step 3
 ```
 
-### Step 7. Final Remark
+### Step 7. Final Remarks
 
 If you intend to make changes to the source code and publish it in the future, you should first disable the build command override in the project settings on Vercel.\
 Otherwise, the template content is populated with each build and eventually overwrites your changes in Contentful.
 
-## Developer Section
+## Developer Quick Start
 
-### Getting Started
+### Create and Install Ninetailed
 
-Install all packages first:
+Use our documentation [here](https://docs.ninetailed.io/setup/content-sources) to install Ninetailed to a blank Contentful environment.
+
+### App Setup
+
+Install all packages:
 
 ```bash
 yarn install
@@ -114,16 +115,16 @@ CONTENTFUL_PREVIEW_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 CONTENTFUL_MANAGEMENT_TOKEN=XXXXX-XXXXX-XXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
+### Import Demo Data to Contentful
+
+```bash
+yarn setup
+```
+
+### Develop
+
 Run the development server:
 
 ```bash
 yarn dev
-```
-
-### Import and Export Data to Contentful
-
-```bash
-yarn setup
-
-yarn export
 ```
