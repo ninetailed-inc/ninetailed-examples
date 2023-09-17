@@ -57,7 +57,7 @@ export default async function handler(
       ...(request.body.lifecyclestage && {
         lifecyclestage: request.body.lifecyclestage,
       }),
-      ...(request.body.ownername && { ownername: request.body.lifecyclestage }),
+      ...(request.body.ownername && { ownername: request.body.ownername }),
     },
   });
 
