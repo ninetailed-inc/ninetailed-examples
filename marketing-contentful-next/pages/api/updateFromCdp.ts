@@ -8,9 +8,9 @@ type SendEventOptions = {
 };
 
 type CdpWebhookPayload = {
-  ownername: string;
+  ownername?: string;
+  lifecyclestage?: string;
   ninetailedid: string;
-  lifecyclestage: string;
   ninetailed_environment: string;
   ninetailed_organization_id: string;
 };
@@ -54,8 +54,10 @@ export default async function handler(
   const ninetailedResponse = await upsertProfileViaIdentify(apiClient, {
     id: request.body.ninetailedid,
     traits: {
-      lifecyclestage: request.body.lifecyclestage,
-      ownername: request.body.ownername,
+      ...(request.body.lifecyclestage && {
+        lifecyclestage: request.body.lifecyclestage,
+      }),
+      ...(request.body.ownername && { ownername: request.body.lifecyclestage }),
     },
   });
 
