@@ -19,7 +19,7 @@
     "export": "PATH_TO_ENV_FILE=.env.local node ./contentful/export.js",
     "build-and-setup": "PATH_TO_ENV_FILE=.env.local node ./contentful/setup.js && next build",
     "delete-entries": "PATH_TO_ENV_FILE=.env.local CONTENT_TYPE=testType LIMIT=1000 node ./contentful/deleteEntriesOfContentType.js",
-    "production-clean-then-build-and-setup": "if [ \"$VERCEL_ENV\" == \"production\" ]; then npx contentful-clean-space --space-id $NEXT_PUBLIC_CONTENTFUL_SPACE_ID --env $NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT --accesstoken $CONTENTFUL_MANAGEMENT_TOKEN --content-types=true --assets=true --yes=true --verbose=true && PATH_TO_ENV_FILE=.env.local node ./contentful/setup.js; else echo \"not production environment, so won't touch Contentful\"; fi; next build"
+    "production-clean-then-build-and-setup": "if [ \"$VERCEL_ENV\" == \"production\" ]; then echo \"production environment\" && npx contentful-clean-space --space-id $NEXT_PUBLIC_CONTENTFUL_SPACE_ID --env $NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT --accesstoken $CONTENTFUL_MANAGEMENT_TOKEN --content-types=true --assets=true --yes=true --verbose=true && PATH_TO_ENV_FILE=.env.local node ./contentful/setup.js; else echo \"not production environment, so won't touch Contentful\"; fi; next build"
   },
   "dependencies": {
     "@contentful/live-preview": "2.4.5",
