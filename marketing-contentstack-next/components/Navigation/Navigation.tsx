@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { INavigation } from '@/types/contentstack';
+import { Navigation as INavigation } from '@/types/contentstack';
 import Logo from '@/public/logo.svg';
 
 import classNames from 'classnames';
@@ -32,15 +32,8 @@ export const Navigation: React.FC<INavigation> = (props) => {
         <div className="flex justify-between items-center w-full py-6 border-b-2 border-gray-100 ">
           <div className="flex justify-start">
             <Link href="/">
-              <a href="/">
-                <span className="sr-only">Workflow</span>
-                <Image
-                  src={Logo as string}
-                  width={175}
-                  height={57}
-                  alt="Logo"
-                />
-              </a>
+              <span className="sr-only">Workflow</span>
+              <Image src={Logo as string} width={175} height={57} alt="Logo" />
             </Link>
           </div>
 
@@ -58,13 +51,11 @@ export const Navigation: React.FC<INavigation> = (props) => {
                 }
                 return (
                   <div key={i} className="px-5 py-2">
-                    <Link href={link.page_reference[0].url || '#'}>
-                      <a
-                        className="text-base font-medium text-gray-500 hover:text-gray-900"
-                        href={link.page_reference[0].url}
-                      >
-                        {link.title}
-                      </a>
+                    <Link
+                      href={link.page_reference[0].url || '#'}
+                      className="text-base font-medium text-gray-500 hover:text-gray-900"
+                    >
+                      {link.title}
                     </Link>
                   </div>
                 );
@@ -110,13 +101,11 @@ export const Navigation: React.FC<INavigation> = (props) => {
             }
             return (
               <div key={i} className="px-5 py-2">
-                <Link href={link.page_reference[0].url || '#'}>
-                  <a
-                    className="text-base font-medium text-gray-500 hover:text-gray-900"
-                    href={link.page_reference[0].url}
-                  >
-                    {link.title}
-                  </a>
+                <Link
+                  href={link.page_reference[0].url || '#'}
+                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  {link.title}
                 </Link>
               </div>
             );

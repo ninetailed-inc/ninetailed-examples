@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { XIcon } from '@heroicons/react/solid';
 
 import { RichText } from '@/components/RichText';
-import { IBanner } from '@/types/contentstack';
+import { Banner as IBanner } from '@/types/contentstack';
 
 export type Handler = () => void;
 
@@ -23,13 +23,11 @@ export const Banner: React.FC<IBanner> = (props) => {
             {props.link && (
               <>
                 <span className="block sm:ml-2 sm:inline-block">
-                  <Link href={props.link.href}>
-                    <a
-                      className="text-white font-bold underline"
-                      href={props.link.href}
-                    >
-                      {props.link.title}
-                    </a>
+                  <Link
+                    href={props.link.href}
+                    className="text-white font-bold underline"
+                  >
+                    {props.link.title}
                   </Link>
                 </span>
                 <span aria-hidden="true"> &rarr;</span>

@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
-import { ICta } from '@/types/contentstack';
+import { Cta as ICta } from '@/types/contentstack';
 
 export const CTA: React.FC<ICta> = (props) => {
   return (
@@ -23,7 +23,7 @@ export const CTA: React.FC<ICta> = (props) => {
             }
             return (
               <div key={i} className="shadow w-full">
-                <Link passHref href={button.button_link.href}>
+                <Link passHref href={button.button_link.href} legacyBehavior>
                   <Button
                     as="a"
                     type="button"
