@@ -259,12 +259,7 @@ export const getAllExperiments = async () => {
       };
     })
     .filter(ExperienceMapper.isExperimentEntry)
-    .map(ExperienceMapper.mapExperiment)
-    // FIXME: Description undefined bug
-    // eslint-disable-next-line
-    .map(({ description, ...experimentAttrs }: { description: string }) => {
-      return experimentAttrs;
-    });
+    .map(ExperienceMapper.mapExperiment);
 
   return mappedExperiments;
 };
@@ -305,12 +300,7 @@ export const getAllExperiences = async () => {
       };
     })
     .filter(ExperienceMapper.isExperienceEntry)
-    .map(ExperienceMapper.mapExperience)
-    // FIXME: Description undefined bug
-    // eslint-disable-next-line
-    .map(({ description, ...experimentAttrs }: { description: string }) => {
-      return experimentAttrs;
-    });
+    .map(ExperienceMapper.mapExperience);
 
   return mappedExperiences;
 };
