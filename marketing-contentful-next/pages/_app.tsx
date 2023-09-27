@@ -73,6 +73,19 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
                       );
                     }
                   },
+                  onOpenAudienceEditor: (audience) => {
+                    if (process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID) {
+                      window.open(
+                        `https://app.contentful.com/spaces/${
+                          process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+                        }/environments/${
+                          process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT ||
+                          'master'
+                        }/entries/${audience.id}`,
+                        '_blank'
+                      );
+                    }
+                  },
                 }),
               ]
             : []),
