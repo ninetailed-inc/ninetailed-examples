@@ -12,7 +12,7 @@
         "id": "nt_audience",
         "type": "ContentType",
         "createdAt": "2023-07-10T22:30:57.212Z",
-        "updatedAt": "2023-10-31T20:20:42.442Z",
+        "updatedAt": "2023-11-01T15:27:19.850Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -20,8 +20,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 41,
-        "publishedAt": "2023-10-31T20:20:42.442Z",
+        "publishedVersion": 43,
+        "publishedAt": "2023-11-01T15:27:19.850Z",
         "firstPublishedAt": "2023-07-10T22:30:57.524Z",
         "createdBy": {
           "sys": {
@@ -37,8 +37,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 21,
-        "version": 42,
+        "publishedCounter": 22,
+        "version": 44,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -102,7 +102,7 @@
           "localized": false,
           "required": false,
           "validations": [],
-          "disabled": false,
+          "disabled": true,
           "omitted": false
         }
       ]
@@ -2635,7 +2635,7 @@
             "linkType": "Space"
           }
         },
-        "version": 43,
+        "version": 45,
         "createdAt": "2023-07-10T22:30:57.599Z",
         "createdBy": {
           "sys": {
@@ -2644,7 +2644,7 @@
             "linkType": "AppDefinition"
           }
         },
-        "updatedAt": "2023-10-31T20:20:43.037Z",
+        "updatedAt": "2023-11-01T15:27:20.547Z",
         "updatedBy": {
           "sys": {
             "id": "0kSCJNqwfy3USaGrGQ3HHA",
