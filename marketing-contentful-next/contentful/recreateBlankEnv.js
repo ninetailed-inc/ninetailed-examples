@@ -6,7 +6,12 @@ const contentful = require('contentful-management');
 const dotEnv = require('dotenv');
 dotEnv.config({ path: `${process.env.PATH_TO_ENV_FILE}` });
 
+function timer(ms) {
+  new Promise((res) => setTimeout(res, ms));
+}
+
 async function recreateBlankEnv() {
+  console.log('Starting environment recreation...');
   if (
     !process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ||
     !process.env.CONTENTFUL_MANAGEMENT_TOKEN
@@ -37,8 +42,7 @@ async function recreateBlankEnv() {
     environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
   });
 
-  // Can't immediately recreate under the same name, causes race condition
-  let newEnv = await client.environment.createWithId(
+  const newEnv = await client.environment.createWithId(
     {
       spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
       environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
@@ -50,18 +54,39 @@ async function recreateBlankEnv() {
   console.log(`New Environment Created:`);
   console.log(JSON.stringify(newEnv, null, 2));
 
-  const pollStatus = setInterval(async () => {
-    let status = newEnv.sys.status.sys.id;
-    newEnv = await client.environment.get({
+  let status = newEnv.sys.status.sys.id;
+
+  while (status !== 'ready') {
+    let polledEnv = await client.environment.get({
       spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
       environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
     });
-    console.log(`Polling: ${status}`);
+    status = polledEnv.sys.status.sys.id;
+    console.log(`Waiting for environment to be ready...`);
     if (status === 'ready') {
-      console.log(`Env ready`);
-      clearInterval(pollStatus);
+      console.log(`Environment ready`);
+    } else {
+      await timer(2000);
     }
-  }, 2000);
+  }
+
+  console.log(`Installing Ninetailed...`);
+
+  await client.appInstallation.upsert(
+    {
+      spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
+      environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
+      appDefinitionId: process.env.NINETAILED_DEFINITION_ID,
+    },
+    {},
+    {
+      'X-Contentful-Marketplace':
+        'i-accept-end-user-license-agreement,i-accept-marketplace-terms-of-service,i-accept-privacy-policy',
+    }
+  );
+
+  console.log('Ninetailed installation complete');
+  console.log('Environment recreation complete');
 }
 
 recreateBlankEnv();
