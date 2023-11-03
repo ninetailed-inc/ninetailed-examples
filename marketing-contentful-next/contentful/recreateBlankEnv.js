@@ -37,6 +37,12 @@ async function recreateBlankEnv() {
     }
   );
 
+  const ninetailedInstallation = await client.appInstallation.get({
+    spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
+    environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
+    appDefinitionId: process.env.NINETAILED_DEFINITION_ID,
+  });
+
   await client.environment.delete({
     spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
     environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
@@ -78,7 +84,9 @@ async function recreateBlankEnv() {
       environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
       appDefinitionId: process.env.NINETAILED_DEFINITION_ID,
     },
-    {},
+    {
+      parameters: ninetailedInstallation.parameters,
+    },
     {
       'X-Contentful-Marketplace':
         'i-accept-end-user-license-agreement,i-accept-marketplace-terms-of-service,i-accept-privacy-policy',
