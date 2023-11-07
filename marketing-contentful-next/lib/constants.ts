@@ -9,4 +9,5 @@ export const ComponentContentTypes = {
   PricingPlan: 'pricingPlan',
   Form: 'form',
   HubspotForm: 'hubspotForm',
+  ProductDetail: 'productDetail',
 };

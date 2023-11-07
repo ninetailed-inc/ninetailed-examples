@@ -44,7 +44,14 @@ export const renderRichText = (
         return <ul className={options.classNames?.ul}>{children}</ul>;
       },
       [BLOCKS.LIST_ITEM]: (node, children) => {
-        return <li className={options.classNames?.ul}>{children}</li>;
+        // Removes <p> element inside each <li> element
+        const untaggedChildren = documentToReactComponents(node as Document, {
+          renderNode: {
+            [BLOCKS.PARAGRAPH]: (node, children) => children,
+            [BLOCKS.LIST_ITEM]: (node, children) => children,
+          },
+        });
+        return <li>{untaggedChildren}</li>;
       },
 
       ...(options.renderNode || {}),

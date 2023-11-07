@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { XIcon } from '@heroicons/react/solid';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 import { RichText } from '@/components/RichText';
 import { IBanner } from '@/types/contentful';
@@ -41,7 +41,7 @@ export const Banner = ({ fields }: IBanner) => {
             className="flex p-2 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white"
           >
             <span className="sr-only">Dismiss</span>
-            <XIcon
+            <XMarkIcon
               className="h-6 w-6 text-white"
               aria-hidden="true"
               onClick={handleCloseBanner}

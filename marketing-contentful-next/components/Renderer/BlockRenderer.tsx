@@ -12,6 +12,7 @@ import { Footer } from '@/components/Footer';
 import { PricingTable } from '@/components/PricingTable';
 import { PricingPlan } from '@/components/PricingPlan';
 import { HubspotForm } from '@/components/HubspotForm';
+import { ProductDetail } from '@/components/ProductDetail';
 
 import {
   IBanner,
@@ -22,6 +23,7 @@ import {
   INavigation,
   IPricingPlan,
   IPricingTable,
+  IProductDetail,
 } from '@/types/contentful';
 
 import { ComponentContentTypes } from '@/lib/constants';
@@ -37,6 +39,7 @@ const ContentTypeMap = {
   [ComponentContentTypes.PricingPlan]: PricingPlan,
   [ComponentContentTypes.PricingTable]: PricingTable,
   [ComponentContentTypes.HubspotForm]: HubspotForm,
+  [ComponentContentTypes.ProductDetail]: ProductDetail,
 };
 
 type Component =
@@ -47,7 +50,8 @@ type Component =
   | IFooter
   | IPricingTable
   | IPricingPlan
-  | IHubspotForm;
+  | IHubspotForm
+  | ProductDetail;
 
 const ComponentRenderer = (props: Component) => {
   const contentTypeId = props.sys.contentType.sys.id;

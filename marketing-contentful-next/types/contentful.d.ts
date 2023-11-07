@@ -75,11 +75,20 @@ export interface IConfigFields {
   /** Internal Name */
   name: 'Configuration';
 
+  /** Banner */
+  banner?: IBanner | undefined;
+
+  /** Navigation */
+  navigation?: INavigation | undefined;
+
   /** Settings */
   settings?: ISetting[] | undefined;
 
   /** Styles */
   styles: IStyle[];
+
+  /** Footer */
+  footer?: IFooter | undefined;
 }
 
 export interface IConfig extends Entry<IConfigFields> {
@@ -350,6 +359,9 @@ export interface INtExperienceFields {
 
   /** Variants */
   nt_variants?: Entry<{ [fieldId: string]: unknown }>[] | undefined;
+
+  /** Experience Id */
+  nt_experience_id?: string | undefined;
 }
 
 /** Ninetailed Experience */
@@ -411,17 +423,8 @@ export interface IPageFields {
   /** SEO */
   seo?: ISeo | undefined;
 
-  /** Banner */
-  banner?: IBanner | undefined;
-
-  /** Navigation */
-  navigation?: INavigation | undefined;
-
   /** Sections */
   sections: (ICta | IFeature | IHero | IHubspotForm | IPricingTable)[];
-
-  /** Footer */
-  footer?: IFooter | undefined;
 }
 
 export interface IPage extends Entry<IPageFields> {
@@ -434,6 +437,43 @@ export interface IPage extends Entry<IPageFields> {
     contentType: {
       sys: {
         id: 'page';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IPdpFields {
+  /** Title */
+  title: string;
+
+  /** Slug */
+  slug: string;
+
+  /** SEO */
+  seo: ISeo;
+
+  /** Product */
+  product: string;
+
+  /** Details */
+  details?: IProductDetail[] | undefined;
+
+  /** Sections */
+  sections?: IFeature[] | undefined;
+}
+
+export interface IPdp extends Entry<IPdpFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'pdp';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -511,6 +551,59 @@ export interface IPricingTable extends Entry<IPricingTableFields> {
     contentType: {
       sys: {
         id: 'pricingTable';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IProductDetailFields {
+  /** Title */
+  title: string;
+
+  /** Heading */
+  heading: string;
+
+  /** Body */
+  body?: Document | undefined;
+}
+
+export interface IProductDetail extends Entry<IProductDetailFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'productDetail';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IProductInfoBlockFields {
+  /** Title */
+  title: string;
+
+  /** Copy */
+  copy?: Document | undefined;
+}
+
+export interface IProductInfoBlock extends Entry<IProductInfoBlockFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'productInfoBlock';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -628,8 +721,11 @@ export type CONTENT_TYPE =
   | 'nt_experience'
   | 'nt_mergetag'
   | 'page'
+  | 'pdp'
   | 'pricingPlan'
   | 'pricingTable'
+  | 'productDetail'
+  | 'productInfoBlock'
   | 'seo'
   | 'setting'
   | 'style';
