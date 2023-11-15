@@ -29,7 +29,7 @@ type Audience = {
   id: string;
 };
 interface CustomPageProps {
-  page: IPage;
+  page: any;
   config: IConfig;
   ninetailed?: {
     preview: {

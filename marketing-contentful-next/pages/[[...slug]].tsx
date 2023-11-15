@@ -2,6 +2,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
 
+import { Compressed, compress, decompress } from 'compress-json';
+
 import { BlockRenderer } from '@/components/Renderer';
 import {
   getPages,
@@ -12,10 +14,12 @@ import {
 } from '@/lib/api';
 import { IPage } from '@/types/contentful';
 
-const Page = ({ page }: { page: IPage }) => {
-  if (!page) {
+const Page = ({ compressedPage }: { compressedPage: Compressed }) => {
+  if (!compressedPage) {
     return null;
   }
+
+  const page = decompress(compressedPage) as IPage;
 
   const { seo, banner, navigation, sections = [], footer } = page.fields;
 
@@ -51,9 +55,13 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
     getAllExperiences(),
     getAllAudiences(),
   ]);
+
+  // Reducing static build size with compressed payload
+  const compressedPage = compress(page);
+
   return {
     props: {
-      page,
+      compressedPage,
       config,
       ninetailed: {
         preview: {
