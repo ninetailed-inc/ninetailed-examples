@@ -1,65 +1,56 @@
 import { useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { RadioGroup } from '@headlessui/react';
-import {
-  CurrencyDollarIcon,
-  GlobeAmericasIcon,
-} from '@heroicons/react/24/outline';
 import { ProductDetails } from '../ProductDetails';
-import { ProductPrice } from '@shopify/hydrogen-react';
-
-import { IPdp } from '@/types/contentful';
-
+import { ProductPolicies } from '../ProductPolicies';
+import { flattenConnection, ProductPrice } from '@shopify/hydrogen-react';
+import Image from 'next/image';
+import { ShopifyImageLoader } from '@/lib/helperfunctions';
 import classNames from 'classnames';
+import { IPdp } from '@/types/contentful';
+import type { Product as IProduct } from '@shopify/hydrogen-react/storefront-api-types';
 
-const policies = [
-  {
-    name: 'International delivery',
-    icon: GlobeAmericasIcon,
-    description: 'Get your order in 2 years',
-  },
-  {
-    name: 'Loyalty rewards',
-    icon: CurrencyDollarIcon,
-    description: "Don't look at other tees",
-  },
-];
-
-// TODO: Type product data
+// TODO: Types
 export const Product = ({
-  product,
+  constProduct,
   pdp,
-  fetchedProduct,
+  pimData,
 }: {
-  product: any;
+  constProduct: any;
   pdp: IPdp;
-  fetchedProduct: any;
+  pimData: Partial<IProduct>; // TODO: Could be improved by codegen on query or constructing specific type
 }) => {
-  // const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const productImages = flattenConnection(pimData.images);
+  const productVariants = flattenConnection(pimData.variants);
+  // const [selectedColor, setSelectedColor] = useState(constProduct.colors[0]);
+  const [selectedSize, setSelectedSize] = useState(productVariants[2].title);
 
   return (
     <div className="bg-white">
-      <div className="pb-16 pt-6 sm:pb-24">
+      <pre>{JSON.stringify(pimData, null, 2)}</pre>
+      <pre>{JSON.stringify(productImages, null, 2)}</pre>
+      <pre>{JSON.stringify(productVariants, null, 2)}</pre>
+      <div className="pb-16 pt-6">
         <div className="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
             <div className="lg:col-span-5 lg:col-start-8">
               <div className="flex justify-between">
                 <h1 className="text-xl font-medium text-gray-900">
-                  {fetchedProduct.title}
+                  {pimData.title}
                 </h1>
                 <ProductPrice
-                  data={fetchedProduct}
+                  data={pimData}
                   withoutTrailingZeros
                   className="text-xl font-medium text-gray-900"
                 />
               </div>
+              {/* TODO: Dynamic constProduct ratings? Or keep simple with static? */}
               {/* Reviews */}
               <div className="mt-4">
                 <h2 className="sr-only">Reviews</h2>
                 <div className="flex items-center">
                   <p className="text-sm text-gray-700">
-                    {product.rating}
+                    {constProduct.rating}
                     <span className="sr-only"> out of 5 stars</span>
                   </p>
                   <div className="ml-1 flex items-center">
@@ -67,7 +58,7 @@ export const Product = ({
                       <StarIcon
                         key={rating}
                         className={classNames(
-                          product.rating > rating
+                          constProduct.rating > rating
                             ? 'text-yellow-400'
                             : 'text-gray-200',
                           'h-5 w-5 flex-shrink-0'
@@ -87,7 +78,7 @@ export const Product = ({
                       href="#"
                       className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
                     >
-                      See all {product.reviewCount} reviews
+                      See all {constProduct.reviewCount} reviews
                     </a>
                   </div>
                 </div>
@@ -95,18 +86,22 @@ export const Product = ({
             </div>
 
             {/* Image gallery */}
+            {/* TODO: Use CMS to manage images, rather than PIM? */}
             <div className="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
               <h2 className="sr-only">Images</h2>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
-                {product.images.map((image) => (
-                  <img
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:auto-rows-min lg:gap-8 relative">
+                {productImages.map((image, i) => (
+                  <Image
                     key={image.id}
-                    src={image.imageSrc}
-                    alt={image.imageAlt}
+                    loader={ShopifyImageLoader}
+                    src={image.url}
+                    alt={image.altText || pimData.title || ''}
+                    height={image.height || 500}
+                    width={image.width || 500}
                     className={classNames(
-                      image.primary
-                        ? 'lg:col-span-2 lg:row-span-2'
+                      i === 0
+                        ? 'lg:col-span-2 lg:row-span-2 object-cover'
                         : 'hidden lg:block',
                       'rounded-lg'
                     )}
@@ -121,12 +116,9 @@ export const Product = ({
                 <div className="mt-8">
                   <div className="flex items-center justify-between">
                     <h2 className="text-sm font-medium text-gray-900">Size</h2>
-                    <a
-                      href="#"
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                    >
+                    <button className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                       See sizing chart
-                    </a>
+                    </button>
                   </div>
 
                   <RadioGroup
@@ -138,13 +130,14 @@ export const Product = ({
                       Choose a size
                     </RadioGroup.Label>
                     <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-                      {product.sizes.map((size) => (
+                      {productVariants.map((productVariant) => (
+                        // TODO: Make generic - this works with only one product option
                         <RadioGroup.Option
-                          key={size.name}
-                          value={size}
+                          key={productVariant.id}
+                          value={productVariant.title}
                           className={({ active, checked }) =>
                             classNames(
-                              size.inStock
+                              productVariant.availableForSale
                                 ? 'cursor-pointer focus:outline-none'
                                 : 'cursor-not-allowed opacity-25',
                               active
@@ -156,10 +149,10 @@ export const Product = ({
                               'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1'
                             )
                           }
-                          disabled={!size.inStock}
+                          disabled={!productVariant.availableForSale}
                         >
                           <RadioGroup.Label as="span">
-                            {size.name}
+                            {productVariant.title}
                           </RadioGroup.Label>
                         </RadioGroup.Option>
                       ))}
@@ -179,33 +172,7 @@ export const Product = ({
               <ProductDetails details={pdp.fields.details} />
 
               {/* Policies */}
-              <section aria-labelledby="policies-heading" className="mt-10">
-                <h2 id="policies-heading" className="sr-only">
-                  Our Policies
-                </h2>
-
-                <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                  {policies.map((policy) => (
-                    <div
-                      key={policy.name}
-                      className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center"
-                    >
-                      <dt>
-                        <policy.icon
-                          className="mx-auto h-6 w-6 flex-shrink-0 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        <span className="mt-4 text-sm font-medium text-gray-900">
-                          {policy.name}
-                        </span>
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-500">
-                        {policy.description}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </section>
+              <ProductPolicies policies={pdp.fields.policies} />
             </div>
           </div>
         </div>

@@ -15,6 +15,7 @@ export const ProductDetails = ({
         return (
           <div
             className={i === 0 ? 'mt-10' : 'mt-8 border-t border-gray-200 pt-8'}
+            key={detail.sys.id}
           >
             <BlockRenderer block={detail} />
           </div>

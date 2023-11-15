@@ -13,6 +13,7 @@ import { PricingTable } from '@/components/PricingTable';
 import { PricingPlan } from '@/components/PricingPlan';
 import { HubspotForm } from '@/components/HubspotForm';
 import { ProductDetail } from '@/components/ProductDetail';
+import { ProductPolicy } from '@/components/ProductPolicy';
 
 import {
   IBanner,
@@ -24,6 +25,7 @@ import {
   IPricingPlan,
   IPricingTable,
   IProductDetail,
+  IProductPolicy,
 } from '@/types/contentful';
 
 import { ComponentContentTypes } from '@/lib/constants';
@@ -40,6 +42,7 @@ const ContentTypeMap = {
   [ComponentContentTypes.PricingTable]: PricingTable,
   [ComponentContentTypes.HubspotForm]: HubspotForm,
   [ComponentContentTypes.ProductDetail]: ProductDetail,
+  [ComponentContentTypes.ProductPolicy]: ProductPolicy,
 };
 
 type Component =
@@ -51,7 +54,8 @@ type Component =
   | IPricingTable
   | IPricingPlan
   | IHubspotForm
-  | ProductDetail;
+  | IProductDetail
+  | IProductPolicy;
 
 const ComponentRenderer = (props: Component) => {
   const contentTypeId = props.sys.contentType.sys.id;

@@ -460,6 +460,9 @@ export interface IPdpFields {
   /** Details */
   details?: IProductDetail[] | undefined;
 
+  /** Policies */
+  policies?: IProductPolicy[] | undefined;
+
   /** Sections */
   sections?: IFeature[] | undefined;
 }
@@ -559,8 +562,8 @@ export interface IPricingTable extends Entry<IPricingTableFields> {
 }
 
 export interface IProductDetailFields {
-  /** Title */
-  title: string;
+  /** Internal Name */
+  internalName: string;
 
   /** Heading */
   heading: string;
@@ -604,6 +607,37 @@ export interface IProductInfoBlock extends Entry<IProductInfoBlockFields> {
     contentType: {
       sys: {
         id: 'productInfoBlock';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IProductPolicyFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Policy Type */
+  policyType: 'Shipping' | 'Loyalty';
+
+  /** Heading */
+  heading: string;
+
+  /** Description */
+  description?: Document | undefined;
+}
+
+export interface IProductPolicy extends Entry<IProductPolicyFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'productPolicy';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -726,6 +760,7 @@ export type CONTENT_TYPE =
   | 'pricingTable'
   | 'productDetail'
   | 'productInfoBlock'
+  | 'productPolicy'
   | 'seo'
   | 'setting'
   | 'style';

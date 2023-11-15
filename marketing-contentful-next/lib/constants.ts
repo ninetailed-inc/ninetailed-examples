@@ -10,4 +10,5 @@ export const ComponentContentTypes = {
   Form: 'form',
   HubspotForm: 'hubspotForm',
   ProductDetail: 'productDetail',
+  ProductPolicy: 'productPolicy',
 };
