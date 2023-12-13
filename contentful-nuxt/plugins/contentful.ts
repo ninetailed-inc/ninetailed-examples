@@ -13,5 +13,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     environment: config.public.contentfulEnvironment,
   });
 
-  nuxtApp.provide("contentfulClient", client);
+  return {
+    provide: {
+      contentfulClient: client,
+    },
+  };
 });
