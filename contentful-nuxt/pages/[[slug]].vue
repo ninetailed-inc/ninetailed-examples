@@ -1,10 +1,11 @@
 <template>
   <pre>You've visited the {{ formattedSlug }} page!</pre>
   <pre>
-There are {{ data.fields.sections.length }} sections on this entry, {{
+There are {{ data.fields.sections.length || 0 }} sections on this entry, {{
       numberOfHeroSections
     }} of which are Hero sections.</pre
   >
+  <pre>{{ data?.fields.title }}</pre>
   <ClientOnly>
     <PageSections :data="data" />
   </ClientOnly>
@@ -18,25 +19,23 @@ import {
 } from "~/lib/experiences";
 import Experience from "../components/Experience.vue";
 
-const route = useRoute();
-const formattedSlug = ref(route.params.slug || "/");
+const {
+  params: { slug },
+} = useRoute();
+const formattedSlug = slug || "/";
 
 // TODO: Make pure SSG via server only fetched data
-const { data } = await useAsyncData(
-  "pageData",
-  async () => {
-    const { $contentfulClient } = useNuxtApp();
-    console.log(`Fetching ${formattedSlug.value} data`);
-    const pages = await $contentfulClient.getEntries({
-      content_type: "page",
-      "fields.slug": formattedSlug.value,
-      limit: 1,
-      include: 10,
-    });
-    return pages.items[0];
-  },
-  { watch: [() => route.params.slug] }
-);
+const { data } = await useAsyncData(slug as string, async () => {
+  const { $contentfulClient } = useNuxtApp();
+  console.log(`Fetching ${formattedSlug} data`);
+  const pages = await $contentfulClient.getEntries({
+    content_type: "page",
+    "fields.slug": formattedSlug,
+    limit: 1,
+    include: 10,
+  });
+  return pages.items[0];
+});
 
 const numberOfHeroSections = data.value.fields.sections.filter(
   (section: any) => section.sys?.contentType.sys.id === "hero"

@@ -2,6 +2,7 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  //TODO: Dynamic generation
   generate: {
     routes: ["/", "/pricing"],
   },
@@ -9,10 +10,6 @@ export default defineNuxtConfig({
     contentful: {},
   },
   modules: ["@nuxt/image"],
-  routeRules: {
-    // Demo purposes only!
-    "/**": { swr: 5 },
-  },
   runtimeConfig: {
     public: {
       ninetailedClientId: "",
@@ -23,5 +20,4 @@ export default defineNuxtConfig({
     },
     contentfulPreviewToken: "",
   },
-  ssr: false, // TODO: Show SSG. For some reason, useAsyncData is holding onto fetched page data on route change?
 });
