@@ -17,7 +17,7 @@ const exportOptions = {
 
 if (
   !process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ||
-  !process.env.CONTENTFUL_MANAGEMENT_TOKEN ||
+  !process.env.CONTENTFUL_MANAGEMENT_TOKEN
 ) {
   throw new Error(
     [

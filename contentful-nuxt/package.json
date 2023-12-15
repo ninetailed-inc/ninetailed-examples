@@ -1,0 +1,31 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@types/lodash": "^4.14.202",
+    "nuxt": "^3.8.2",
+    "vue": "^3.3.8",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@contentful/rich-text-html-renderer": "^16.3.0",
+    "@ninetailed/experience.js": "^7.4.2",
+    "@ninetailed/experience.js-shared": "^7.4.2",
+    "@ninetailed/experience.js-utils-contentful": "^7.4.3",
+    "@nuxt/image": "^1.1.0",
+    "contentful": "^10.6.12",
+    "contentful-rich-text-vue-renderer": "^3.1.0",
+    "install": "^0.13.0",
+    "lodash": "^4.17.21",
+    "npm": "^10.2.5"
+  }
+}
