@@ -24,7 +24,7 @@ type AppProps<P = unknown> = {
 
 // FIXME: Re-export this type from utils-contentful
 type Audience = {
-  name?: string | undefined;
+  name: string;
   description?: string | undefined;
   id: string;
 };
