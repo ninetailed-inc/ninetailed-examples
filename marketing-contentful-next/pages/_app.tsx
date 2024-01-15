@@ -22,19 +22,19 @@ type AppProps<P = unknown> = {
   pageProps: P;
 } & Omit<NextAppProps<P>, 'pageProps'>;
 
-// FIXME: Re-export this type from utils-contentful
-type Audience = {
-  name?: string | undefined;
-  description?: string | undefined;
+type PreviewAudience = {
   id: string;
+  name: string;
+  description?: string | undefined;
 };
+
 interface CustomPageProps {
   page: IPage;
   config: IConfig;
   ninetailed?: {
     preview: {
       allExperiences: ExperienceConfiguration[];
-      allAudiences: Audience[];
+      allAudiences: PreviewAudience[];
     };
   };
 }
