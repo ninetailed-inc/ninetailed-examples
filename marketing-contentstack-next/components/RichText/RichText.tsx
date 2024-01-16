@@ -27,6 +27,7 @@ export const RichText = ({
             </li>
           );
         }
+        //  TODO: parse fallback, use shortcode [[]]
         if (NodeTag === 'mergetag') {
           return <MergeTag id={domNode.children[0].data} />;
         }

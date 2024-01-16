@@ -10,7 +10,7 @@ import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-previe
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights';
 
-import { LandingPage as ILandingPage } from '@/types/contentstack';
+import type { LandingPage, Config } from '@/types/contentstack';
 import '@contentstack/live-preview-utils/dist/main.css';
 
 type AppProps<P = unknown> = {
@@ -23,8 +23,10 @@ type Audience = {
   description?: string | undefined;
   id: string;
 };
+
 interface CustomPageProps {
-  page: ILandingPage;
+  page: LandingPage;
+  config: Config;
   ninetailed?: {
     preview: {
       experiences: ExperienceConfiguration[];

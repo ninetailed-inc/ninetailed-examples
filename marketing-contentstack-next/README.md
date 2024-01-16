@@ -106,3 +106,7 @@ Run the development server:
 ```bash
 yarn dev
 ```
+
+### Codegen
+
+Use the Contentstack [CLI ts-gen plugin to generate types](https://www.contentstack.com/docs/developers/cli/tsgen-plugin), using the command `csdx tsgen -a "YOUR_CLI_TOKEN_ALIAS" -o "types/contentstack.d.ts"`

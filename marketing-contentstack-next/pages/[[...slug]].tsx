@@ -5,14 +5,24 @@ import get from 'lodash/get';
 import { BlockRenderer } from '@/components/Renderer';
 import {
   getAllExperiences,
-  getAllExperiments,
   getAllLandingPages,
+  getConfigEntry,
   getLandingPage,
 } from '@/lib/api';
-import { LandingPage as ILandingPage } from '@/types/contentstack';
+import type { Config, LandingPage } from '@/types/contentstack';
 
-function Page({ page: pageData }: { page: ILandingPage }) {
-  const { seo, banner, navigation, sections, footer } = pageData;
+function Page({
+  page: pageData,
+  config,
+}: {
+  page: LandingPage;
+  config: Config;
+}) {
+  console.log('page', pageData);
+  const { seo, sections, nt_modular_blocks_experiences } = pageData;
+  const { banner, navigation, footer } = config;
+
+  console.log('da banner exps', JSON.stringify(banner, null, 2));
 
   return (
     <>
@@ -25,9 +35,14 @@ function Page({ page: pageData }: { page: ILandingPage }) {
       <div className="w-full h-full flex flex-col">
         {banner && <BlockRenderer block={banner} />}
         {navigation && <BlockRenderer block={navigation} />}
-        <main className="grow">
-          <BlockRenderer block={sections} />
-        </main>
+        {
+          <main className="grow">
+            <BlockRenderer
+              block={sections}
+              modularBlockExperiences={nt_modular_blocks_experiences}
+            />
+          </main>
+        }
         {footer && <BlockRenderer block={footer} />}
       </div>
     </>
@@ -37,14 +52,16 @@ function Page({ page: pageData }: { page: ILandingPage }) {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = '/' + rawSlug.join('/');
-  const [page, experiences] = await Promise.all([
+  const [page, config, experiences] = await Promise.all([
     getLandingPage(slug),
+    getConfigEntry(),
     getAllExperiences(),
   ]);
 
   return {
     props: {
       page,
+      config,
       ninetailed: {
         preview: {
           experiences,
