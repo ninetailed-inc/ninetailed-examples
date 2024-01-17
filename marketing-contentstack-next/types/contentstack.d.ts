@@ -50,45 +50,6 @@ export interface Seo {
   enable_link_following?: boolean;
 }
 
-export interface PricingPlan {
-  /** Version */
-  version: 2;
-  /** Internal Title */
-  title: string;
-  /** Title */
-  display_title?: any;
-  /** Price */
-  price?: any;
-  /** Frequency */
-  frequency?: ('/month' | '/week') | null;
-  /** Discounted Price */
-  discounted_price?: any;
-  /** Description */
-  description?: any;
-  /** Button */
-  button?: {
-    /** Button Link */
-    button_link?: Link;
-    /** Button Variant */
-    button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
-  }[];
-  /** Most Popular */
-  most_popular?: boolean;
-}
-
-export interface Config {
-  /** Version */
-  version: 2;
-  /** Internal Title */
-  title: string;
-  /** Banner */
-  banner?: Banner[];
-  /** Navigation */
-  navigation?: Navigation[];
-  /** Footer */
-  footer?: Footer[];
-}
-
 /** Ninetailed Experience */
 export interface NtExperience {
   /** Version */
@@ -104,7 +65,7 @@ export interface NtExperience {
   /** Config */
   nt_config: any;
   /** Variants */
-  nt_variants?: Banner[];
+  nt_variants?: (Banner | Navigation)[];
   /** Title */
   title: string;
 }
@@ -139,9 +100,48 @@ export interface NtAudience {
   title: string;
 }
 
+export interface PricingPlan {
+  /** Version */
+  version: 3;
+  /** Internal Title */
+  title: string;
+  /** Title */
+  display_title?: any;
+  /** Price */
+  price?: any;
+  /** Frequency */
+  frequency?: ('/month' | '/week') | null;
+  /** Discounted Price */
+  discounted_price?: any;
+  /** Description */
+  description?: any;
+  /** Button */
+  button?: {
+    /** Button Link */
+    button_link: Link;
+    /** Button Variant */
+    button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+  }[];
+  /** Most Popular */
+  most_popular?: boolean;
+}
+
+export interface Config {
+  /** Version */
+  version: 2;
+  /** Internal Title */
+  title: string;
+  /** Banner */
+  banner?: Banner[];
+  /** Navigation */
+  navigation?: Navigation[];
+  /** Footer */
+  footer?: Footer[];
+}
+
 export interface LandingPage {
   /** Version */
-  version: 14;
+  version: 23;
   /** Title */
   title: string;
   /** SEO */
@@ -156,20 +156,20 @@ export interface LandingPage {
         hero: {
           /** Internal Title */ title?: string;
           /** Headline */
-          headline?: any;
+          headline: any;
           /** Subline */
           subline?: string;
           /** Buttons */
           buttons?: [
             {
               /** Button Link */
-              button_link?: Link;
+              button_link: Link;
               /** Button Variant */
               button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
             },
             {
               /** Button Link */
-              button_link?: Link;
+              button_link: Link;
               /** Button Variant */
               button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
             }
@@ -195,13 +195,13 @@ export interface LandingPage {
           buttons?: [
             {
               /** Button Link */
-              button_link?: Link;
+              button_link: Link;
               /** Button Variant */
               button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
             },
             {
               /** Button Link */
-              button_link?: Link;
+              button_link: Link;
               /** Button Variant */
               button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
             }
@@ -216,7 +216,7 @@ export interface LandingPage {
       }
     | {
         feature: {
-          /** Title */ title?: string;
+          /** Internal Title */ title?: string;
           /** Headline */
           headline?: any;
           /** Subline */
@@ -224,7 +224,7 @@ export interface LandingPage {
           /** Buttons */
           buttons?: {
             /** Button Link */
-            button_link?: Link;
+            button_link: Link;
             /** Button Variant */
             button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
           }[];
@@ -242,7 +242,9 @@ export interface LandingPage {
       }
     | {
         pricing_table: {
-          /** Headline */ headline?: any;
+          /** Internal Title */ title?: string;
+          /** Headline */
+          headline?: any;
           /** Subline */
           subline?: string;
           /** Pricing Plans */
@@ -257,7 +259,7 @@ export interface LandingPage {
       }
     | {
         hubspot_form: {
-          /** Title */ title?: string;
+          /** Internal Title */ title?: string;
           /** Hubspot Form ID */
           hubspot_form_id?: string;
           /** Hubspot Portal ID */
@@ -285,7 +287,7 @@ export interface LandingPage {
             hero: {
               /** Internal Title */ title?: string;
               /** Headline */
-              headline?: any;
+              headline: any;
               /** Subline */
               subline?: string;
               /** Buttons */
@@ -341,7 +343,7 @@ export interface LandingPage {
           }
         | {
             feature: {
-              /** Title */ title?: string;
+              /** Internal Title */ title?: string;
               /** Headline */
               headline?: any;
               /** Subline */
@@ -365,7 +367,9 @@ export interface LandingPage {
           }
         | {
             pricing_table: {
-              /** Headline */ headline?: any;
+              /** Internal Title */ title?: string;
+              /** Headline */
+              headline?: any;
               /** Subline */
               subline?: string;
               /** Pricing Plans */
@@ -378,7 +382,7 @@ export interface LandingPage {
           }
         | {
             hubspot_form: {
-              /** Title */ title?: string;
+              /** Internal Title */ title?: string;
               /** Hubspot Form ID */
               hubspot_form_id?: string;
               /** Hubspot Portal ID */
@@ -412,7 +416,7 @@ export interface Footer {
 
 export interface Navigation {
   /** Version */
-  version: 4;
+  version: 7;
   /** Title */
   title: string;
   /** Navigation Items */
@@ -420,7 +424,7 @@ export interface Navigation {
     /** Title */
     title: string;
     /** Page Reference */
-    page_reference?: LandingPage[];
+    page_reference: LandingPage[];
   }[];
   /** Ninetailed */
   nt_experiences?: NtExperience[];
@@ -429,7 +433,7 @@ export interface Navigation {
 /** A dismissible call-to-cation displayed at the top of the viewport. */
 export interface Banner {
   /** Version */
-  version: 3;
+  version: 5;
   /** Title */
   title: string;
   /** Text */

@@ -40,16 +40,16 @@ export const PricingPlan = (props: IPricingPlan) => {
         </div>
         <RichText richTextHtml={description} />
       </div>
-      {button?.button_link.href && (
+      {button?.[0].button_link.href && (
         <div className="mt-auto">
-          <Link passHref href={button.button_link.href} legacyBehavior>
+          <Link passHref href={button[0].button_link.href} legacyBehavior>
             <Button
               as="a"
               type="button"
-              variant={button.button_variant as ButtonVariant}
+              variant={button[0].button_variant as ButtonVariant}
               size="large"
             >
-              {button.button_link.title}
+              {button[0].button_link.title}
             </Button>
           </Link>
         </div>

@@ -19,7 +19,7 @@ type AppProps<P = unknown> = {
 
 // FIXME: Re-export this type from utils
 type Audience = {
-  name?: string | undefined;
+  name: string;
   description?: string | undefined;
   id: string;
 };
@@ -30,7 +30,7 @@ interface CustomPageProps {
   ninetailed?: {
     preview: {
       experiences: ExperienceConfiguration[];
-      audiences: Audience;
+      audiences: Audience[];
     };
   };
 }
@@ -55,15 +55,8 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
                   audiences:
                     pageProps.ninetailed?.preview.experiences
                       .map((experience) => experience.audience)
-                      .filter(
-                        (
-                          audience
-                        ): audience is {
-                          id: string;
-                          name?: string | undefined;
-                          description: string | undefined;
-                        } => !!audience
-                      ) || [],
+                      .filter((audience): audience is Audience => !!audience) ||
+                    [],
                 }),
               ]
             : []),
