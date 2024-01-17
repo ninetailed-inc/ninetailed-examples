@@ -251,6 +251,15 @@
     uuid "9.0.0"
     zod "3.21.4"
 
+"@ninetailed/experience.js-plugin-analytics@7.5.1":
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-analytics/-/experience.js-plugin-analytics-7.5.1.tgz#18db46ab08b8e2b0b6a323667605c033920defd0"
+  integrity sha512-TAwsFZZqE+s/kUmOFI/pdmFaZJLkPG+Zx1xbqUYOYnny6wEes8ONirgaZBQpTHH+HjcJmdUVmt/P9grlvpZCKw==
+  dependencies:
+    "@ninetailed/experience.js" "7.5.1"
+    "@ninetailed/experience.js-shared" "7.5.1"
+    analytics "0.8.1"
+
 "@ninetailed/experience.js-plugin-analytics@7.5.2-beta.5":
   version "7.5.2-beta.5"
   resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-analytics/-/experience.js-plugin-analytics-7.5.2-beta.5.tgz#1a82fc27b2a21746270fc906c57cea2c8eab2104"
@@ -259,6 +268,25 @@
     "@ninetailed/experience.js" "7.5.2-beta.5"
     "@ninetailed/experience.js-shared" "7.5.2-beta.5"
     analytics "0.8.1"
+
+"@ninetailed/experience.js-plugin-contentsquare@^7.5.1":
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-contentsquare/-/experience.js-plugin-contentsquare-7.5.1.tgz#b38d9d9b6a8a0cbe084db049673f3b34be6cd64c"
+  integrity sha512-fbBhH2LPnLCwAp7uzA8mY+/WNqMKzRnVtoRY93DCoTyOStwuMtk+N3ApGKiAj1ofYlZmnOCLJ6mJt66Tvq6cAA==
+  dependencies:
+    "@ninetailed/experience.js" "7.5.1"
+    "@ninetailed/experience.js-plugin-analytics" "7.5.1"
+    "@ninetailed/experience.js-shared" "7.5.1"
+    "@ninetailed/testing-utils" "7.5.0"
+    analytics "0.8.1"
+    async-retry "1.3.3"
+    diary "0.4.4"
+    i18n-iso-countries "7.5.0"
+    murmurhash-js "1.0.0"
+    radash "10.9.0"
+    ts-toolbelt "9.6.0"
+    tslib "2.4.1"
+    zod "3.21.4"
 
 "@ninetailed/experience.js-plugin-google-tagmanager@7.5.2-beta.5":
   version "7.5.2-beta.5"
@@ -379,6 +407,11 @@
     "@ninetailed/experience.js-shared" "7.5.2-beta.5"
     analytics "0.8.1"
     zod "3.21.4"
+
+"@ninetailed/testing-utils@7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/testing-utils/-/testing-utils-7.5.0.tgz#23e036ca3df74cdee694dcecf39edb6e186cb723"
+  integrity sha512-uprBOcGGI3Fz3ctYJ5L8l28WCDx9zYEgBHck1GZXXvVSZkKQ8sNlDqoKHPib3YfKXk6NohM2CJVtwCE69P9jWQ==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"

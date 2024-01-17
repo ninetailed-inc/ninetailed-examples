@@ -13,16 +13,13 @@ import type { Config, LandingPage } from '@/types/contentstack';
 
 function Page({
   page: pageData,
-  config,
+  globalConfig,
 }: {
   page: LandingPage;
-  config: Config;
+  globalConfig: Config;
 }) {
-  console.log('page', pageData);
   const { seo, sections, nt_modular_blocks_experiences } = pageData;
-  const { banner, navigation, footer } = config;
-
-  console.log('da banner exps', JSON.stringify(banner, null, 2));
+  const { banner, navigation, footer } = globalConfig;
 
   return (
     <>
@@ -52,7 +49,7 @@ function Page({
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = '/' + rawSlug.join('/');
-  const [page, config, experiences] = await Promise.all([
+  const [page, globalConfig, experiences] = await Promise.all([
     getLandingPage(slug),
     getConfigEntry(),
     getAllExperiences(),
@@ -61,7 +58,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       page,
-      config,
+      globalConfig,
       ninetailed: {
         preview: {
           experiences,

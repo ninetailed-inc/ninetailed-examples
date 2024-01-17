@@ -20,10 +20,7 @@ export const Hero = (props: any) => {
                   className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
                   richTextHtml={hero.headline}
                 />
-                <RichText
-                  className="mt-6 text-xl text-gray-500"
-                  richTextHtml={hero.subline}
-                />
+                <p className="mt-6 text-xl text-gray-500">{hero.subline}</p>
               </div>
               <div className="mt-5 mx-auto flex flex-col sm:flex-row justify-start md:mt-8 space-y-5 sm:w-full sm:space-x-5 sm:space-y-0">
                 {hero.buttons?.map((button: any) => {
@@ -103,7 +100,6 @@ export const Hero = (props: any) => {
                   height={590}
                   className="w-full rounded-lg lg:w-auto lg:max-w-none"
                   alt=""
-                  {...hero.image.$.url}
                 />
               )}
             </div>
@@ -117,7 +113,6 @@ export const Hero = (props: any) => {
                   height={320}
                   className="w-full rounded-md lg:h-full lg:w-auto lg:max-w-none"
                   alt=""
-                  {...hero.image.$.url}
                 />
               )}
             </div>

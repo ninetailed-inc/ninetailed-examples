@@ -2,9 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
-import { Cta as ICta } from '@/types/contentstack';
 
-export const CTA: React.FC<ICta> = (props) => {
+export const CTA = (props: any) => {
   const { cta } = props;
   return (
     <div className="bg-white">
@@ -13,10 +12,7 @@ export const CTA: React.FC<ICta> = (props) => {
           className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
           richTextHtml={cta.headline}
         />
-        <RichText
-          className="mt-6 text-xl text-gray-500"
-          richTextHtml={cta.subline}
-        />
+        <p className="mt-6 text-xl text-gray-500">{cta.subline}</p>
         <div className="mt-5 mx-auto flex flex-col sm:flex-row lg:w-6/12 sm:w-full items-center justify-center space-y-5 sm:space-y-0 sm:space-x-5">
           {cta.buttons?.map((button: any, i: number) => {
             if (!button.button_link.href) {

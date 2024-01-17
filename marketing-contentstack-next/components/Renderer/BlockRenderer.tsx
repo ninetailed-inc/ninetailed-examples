@@ -65,7 +65,6 @@ function getContentType(obj: any) {
 }
 
 const ComponentRenderer = (props: any) => {
-  // console.log('componentRendererProps', props);
   const contentTypeId: string = getContentType(props);
 
   // eslint-disable-next-line
@@ -107,23 +106,21 @@ const BlockRenderer = ({
   const id = getBlockId(block);
 
   if (isModularBlock(block)) {
-    const ntExperiences = block[getContentType(block)].nt_experiences;
-    console.log('lolol', modularBlockExperiences);
-    const allVariants = modularBlockExperiences
-      ?.map((experience) => {
-        const variants = experience.nt_experience_block_sections.nt_variants;
+    console.log(block); // FIXME: this has no experience set on it, a result from the CS interface not assigning the experience to the baseline
+    const ntExperiences = block[getContentType(block)]?.nt_experiences ?? [];
+    const allVariants = (
+      modularBlockExperiences?.map((experience) => {
+        const variants = experience.nt_experience_block_sections?.nt_variants;
         return variants?.map((variant: any) => {
           return {
             ...variant,
             id: getBlockId(variant),
           };
         });
-      })
-      .flat();
+      }) || []
+    ).flat();
 
-    console.log('allVariants', JSON.stringify(allVariants, null, 2));
-
-    const experiences = (ntExperiences || [])
+    const experiences = ntExperiences
       .map((experience: any) => {
         return {
           name: experience.nt_name,
@@ -148,10 +145,14 @@ const BlockRenderer = ({
               }
             ),
           },
-          audience: {
-            id: experience.nt_audience[0].nt_audience_id,
-            name: experience.nt_audience[0].nt_name,
-          },
+          ...(experience.nt_audience.length
+            ? {
+                audience: {
+                  id: experience.nt_audience[0].nt_audience_id,
+                  name: experience.nt_audience[0].nt_name,
+                },
+              }
+            : {}),
           id: experience.uid,
           variants: allVariants, // TODO: Filter variants only for this experience & baseline
         };
@@ -160,8 +161,6 @@ const BlockRenderer = ({
         ExperienceMapper.isExperienceEntry(experience)
       )
       .map((experience: any) => ExperienceMapper.mapExperience(experience));
-
-    console.log('experiences', experiences);
 
     return (
       // eslint-disable-next-line react/jsx-key
@@ -173,17 +172,20 @@ const BlockRenderer = ({
       />
     );
   } else {
-    const experiences = (block.nt_experiences || [])
+    const experiences = (block?.nt_experiences ?? [])
       .map((experience: any) => {
-        console.log('did ya find any variants?', experience.nt_variants);
         return {
           name: experience.nt_name,
           type: experience.nt_type,
           config: experience.nt_config,
-          audience: {
-            id: experience.nt_audience[0].nt_audience_id,
-            name: experience.nt_audience[0].nt_name,
-          },
+          ...(experience.nt_audience.length
+            ? {
+                audience: {
+                  id: experience.nt_audience[0].nt_audience_id,
+                  name: experience.nt_audience[0].nt_name,
+                },
+              }
+            : {}),
           id: experience.uid,
           variants: experience.nt_variants?.map((variant: any) => {
             return {
@@ -197,7 +199,6 @@ const BlockRenderer = ({
         ExperienceMapper.isExperienceEntry(experience)
       )
       .map((experience: any) => ExperienceMapper.mapExperience(experience));
-    console.log('?????', JSON.stringify(experiences, null, 2));
 
     return (
       <div key={`${contentTypeId}-${id}`}>

@@ -1,6 +1,5 @@
 import { useNinetailed, useProfile } from '@ninetailed/experience.js-next';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { HubspotForm as IHubspotForm } from '@/types/contentstack';
 import classNames from 'classnames';
 
 type FormValues = {
@@ -14,7 +13,7 @@ type FormValues = {
   ninetailed_environment: string;
 };
 
-export const HubspotForm = (props: IHubspotForm) => {
+export const HubspotForm = (props: any) => {
   const { profile } = useProfile();
   const { identify } = useNinetailed();
 

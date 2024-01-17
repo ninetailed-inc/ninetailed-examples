@@ -160,6 +160,7 @@ export const getLandingPage = async (entryUrl: string) => {
       'sections.cta.subline',
       'nt_modular_blocks_experiences.nt_experience_block_sections.nt_variants.cta.headline',
       'nt_modular_blocks_experiences.nt_experience_block_sections.nt_variants.cta.subline',
+      //
       // 'sections.pricing_plans.headline',
       // 'sections.pricing_plans.subline',
       // 'sections.pricing_plans.price',
@@ -185,10 +186,11 @@ export const getConfigEntry = async () => {
     fieldValue: 'Global Configuration',
     contentTypeUid: 'config',
     referenceFieldPath: [
+      'banner',
       'banner.nt_experiences.nt_variants',
       'banner.nt_experiences.nt_audience',
       'navigation.navigation_items.page_reference',
-      'navigation.nt_experiences.nt_variants.navigation_items.page_reference',
+      //'navigation.nt_experiences.nt_variants.navigation_items.page_reference',
       'footer.footer_links.page_reference',
     ],
     jsonRtePath: [
@@ -216,16 +218,21 @@ export const getAllExperiences = async () => {
     ],
   });
 
+  // TODO: Turn into reusable function
   const mappedExperiences = (response[0] || [])
     .map((experience: any) => {
       return {
         name: experience.nt_name,
         type: experience.nt_type,
         config: experience.nt_config,
-        audience: {
-          id: experience.nt_audience[0].nt_audience_id,
-          name: experience.nt_audience[0].title,
-        },
+        ...(experience.nt_audience.length
+          ? {
+              audience: {
+                id: experience.nt_audience[0].nt_audience_id,
+                name: experience.nt_audience[0].title,
+              },
+            }
+          : {}),
         id: experience.uid,
         variants: experience.nt_variants?.map((variant: any) => {
           return {
