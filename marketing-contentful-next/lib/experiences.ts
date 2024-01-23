@@ -3,6 +3,9 @@ import {
   Entry,
   ExperienceMapper,
 } from '@ninetailed/experience.js-utils-contentful';
+import { SettingsContext } from './SettingsProvider';
+import { useContext } from 'react';
+import { useExperience } from '@ninetailed/experience.js-next';
 
 export type singularBlock = Entry | BaselineWithExperiencesEntry;
 export type singularOrArrayBlock =
@@ -24,4 +27,24 @@ export const parseExperiences = (entry: singularBlock) => {
         .filter((experience) => ExperienceMapper.isExperienceEntry(experience))
         .map((experience) => ExperienceMapper.mapExperience(experience))
     : [];
+};
+
+export const hoistId = (entry: singularBlock) => {
+  return {
+    ...entry,
+    id: entry.sys.id,
+  };
+};
+
+// Feature flagging example
+export const useFlag = (flag: string) => {
+  const settings = useContext(SettingsContext);
+  const pdpLayoutSetting = settings[flag] || {};
+
+  const { variantIndex } = useExperience({
+    baseline: hoistId(pdpLayoutSetting),
+    experiences: parseExperiences(pdpLayoutSetting),
+  });
+
+  return variantIndex;
 };

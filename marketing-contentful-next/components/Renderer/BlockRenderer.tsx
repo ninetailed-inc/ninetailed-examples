@@ -88,13 +88,12 @@ export const BlockRenderer = ({ block }: { block: singularOrArrayBlock }) => {
   const parsedExperiences = parseExperiences(block);
 
   return (
-    <div key={`${contentTypeId}-${id}`}>
-      <Experience
-        {...block}
-        id={id}
-        component={ComponentRenderer}
-        experiences={parsedExperiences}
-      />
-    </div>
+    <Experience
+      key={`${contentTypeId}-${id}`}
+      {...block}
+      id={id}
+      component={ComponentRenderer}
+      experiences={parsedExperiences}
+    />
   );
 };

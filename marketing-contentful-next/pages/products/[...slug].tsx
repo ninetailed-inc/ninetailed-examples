@@ -17,27 +17,14 @@ import { IConfig, IPdp } from '@/types/contentful';
 import type { Product as IProduct } from '@shopify/hydrogen-react/storefront-api-types';
 import { request, gql } from 'graphql-request';
 
-const constProduct = {
-  rating: 3.9,
-  reviewCount: 512,
-  colors: [
-    { name: 'Black', bgColor: 'bg-gray-900', selectedColor: 'ring-gray-900' },
-    {
-      name: 'Heather Grey',
-      bgColor: 'bg-gray-400',
-      selectedColor: 'ring-gray-400',
-    },
-  ],
-};
-
 const Pdp = ({
   pdp,
   config,
-  pimData,
+  product,
 }: {
   pdp: IPdp;
   config: IConfig;
-  pimData: Partial<IProduct>; // TODO: Could be improved by codegen on query or constructing specific type
+  product: Partial<IProduct>; // TODO: Could be improved by codegen on query or constructing specific type
 }) => {
   if (!pdp) {
     return null;
@@ -58,9 +45,7 @@ const Pdp = ({
       {navigation && <BlockRenderer block={navigation} />}
 
       <main className="grow">
-        {pimData && (
-          <Product constProduct={constProduct} pdp={pdp} pimData={pimData} />
-        )}
+        {product && <Product pdp={pdp} product={product} />}
         {sections && <BlockRenderer block={sections} />}
       </main>
       {footer && <BlockRenderer block={footer} />}
@@ -132,7 +117,7 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
     id: pdp.fields.product,
   };
 
-  const { product: pimData }: { product: Partial<IProduct> } = await request(
+  const { product }: { product: Partial<IProduct> } = await request(
     getStorefrontApiUrl(),
     productInfoQuery,
     productInfoQueryVariables,
@@ -143,7 +128,7 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
     props: {
       pdp,
       config,
-      pimData,
+      product,
       ninetailed: {
         preview: {
           allExperiences,
