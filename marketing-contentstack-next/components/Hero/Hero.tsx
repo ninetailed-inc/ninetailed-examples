@@ -7,6 +7,7 @@ import { ContentstackImageLoader } from '@/lib/helperfunctions';
 
 export const Hero = (props: any) => {
   const { hero } = props;
+  console.log(hero);
 
   return (
     <div className="bg-white pb-8 sm:pb-12 lg:pb-12">

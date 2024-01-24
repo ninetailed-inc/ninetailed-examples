@@ -1,5 +1,4 @@
 import React from 'react';
-import get from 'lodash/get';
 import { ExperienceMapper } from '@ninetailed/experience.js-utils';
 
 import { Experience } from '@ninetailed/experience.js-next';
@@ -106,61 +105,69 @@ const BlockRenderer = ({
   const id = getBlockId(block);
 
   if (isModularBlock(block)) {
-    console.log(block); // FIXME: this has no experience set on it, a result from the CS interface not assigning the experience to the baseline
-    const ntExperiences = block[getContentType(block)]?.nt_experiences ?? [];
+    const ntExperiences = modularBlockExperiences || [];
     const allVariants = (
-      modularBlockExperiences?.map((experience) => {
-        const variants = experience.nt_experience_block_sections?.nt_variants;
-        return variants?.map((variant: any) => {
-          return {
-            ...variant,
-            id: getBlockId(variant),
-          };
-        });
-      }) || []
+      (ntExperiences.length &&
+        ntExperiences.map((experience) => {
+          const variants = experience.nt_experience_block.nt_variants;
+          return variants?.map((variant: any) => {
+            return {
+              ...variant,
+              id: getBlockId(variant),
+            };
+          });
+        })) ||
+      []
     ).flat();
 
-    const experiences = ntExperiences
-      .map((experience: any) => {
-        return {
-          name: experience.nt_name,
-          type: experience.nt_type,
-          config: {
-            ...experience.nt_config,
-            components: experience.nt_config?.components?.map(
-              (component: { variants: any[]; baseline: { blockId: any } }) => {
-                return {
-                  ...component,
-                  variants: component.variants?.map((variant) => {
-                    return {
-                      ...variant,
-                      id: variant.blockId,
-                    };
-                  }),
-                  baseline: {
-                    ...component.baseline,
-                    id: component.baseline.blockId,
+    const experiences =
+      ntExperiences.length &&
+      ntExperiences
+        .map((modularBlockExperience: any) => {
+          const experience =
+            modularBlockExperience.nt_experience_block.nt_experience[0];
+          return {
+            name: experience.nt_name,
+            type: experience.nt_type,
+            config: {
+              ...experience.nt_config,
+              components: experience.nt_config?.components?.map(
+                (component: {
+                  variants: any[];
+                  baseline: { blockId: any };
+                }) => {
+                  return {
+                    ...component,
+                    variants: component.variants?.map((variant) => {
+                      return {
+                        ...variant,
+                        id: variant.blockId,
+                      };
+                    }),
+                    baseline: {
+                      ...component.baseline,
+                      id: component.baseline.blockId,
+                    },
+                  };
+                }
+              ),
+            },
+            ...(experience.nt_audience.length
+              ? {
+                  audience: {
+                    id: experience.nt_audience[0].nt_audience_id,
+                    name: experience.nt_audience[0].nt_name,
                   },
-                };
-              }
-            ),
-          },
-          ...(experience.nt_audience.length
-            ? {
-                audience: {
-                  id: experience.nt_audience[0].nt_audience_id,
-                  name: experience.nt_audience[0].nt_name,
-                },
-              }
-            : {}),
-          id: experience.uid,
-          variants: allVariants, // TODO: Filter variants only for this experience & baseline
-        };
-      })
-      .filter((experience: any) =>
-        ExperienceMapper.isExperienceEntry(experience)
-      )
-      .map((experience: any) => ExperienceMapper.mapExperience(experience));
+                }
+              : {}),
+            id: experience.uid,
+            variants: allVariants, // TODO: Filter variants only for this experience & baseline
+          };
+        })
+        .filter((experience: any) =>
+          ExperienceMapper.isExperienceEntry(experience)
+        )
+        .map((experience: any) => ExperienceMapper.mapExperience(experience));
 
     return (
       // eslint-disable-next-line react/jsx-key

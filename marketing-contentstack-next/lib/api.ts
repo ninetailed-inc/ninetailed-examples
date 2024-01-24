@@ -150,16 +150,18 @@ export const getLandingPage = async (entryUrl: string) => {
     referenceFieldPath: [
       'sections.hero.nt_experiences.nt_audience',
       'sections.cta.nt_experiences.nt_audience',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_experience',
     ],
     jsonRtePath: [
       'sections.hero.headline',
       'sections.hero.subline',
-      'nt_modular_blocks_experiences.nt_experience_block_sections.nt_variants.hero.headline',
-      'nt_modular_blocks_experiences.nt_experience_block_sections.nt_variants.hero.subline',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.hero.headline',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.hero.subline',
       'sections.cta.headline',
       'sections.cta.subline',
-      'nt_modular_blocks_experiences.nt_experience_block_sections.nt_variants.cta.headline',
-      'nt_modular_blocks_experiences.nt_experience_block_sections.nt_variants.cta.subline',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.cta.headline',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.cta.subline',
       //
       // 'sections.pricing_plans.headline',
       // 'sections.pricing_plans.subline',
