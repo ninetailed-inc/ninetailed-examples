@@ -40,9 +40,9 @@ function getBlockId(obj: any) {
   let id = '';
 
   if (isModularBlock(obj)) {
-    // Find and return the key that is not '$' and extract it as the content type
+    // Find and return the key that is not '$' or 'id' and extract it as the content type
     const keys = Object.keys(obj);
-    const blockKey = keys.find((key) => key !== '$') || '';
+    const blockKey = keys.find((key) => key !== '$' && key !== 'id') || '';
     id = obj[blockKey]._metadata.uid;
   } else {
     id = obj.uid;
@@ -54,7 +54,7 @@ function getContentType(obj: any) {
   let contentType = '';
 
   if (isModularBlock(obj)) {
-    // Find and return the key that is not '$' and extract it as the content type
+    // Find and return the key that is not '$' or 'id' and extract it as the content type
     const keys = Object.keys(obj);
     contentType = keys.find((key) => key !== '$' && key !== 'id') || '';
   } else {
@@ -106,7 +106,10 @@ const BlockRenderer = ({
 
   if (isModularBlock(block)) {
     const ntExperiences = modularBlockExperiences || [];
-    const allVariants = (
+    const scopedExperiences = ntExperiences.filter((experience) => {
+      return experience.nt_experience_block.nt_baseline.uid === id;
+    });
+    const mappedVariants = (
       (ntExperiences.length &&
         ntExperiences.map((experience) => {
           const variants = experience.nt_experience_block.nt_variants;
@@ -120,54 +123,48 @@ const BlockRenderer = ({
       []
     ).flat();
 
-    const experiences =
-      ntExperiences.length &&
-      ntExperiences
-        .map((modularBlockExperience: any) => {
-          const experience =
-            modularBlockExperience.nt_experience_block.nt_experience[0];
-          return {
-            name: experience.nt_name,
-            type: experience.nt_type,
-            config: {
-              ...experience.nt_config,
-              components: experience.nt_config?.components?.map(
-                (component: {
-                  variants: any[];
-                  baseline: { blockId: any };
-                }) => {
-                  return {
-                    ...component,
-                    variants: component.variants?.map((variant) => {
-                      return {
-                        ...variant,
-                        id: variant.blockId,
-                      };
-                    }),
-                    baseline: {
-                      ...component.baseline,
-                      id: component.baseline.blockId,
-                    },
-                  };
-                }
-              ),
-            },
-            ...(experience.nt_audience.length
-              ? {
-                  audience: {
-                    id: experience.nt_audience[0].nt_audience_id,
-                    name: experience.nt_audience[0].nt_name,
+    const mappedExperiences = scopedExperiences
+      .map((modularBlockExperience: any) => {
+        const experience =
+          modularBlockExperience.nt_experience_block.nt_experience[0];
+        return {
+          name: experience.nt_name,
+          type: experience.nt_type,
+          config: {
+            ...experience.nt_config,
+            components: experience.nt_config?.components?.map(
+              (component: { variants: any[]; baseline: { blockId: any } }) => {
+                return {
+                  variants: component.variants?.map((variant) => {
+                    return {
+                      ...variant,
+                      id: variant.blockId,
+                    };
+                  }),
+                  baseline: {
+                    ...component.baseline,
+                    id: component.baseline.blockId,
                   },
-                }
-              : {}),
-            id: experience.uid,
-            variants: allVariants, // TODO: Filter variants only for this experience & baseline
-          };
-        })
-        .filter((experience: any) =>
-          ExperienceMapper.isExperienceEntry(experience)
-        )
-        .map((experience: any) => ExperienceMapper.mapExperience(experience));
+                };
+              }
+            ),
+          },
+          ...(experience.nt_audience.length
+            ? {
+                audience: {
+                  id: experience.nt_audience[0].nt_audience_id,
+                  name: experience.nt_audience[0].nt_name,
+                },
+              }
+            : {}),
+          id: experience.uid,
+          variants: mappedVariants,
+        };
+      })
+      .filter((experience: any) =>
+        ExperienceMapper.isExperienceEntry(experience)
+      )
+      .map((experience: any) => ExperienceMapper.mapExperience(experience));
 
     return (
       // eslint-disable-next-line react/jsx-key
@@ -175,11 +172,12 @@ const BlockRenderer = ({
         {...block}
         id={id}
         component={ComponentRenderer}
-        experiences={experiences}
+        experiences={mappedExperiences}
+        key={`${contentTypeId}-${id}`}
       />
     );
   } else {
-    const experiences = (block?.nt_experiences ?? [])
+    const mappedExperiences = (block?.nt_experiences ?? [])
       .map((experience: any) => {
         return {
           name: experience.nt_name,
@@ -208,14 +206,13 @@ const BlockRenderer = ({
       .map((experience: any) => ExperienceMapper.mapExperience(experience));
 
     return (
-      <div key={`${contentTypeId}-${id}`}>
-        <Experience
-          {...block}
-          id={id}
-          component={ComponentRenderer}
-          experiences={experiences}
-        />
-      </div>
+      <Experience
+        {...block}
+        id={id}
+        component={ComponentRenderer}
+        experiences={mappedExperiences}
+        key={`${contentTypeId}-${id}`}
+      />
     );
   }
 };
