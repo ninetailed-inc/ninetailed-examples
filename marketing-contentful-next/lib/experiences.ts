@@ -39,11 +39,11 @@ export const hoistId = (entry: singularBlock) => {
 // Feature flagging example
 export const useFlag = (flag: string) => {
   const settings = useContext(SettingsContext);
-  const pdpLayoutSetting = settings[flag] || {};
+  const setting = settings[flag] || {};
 
   const { variantIndex } = useExperience({
-    baseline: hoistId(pdpLayoutSetting),
-    experiences: parseExperiences(pdpLayoutSetting),
+    baseline: hoistId(setting),
+    experiences: parseExperiences(setting),
   });
 
   return variantIndex;

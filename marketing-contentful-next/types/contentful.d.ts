@@ -362,6 +362,9 @@ export interface INtExperienceFields {
 
   /** Experience Id */
   nt_experience_id?: string | undefined;
+
+  /** Experience Metadata */
+  nt_metadata?: Record<string, any> | undefined;
 }
 
 /** Ninetailed Experience */
@@ -424,7 +427,14 @@ export interface IPageFields {
   seo?: ISeo | undefined;
 
   /** Sections */
-  sections: (ICta | IFeature | IHero | IHubspotForm | IPricingTable)[];
+  sections: (
+    | ICta
+    | IFeature
+    | IHero
+    | IHubspotForm
+    | IPricingTable
+    | ISectionsGroup
+  )[];
 }
 
 export interface IPage extends Entry<IPageFields> {
@@ -645,6 +655,36 @@ export interface IProductPolicy extends Entry<IProductPolicyFields> {
   };
 }
 
+export interface ISectionsGroupFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Sections */
+  sections?:
+    | (ICta | IFeature | IHero | IHubspotForm | IPricingTable)[]
+    | undefined;
+
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
+}
+
+export interface ISectionsGroup extends Entry<ISectionsGroupFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'sectionsGroup';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export interface ISeoFields {
   /** Internal Name */
   name: string;
@@ -761,6 +801,7 @@ export type CONTENT_TYPE =
   | 'productDetail'
   | 'productInfoBlock'
   | 'productPolicy'
+  | 'sectionsGroup'
   | 'seo'
   | 'setting'
   | 'style';

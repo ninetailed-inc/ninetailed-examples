@@ -1,3 +1,4 @@
+// Under construction
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
