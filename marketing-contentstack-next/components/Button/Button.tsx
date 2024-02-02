@@ -27,37 +27,28 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
       children,
       ...rest
     } = props;
+
+    const colorMap = {
+      Primary: 'bg-indigo-600 text-white',
+      Secondary: 'bg-indigo-100 text-indigo-700',
+      Loud: 'bg-amber-600 text-white',
+    };
+
     return (
-      <Component
-        {...rest}
-        type={type}
-        ref={ref}
-        className={classNames(
-          `w-full 
-            flex  
-            border border-transparent
-            items-center justify-center`,
-          {
-            'text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded shadow-sm':
-              variant === 'Primary',
-          },
-          {
-            'text-indigo-700 bg-indigo-100 hover:bg-indigo-200 font-medium rounded shadow-sm':
-              variant === 'Secondary',
-          },
-          {
-            'text-white bg-amber-600 hover:bg-amber-700 font-medium rounded shadow-sm':
-              variant === 'Loud',
-          },
-          // {"text-gray-300 hover:text-white font-light": props.variant === "footerLink"},
-          // {"text-gray-300 hover:text-white font-medium": props.variant === "navLink"},
-          { 'px-3 py-1 text-sm': size === 'small' },
-          { 'px-4 py-2 text-base': size === 'medium' },
-          { 'px-6 py-3 text-base': size === 'large' }
-        )}
-      >
-        {children}
-      </Component>
+      <>
+        <Component
+          {...rest}
+          type={type}
+          ref={ref}
+          className="block bg-slate-800"
+        >
+          <div
+            className={`${colorMap[variant]} active:translate-x-0 active:translate-y-0 flex items-center border-slate-800 border-2 duration-150 py-3 px-5 -translate-x-1 -translate-y-1 hover:-translate-x-1.5 hover:-translate-y-1.5 w-full`}
+          >
+            {children}
+          </div>
+        </Component>
+      </>
     );
   }
 );

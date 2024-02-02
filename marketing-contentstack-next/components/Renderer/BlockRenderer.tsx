@@ -1,5 +1,4 @@
 import React from 'react';
-import { ExperienceMapper } from '@ninetailed/experience.js-utils';
 
 import { Experience } from '@ninetailed/experience.js-next';
 
@@ -14,6 +13,15 @@ import { PricingPlan } from '@/components/PricingPlan';
 import { HubspotForm } from '@/components/HubspotForm';
 
 import { ComponentContentTypes } from '@/lib/constants';
+import {
+  parseExperiences,
+  parseModularBlockExperiences,
+} from '@/lib/experiences';
+import {
+  getBlockId,
+  getContentType,
+  isModularBlock,
+} from '@/lib/modularblocks';
 
 const ContentTypeMap = {
   [ComponentContentTypes.Hero]: Hero,
@@ -26,42 +34,6 @@ const ContentTypeMap = {
   [ComponentContentTypes.PricingTable]: PricingTable,
   [ComponentContentTypes.HubspotForm]: HubspotForm,
 };
-
-function isModularBlock(obj: any) {
-  if (Object.prototype.hasOwnProperty.call(obj, '_content_type_uid')) {
-    return false;
-  }
-
-  // Otherwise, it's likely a modular block
-  return true;
-}
-
-function getBlockId(obj: any) {
-  let id = '';
-
-  if (isModularBlock(obj)) {
-    // Find and return the key that is not '$' or 'id' and extract it as the content type
-    const keys = Object.keys(obj);
-    const blockKey = keys.find((key) => key !== '$' && key !== 'id') || '';
-    id = obj[blockKey]._metadata.uid;
-  } else {
-    id = obj.uid;
-  }
-  return id;
-}
-
-function getContentType(obj: any) {
-  let contentType = '';
-
-  if (isModularBlock(obj)) {
-    // Find and return the key that is not '$' or 'id' and extract it as the content type
-    const keys = Object.keys(obj);
-    contentType = keys.find((key) => key !== '$' && key !== 'id') || '';
-  } else {
-    contentType = obj['_content_type_uid'];
-  }
-  return contentType;
-}
 
 const ComponentRenderer = (props: any) => {
   const contentTypeId: string = getContentType(props);
@@ -106,9 +78,6 @@ const BlockRenderer = ({
 
   if (isModularBlock(block)) {
     const ntExperiences = modularBlockExperiences || [];
-    const scopedExperiences = ntExperiences.filter((experience) => {
-      return experience.nt_experience_block.nt_baseline.uid === id;
-    });
     const mappedVariants = (
       (ntExperiences.length &&
         ntExperiences.map((experience) => {
@@ -123,49 +92,10 @@ const BlockRenderer = ({
       []
     ).flat();
 
-    const mappedExperiences = scopedExperiences
-      .map((modularBlockExperience: any) => {
-        const experience =
-          modularBlockExperience.nt_experience_block.nt_experience[0];
-        return {
-          name: experience.nt_name,
-          type: experience.nt_type,
-          config: {
-            ...experience.nt_config,
-            components: experience.nt_config?.components?.map(
-              (component: { variants: any[]; baseline: { blockId: any } }) => {
-                return {
-                  variants: component.variants?.map((variant) => {
-                    return {
-                      ...variant,
-                      id: variant.blockId,
-                    };
-                  }),
-                  baseline: {
-                    ...component.baseline,
-                    id: component.baseline.blockId,
-                  },
-                };
-              }
-            ),
-          },
-          ...(experience.nt_audience.length
-            ? {
-                audience: {
-                  id: experience.nt_audience[0].nt_audience_id,
-                  name: experience.nt_audience[0].nt_name,
-                },
-              }
-            : {}),
-          id: experience.uid,
-          variants: mappedVariants,
-        };
-      })
-      .filter((experience: any) =>
-        ExperienceMapper.isExperienceEntry(experience)
-      )
-      .map((experience: any) => ExperienceMapper.mapExperience(experience));
-
+    const mappedExperiences = parseModularBlockExperiences(
+      modularBlockExperiences,
+      mappedVariants
+    );
     return (
       // eslint-disable-next-line react/jsx-key
       <Experience
@@ -177,34 +107,7 @@ const BlockRenderer = ({
       />
     );
   } else {
-    const mappedExperiences = (block?.nt_experiences ?? [])
-      .map((experience: any) => {
-        return {
-          name: experience.nt_name,
-          type: experience.nt_type,
-          config: experience.nt_config,
-          ...(experience.nt_audience.length
-            ? {
-                audience: {
-                  id: experience.nt_audience[0].nt_audience_id,
-                  name: experience.nt_audience[0].nt_name,
-                },
-              }
-            : {}),
-          id: experience.uid,
-          variants: experience.nt_variants?.map((variant: any) => {
-            return {
-              id: variant.uid,
-              ...variant,
-            };
-          }),
-        };
-      })
-      .filter((experience: any) =>
-        ExperienceMapper.isExperienceEntry(experience)
-      )
-      .map((experience: any) => ExperienceMapper.mapExperience(experience));
-
+    const mappedExperiences = parseExperiences(block);
     return (
       <Experience
         {...block}

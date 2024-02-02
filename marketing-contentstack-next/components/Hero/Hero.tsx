@@ -98,7 +98,7 @@ export const Hero = (props: any) => {
                   src={hero.image.url}
                   width={865}
                   height={590}
-                  className="w-full rounded-lg lg:w-auto lg:max-w-none"
+                  className="w-full rounded-lg lg:w-auto lg:max-w-none lg:max-h-[38rem]"
                   alt=""
                 />
               )}
