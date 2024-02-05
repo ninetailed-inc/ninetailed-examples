@@ -40,10 +40,10 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
           {...rest}
           type={type}
           ref={ref}
-          className="block bg-slate-800"
+          className="block bg-gray-900"
         >
           <div
-            className={`${colorMap[variant]} active:translate-x-0 active:translate-y-0 flex items-center border-slate-800 border-2 duration-150 py-3 px-5 -translate-x-1 -translate-y-1 hover:-translate-x-1.5 hover:-translate-y-1.5 w-full`}
+            className={`${colorMap[variant]} active:translate-x-0 active:translate-y-0 flex justify-center border-gray-900 border-2 duration-150 py-3 px-5 -translate-x-1 -translate-y-1 hover:-translate-x-1.5 hover:-translate-y-1.5 w-full`}
           >
             {children}
           </div>

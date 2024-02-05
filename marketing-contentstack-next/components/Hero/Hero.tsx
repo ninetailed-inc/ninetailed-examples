@@ -54,7 +54,7 @@ export const Hero = (props: any) => {
 
         {/* Image section */}
         <div className="sm:mx-auto sm:max-w-3xl sm:px-6">
-          <div className="py-12 sm:relative sm:mt-12 sm:py-16 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          <div className="py-12 sm:relative sm:mt-12 sm:py-16 lg:absolute lg:top-1/2 lg:right-0 lg:w-1/2 lg:-translate-y-1/2">
             <div className="hidden sm:block">
               <div className="absolute inset-y-0 left-1/2 w-screen bg-gray-50 rounded-l-3xl lg:left-80 lg:right-0 lg:w-full" />
               <svg

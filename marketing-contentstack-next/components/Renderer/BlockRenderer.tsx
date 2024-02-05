@@ -76,48 +76,19 @@ const BlockRenderer = ({
   const contentTypeId = getContentType(block);
   const id = getBlockId(block);
 
-  if (isModularBlock(block)) {
-    const ntExperiences = modularBlockExperiences || [];
-    const mappedVariants = (
-      (ntExperiences.length &&
-        ntExperiences.map((experience) => {
-          const variants = experience.nt_experience_block.nt_variants;
-          return variants?.map((variant: any) => {
-            return {
-              ...variant,
-              id: getBlockId(variant),
-            };
-          });
-        })) ||
-      []
-    ).flat();
+  const mappedExperiences = isModularBlock(block)
+    ? parseModularBlockExperiences(modularBlockExperiences, id)
+    : parseExperiences(block);
 
-    const mappedExperiences = parseModularBlockExperiences(
-      modularBlockExperiences,
-      mappedVariants
-    );
-    return (
-      // eslint-disable-next-line react/jsx-key
-      <Experience
-        {...block}
-        id={id}
-        component={ComponentRenderer}
-        experiences={mappedExperiences}
-        key={`${contentTypeId}-${id}`}
-      />
-    );
-  } else {
-    const mappedExperiences = parseExperiences(block);
-    return (
-      <Experience
-        {...block}
-        id={id}
-        component={ComponentRenderer}
-        experiences={mappedExperiences}
-        key={`${contentTypeId}-${id}`}
-      />
-    );
-  }
+  return (
+    <Experience
+      {...block}
+      id={id}
+      component={ComponentRenderer}
+      experiences={mappedExperiences}
+      key={`${contentTypeId}-${id}`}
+    />
+  );
 };
 
 export { BlockRenderer };
