@@ -1,38 +1,43 @@
 import React from 'react';
-import classNames from 'classnames';
-
-export type IconProps = 'some SVG icon props';
 
 export type ButtonType = 'button' | 'submit' | 'reset';
 
-export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonSize = 'small' | 'large';
 
 export type ButtonVariant = 'Primary' | 'Secondary' | 'Loud';
 
 export interface ButtonProps {
-  as?: React.ElementType;
-  type: ButtonType;
-  size: ButtonSize;
-  variant: ButtonVariant;
   children: string;
+  type: ButtonType;
+  variant: ButtonVariant;
+  as?: React.ElementType;
+  disabled?: boolean;
+  onClick?: () => void;
+  size?: ButtonSize;
 }
+
+const colorMap = {
+  Primary: 'bg-indigo-600 text-white',
+  Secondary: 'bg-indigo-100 text-indigo-700',
+  Loud: 'bg-amber-600 text-white',
+};
+
+const sizeMap = {
+  small: 'py-2 px-3',
+  large: 'py-3 px-6',
+};
 
 export const Button: React.FC<ButtonProps> = React.forwardRef(
   (props: ButtonProps, ref) => {
     const {
       as: Component = 'button',
+      size: size = 'large',
       type,
-      size,
       variant,
       children,
+      disabled,
       ...rest
     } = props;
-
-    const colorMap = {
-      Primary: 'bg-indigo-600 text-white',
-      Secondary: 'bg-indigo-100 text-indigo-700',
-      Loud: 'bg-amber-600 text-white',
-    };
 
     return (
       <>
@@ -40,10 +45,11 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
           {...rest}
           type={type}
           ref={ref}
-          className="block bg-gray-900"
+          className="block bg-gray-900 disabled:opacity-80"
+          disabled={disabled}
         >
           <div
-            className={`${colorMap[variant]} active:translate-x-0 active:translate-y-0 flex justify-center border-gray-900 border-2 duration-150 py-3 px-5 -translate-x-1 -translate-y-1 hover:-translate-x-1.5 hover:-translate-y-1.5 w-full`}
+            className={`${colorMap[variant]} ${sizeMap[size]} flex justify-center border-gray-900 border-2 duration-150 -translate-x-1 -translate-y-1 active:translate-x-0 active:translate-y-0 hover:-translate-x-1.5 hover:-translate-y-1.5`}
           >
             {children}
           </div>
@@ -52,8 +58,3 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
     );
   }
 );
-Button.defaultProps = {
-  as: 'a',
-};
-
-Button.displayName = 'Button';
