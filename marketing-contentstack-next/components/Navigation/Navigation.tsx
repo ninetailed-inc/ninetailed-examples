@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { Navigation as INavigation } from '@/types/contentstack';
 import Logo from '@/public/logo.svg';
 
-import classNames from 'classnames';
-
 import { handleErrors } from '@/lib/helperfunctions';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 import { Button } from '@/components/Button';
