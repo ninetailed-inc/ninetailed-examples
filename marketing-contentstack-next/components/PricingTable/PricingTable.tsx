@@ -1,7 +1,20 @@
 import React from 'react';
 import { PricingPlan } from '@/components/PricingPlan';
-import { PricingTable as IPricingTable } from '@/types/contentstack';
+import type {
+  PricingPlan as IPricingPlan,
+  NtExperience,
+} from '@/types/contentstack';
 import { RichText } from '../RichText/RichText';
+
+interface IPricingTable {
+  /** Headline */ headline?: any;
+  /** Subline */
+  subline?: string;
+  /** Pricing Plans */
+  pricing_plans?: IPricingPlan[];
+  /** Ninetailed Experiences */
+  nt_experiences?: NtExperience[];
+}
 
 export const PricingTable: React.FC<IPricingTable> = (props) => {
   return (
@@ -10,14 +23,10 @@ export const PricingTable: React.FC<IPricingTable> = (props) => {
         className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
         richTextHtml={props.headline}
       />
-      <RichText
-        className="mt-6 text-xl text-gray-500"
-        richTextHtml={props.subline}
-      />
-
+      <p className="mt-6 text-xl text-gray-500">{props.subline}</p>
       {/* Tiers */}
       <div className="mt-24 space-y-12 lg:space-y-0 flex flex-col lg:flex-row lg:gap-x-8">
-        {props.pricing_plans?.map((plan, i) => {
+        {props.pricing_plans?.map((plan: IPricingPlan, i: number) => {
           return (
             <div key={i} className="flex-1">
               <PricingPlan {...plan} />

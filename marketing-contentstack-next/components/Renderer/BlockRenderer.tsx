@@ -1,6 +1,4 @@
 import React from 'react';
-import get from 'lodash/get';
-import { ExperienceMapper } from '@ninetailed/experience.js-utils';
 
 import { Experience } from '@ninetailed/experience.js-next';
 
@@ -15,6 +13,15 @@ import { PricingPlan } from '@/components/PricingPlan';
 import { HubspotForm } from '@/components/HubspotForm';
 
 import { ComponentContentTypes } from '@/lib/constants';
+import {
+  parseExperiences,
+  parseModularBlockExperiences,
+} from '@/lib/experiences';
+import {
+  getBlockId,
+  getContentType,
+  isModularBlock,
+} from '@/lib/modularblocks';
 
 const ContentTypeMap = {
   [ComponentContentTypes.Hero]: Hero,
@@ -29,7 +36,8 @@ const ContentTypeMap = {
 };
 
 const ComponentRenderer = (props: any) => {
-  const contentTypeId: string = props._content_type_uid;
+  const contentTypeId: string = getContentType(props);
+
   // eslint-disable-next-line
   // @ts-ignore
   const Component = ContentTypeMap[contentTypeId];
@@ -42,51 +50,44 @@ const ComponentRenderer = (props: any) => {
   return <Component {...props} />;
 };
 
-const BlockRenderer = ({ block }: { block: any }) => {
+const BlockRenderer = ({
+  block,
+  modularBlockExperiences,
+}: {
+  block: any;
+  modularBlockExperiences?: any[];
+}) => {
   if (Array.isArray(block)) {
     return (
       <>
         {block.map((b) => {
-          return <BlockRenderer key={`block-${b.uid}`} block={b} />;
+          return (
+            <BlockRenderer
+              key={`block-${getBlockId(b)}`}
+              block={b}
+              modularBlockExperiences={modularBlockExperiences}
+            />
+          );
         })}
       </>
     );
   }
 
-  const contentTypeId = get(block, '_content_type_uid') as string;
-  const id = block.uid;
+  const contentTypeId = getContentType(block);
+  const id = getBlockId(block);
 
-  const experiences = (block.nt_experiences || [])
-    .map((experience: any) => {
-      return {
-        name: experience.nt_name,
-        type: experience.nt_type,
-        config: experience.nt_config,
-        audience: {
-          id: experience.nt_audience[0].nt_audience_id,
-          name: experience.nt_audience[0].nt_name,
-        },
-        id: experience.uid,
-        variants: experience.nt_variants?.map((variant: any) => {
-          return {
-            id: variant.uid,
-            ...variant,
-          };
-        }),
-      };
-    })
-    .filter((experience: any) => ExperienceMapper.isExperienceEntry(experience))
-    .map((experience: any) => ExperienceMapper.mapExperience(experience));
+  const mappedExperiences = isModularBlock(block)
+    ? parseModularBlockExperiences(modularBlockExperiences, id)
+    : parseExperiences(block);
 
   return (
-    <div key={`${contentTypeId}-${id}`}>
-      <Experience
-        {...block}
-        id={id}
-        component={ComponentRenderer}
-        experiences={experiences}
-      />
-    </div>
+    <Experience
+      {...block}
+      id={id}
+      component={ComponentRenderer}
+      experiences={mappedExperiences}
+      key={`${contentTypeId}-${id}`}
+    />
   );
 };
 

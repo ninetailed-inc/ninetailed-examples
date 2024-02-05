@@ -84,12 +84,12 @@ async function getEntryByWhereQuery({
   referenceFieldPath,
   jsonRtePath,
 }: GetEntryByWhereQuery) {
-  const landingPageQuery = Stack.ContentType(contentTypeUid).Query();
+  const entryQuery = Stack.ContentType(contentTypeUid).Query();
   if (referenceFieldPath) {
-    landingPageQuery.includeReference(referenceFieldPath).toJSON();
+    entryQuery.includeReference(referenceFieldPath).toJSON();
   }
   try {
-    const result = await landingPageQuery.where(fieldName, fieldValue).find();
+    const result = await entryQuery.where(fieldName, fieldValue).find();
     jsonRtePath &&
       contentstack.Utils.jsonToHTML({
         entry: result,
@@ -104,33 +104,6 @@ async function getEntryByWhereQuery({
     console.log('getEntryByUrl Error:', err);
     throw err;
   }
-}
-
-function getExperimentsQuery({
-  referenceFieldPath = [],
-  jsonRtePath,
-}: GetExperiment): Promise<any> {
-  return new Promise((resolve, reject) => {
-    const landingPageQuery = Stack.ContentType('nt_experience').Query();
-    landingPageQuery
-      .includeReference(['nt_audience', 'nt_variants', ...referenceFieldPath])
-      .toJSON();
-    const data = landingPageQuery.where('nt_type', 'nt_experiment').find();
-    data.then(
-      (result) => {
-        jsonRtePath &&
-          contentstack.Utils.jsonToHTML({
-            entry: result,
-            paths: jsonRtePath,
-          });
-        resolve(result);
-      },
-      (error) => {
-        console.error(error);
-        reject(error);
-      }
-    );
-  });
 }
 
 function getAllExperiencesQuery({
@@ -175,93 +148,60 @@ export const getLandingPage = async (entryUrl: string) => {
     fieldName: 'url',
     fieldValue: entryUrl,
     referenceFieldPath: [
+      'sections.hero.nt_experiences.nt_audience',
+      'sections.cta.nt_experiences.nt_audience',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_experience',
+    ],
+    jsonRtePath: [
+      'sections.hero.headline',
+      'sections.hero.subline',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.hero.headline',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.hero.subline',
+      'sections.cta.headline',
+      'sections.cta.subline',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.cta.headline',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.cta.subline',
+      //
+      // 'sections.pricing_plans.headline',
+      // 'sections.pricing_plans.subline',
+      // 'sections.pricing_plans.price',
+      // 'sections.pricing_plans.discounted_price',
+      // 'sections.pricing_plans.description',
+      // 'sections.pricing_plans.display_title',
+      // 'sections.nt_experiences.nt_variants.headline',
+      // 'sections.nt_experiences.nt_variants.subline',
+      // 'sections.nt_experiences.nt_variants.pricing_plans.headline',
+      // 'sections.nt_experiences.nt_variants.pricing_plans.subline',
+      // 'sections.nt_experiences.nt_variants.pricing_plans.price',
+      // 'sections.nt_experiences.nt_variants.pricing_plans.discounted_price',
+      // 'sections.nt_experiences.nt_variants.pricing_plans.description',
+      // 'sections.nt_experiences.nt_variants.pricing_plans.display_title',
+    ],
+  });
+  return response[0];
+};
+
+export const getConfigEntry = async () => {
+  const response = await getEntryByWhereQuery({
+    fieldName: 'title',
+    fieldValue: 'Global Configuration',
+    contentTypeUid: 'config',
+    referenceFieldPath: [
+      'banner',
       'banner.nt_experiences.nt_variants',
+      'banner.nt_experiences.nt_audience',
       'navigation.navigation_items.page_reference',
-      'navigation.nt_experiences.nt_variants.navigation_items.page_reference',
-      'sections.pricing_plans',
-      'sections.nt_experiences.nt_audience',
-      'sections.nt_experiences.nt_variants',
-      'sections.nt_experiences.nt_variants.pricing_plans',
+      //'navigation.nt_experiences.nt_variants.navigation_items.page_reference',
       'footer.footer_links.page_reference',
     ],
     jsonRtePath: [
       'banner.text',
       'banner.nt_experiences.nt_variants.text',
       'footer.copyright',
-      'sections.headline',
-      'sections.subline',
-      'sections.pricing_plans.headline',
-      'sections.pricing_plans.subline',
-      'sections.pricing_plans.price',
-      'sections.pricing_plans.discounted_price',
-      'sections.pricing_plans.description',
-      'sections.pricing_plans.display_title',
-      'sections.nt_experiences.nt_variants.headline',
-      'sections.nt_experiences.nt_variants.subline',
-      'sections.nt_experiences.nt_variants.pricing_plans.headline',
-      'sections.nt_experiences.nt_variants.pricing_plans.subline',
-      'sections.nt_experiences.nt_variants.pricing_plans.price',
-      'sections.nt_experiences.nt_variants.pricing_plans.discounted_price',
-      'sections.nt_experiences.nt_variants.pricing_plans.description',
-      'sections.nt_experiences.nt_variants.pricing_plans.display_title',
     ],
   });
   return response[0];
-};
-
-export const getHeroEntryById = async (
-  uid: string,
-  referenceFieldPath: string[],
-  jsonRtePath: string[]
-) => {
-  const response = await getEntryByWhereQuery({
-    contentTypeUid: 'hero',
-    fieldName: 'uid',
-    fieldValue: uid,
-    referenceFieldPath,
-    jsonRtePath,
-  });
-  return response[0];
-};
-
-export const getAllExperiments = async () => {
-  const response = await getExperimentsQuery({
-    jsonRtePath: [
-      'nt_variants.text',
-      'nt_variants.copyright',
-      'nt_variants.headline',
-      'nt_variants.subline',
-      'nt_variants.pricing_plans.headline',
-      'nt_variants.pricing_plans.subline',
-      'nt_variants.pricing_plans.price',
-      'nt_variants.pricing_plans.discounted_price',
-      'nt_variants.pricing_plans.description',
-      'nt_variants.pricing_plans.display_title',
-    ],
-  });
-
-  const mappedExperiments = (response[0] || [])
-    .map((experiment: any) => {
-      return {
-        name: experiment.nt_name,
-        type: experiment.nt_type,
-        config: experiment.nt_config,
-        audience: {
-          id: experiment.nt_audience[0].nt_audience_id,
-        },
-        id: experiment.uid,
-        variants: experiment.nt_variants?.map((variant: any) => {
-          return {
-            id: variant.uid,
-            ...variant,
-          };
-        }),
-      };
-    })
-    .filter(ExperienceMapper.isExperimentEntry)
-    .map(ExperienceMapper.mapExperiment);
-
-  return mappedExperiments;
 };
 
 export const getAllExperiences = async () => {
@@ -280,16 +220,21 @@ export const getAllExperiences = async () => {
     ],
   });
 
+  // TODO: Turn into reusable function
   const mappedExperiences = (response[0] || [])
     .map((experience: any) => {
       return {
         name: experience.nt_name,
         type: experience.nt_type,
         config: experience.nt_config,
-        audience: {
-          id: experience.nt_audience[0].nt_audience_id,
-          name: experience.nt_audience[0].title,
-        },
+        ...(experience.nt_audience.length
+          ? {
+              audience: {
+                id: experience.nt_audience[0].nt_audience_id,
+                name: experience.nt_audience[0].title,
+              },
+            }
+          : {}),
         id: experience.uid,
         variants: experience.nt_variants?.map((variant: any) => {
           return {
