@@ -7,26 +7,27 @@ import type {
 import { RichText } from '../RichText/RichText';
 
 interface IPricingTable {
-  /** Headline */ headline?: any;
-  /** Subline */
+  title?: string;
+  headline?: any;
   subline?: string;
-  /** Pricing Plans */
   pricing_plans?: IPricingPlan[];
-  /** Ninetailed Experiences */
   nt_experiences?: NtExperience[];
 }
 
-export const PricingTable: React.FC<IPricingTable> = (props) => {
+export const PricingTable: React.FC<{ pricing_table: IPricingTable }> = (
+  props
+) => {
+  const { pricing_table } = props;
   return (
     <div className="max-w-7xl mx-auto py-24 px-4 bg-white sm:px-6 lg:px-8">
       <RichText
         className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
-        richTextHtml={props.headline}
+        richTextHtml={pricing_table.headline}
       />
-      <p className="mt-6 text-xl text-gray-500">{props.subline}</p>
+      <p className="mt-6 text-xl text-gray-500">{pricing_table.subline}</p>
       {/* Tiers */}
       <div className="mt-24 space-y-12 lg:space-y-0 flex flex-col lg:flex-row lg:gap-x-8">
-        {props.pricing_plans?.map((plan: IPricingPlan, i: number) => {
+        {pricing_table.pricing_plans?.map((plan: IPricingPlan, i: number) => {
           return (
             <div key={i} className="flex-1">
               <PricingPlan {...plan} />

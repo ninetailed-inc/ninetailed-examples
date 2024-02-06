@@ -82,7 +82,7 @@ export const Feature = (props: any) => {
               src={feature.image.url}
               width={480}
               height={320}
-              className="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none"
+              className="lg:h-full lg:w-auto lg:max-w-none"
               alt=""
             />
           )}

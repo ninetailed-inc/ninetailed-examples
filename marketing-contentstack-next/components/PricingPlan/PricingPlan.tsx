@@ -23,7 +23,7 @@ export const PricingPlan = (props: IPricingPlan) => {
           richTextHtml={display_title}
         />
         {most_popular ? (
-          <p className="absolute top-0 py-1.5 px-4 bg-indigo-500 rounded-full text-xs font-semibold uppercase tracking-wide text-white transform -translate-y-1/2">
+          <p className="absolute top-0 py-1.5 px-4 bg-indigo-500 text-xs border-2 border-gray-900 font-semibold uppercase tracking-wide text-white transform -translate-y-1/2">
             Most popular
           </p>
         ) : null}
@@ -32,7 +32,9 @@ export const PricingPlan = (props: IPricingPlan) => {
             className="text-5xl font-extrabold tracking-tight"
             richTextHtml={price}
           />
-          <p className="text-xl font-semibold">{frequency}</p>
+          {frequency ? (
+            <p className="text-xl font-semibold">{frequency}</p>
+          ) : null}
           <RichText
             className="line-through text-red-500 ml-1 font-semibold text-2xl"
             richTextHtml={discounted_price}
