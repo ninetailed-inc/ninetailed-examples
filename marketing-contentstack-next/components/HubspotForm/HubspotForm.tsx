@@ -1,6 +1,5 @@
 import { useNinetailed, useProfile } from '@ninetailed/experience.js-next';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import classNames from 'classnames';
 import { Button } from '../Button';
 
 type FormValues = {

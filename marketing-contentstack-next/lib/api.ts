@@ -150,11 +150,12 @@ export const getLandingPage = async (entryUrl: string) => {
     referenceFieldPath: [
       'sections.hero.nt_experiences.nt_audience',
       'sections.cta.nt_experiences.nt_audience',
+      'sections.feature.nt_experiences.nt_audience',
       'sections.pricing_table.nt_experiences.nt_audience',
       'sections.pricing_table.pricing_plans',
-      'sections.feature.nt_experiences.nt_audience',
       'nt_modular_blocks_experiences.nt_experience_block.nt_variants',
       'nt_modular_blocks_experiences.nt_experience_block.nt_experience',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.pricing_table.pricing_plans',
     ],
     jsonRtePath: [
       'sections.hero.headline',
@@ -177,14 +178,10 @@ export const getLandingPage = async (entryUrl: string) => {
       'sections.pricing_table.pricing_plans.price',
       'sections.pricing_table.pricing_plans.discounted_price',
       'sections.pricing_table.pricing_plans.description',
-      // 'sections.nt_experiences.nt_variants.headline',
-      // 'sections.nt_experiences.nt_variants.subline',
-      // 'sections.nt_experiences.nt_variants.pricing_plans.headline',
-      // 'sections.nt_experiences.nt_variants.pricing_plans.subline',
-      // 'sections.nt_experiences.nt_variants.pricing_plans.price',
-      // 'sections.nt_experiences.nt_variants.pricing_plans.discounted_price',
-      // 'sections.nt_experiences.nt_variants.pricing_plans.description',
-      // 'sections.nt_experiences.nt_variants.pricing_plans.display_title',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.pricing_table.pricing_plans.display_title',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.pricing_table.pricing_plans.price',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.pricing_table.pricing_plans.discounted_price',
+      'nt_modular_blocks_experiences.nt_experience_block.nt_variants.pricing_table.pricing_plans.description',
     ],
   });
   return response[0];
@@ -200,7 +197,7 @@ export const getConfigEntry = async () => {
       'banner.nt_experiences.nt_variants',
       'banner.nt_experiences.nt_audience',
       'navigation.navigation_items.page_reference',
-      //'navigation.nt_experiences.nt_variants.navigation_items.page_reference',
+      'navigation.nt_experiences.nt_variants.navigation_items.page_reference',
       'footer.footer_links.page_reference',
     ],
     jsonRtePath: [
