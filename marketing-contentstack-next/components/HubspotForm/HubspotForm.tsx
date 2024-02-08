@@ -1,6 +1,6 @@
 import { useNinetailed, useProfile } from '@ninetailed/experience.js-next';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import classNames from 'classnames';
+import { Button } from '../Button';
 
 type FormValues = {
   firstname: string;
@@ -14,6 +14,7 @@ type FormValues = {
 };
 
 export const HubspotForm = (props: any) => {
+  const { hubspot_form } = props;
   const { profile } = useProfile();
   const { identify } = useNinetailed();
 
@@ -27,7 +28,7 @@ export const HubspotForm = (props: any) => {
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${props.hubspot_portal_id}/${props.hubspot_form_id}`,
+        `https://api.hsforms.com/submissions/v3/integration/submit/${hubspot_form.hubspot_portal_id}/${hubspot_form.hubspot_form_id}`,
         {
           method: 'POST',
           headers: {
@@ -236,14 +237,9 @@ export const HubspotForm = (props: any) => {
               value: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT || 'main',
             })}
           />
-          <input
-            type="submit"
-            value={isSubmitting ? 'Submitting...' : 'Submit'}
-            className={classNames(
-              'inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75',
-              { 'bg-opacity-20 hover:bg-opacity-20': isSubmitting }
-            )}
-          />
+          <Button type="submit" disabled={isSubmitting} variant="Primary">
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </Button>
         </form>
       )}
     </div>
