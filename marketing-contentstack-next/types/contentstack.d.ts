@@ -1,3 +1,10 @@
+export interface PublishDetails {
+  environment: string;
+  locale: string;
+  time: string;
+  user: string;
+}
+
 export interface File {
   uid: string;
   created_at: string;
@@ -14,12 +21,7 @@ export interface File {
   parent_uid: string;
   _version: number;
   title: string;
-  publish_details: {
-    environment: string;
-    locale: string;
-    time: string;
-    user: string;
-  };
+  publish_details: PublishDetails;
 }
 
 export interface Link {
@@ -27,14 +29,17 @@ export interface Link {
   href: string;
 }
 
-export interface Button {
-  /** Button Link */
-  button_link: Link;
-  /** Button Variant */
-  button_variant?: 'Primary' | 'Secondary' | 'Tertiary';
+export interface Taxonomy {
+  taxonomy_uid: string;
+  max_terms?: number;
+  mandatory: boolean;
+  non_localizable: boolean;
 }
 
+/** A field group for specifying SEO data on an associated page entry. */
 export interface Seo {
+  /** Version */
+  version: 1;
   /** Meta Title */
   meta_title?: string;
   /** Meta Description */
@@ -47,6 +52,8 @@ export interface Seo {
 
 /** Ninetailed Experience */
 export interface NtExperience {
+  /** Version */
+  version: 3;
   /** Name */
   nt_name: string;
   /** Description */
@@ -58,13 +65,15 @@ export interface NtExperience {
   /** Config */
   nt_config: any;
   /** Variants */
-  nt_variants?: (PricingTable | Navigation | Hero | Feature | Cta | Banner)[];
+  nt_variants?: (Banner | Navigation)[];
   /** Title */
   title: string;
 }
 
 /** Ninetailed Merge Tag */
 export interface NtMergetag {
+  /** Version */
+  version: 2;
   /** Name */
   nt_name: string;
   /** Fallback */
@@ -77,8 +86,8 @@ export interface NtMergetag {
 
 /** Ninetailed Audience */
 export interface NtAudience {
-  /** Title */
-  title?: string;
+  /** Version */
+  version: 2;
   /** Name */
   nt_name: string;
   /** Description */
@@ -87,9 +96,13 @@ export interface NtAudience {
   nt_rules: any;
   /** Audience Id */
   nt_audience_id: string;
+  /** Title */
+  title: string;
 }
 
 export interface PricingPlan {
+  /** Version */
+  version: 3;
   /** Internal Title */
   title: string;
   /** Title */
@@ -97,105 +110,303 @@ export interface PricingPlan {
   /** Price */
   price?: any;
   /** Frequency */
-  frequency?: '/month' | '/week' | '/day';
+  frequency?: ('/month' | '/week') | null;
   /** Discounted Price */
   discounted_price?: any;
   /** Description */
   description?: any;
   /** Button */
-  button?: Button;
+  button?: {
+    /** Button Link */
+    button_link: Link;
+    /** Button Variant */
+    button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+  }[];
   /** Most Popular */
   most_popular?: boolean;
 }
 
-export interface PricingTable {
-  /** Title */
-  title: string;
-  /** Headline */
-  headline?: any;
-  /** Subline */
-  subline?: any;
-  /** Pricing Plans */
-  pricing_plans?: PricingPlan[];
-  /** Ninetailed */
-  nt_experiences?: NtExperience[];
-}
-
-export interface Feature {
-  /** Title */
-  title: string;
-  /** Headline */
-  headline?: any;
-  /** Subline */
-  subline?: any;
-  /** Buttons */
-  buttons?: Button[];
-  /** Image */
-  image?: File;
-  /** Image Position */
-  image_position?: 'left' | 'right';
-  /** Ninetailed */
-  nt_experiences?: NtExperience[];
-}
-
-export interface Cta {
-  /** Title */
-  title: string;
-  /** Headline */
-  headline?: any;
-  /** Subline */
-  subline?: any;
-  /** Buttons */
-  buttons?: Button[];
-  /** Ninetailed */
-  nt_experiences?: NtExperience[];
-}
-
-export interface Hero {
+export interface Config {
+  /** Version */
+  version: 2;
   /** Internal Title */
   title: string;
-  /** Headline */
-  headline?: any;
-  /** Subline */
-  subline?: any;
-  /** Buttons */
-  buttons?: Button[];
-  /** Image */
-  image?: File;
-  /** Ninetailed */
-  nt_experiences?: NtExperience[];
+  /** Banner */
+  banner?: Banner[];
+  /** Navigation */
+  navigation?: Navigation[];
+  /** Footer */
+  footer?: Footer[];
 }
 
-export interface Navigation {
+export interface LandingPage {
+  /** Version */
+  version: 23;
   /** Title */
   title: string;
-  /** Navigation Items */
-  navigation_items?: {
-    /** Title */
-    title?: string;
-    /** Page Reference */
-    page_reference: LandingPage[];
+  /** SEO */
+  seo?: Seo;
+  /** URL */
+  url?: string;
+  /** Ninetailed */
+  nt_experiences?: NtExperience[];
+  /** Sections */
+  sections?: (
+    | {
+        hero: {
+          /** Internal Title */ title?: string;
+          /** Headline */
+          headline: any;
+          /** Subline */
+          subline?: string;
+          /** Buttons */
+          buttons?: [
+            {
+              /** Button Link */
+              button_link: Link;
+              /** Button Variant */
+              button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+            },
+            {
+              /** Button Link */
+              button_link: Link;
+              /** Button Variant */
+              button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+            }
+          ];
+          /** Image */
+          image?: File | null;
+          /** Ninetailed Experiences */
+          nt_experiences?: NtExperience[];
+        };
+        cta: undefined;
+        feature: undefined;
+        pricing_table: undefined;
+        hubspot_form: undefined;
+      }
+    | {
+        cta: {
+          /** Internal Title */ title?: string;
+          /** Headline */
+          headline?: any;
+          /** Subline */
+          subline?: string;
+          /** Buttons */
+          buttons?: [
+            {
+              /** Button Link */
+              button_link: Link;
+              /** Button Variant */
+              button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+            },
+            {
+              /** Button Link */
+              button_link: Link;
+              /** Button Variant */
+              button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+            }
+          ];
+          /** Ninetailed Experiences */
+          nt_experiences?: NtExperience[];
+        };
+        hero: undefined;
+        feature: undefined;
+        pricing_table: undefined;
+        hubspot_form: undefined;
+      }
+    | {
+        feature: {
+          /** Internal Title */ title?: string;
+          /** Headline */
+          headline?: any;
+          /** Subline */
+          subline?: string;
+          /** Buttons */
+          buttons?: {
+            /** Button Link */
+            button_link: Link;
+            /** Button Variant */
+            button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+          }[];
+          /** Image */
+          image?: File | null;
+          /** Image Position */
+          image_position?: ('left' | 'right') | null;
+          /** Ninetailed Experiences */
+          nt_experiences?: NtExperience[];
+        };
+        hero: undefined;
+        cta: undefined;
+        pricing_table: undefined;
+        hubspot_form: undefined;
+      }
+    | {
+        pricing_table: {
+          /** Internal Title */ title?: string;
+          /** Headline */
+          headline?: any;
+          /** Subline */
+          subline?: string;
+          /** Pricing Plans */
+          pricing_plans?: PricingPlan[];
+          /** Ninetailed Experiences */
+          nt_experiences?: NtExperience[];
+        };
+        hero: undefined;
+        cta: undefined;
+        feature: undefined;
+        hubspot_form: undefined;
+      }
+    | {
+        hubspot_form: {
+          /** Internal Title */ title?: string;
+          /** Hubspot Form ID */
+          hubspot_form_id?: string;
+          /** Hubspot Portal ID */
+          hubspot_portal_id?: string;
+          /** Ninetailed Experiences */
+          nt_experiences?: NtExperience[];
+        };
+        hero: undefined;
+        cta: undefined;
+        feature: undefined;
+        pricing_table: undefined;
+      }
+  )[];
+  /** Ninetailed Experiences */
+  nt_modular_blocks_experiences?: {
+    nt_experience_block: {
+      /** Title */ nt_title?: string;
+      /** Experience */
+      nt_experience: NtExperience[];
+      /** Baseline */
+      nt_baseline: any;
+      /** Variants */
+      nt_variants?: (
+        | {
+            hero: {
+              /** Internal Title */ title?: string;
+              /** Headline */
+              headline: any;
+              /** Subline */
+              subline?: string;
+              /** Buttons */
+              buttons?: [
+                {
+                  /** Button Link */
+                  button_link?: Link;
+                  /** Button Variant */
+                  button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+                },
+                {
+                  /** Button Link */
+                  button_link?: Link;
+                  /** Button Variant */
+                  button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+                }
+              ];
+              /** Image */
+              image?: File | null;
+            };
+            cta: undefined;
+            feature: undefined;
+            pricing_table: undefined;
+            hubspot_form: undefined;
+          }
+        | {
+            cta: {
+              /** Internal Title */ title?: string;
+              /** Headline */
+              headline?: any;
+              /** Subline */
+              subline?: string;
+              /** Buttons */
+              buttons?: [
+                {
+                  /** Button Link */
+                  button_link?: Link;
+                  /** Button Variant */
+                  button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+                },
+                {
+                  /** Button Link */
+                  button_link?: Link;
+                  /** Button Variant */
+                  button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+                }
+              ];
+            };
+            hero: undefined;
+            feature: undefined;
+            pricing_table: undefined;
+            hubspot_form: undefined;
+          }
+        | {
+            feature: {
+              /** Internal Title */ title?: string;
+              /** Headline */
+              headline?: any;
+              /** Subline */
+              subline?: string;
+              /** Buttons */
+              buttons?: {
+                /** Button Link */
+                button_link?: Link;
+                /** Button Variant */
+                button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
+              }[];
+              /** Image */
+              image?: File | null;
+              /** Image Position */
+              image_position?: ('left' | 'right') | null;
+            };
+            hero: undefined;
+            cta: undefined;
+            pricing_table: undefined;
+            hubspot_form: undefined;
+          }
+        | {
+            pricing_table: {
+              /** Internal Title */ title?: string;
+              /** Headline */
+              headline?: any;
+              /** Subline */
+              subline?: string;
+              /** Pricing Plans */
+              pricing_plans?: PricingPlan[];
+            };
+            hero: undefined;
+            cta: undefined;
+            feature: undefined;
+            hubspot_form: undefined;
+          }
+        | {
+            hubspot_form: {
+              /** Internal Title */ title?: string;
+              /** Hubspot Form ID */
+              hubspot_form_id?: string;
+              /** Hubspot Portal ID */
+              hubspot_portal_id?: string;
+            };
+            hero: undefined;
+            cta: undefined;
+            feature: undefined;
+            pricing_table: undefined;
+          }
+      )[];
+    };
   }[];
-  /** Ninetailed */
-  nt_experiences?: NtExperience[];
-}
-
-export interface HubspotForm {
-  /** Title */
-  title: string;
-  /** Hubspot Form ID */
-  hubspot_form_id?: string;
-  /** Hubspot Portal ID */
-  hubspot_portal_id?: string;
 }
 
 export interface Footer {
+  /** Version */
+  version: 3;
   /** Title */
   title: string;
   /** Footer Links */
   footer_links?: {
     /** Title */
-    title?: string;
+    title: string;
     /** Page Reference */
     page_reference?: LandingPage[];
   }[];
@@ -203,24 +414,26 @@ export interface Footer {
   copyright?: any;
 }
 
-export interface LandingPage {
+export interface Navigation {
+  /** Version */
+  version: 7;
   /** Title */
   title: string;
-  /** SEO */
-  seo?: Seo;
-  /** URL */
-  url?: string;
-  /** Banner */
-  banner?: Banner[];
-  /** Navigation */
-  navigation?: Navigation[];
-  /** Sections */
-  sections?: (Cta | Feature | Hero | HubspotForm | PricingTable)[];
-  /** Footer */
-  footer?: Footer[];
+  /** Navigation Items */
+  navigation_items?: {
+    /** Title */
+    title: string;
+    /** Page Reference */
+    page_reference: LandingPage[];
+  }[];
+  /** Ninetailed */
+  nt_experiences?: NtExperience[];
 }
 
+/** A dismissible call-to-cation displayed at the top of the viewport. */
 export interface Banner {
+  /** Version */
+  version: 5;
   /** Title */
   title: string;
   /** Text */

@@ -24,7 +24,7 @@ type AppProps<P = unknown> = {
 
 // FIXME: Re-export this type from utils-contentful
 type Audience = {
-  name?: string | undefined;
+  name: string;
   description?: string | undefined;
   id: string;
 };
@@ -96,6 +96,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
       >
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
+            {/* Injected style example*/}
             {pageProps.config &&
               pageProps.config.fields.styles?.length &&
               pageProps.config.fields.styles.map((styleEntry) => {

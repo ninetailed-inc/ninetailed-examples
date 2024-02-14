@@ -16,6 +16,9 @@ export interface IBannerFields {
   /** slug */
   slug: string;
 
+  /** Variant */
+  variant?: 'Primary' | 'Loud' | undefined;
+
   /** Ninetailed */
   nt_experiences?: INtExperience[] | undefined;
 }
@@ -75,11 +78,20 @@ export interface IConfigFields {
   /** Internal Name */
   name: 'Configuration';
 
+  /** Banner */
+  banner?: IBanner | undefined;
+
+  /** Navigation */
+  navigation?: INavigation | undefined;
+
   /** Settings */
   settings?: ISetting[] | undefined;
 
   /** Styles */
   styles: IStyle[];
+
+  /** Footer */
+  footer?: IFooter | undefined;
 }
 
 export interface IConfig extends Entry<IConfigFields> {
@@ -350,6 +362,12 @@ export interface INtExperienceFields {
 
   /** Variants */
   nt_variants?: Entry<{ [fieldId: string]: unknown }>[] | undefined;
+
+  /** Experience Id */
+  nt_experience_id?: string | undefined;
+
+  /** Experience Metadata */
+  nt_metadata?: Record<string, any> | undefined;
 }
 
 /** Ninetailed Experience */
@@ -411,17 +429,15 @@ export interface IPageFields {
   /** SEO */
   seo?: ISeo | undefined;
 
-  /** Banner */
-  banner?: IBanner | undefined;
-
-  /** Navigation */
-  navigation?: INavigation | undefined;
-
   /** Sections */
-  sections: (ICta | IFeature | IHero | IHubspotForm | IPricingTable)[];
-
-  /** Footer */
-  footer?: IFooter | undefined;
+  sections: (
+    | ICta
+    | IFeature
+    | IHero
+    | IHubspotForm
+    | IPricingTable
+    | ISectionsGroup
+  )[];
 }
 
 export interface IPage extends Entry<IPageFields> {
@@ -434,6 +450,46 @@ export interface IPage extends Entry<IPageFields> {
     contentType: {
       sys: {
         id: 'page';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IPdpFields {
+  /** Title */
+  title: string;
+
+  /** Slug */
+  slug: string;
+
+  /** SEO */
+  seo: ISeo;
+
+  /** Product */
+  product: string;
+
+  /** Details */
+  details?: IProductDetail[] | undefined;
+
+  /** Policies */
+  policies?: IProductPolicy[] | undefined;
+
+  /** Sections */
+  sections?: IFeature[] | undefined;
+}
+
+export interface IPdp extends Entry<IPdpFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'pdp';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -511,6 +567,120 @@ export interface IPricingTable extends Entry<IPricingTableFields> {
     contentType: {
       sys: {
         id: 'pricingTable';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IProductDetailFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Heading */
+  heading: string;
+
+  /** Body */
+  body?: Document | undefined;
+}
+
+export interface IProductDetail extends Entry<IProductDetailFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'productDetail';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IProductInfoBlockFields {
+  /** Title */
+  title: string;
+
+  /** Copy */
+  copy?: Document | undefined;
+}
+
+export interface IProductInfoBlock extends Entry<IProductInfoBlockFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'productInfoBlock';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IProductPolicyFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Policy Type */
+  policyType: 'Shipping' | 'Loyalty';
+
+  /** Heading */
+  heading: string;
+
+  /** Description */
+  description?: Document | undefined;
+}
+
+export interface IProductPolicy extends Entry<IProductPolicyFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'productPolicy';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface ISectionsGroupFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Sections */
+  sections?:
+    | (ICta | IFeature | IHero | IHubspotForm | IPricingTable)[]
+    | undefined;
+
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
+}
+
+export interface ISectionsGroup extends Entry<ISectionsGroupFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'sectionsGroup';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -628,8 +798,13 @@ export type CONTENT_TYPE =
   | 'nt_experience'
   | 'nt_mergetag'
   | 'page'
+  | 'pdp'
   | 'pricingPlan'
   | 'pricingTable'
+  | 'productDetail'
+  | 'productInfoBlock'
+  | 'productPolicy'
+  | 'sectionsGroup'
   | 'seo'
   | 'setting'
   | 'style';

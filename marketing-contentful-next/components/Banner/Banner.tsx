@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { XIcon } from '@heroicons/react/solid';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 import { RichText } from '@/components/RichText';
 import { IBanner } from '@/types/contentful';
+import classNames from 'classnames';
 
 export type Handler = () => void;
 
@@ -15,7 +16,13 @@ export const Banner = ({ fields }: IBanner) => {
   };
 
   return (
-    <div className={show ? 'relative bg-indigo-600' : 'hidden'}>
+    <div
+      className={classNames(
+        show ? 'relative' : 'hidden',
+        { 'bg-indigo-600': fields.variant === 'Primary' },
+        { 'bg-orange-600': fields.variant === 'Loud' }
+      )}
+    >
       <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
         <div className="pr-16 sm:text-center sm:px-16">
           <div className="font-medium text-white">
@@ -41,7 +48,7 @@ export const Banner = ({ fields }: IBanner) => {
             className="flex p-2 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white"
           >
             <span className="sr-only">Dismiss</span>
-            <XIcon
+            <XMarkIcon
               className="h-6 w-6 text-white"
               aria-hidden="true"
               onClick={handleCloseBanner}

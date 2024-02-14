@@ -16,14 +16,14 @@ export const Navigation = ({ fields }: INavigation) => {
   const { identify } = useNinetailed();
   const handleLogin = handleErrors(async () => {
     setLoggingIn(true);
-    await identify('', { pricingplan: 'lite' });
+    // This is a hard-coded Segment user_id for demo purposes
+    await identify('6468b4e5', { pricingplan: 'growth' });
     setLoggingIn(false);
   });
 
   const handleRegistration = handleErrors(async () => {
     setRegistering(true);
-    // This is a hard-coded Segment user_id for demo purposes
-    await identify('6468b4e5', { pricingplan: 'growth' });
+    await identify('', { pricingplan: 'lite' });
     setRegistering(false);
   });
 

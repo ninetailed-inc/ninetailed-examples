@@ -130,3 +130,15 @@ Run the development server:
 ```bash
 yarn dev
 ```
+
+### Make Your Own Content Export
+
+```bash
+yarn export
+```
+
+### Generate Types
+
+```bash
+yarn codegen
+```

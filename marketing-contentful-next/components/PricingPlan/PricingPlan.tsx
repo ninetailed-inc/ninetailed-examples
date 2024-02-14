@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { BLOCKS } from '@contentful/rich-text-types';
-import { CheckIcon } from '@heroicons/react/solid';
+import { CheckIcon } from '@heroicons/react/24/solid';
 import { Button, ButtonVariant } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { IPricingPlan } from '@/types/contentful';

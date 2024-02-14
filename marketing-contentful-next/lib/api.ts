@@ -1,5 +1,11 @@
 import { ContentfulClientApi, createClient } from 'contentful';
-import { IConfig, IPage, IPageFields } from '@/types/contentful';
+import {
+  IConfig,
+  IPage,
+  IPageFields,
+  IPdp,
+  IPdpFields,
+} from '@/types/contentful';
 import {
   AudienceEntryLike,
   AudienceMapper,
@@ -28,11 +34,13 @@ const getClient = (preview: boolean): ContentfulClientApi => {
 interface IQueryParams {
   preview?: boolean;
 }
-interface IPageQueryParams extends IQueryParams {
+interface IPagelikeQueryParams extends IQueryParams {
   slug: string;
 }
 
-const getPageQuery = (pageParams: IPageQueryParams) => {
+// TODO: Use generics to reduce regular page and PDP page repeititon
+
+const getPageQuery = (pageParams: IPagelikeQueryParams) => {
   return {
     limit: 1,
     include: 10,
@@ -41,7 +49,18 @@ const getPageQuery = (pageParams: IPageQueryParams) => {
   };
 };
 
-export async function getPage(pageParams: IPageQueryParams): Promise<IPage> {
+const getProductDisplayPageQuery = (pageParams: IPagelikeQueryParams) => {
+  return {
+    limit: 1,
+    include: 10,
+    'fields.slug': pageParams.slug,
+    content_type: 'pdp',
+  };
+};
+
+export async function getPage(
+  pageParams: IPagelikeQueryParams
+): Promise<IPage> {
   const query = getPageQuery(pageParams);
   const client = getClient(pageParams.preview as boolean);
   const entries = await client.getEntries<IPageFields>(query);
@@ -58,24 +77,39 @@ export async function getPages(QueryParams: IQueryParams): Promise<IPage[]> {
   return pages || [];
 }
 
-// export async function getExperiments(QueryParams: IQueryParams) {
-//   const query = {
-//     content_type: 'nt_experience',
-//     'fields.nt_type': 'nt_experiment',
-//   };
-//   const client = getClient(QueryParams.preview as boolean);
-//   const entries = await client.getEntries(query);
-//   const experiments = entries.items as ExperimentEntry[];
+export async function getProductPage(
+  pageParams: IPagelikeQueryParams
+): Promise<IPdp> {
+  const query = getProductDisplayPageQuery(pageParams);
+  const client = getClient(pageParams.preview as boolean);
+  const entries = await client.getEntries<IPdpFields>(query);
+  const [pdp] = entries.items as IPdp[];
+  return pdp;
+}
 
-//   const mappedExperiments = (experiments || [])
-//     .filter((entry) => ExperienceMapper.isExperiment(entry))
-//     .map((entry) => {
-//       return ExperienceMapper.mapExperiment(entry);
-//     });
+export async function getProductPages(
+  QueryParams: IQueryParams
+): Promise<IPdp[]> {
+  const query = { content_type: 'pdp' };
+  const client = getClient(QueryParams.preview as boolean);
+  const entries = await client.getEntries<IPdpFields>(query);
+  const pdps = entries.items as IPdp[];
 
-//   return mappedExperiments;
-// }
+  return pdps || [];
+}
 
+export async function getGlobalConfig(QueryParams: IQueryParams) {
+  const query = {
+    content_type: 'config',
+    limit: 1,
+    include: 4, // Need at least 4: Config [0] => Nav [1] => NT Experience [2] => NT Variants [3] => Button [4]
+  };
+  const client = getClient(QueryParams.preview as boolean);
+  const entries = await client.getEntries(query);
+  return entries.items[0] as IConfig;
+}
+
+// For the preview widget
 export async function getAllExperiences() {
   const query = {
     content_type: 'nt_experience',
@@ -109,15 +143,4 @@ export async function getAllAudiences() {
     .map((entry) => AudienceMapper.mapAudience(entry));
 
   return mappedAudiences;
-}
-
-export async function getGlobalConfig(QueryParams: IQueryParams) {
-  const query = {
-    content_type: 'config',
-    limit: 1,
-    include: 3, // Config [0] => Setting [1] => NT Experience [2] => NT Variants [3]
-  };
-  const client = getClient(QueryParams.preview as boolean);
-  const entries = await client.getEntries(query);
-  return entries.items[0] as IConfig;
 }
