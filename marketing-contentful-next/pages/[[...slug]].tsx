@@ -10,14 +10,15 @@ import {
   getGlobalConfig,
   getAllAudiences,
 } from '@/lib/api';
-import { IPage } from '@/types/contentful';
+import { IConfig, IPage } from '@/types/contentful';
 
-const Page = ({ page }: { page: IPage }) => {
+const Page = ({ page, config }: { page: IPage; config: IConfig }) => {
   if (!page) {
     return null;
   }
 
-  const { seo, banner, navigation, sections = [], footer } = page.fields;
+  const { seo, sections = [] } = page.fields;
+  const { banner, navigation, footer } = config.fields;
 
   return (
     <>
