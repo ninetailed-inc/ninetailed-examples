@@ -3,10 +3,12 @@ import '@/styles/globals.css';
 import { AppProps as NextAppProps } from 'next/app';
 import Script from 'next/script';
 import {
+  ESRProvider,
   Experience,
   ExperienceConfiguration,
   NinetailedProvider,
 } from '@ninetailed/experience.js-next';
+import NinetailedSsrPlugin from '@ninetailed/experience.js-plugin-ssr';
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights';
@@ -44,6 +46,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
     <div className="app">
       <NinetailedProvider
         plugins={[
+          new NinetailedSsrPlugin(),
           new NinetailedInsightsPlugin(),
           ...(process.env.NEXT_PUBLIC_GTM_ID
             ? [
@@ -94,6 +97,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
         componentViewTrackingThreshold={2000} // Default = 2000
       >
+        {/* <ESRProvider experienceVariantsMap={ninetailed?.experienceVariantsMap}> */}
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
             {/* Injected style example*/}
@@ -130,6 +134,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
             <Component {...pageProps} />
           </ContentfulLivePreviewProvider>
         </SettingsProviderWrapper>
+        {/* </ESRProvider> */}
       </NinetailedProvider>
     </div>
   );
