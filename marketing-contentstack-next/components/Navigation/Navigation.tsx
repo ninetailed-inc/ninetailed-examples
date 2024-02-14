@@ -5,10 +5,9 @@ import Link from 'next/link';
 import { Navigation as INavigation } from '@/types/contentstack';
 import Logo from '@/public/logo.svg';
 
-import classNames from 'classnames';
-
 import { handleErrors } from '@/lib/helperfunctions';
 import { useNinetailed } from '@ninetailed/experience.js-next';
+import { Button } from '@/components/Button';
 
 export const Navigation: React.FC<INavigation> = (props) => {
   const [loggingIn, setLoggingIn] = React.useState<boolean>(false);
@@ -63,28 +62,26 @@ export const Navigation: React.FC<INavigation> = (props) => {
             </div>
           </div>
 
-          <div className="ml-10 space-x-4">
+          <div className="ml-10 space-x-4 flex">
             {/* Buttons here */}
-            <button
+            <Button
               onClick={handleLogin}
-              className={classNames(
-                'inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75',
-                { 'bg-opacity-20': loggingIn }
-              )}
               disabled={loggingIn}
+              type="button"
+              variant="Primary"
+              size="small"
             >
               Sign in
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleRegistration}
-              className={classNames(
-                'inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50',
-                { 'bg-opacity-20': registering }
-              )}
               disabled={registering}
+              type="button"
+              variant="Secondary"
+              size="small"
             >
               Sign up
-            </button>
+            </Button>
           </div>
         </div>
 

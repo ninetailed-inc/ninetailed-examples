@@ -5,40 +5,36 @@ import { RichText } from '@/components/RichText';
 import { Button, ButtonVariant } from '@/components/Button';
 import { ContentstackImageLoader } from '@/lib/helperfunctions';
 
-import { Feature as IFeature } from '@/types/contentstack';
-
-export const Feature: React.FC<IFeature> = (props) => {
+export const Feature = (props: any) => {
+  const { feature } = props;
   return (
     <div className="relative max-w-xl mx-auto lg:max-w-7xl px-4 sm:max-w-3xl sm:px-6 sm:py-6 lg:px-12">
       <div className="relative mt-2 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
         <div
-          className={`relative${
-            props.image_position !== 'left' ? '' : ' order-last'
+          className={`relative ${
+            feature.image_position !== 'left' ? '' : ' order-last'
           }`}
         >
           <RichText
             className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
-            richTextHtml={props.headline}
+            richTextHtml={feature.headline}
           />
-          <RichText
-            className="mt-6 text-xl text-gray-500"
-            richTextHtml={props.subline}
-          />
+          <p className="mt-6 text-xl text-gray-500">{feature.subline}</p>
           <div className="mt-5 mx-auto flex flex-col sm:flex-row md:mt-8 sm:w-full">
-            {props.buttons && props.buttons[0]?.button_link.href && (
+            {feature.buttons && feature.buttons[0]?.button_link.href && (
               <div>
                 <Link
                   passHref
-                  href={props.buttons[0].button_link.href}
+                  href={feature.buttons[0].button_link.href}
                   legacyBehavior
                 >
                   <Button
                     as="a"
                     type="button"
-                    variant={props.buttons[0].button_variant as ButtonVariant}
+                    variant={feature.buttons[0].button_variant as ButtonVariant}
                     size="large"
                   >
-                    {props.buttons[0].button_link.title}
+                    {feature.buttons[0].button_link.title}
                   </Button>
                 </Link>
               </div>
@@ -80,13 +76,13 @@ export const Feature: React.FC<IFeature> = (props) => {
               fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)"
             />
           </svg>
-          {props.image && (
+          {feature.image && (
             <Image
               loader={ContentstackImageLoader}
-              src={props.image.url}
+              src={feature.image.url}
               width={480}
               height={320}
-              className="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none"
+              className="lg:h-full lg:w-auto lg:max-w-none"
               alt=""
             />
           )}

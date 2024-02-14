@@ -165,7 +165,7 @@ export const Hero = ({ sys, fields }: IHero) => {
                     590,
                     updatedHero.fields.image.fields.file.details.image.height
                   )}
-                  className="w-full rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 lg:w-auto lg:max-w-none object-cover"
+                  className="w-full rounded lg:w-auto lg:max-w-none object-cover"
                   style={{
                     width:
                       (updatedHero.fields.image.fields.file.details.image
