@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 
 import { RichText } from '@/components/RichText';
 import { IBanner } from '@/types/contentful';
+import classNames from 'classnames';
 
 export type Handler = () => void;
 
@@ -15,7 +16,13 @@ export const Banner = ({ fields }: IBanner) => {
   };
 
   return (
-    <div className={show ? 'relative bg-indigo-600' : 'hidden'}>
+    <div
+      className={classNames(
+        show ? 'relative' : 'hidden',
+        { 'bg-indigo-600': fields.variant === 'Primary' },
+        { 'bg-orange-600': fields.variant === 'Loud' }
+      )}
+    >
       <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
         <div className="pr-16 sm:text-center sm:px-16">
           <div className="font-medium text-white">

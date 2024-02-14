@@ -1,4 +1,6 @@
+// ==================
 // Under construction
+// ==================
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
@@ -12,11 +14,15 @@ import {
   getGlobalConfig,
   getAllAudiences,
 } from '@/lib/api';
-import { getStorefrontApiUrl, getPrivateTokenHeaders } from '@/lib/shopifyApi';
+import {
+  getStorefrontApiUrl,
+  getPrivateTokenHeaders,
+  productInfoQuery,
+} from '@/lib/shopifyApi';
 
 import { IConfig, IPdp } from '@/types/contentful';
 import type { Product as IProduct } from '@shopify/hydrogen-react/storefront-api-types';
-import { request, gql } from 'graphql-request';
+import { request } from 'graphql-request';
 
 const Pdp = ({
   pdp,
@@ -25,9 +31,9 @@ const Pdp = ({
 }: {
   pdp: IPdp;
   config: IConfig;
-  product: Partial<IProduct>; // TODO: Could be improved by codegen on query or constructing specific type
+  product: Partial<IProduct>;
 }) => {
-  if (!pdp) {
+  if (!pdp || !product) {
     return null;
   }
 
@@ -44,7 +50,6 @@ const Pdp = ({
       />
       {banner && <BlockRenderer block={banner} />}
       {navigation && <BlockRenderer block={navigation} />}
-
       <main className="grow">
         {product && <Product pdp={pdp} product={product} />}
         {sections && <BlockRenderer block={sections} />}
@@ -67,69 +72,25 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
     getAllAudiences(),
   ]);
 
-  const productInfoQuery = gql`
-    query getProductById($id: ID!) {
-      product(id: $id) {
-        title
-        options(first: 3) {
-          id
-          name
-          values
-        }
-        images(first: 3) {
-          edges {
-            node {
-              id
-              url
-              altText
-              height
-              width
-            }
-          }
-        }
-        priceRange {
-          minVariantPrice {
-            amount
-            currencyCode
-          }
-        }
-        requiresSellingPlan
-        variants(first: 10) {
-          edges {
-            node {
-              id
-              title
-              selectedOptions {
-                name
-                value
-              }
-              price {
-                amount
-              }
-              availableForSale
-            }
-          }
-        }
-      }
-    }
-  `;
-
   const productInfoQueryVariables = {
     id: pdp.fields.product,
   };
 
-  const { product }: { product: Partial<IProduct> } = await request(
-    getStorefrontApiUrl(),
-    productInfoQuery,
-    productInfoQueryVariables,
-    getPrivateTokenHeaders()
-  );
+  const productInfo: { product: Partial<IProduct> } | null =
+    getStorefrontApiUrl && getPrivateTokenHeaders
+      ? await request(
+          getStorefrontApiUrl(),
+          productInfoQuery,
+          productInfoQueryVariables,
+          getPrivateTokenHeaders()
+        )
+      : null;
 
   return {
     props: {
       pdp,
       config,
-      product,
+      product: productInfo && productInfo.product,
       ninetailed: {
         preview: {
           allExperiences,
@@ -142,21 +103,32 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pdps = await getProductPages({ preview: false });
+  if (
+    process.env.SHOPIFY_PRIVATE_STOREFRONT_TOKEN &&
+    process.env.SHOPIFY_STORE_NAME
+  ) {
+    const pdps = await getProductPages({ preview: false });
 
-  const paths = pdps
-    .filter((pdp) => {
-      return pdp.fields.slug !== '/';
-    })
-    .map((pdp) => {
-      return {
-        params: { slug: pdp.fields.slug.split('/') },
-      };
-    });
-  return {
-    paths: paths,
-    fallback: false,
-  };
+    const paths = pdps
+      .filter((pdp) => {
+        return pdp.fields.slug !== '/';
+      })
+      .map((pdp) => {
+        return {
+          params: { slug: pdp.fields.slug.split('/') },
+        };
+      });
+    return {
+      paths: paths,
+      // Consider using 'blocking' or 'true' for a large catalogue of which only a subset is built ahead of time
+      fallback: false,
+    };
+  } else {
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
 };
 
 export default Pdp;

@@ -9,15 +9,17 @@ dotEnv.config({ path: `${process.env.PATH_TO_ENV_FILE}` });
  * */
 const exportOptions = {
   spaceId: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-  environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,
+  environmentId: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT || 'master',
   managementToken: process.env.CONTENTFUL_MANAGEMENT_TOKEN,
   contentFile: './contentful/data/contentful-space-data.json',
   includeDrafts: true,
+  skipRoles: true,
+  skipWebhooks: true,
 };
 
 if (
   !process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ||
-  !process.env.CONTENTFUL_MANAGEMENT_TOKEN ||
+  !process.env.CONTENTFUL_MANAGEMENT_TOKEN
 ) {
   throw new Error(
     [

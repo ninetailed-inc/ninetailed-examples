@@ -16,6 +16,9 @@ export interface IBannerFields {
   /** slug */
   slug: string;
 
+  /** Variant */
+  variant?: 'Primary' | 'Loud' | undefined;
+
   /** Ninetailed */
   nt_experiences?: INtExperience[] | undefined;
 }

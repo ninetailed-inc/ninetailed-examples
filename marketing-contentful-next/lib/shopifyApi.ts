@@ -1,8 +1,8 @@
 import { StorefrontClientProps } from '@shopify/hydrogen-react';
+import { gql } from 'graphql-request';
 
 // This is code copied from the @shopify/hydrogen-react package, which is currently imcompatible with server contexts in Next.js due to the way it is exported
 // https://github.com/Shopify/hydrogen/issues/867
-
 const storefrontApiConstants = {
   SFAPI_VERSION: '2023-10',
 };
@@ -89,8 +89,7 @@ You may run into unexpected errors if these versions don't match. Received verio
           privateStorefrontToken ??
           '',
         ...((props == null ? void 0 : props.buyerIp)
-          ? // @ts-ignore
-            { 'Shopify-Storefront-Buyer-IP': props.buyerIp }
+          ? { 'Shopify-Storefront-Buyer-IP': props?.buyerIp }
           : {}),
       };
     },
@@ -146,11 +145,68 @@ const warnOnce = (string: string) => {
 };
 
 // Here's the good stuff: a client that gives us the GraphQL API endpoint to hit along with a method to construct private token headers
-const serverSideShopifyClient = createStorefrontClient({
-  privateStorefrontToken: process.env.SHOPIFY_PRIVATE_STOREFRONT_TOKEN,
-  storeDomain: `https://${process.env.SHOPIFY_STORE_NAME}.myshopify.com`,
-});
+const serverSideShopifyClient =
+  process.env.SHOPIFY_PRIVATE_STOREFRONT_TOKEN && process.env.SHOPIFY_STORE_NAME
+    ? createStorefrontClient({
+        privateStorefrontToken: process.env.SHOPIFY_PRIVATE_STOREFRONT_TOKEN,
+        storeDomain: `https://${
+          process.env.SHOPIFY_STORE_NAME || ''
+        }.myshopify.com`,
+      })
+    : null;
 
-export const getStorefrontApiUrl = serverSideShopifyClient.getStorefrontApiUrl;
+export const getStorefrontApiUrl =
+  // eslint-disable-next-line
+  serverSideShopifyClient?.getStorefrontApiUrl || null;
+
+// eslint-disable-next-line
 export const getPrivateTokenHeaders =
-  serverSideShopifyClient.getPrivateTokenHeaders;
+  // eslint-disable-next-line
+  serverSideShopifyClient?.getPrivateTokenHeaders || null;
+
+export const productInfoQuery = gql`
+  query getProductById($id: ID!) {
+    product(id: $id) {
+      title
+      options(first: 3) {
+        id
+        name
+        values
+      }
+      images(first: 3) {
+        edges {
+          node {
+            id
+            url
+            altText
+            height
+            width
+          }
+        }
+      }
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      requiresSellingPlan
+      variants(first: 10) {
+        edges {
+          node {
+            id
+            title
+            selectedOptions {
+              name
+              value
+            }
+            price {
+              amount
+            }
+            availableForSale
+          }
+        }
+      }
+    }
+  }
+`;

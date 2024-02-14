@@ -486,10 +486,10 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@shopify/hydrogen-react@^2023.10.0":
-  version "2023.10.0"
-  resolved "https://registry.yarnpkg.com/@shopify/hydrogen-react/-/hydrogen-react-2023.10.0.tgz#e169632e40b2b8450e9744a422d1fc0b120cd674"
-  integrity sha512-fb9UHLF2nzzfHZMCPedT4kRHnCAcdrlCjsa8JUs3HFD0ESBq3VKCOxS5QLzVc5uT9X7ElRp1JnORa7q/qXUaxQ==
+"@shopify/hydrogen-react@2024.1.0":
+  version "2024.1.0"
+  resolved "https://registry.yarnpkg.com/@shopify/hydrogen-react/-/hydrogen-react-2024.1.0.tgz#229bfcc616980c5d01c5179d47abc9d046731814"
+  integrity sha512-WHqBhDlGt7ehrryn7KrSSMRrFA+oaDajgipOmkN62ekM/XRGWeEdL19l9yuiEaU6kSK36xznous56HF4+bEBfg==
   dependencies:
     "@google/model-viewer" "^1.12.1"
     "@xstate/fsm" "^2.0.0"
