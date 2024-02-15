@@ -11,6 +11,7 @@ import {
   getAllAudiences,
 } from '@/lib/api';
 import { IConfig, IPage } from '@/types/contentful';
+import { decodeExperienceVariantsMap } from '@ninetailed/experience.js-next';
 
 const Page = ({ page, config }: { page: IPage; config: IConfig }) => {
   if (!page) {
@@ -42,7 +43,12 @@ const Page = ({ page, config }: { page: IPage; config: IConfig }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   const rawSlug = get(params, 'slug', []) as string[];
-  const slug = rawSlug.join('/');
+  const experienceVariantsSlug = rawSlug[0] || '';
+  const isPersonalized = experienceVariantsSlug.startsWith(';');
+  const experienceVariantsMap = isPersonalized
+    ? decodeExperienceVariantsMap(experienceVariantsSlug.split(';')[1])
+    : {};
+  const slug = isPersonalized ? rawSlug.slice(1).join('/') : rawSlug.join('/');
   const [page, config, allExperiences, allAudiences] = await Promise.all([
     getPage({
       preview: draftMode,
@@ -61,6 +67,7 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
           allExperiences,
           allAudiences,
         },
+        experienceVariantsMap,
       },
     },
     revalidate: 5,
@@ -81,7 +88,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     });
   return {
     paths: [...paths, { params: { slug: [''] } }],
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 

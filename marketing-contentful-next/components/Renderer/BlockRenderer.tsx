@@ -1,5 +1,8 @@
 import React from 'react';
-import { Experience } from '@ninetailed/experience.js-next';
+import {
+  ESRLoadingComponent,
+  Experience,
+} from '@ninetailed/experience.js-next';
 
 import get from 'lodash/get';
 
@@ -62,7 +65,7 @@ type Component =
   | ISectionsGroup;
 
 const ComponentRenderer = (props: Component) => {
-  const contentTypeId = props.sys.contentType.sys.id;
+  const contentTypeId = props.sys?.contentType.sys.id;
   const Component = ContentTypeMap[contentTypeId];
 
   if (!Component) {
@@ -96,8 +99,12 @@ export const BlockRenderer = ({ block }: { block: singularOrArrayBlock }) => {
       key={`${contentTypeId}-${id}`}
       {...block}
       id={id}
+      // TODO: typing with ESRLoadingComponent
+      // eslint-disable-next-line
+      // @ts-ignore
       component={ComponentRenderer}
       experiences={parsedExperiences}
+      loadingComponent={ESRLoadingComponent}
     />
   );
 };

@@ -11,7 +11,7 @@ import { v4 as uuid } from 'uuid';
 
 type GetServerSideProfileOptions = {
   ctx: NinetailedRequestContext;
-  cookies: RequestCookies; // ?
+  cookies: RequestCookies;
   clientId: string;
   environment?: string;
   url?: string;

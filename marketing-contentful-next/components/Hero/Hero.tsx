@@ -9,10 +9,12 @@ import { IHero } from '@/types/contentful';
 import { ContentfulLivePreview } from '@contentful/live-preview';
 import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 import classNames from 'classnames';
-import { useFlag } from '@/lib/experiences';
+// import { useFlag } from '@/lib/experiences';
 
 export const Hero = ({ sys, fields }: IHero) => {
-  const expFlag = useFlag('heroLayout');
+  // TODO: Enable feature flagging style experiments with ESR
+  // const expFlag = useFlag('heroLayout');
+  const expFlag = 0;
 
   const updatedHero = useContentfulLiveUpdates({ sys, fields }) as IHero;
   const layoutStyles = [
@@ -94,6 +96,8 @@ export const Hero = ({ sys, fields }: IHero) => {
                     'bg-gray-50 w-screen': expFlag === 0,
                   },
                   {
+                    // eslint-disable-next-line
+                    // @ts-ignore
                     'bg-amber-200 blur-2xl m-20 w-full': expFlag === 1,
                   }
                 )}
@@ -101,6 +105,8 @@ export const Hero = ({ sys, fields }: IHero) => {
               <svg
                 className={classNames(
                   'absolute top-8 right-1/2 -mr-3 lg:m-0 lg:left-0',
+                  // eslint-disable-next-line
+                  // @ts-ignore
                   { hidden: expFlag === 1 }
                 )}
                 width={404}

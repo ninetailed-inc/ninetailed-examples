@@ -5,6 +5,7 @@ import {
   buildNinetailedEdgeRequestContext,
   fetchEdgeProfile,
 } from './lib/middlewareFunctions';
+import { getContinentCode } from './lib/geolocation';
 
 export const config = {
   matcher: [
@@ -42,7 +43,7 @@ export default async function middleware(req: NextRequest) {
       city: req.geo?.city,
       region: req.geo?.region,
       country: req.geo?.country,
-      continent: '', // TODO: Assign continent
+      continent: getContinentCode(req.geo?.country),
     },
   };
 
@@ -68,7 +69,8 @@ export default async function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
   url.pathname = `/;${variantsPath}${url.pathname}`;
   url.pathname = url.pathname.replace(/\/$/, '');
-  console.log(url);
   const res = NextResponse.rewrite(url);
   res.cookies.set(NINETAILED_ANONYMOUS_ID_COOKIE, profile.id);
+
+  return res;
 }
