@@ -175,3 +175,5 @@ fabric.properties
 
 # Contentstack
 /logs/
+/temp
+/contentstack/data/logs
