@@ -5,6 +5,7 @@ import {
   IPageFields,
   IPdp,
   IPdpFields,
+  IRedirect,
 } from '@/types/contentful';
 import {
   AudienceEntryLike,
@@ -57,6 +58,23 @@ const getProductDisplayPageQuery = (pageParams: IPagelikeQueryParams) => {
     content_type: 'pdp',
   };
 };
+
+export async function getRedirect({ slug, preview }: IPagelikeQueryParams) {
+  const query = {
+    limit: 1,
+    include: 2,
+    'fields.from': slug,
+    content_type: 'redirect',
+  };
+  const client = getClient(Boolean(preview));
+  const entries = await client.getEntries<IRedirect>(query);
+
+  if (!entries.items.length) {
+    return null;
+  }
+
+  return entries.items[0];
+}
 
 export async function getPage(
   pageParams: IPagelikeQueryParams

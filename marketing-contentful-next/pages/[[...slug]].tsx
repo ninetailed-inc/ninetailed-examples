@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
+import { useRouter } from 'next/router';
 
 import { BlockRenderer } from '@/components/Renderer';
 import {
@@ -9,10 +10,54 @@ import {
   getAllExperiences,
   getGlobalConfig,
   getAllAudiences,
+  getRedirect,
 } from '@/lib/api';
-import { IConfig, IPage } from '@/types/contentful';
+import { IConfig, IPage, IRedirect } from '@/types/contentful';
+import { parseExperiences } from '@/lib/experiences';
+import { Experience } from '@ninetailed/experience.js-next';
+import { useEffect } from 'react';
 
-const Page = ({ page, config }: { page: IPage; config: IConfig }) => {
+const Redirect = (redirect: IRedirect) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const url = new URL(router.asPath, 'https://example.com');
+
+    if (
+      redirect.fields.from !== redirect.fields.to &&
+      url.pathname === redirect.fields.from
+    ) {
+      void router.replace(redirect.fields.to);
+    }
+  }, [router, redirect]);
+
+  return null;
+};
+
+const RedirectExperience: React.FC<{ redirect: IRedirect }> = ({
+  redirect,
+}) => {
+  const parsedExperiences = parseExperiences(redirect);
+
+  return (
+    <Experience
+      {...redirect}
+      id={redirect.sys.id}
+      experiences={parsedExperiences}
+      component={Redirect}
+    />
+  );
+};
+
+const Page = ({
+  page,
+  redirect,
+  config,
+}: {
+  page: IPage;
+  redirect: IRedirect | null;
+  config: IConfig;
+}) => {
   if (!page) {
     return null;
   }
@@ -22,6 +67,7 @@ const Page = ({ page, config }: { page: IPage; config: IConfig }) => {
 
   return (
     <>
+      {redirect && <RedirectExperience redirect={redirect} />}
       <NextSeo
         title={seo?.fields.title}
         description={seo?.fields.description}
@@ -43,18 +89,21 @@ const Page = ({ page, config }: { page: IPage; config: IConfig }) => {
 export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
-  const [page, config, allExperiences, allAudiences] = await Promise.all([
-    getPage({
-      preview: draftMode,
-      slug: slug === '' ? '/' : slug,
-    }),
-    getGlobalConfig({ preview: draftMode }),
-    getAllExperiences(),
-    getAllAudiences(),
-  ]);
+  const [page, redirect, config, allExperiences, allAudiences] =
+    await Promise.all([
+      getPage({
+        preview: draftMode,
+        slug: slug === '' ? '/' : slug,
+      }),
+      getRedirect({ preview: draftMode, slug: slug === '' ? '/' : slug }),
+      getGlobalConfig({ preview: draftMode }),
+      getAllExperiences(),
+      getAllAudiences(),
+    ]);
   return {
     props: {
       page,
+      redirect,
       config,
       ninetailed: {
         preview: {
