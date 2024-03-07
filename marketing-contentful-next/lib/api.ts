@@ -5,7 +5,7 @@ import {
   IPageFields,
   IPdp,
   IPdpFields,
-  IRedirect,
+  IRedirectFields,
 } from '@/types/contentful';
 import {
   AudienceEntryLike,
@@ -14,6 +14,14 @@ import {
   ExperienceMapper,
   // ExperimentEntry,
 } from '@ninetailed/experience.js-utils-contentful';
+import {
+  buildPageEvent,
+  GeoLocation,
+  NinetailedApiClient,
+  NINETAILED_ANONYMOUS_ID_COOKIE,
+} from '@ninetailed/experience.js-shared';
+import { v4 as uuid } from 'uuid';
+import { GetServerSidePropsContext } from 'next';
 
 const contentfulClient = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ?? '',
@@ -67,7 +75,7 @@ export async function getRedirect({ slug, preview }: IPagelikeQueryParams) {
     content_type: 'redirect',
   };
   const client = getClient(Boolean(preview));
-  const entries = await client.getEntries<IRedirect>(query);
+  const entries = await client.getEntries<IRedirectFields>(query);
 
   if (!entries.items.length) {
     return null;
@@ -162,3 +170,67 @@ export async function getAllAudiences() {
 
   return mappedAudiences;
 }
+
+type Cookies = { [key: string]: string };
+
+type GetServerSideProfileOptions = {
+  ctx: GetServerSidePropsContext;
+  url?: string;
+  ip?: string;
+  location?: GeoLocation;
+  preflight?: boolean;
+};
+
+const ninetailedClient = new NinetailedApiClient({
+  clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? '',
+  environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main',
+});
+
+const buildPageEventFromNextContext = (ctx: GetServerSidePropsContext) =>
+  buildPageEvent({
+    ctx: {
+      url: ctx.req.url
+        ? new URL(ctx.req.url, 'https://my-domain.com').toString()
+        : '',
+      locale: '',
+      referrer: ctx.req.headers.referer || '',
+      userAgent: ctx.req.headers['user-agent'] || '',
+    },
+    messageId: uuid(),
+    timestamp: Date.now(),
+    properties: {},
+  });
+
+const sendNinetailedProfileRequest = async ({
+  ctx,
+  ip,
+  location,
+}: GetServerSideProfileOptions) => {
+  const anonymousId = ctx.req.cookies[NINETAILED_ANONYMOUS_ID_COOKIE];
+
+  const pageEvent = buildPageEventFromNextContext(ctx);
+
+  return ninetailedClient.upsertProfile(
+    {
+      profileId: anonymousId,
+      events: [{ ...pageEvent, context: { ...pageEvent.context, location } }],
+    },
+    { ip, preflight: false }
+  );
+};
+
+export const sendNinetailedPreflightRequest = async ({
+  ctx,
+  ip,
+  location,
+}: GetServerSideProfileOptions) => {
+  return sendNinetailedProfileRequest({ ctx, ip, location, preflight: true });
+};
+
+export const sendNinetailedPageview = async ({
+  ctx,
+  ip,
+  location,
+}: GetServerSideProfileOptions) => {
+  return sendNinetailedProfileRequest({ ctx, ip, location, preflight: false });
+};

@@ -10,6 +10,7 @@ import {
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights';
+import { NinetailedSsrPlugin } from '@ninetailed/experience.js-plugin-ssr';
 import { IConfig, IPage } from '@/types/contentful';
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
@@ -44,6 +45,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
     <div className="app">
       <NinetailedProvider
         plugins={[
+          new NinetailedSsrPlugin(),
           new NinetailedInsightsPlugin(),
           ...(process.env.NEXT_PUBLIC_GTM_ID
             ? [

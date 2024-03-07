@@ -51,13 +51,15 @@
     "next-seo": "6.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.45.1"
+    "react-hook-form": "^7.45.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/dlv": "^1.0.0",
     "@types/lodash": "4.14.181",
     "@types/node": "18.0.0",
     "@types/react": "17.0.43",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
     "autoprefixer": "10.4.4",
