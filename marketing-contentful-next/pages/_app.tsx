@@ -18,6 +18,7 @@ import '@contentful/live-preview/style.css';
 import SettingsProviderWrapper from '@/lib/SettingsProvider';
 import Style from '@/components/Style/Style';
 import { parseExperiences } from '@/lib/experiences';
+import { ninetailedInstance } from '@/lib/api';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -44,6 +45,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
   return (
     <div className="app">
       <NinetailedProvider
+        ninetailed={ninetailedInstance}
         plugins={[
           new NinetailedSsrPlugin(),
           new NinetailedInsightsPlugin(),
@@ -92,8 +94,6 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
               ]
             : []),
         ]}
-        clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
-        environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
         componentViewTrackingThreshold={2000} // Default = 2000
       >
         <SettingsProviderWrapper config={pageProps.config}>

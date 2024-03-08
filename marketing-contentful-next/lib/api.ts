@@ -20,6 +20,7 @@ import {
   NinetailedApiClient,
   NINETAILED_ANONYMOUS_ID_COOKIE,
 } from '@ninetailed/experience.js-shared';
+import { Ninetailed } from '@ninetailed/experience.js';
 import { v4 as uuid } from 'uuid';
 import { GetServerSidePropsContext } from 'next';
 
@@ -181,7 +182,7 @@ type GetServerSideProfileOptions = {
   preflight?: boolean;
 };
 
-const ninetailedClient = new NinetailedApiClient({
+export const ninetailedClient = new NinetailedApiClient({
   clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? '',
   environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main',
 });
@@ -234,3 +235,8 @@ export const sendNinetailedPageview = async ({
 }: GetServerSideProfileOptions) => {
   return sendNinetailedProfileRequest({ ctx, ip, location, preflight: false });
 };
+
+export const ninetailedInstance = new Ninetailed({
+  clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? '',
+  environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main',
+});

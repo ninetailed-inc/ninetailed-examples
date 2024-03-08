@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps, GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
 import { useRouter } from 'next/router';
+import { JSDOM } from 'jsdom';
 
 import { BlockRenderer } from '@/components/Renderer';
 import {
@@ -13,11 +14,13 @@ import {
   getRedirect,
   sendNinetailedPreflightRequest,
   sendNinetailedPageview,
+  ninetailedInstance,
 } from '@/lib/api';
 import { IConfig, IPage, IRedirect } from '@/types/contentful';
 import { parseExperiences } from '@/lib/experiences';
 import { Experience, Profile } from '@ninetailed/experience.js-next';
-import { useEffect } from 'react';
+import { createElement, useEffect } from 'react';
+import { Ninetailed } from '@ninetailed/experience.js';
 
 const Redirect = (redirect: IRedirect) => {
   const router = useRouter();
@@ -113,9 +116,15 @@ const handleRedirect = (
     )
   );
 
-  console.log('matched experience', experience);
-
   if (!experience) {
+    return null;
+  }
+
+  const selectedProfileExperience = profileExperiences.find(
+    (profileExperience) => profileExperience.experienceId === experience.id
+  );
+
+  if (!selectedProfileExperience) {
     return null;
   }
 
@@ -129,7 +138,7 @@ const handleRedirect = (
   }
 
   const variant = variants[
-    profileExperiences[0].variantIndex
+    selectedProfileExperience.variantIndex
   ] as unknown as IRedirect;
 
   if (!variant) {
@@ -150,16 +159,21 @@ const handleRedirect = (
   }
 
   return {
-    destination: variant.fields.to,
-    permanent: false,
+    redirect: {
+      destination: variant.fields.to,
+      permanent: false,
+    },
+    experience,
+    variant,
+    variantIndex: selectedProfileExperience.variantIndex,
   };
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { params, preview } = context;
 
-  const acceptHeaders = context.req.headers.accept || '';
-  const isPageRequest = acceptHeaders.includes('text/html');
+  // const acceptHeaders = context.req.headers.accept || '';
+  // const isPageRequest = acceptHeaders.includes('text/html');
 
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
@@ -193,13 +207,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   if (redirectObj) {
-    // This could be done in a backgeound process, need to check how this works in nextjs
-    await sendNinetailedPageview({ ctx: context });
+    const { document } = new JSDOM(``, {}).window;
 
-    // TODO send component seen event.
+    await Promise.all([
+      ninetailedInstance.trackComponentView({
+        experience: redirectObj.experience,
+        element: document.createElement('div'),
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        variant: redirectObj.variant,
+        variantIndex: redirectObj.variantIndex,
+      }),
+      // This could be done in a backgeound process, need to check how this works in nextjs
+      sendNinetailedPageview({ ctx: context }),
+    ]);
 
     return {
-      redirect: redirectObj,
+      redirect: redirectObj.redirect,
     };
   }
 
