@@ -1,0 +1,13 @@
+{
+  "contentVersion": 1,
+  "master_locale": {
+    "name": "English - United States",
+    "code": "en-us"
+  },
+  "data": "./contentstack/data",
+  "moduleName": "assets environments locales extensions marketplace-apps webhooks taxonomies global-fields content-types entries labels",
+  "fetchConcurrency": 5,
+  "writeConcurrency": 5,
+  "securedAssets": false,
+  "createBackupDir": "./temp"
+}
