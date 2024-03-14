@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "18"
+    "node": ">=18 <=20"
   },
   "scripts": {
     "dev": "next dev",
@@ -28,12 +28,13 @@
     "@contentful/rich-text-types": "15.14.1",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
-    "@ninetailed/experience.js-next": "7.5.3",
-    "@ninetailed/experience.js-node": "7.5.3",
-    "@ninetailed/experience.js-plugin-google-tagmanager": "7.5.3",
-    "@ninetailed/experience.js-plugin-insights": "7.5.3",
-    "@ninetailed/experience.js-plugin-preview": "7.5.3",
-    "@ninetailed/experience.js-utils-contentful": "7.5.3",
+    "@ninetailed/experience.js-next": "7.5.2",
+    "@ninetailed/experience.js-node": "7.5.2",
+    "@ninetailed/experience.js-plugin-google-tagmanager": "7.5.2",
+    "@ninetailed/experience.js-plugin-insights": "7.5.2",
+    "@ninetailed/experience.js-plugin-preview": "7.5.2",
+    "@ninetailed/experience.js-utils": "7.5.2",
+    "@ninetailed/experience.js-utils-contentful": "7.5.2",
     "@shopify/hydrogen-react": "2024.1.0",
     "@tailwindcss/typography": "^0.5.10",
     "classnames": "2.3.1",
@@ -46,11 +47,12 @@
     "dotenv": "16.0.1",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
+    "install": "^0.13.0",
     "lodash": "4.17.21",
-    "next": "13.4.8",
+    "next": "^14.1.0",
     "next-seo": "6.1.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1"
   },
   "devDependencies": {
@@ -62,7 +64,7 @@
     "@typescript-eslint/parser": "5.44.0",
     "autoprefixer": "10.4.4",
     "eslint": "^8.28.0",
-    "eslint-config-next": "12.1.6",
+    "eslint-config-next": "^14.1.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
