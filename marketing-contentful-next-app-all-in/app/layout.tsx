@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 
 import '@contentful/live-preview/style.css';
 import Script from 'next/script';
+import { Favicon } from '@/components/Favicon';
 
 export default function RootLayout({
   children,
@@ -11,7 +12,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <Favicon />
+      </head>
       <body>
         {process.env.NEXT_PUBLIC_GTM_ID ? (
           <noscript>
