@@ -5,6 +5,15 @@ import get from 'lodash/get';
 import { BlockRenderer } from '@/components/Renderer';
 import { getPages, getPage, getGlobalConfig } from '@/lib/api';
 
+import {
+  NinetailedApiClient,
+  buildPageEvent,
+} from '@ninetailed/experience.js-shared';
+import { v4 as uuid } from 'uuid';
+import { headers } from 'next/headers';
+import { setExperiences, setProfile } from '@/lib/ninetailedServerContext';
+import RefreshRoute from '@/components/Client/RefreshRoute';
+
 export const dynamicParams = false;
 
 export default async function Page({
@@ -12,26 +21,59 @@ export default async function Page({
 }: {
   params: { slug: string[] | undefined };
 }) {
-  const { isEnabled } = draftMode();
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
-  const [page, config] = await Promise.all([
+  const pagePath = slug === '' ? '/' : slug;
+
+  const headersList = headers();
+  const referer = headersList.get('referer');
+  const userAgent = headersList.get('user-agent');
+
+  const ninetailedApiClient = new NinetailedApiClient({
+    clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || '',
+    environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT || '',
+  });
+
+  const pageEvent = buildPageEvent({
+    ctx: {
+      url: new URL(slug, 'https://b2b.demo.ninetailed.io').toString(),
+      locale: 'en-US', // FIXME: Hardcoded
+      referrer: referer || '',
+      userAgent: userAgent || '',
+    },
+    messageId: uuid(),
+    timestamp: Date.now(),
+    properties: {},
+    // TODO: Proxy over the user location in a location object
+    // See Vercel middleware implementation on feature/vercel-edge-middleware branch
+  });
+
+  const { isEnabled } = draftMode();
+  const [page, config, ninetailedResponse] = await Promise.all([
     getPage({
       preview: isEnabled,
-      slug: slug === '' ? '/' : slug,
+      slug: pagePath,
     }),
     getGlobalConfig({ preview: isEnabled }),
+    ninetailedApiClient.upsertProfile({
+      profileId: 'omgwtfbbq2',
+      events: [pageEvent],
+    }),
   ]);
 
   if (!page) {
     return null;
   }
 
+  setProfile(ninetailedResponse.profile);
+  setExperiences(ninetailedResponse.experiences);
+
   const { sections = [] } = page.fields;
   const { banner, navigation, footer } = config.fields;
 
   return (
     <>
+      <RefreshRoute />
       <div className="w-full h-full flex flex-col">
         {banner && <BlockRenderer block={banner} />}
         {navigation && <BlockRenderer block={navigation} />}

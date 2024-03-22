@@ -14,7 +14,7 @@ import classNames from 'classnames';
 export const Hero = ({ sys, fields }: IHero) => {
   const expFlag = 0; // FIXME: Hardcoded for now
 
-  // TODO: Contentful live updates on app router
+  // TODO: Contentful live updates on app router. This requires client components probably!
   // const updatedHero = useContentfulLiveUpdates({ sys, fields }) as IHero;
   const updatedHero = { sys, fields }; // Proxy for now
   const layoutStyles = [

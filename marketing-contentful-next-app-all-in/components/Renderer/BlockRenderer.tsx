@@ -1,7 +1,5 @@
 import React from 'react';
 
-import get from 'lodash/get';
-
 import { Banner } from '@/components/Banner';
 import { Cta } from '@/components/Cta';
 import { Feature } from '@/components/Feature';
@@ -26,7 +24,10 @@ import {
 } from '@/types/contentful';
 
 import { ComponentContentTypes } from '@/lib/constants';
-// import { singularOrArrayBlock } from '@/lib/experiences'; // import { parseExperiences, singularOrArrayBlock } from '@/lib/experiences';
+
+import { parseExperiences, singularOrArrayBlock } from '@/lib/experiences';
+import { ServerExperience } from '../ServerExperience';
+import { get } from 'lodash';
 
 const ContentTypeMap = {
   [ComponentContentTypes.Banner]: Banner,
@@ -66,13 +67,7 @@ const ComponentRenderer = (props: Component) => {
   return <Component {...props} />;
 };
 
-// eslint-disable-next-line
-// @ts-ignore
-export const BlockRenderer = ({
-  block,
-}: {
-  block: Component | Component[];
-}) => {
+export const BlockRenderer = ({ block }: { block: singularOrArrayBlock }) => {
   if (Array.isArray(block)) {
     return (
       <>
@@ -83,8 +78,16 @@ export const BlockRenderer = ({
     );
   }
 
-  // const contentTypeId = get(block, 'sys.contentType.sys.id') as string;
   const { id } = block.sys;
+  const contentTypeId = get(block, 'sys.contentType.sys.id') as string;
 
-  return <ComponentRenderer {...block} key={id} />;
+  return (
+    <ServerExperience
+      {...block}
+      id={id}
+      key={`${contentTypeId}-${id}`}
+      component={ComponentRenderer}
+      experiences={parseExperiences(block)}
+    />
+  );
 };
