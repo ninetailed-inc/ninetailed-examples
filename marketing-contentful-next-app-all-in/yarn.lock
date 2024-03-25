@@ -344,6 +344,56 @@
   resolved "https://registry.yarnpkg.com/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-14.1.4.tgz#bccf5beccfde66d6c66fa4e2509118c796385eda"
   integrity sha512-4Rto21sPfw555sZ/XNLqfxDUNeLhNYGO2dlPqsnuCg8N8a2a9u1ltqBOPQ4vj1Gf7eJC0W2hHG2eYUHuiXgY2w==
 
+"@ninetailed/experience.js-plugin-analytics@7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-analytics/-/experience.js-plugin-analytics-7.5.3.tgz#c42e1581b08eb7e68e85c60fd0f2db6346ff79a0"
+  integrity sha512-OkqDfZIDpzQsabA3xnvlzB7jqGQeY6LiTIwf/FvKmUr/fAroec0fzHn3X6Uu6F6dx7/pk9+qmu7BtNoRVHFxwg==
+  dependencies:
+    "@ninetailed/experience.js" "7.5.3"
+    "@ninetailed/experience.js-shared" "7.5.3"
+    analytics "0.8.1"
+
+"@ninetailed/experience.js-plugin-google-tagmanager@^7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-google-tagmanager/-/experience.js-plugin-google-tagmanager-7.5.3.tgz#6539c272dcd68af4a9286276585230cf5b857e19"
+  integrity sha512-gqa0PtOLfNtZqpRJJN9LnF9uCZzaTFectXHaT/bIH12r/yHvMrxckmxxYo1UJTR15/GqvXmUvdPQ5UHxlvpcKw==
+  dependencies:
+    "@jest/globals" "27.5.1"
+    "@ninetailed/experience.js" "7.5.3"
+    "@ninetailed/experience.js-plugin-analytics" "7.5.3"
+    "@ninetailed/experience.js-shared" "7.5.3"
+    analytics "0.8.1"
+    async-retry "1.3.3"
+    diary "0.4.4"
+    i18n-iso-countries "7.5.0"
+    murmurhash-js "1.0.0"
+    radash "10.9.0"
+    ts-toolbelt "9.6.0"
+    tslib "2.4.1"
+    zod "3.21.4"
+
+"@ninetailed/experience.js-plugin-insights@^7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-insights/-/experience.js-plugin-insights-7.5.3.tgz#e314903f01b664de7f332cde49dd696fecf51029"
+  integrity sha512-dTnIT2wxFAHGJOdZamTB3hXFoORt0u5afY1DA6Nxfxc6i4nbNiGgTeBoPKvFvkkOTRdq9U5Dv+Hi1NQGYDPe2Q==
+  dependencies:
+    "@ninetailed/experience.js" "7.5.3"
+    "@ninetailed/experience.js-shared" "7.5.3"
+    async-retry "1.3.3"
+    ts-toolbelt "9.6.0"
+    uuid "9.0.0"
+
+"@ninetailed/experience.js-react@^7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-react/-/experience.js-react-7.5.3.tgz#7befbccb0d3730b4c38e1a65af7a0e63bb23f8d6"
+  integrity sha512-FPCzIrwNaqnuk/WMzGYxBIsnKA/h+zFh4V2eMLqzmST7ZYU45SFN3U8+/V1KqfAQX3yCvIWjIQbV0kLiWgghgg==
+  dependencies:
+    "@ninetailed/experience.js" "7.5.3"
+    "@ninetailed/experience.js-shared" "7.5.3"
+    radash "10.9.0"
+    react-intersection-observer "8.34.0"
+    react-is "18.2.0"
+
 "@ninetailed/experience.js-shared@7.5.3", "@ninetailed/experience.js-shared@^7.5.3":
   version "7.5.3"
   resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-shared/-/experience.js-shared-7.5.3.tgz#c6ae504fb6d6ebd6e3a59b64b7e09957a4616d59"
@@ -4166,6 +4216,16 @@ react-hook-form@^7.45.1:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.51.1.tgz#3ce5f8b5ef41903b4054a641cef8c0dc8bf8ae85"
   integrity sha512-ifnBjl+kW0ksINHd+8C/Gp6a4eZOdWyvRv0UBaByShwU8JbVx5hTcTWEcd5VdybvmPTATkVVXk9npXArHmo56w==
 
+react-intersection-observer@8.34.0:
+  version "8.34.0"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-8.34.0.tgz#6f6e67831c52e6233f6b6cc7eb55814820137c42"
+  integrity sha512-TYKh52Zc0Uptp5/b4N91XydfSGKubEhgZRtcg1rhTKABXijc4Sdr1uTp5lJ8TN27jwUsdXxjHXtHa0kPj704sw==
+
+react-is@18.2.0:
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
+  integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
+
 react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -4798,6 +4858,11 @@ tsconfig-paths@^3.14.1, tsconfig-paths@^3.15.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
+tslib@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
+  integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
+
 tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
@@ -4980,6 +5045,11 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
+
+uuid@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
 uuid@^9.0.1:
   version "9.0.1"

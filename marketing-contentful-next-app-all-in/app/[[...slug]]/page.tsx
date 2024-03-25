@@ -1,4 +1,4 @@
-import { draftMode } from 'next/headers';
+import { cookies, draftMode } from 'next/headers';
 
 import get from 'lodash/get';
 
@@ -13,6 +13,8 @@ import { v4 as uuid } from 'uuid';
 import { headers } from 'next/headers';
 import { setExperiences, setProfile } from '@/lib/ninetailedServerContext';
 import RefreshRoute from '@/components/Client/RefreshRoute';
+import { NINETAILED_ANONYMOUS_ID_COOKIE } from '@ninetailed/experience.js-shared';
+import { setNinetailedId } from 'app/actions';
 
 export const dynamicParams = false;
 
@@ -28,6 +30,8 @@ export default async function Page({
   const headersList = headers();
   const referer = headersList.get('referer');
   const userAgent = headersList.get('user-agent');
+
+  const cookieProfileId = cookies().get(NINETAILED_ANONYMOUS_ID_COOKIE);
 
   const ninetailedApiClient = new NinetailedApiClient({
     clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || '',
@@ -56,7 +60,7 @@ export default async function Page({
     }),
     getGlobalConfig({ preview: isEnabled }),
     ninetailedApiClient.upsertProfile({
-      profileId: 'omgwtfbbq2',
+      profileId: process.env.DEMO_NINETAILED_ID, // TODO: Read profile ID from cookies. This is static right now for a demo
       events: [pageEvent],
     }),
   ]);
@@ -66,6 +70,10 @@ export default async function Page({
   }
 
   setProfile(ninetailedResponse.profile);
+  if (!cookieProfileId) {
+    // TODO: Set profile ID into cookie. This could be done in a server action, route handler, or middleware
+    // One of the latter two makes the most sense
+  }
   setExperiences(ninetailedResponse.experiences);
 
   const { sections = [] } = page.fields;

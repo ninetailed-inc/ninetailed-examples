@@ -4,6 +4,7 @@ import '@/styles/globals.css';
 import '@contentful/live-preview/style.css';
 import Script from 'next/script';
 import { Favicon } from '@/components/Favicon';
+import Providers from '@/components/Client/Providers';
 
 export default function RootLayout({
   children,
@@ -48,7 +49,7 @@ export default function RootLayout({
         ) : (
           ''
         )}
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

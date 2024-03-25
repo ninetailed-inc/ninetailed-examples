@@ -3,6 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import { Reference } from '@ninetailed/experience.js';
 import { getExperiences } from '@/lib/ninetailedServerContext';
 import { ExperienceBaseProps } from '@/types/serverExperience';
+import { ComponentTracker } from '../Client/ComponentTracker';
 
 export const ServerExperience = <
   P,
@@ -19,11 +20,14 @@ export const ServerExperience = <
 
   if (!profileExperiences) {
     return (
-      <Component
-        {...passthroughProps}
-        {...(baseline as P)}
-        ninetailed={{ isPersonalized: false, audience: { id: 'baseline' } }}
-      />
+      <>
+        <ComponentTracker variant={baseline} variantIndex={0} />
+        <Component
+          {...passthroughProps}
+          {...(baseline as P)}
+          ninetailed={{ isPersonalized: false, audience: { id: 'baseline' } }}
+        />
+      </>
     );
   }
 
@@ -35,11 +39,14 @@ export const ServerExperience = <
 
   if (!experience) {
     return (
-      <Component
-        {...passthroughProps}
-        {...(baseline as P)}
-        ninetailed={{ isPersonalized: false, audience: { id: 'baseline' } }}
-      />
+      <>
+        <ComponentTracker variant={baseline} variantIndex={0} />
+        <Component
+          {...passthroughProps}
+          {...(baseline as P)}
+          ninetailed={{ isPersonalized: false, audience: { id: 'baseline' } }}
+        />
+      </>
     );
   }
 
@@ -53,11 +60,14 @@ export const ServerExperience = <
 
   if (!component || !experienceInfo) {
     return (
-      <Component
-        {...passthroughProps}
-        {...(baseline as P)}
-        ninetailed={{ isPersonalized: false, audience: { id: 'baseline' } }}
-      />
+      <>
+        <ComponentTracker variant={baseline} variantIndex={0} />
+        <Component
+          {...passthroughProps}
+          {...(baseline as P)}
+          ninetailed={{ isPersonalized: false, audience: { id: 'baseline' } }}
+        />
+      </>
     );
   }
 
@@ -66,11 +76,14 @@ export const ServerExperience = <
 
   if (!variant) {
     return (
-      <Component
-        {...passthroughProps}
-        {...(baseline as P)}
-        ninetailed={{ isPersonalized: false, audience: { id: 'baseline' } }}
-      />
+      <>
+        <ComponentTracker variant={baseline} variantIndex={0} />
+        <Component
+          {...passthroughProps}
+          {...(baseline as P)}
+          ninetailed={{ isPersonalized: false, audience: { id: 'baseline' } }}
+        />
+      </>
     );
   }
 
@@ -79,13 +92,20 @@ export const ServerExperience = <
   }
 
   return (
-    <Component
-      {...passthroughProps}
-      {...(variant as P)}
-      ninetailed={{
-        isPersonalized: true,
-        audience: { id: experience.audience?.id },
-      }}
-    />
+    <>
+      <ComponentTracker
+        experience={experience}
+        variant={variant}
+        variantIndex={experienceInfo.variantIndex}
+      />
+      <Component
+        {...passthroughProps}
+        {...(variant as P)}
+        ninetailed={{
+          isPersonalized: true,
+          audience: { id: experience.audience?.id },
+        }}
+      />
+    </>
   );
 };
