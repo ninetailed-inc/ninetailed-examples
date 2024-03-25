@@ -28,8 +28,6 @@ import { ComponentContentTypes } from '@/lib/constants';
 import { parseExperiences, singularOrArrayBlock } from '@/lib/experiences';
 import { ServerExperience } from '../ServerExperience';
 import { get } from 'lodash';
-import { ClientExperience } from '@/components/Client/ClientExperience';
-import { ClientComponentRenderer } from '../Client/ClientComponentRenderer';
 
 const ContentTypeMap = {
   [ComponentContentTypes.Banner]: Banner,

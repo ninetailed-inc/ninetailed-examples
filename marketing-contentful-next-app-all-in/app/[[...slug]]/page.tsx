@@ -14,7 +14,6 @@ import { headers } from 'next/headers';
 import { setExperiences, setProfile } from '@/lib/ninetailedServerContext';
 import RefreshRoute from '@/components/Client/RefreshRoute';
 import { NINETAILED_ANONYMOUS_ID_COOKIE } from '@ninetailed/experience.js-shared';
-import { setNinetailedId } from 'app/actions';
 
 export const dynamicParams = false;
 
