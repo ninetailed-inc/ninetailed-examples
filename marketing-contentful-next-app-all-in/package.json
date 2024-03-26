@@ -31,6 +31,7 @@
     "@ninetailed/experience.js": "^7.5.3",
     "@ninetailed/experience.js-plugin-google-tagmanager": "^7.5.3",
     "@ninetailed/experience.js-plugin-insights": "^7.5.3",
+    "@ninetailed/experience.js-plugin-ssr": "^7.5.3",
     "@ninetailed/experience.js-react": "^7.5.3",
     "@ninetailed/experience.js-shared": "^7.5.3",
     "@ninetailed/experience.js-utils-contentful": "^7.5.3",

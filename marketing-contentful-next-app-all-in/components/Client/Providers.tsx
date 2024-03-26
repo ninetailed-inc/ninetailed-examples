@@ -2,6 +2,7 @@
 
 import NinetailedGoogleTagmanagerPlugin from '@ninetailed/experience.js-plugin-google-tagmanager';
 import NinetailedInsightsPlugin from '@ninetailed/experience.js-plugin-insights';
+import NinetailedSsrPlugin from '@ninetailed/experience.js-plugin-ssr';
 import { NinetailedProvider } from '@ninetailed/experience.js-react';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -13,6 +14,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       plugins={[
         new NinetailedGoogleTagmanagerPlugin(),
         new NinetailedInsightsPlugin(),
+        new NinetailedSsrPlugin(),
       ]}
     >
       {children}
