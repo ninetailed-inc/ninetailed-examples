@@ -37,6 +37,7 @@
     "@ninetailed/experience.js-utils-contentful": "^7.5.3",
     "@shopify/hydrogen-react": "2024.1.0",
     "@tailwindcss/typography": "^0.5.10",
+    "@vercel/edge": "^1.1.1",
     "classnames": "2.3.1",
     "contentful": "9.2.15",
     "contentful-clean-space": "^0.9.0",
