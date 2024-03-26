@@ -12,3 +12,5 @@ export const ComponentContentTypes = {
   ProductPolicy: 'productPolicy',
   SectionsGroup: 'sectionsGroup',
 };
+
+export const EDGE_URL_DELIMITER = ';';

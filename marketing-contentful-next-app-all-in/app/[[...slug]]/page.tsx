@@ -1,54 +1,35 @@
-import { cookies, draftMode } from 'next/headers';
+import { draftMode } from 'next/headers';
 
 import get from 'lodash/get';
 
 import { BlockRenderer } from '@/components/Renderer';
-import { getPages, getPage, getGlobalConfig } from '@/lib/api';
+import { getPage, getGlobalConfig } from '@/lib/api';
 
-import {
-  NinetailedApiClient,
-  buildPageEvent,
-} from '@ninetailed/experience.js-shared';
-import { v4 as uuid } from 'uuid';
-import { headers } from 'next/headers';
+import { NinetailedApiClient } from '@ninetailed/experience.js-shared';
 import { setExperiences, setProfile } from '@/lib/ninetailedServerContext';
-import RefreshRoute from '@/components/Client/RefreshRoute';
-import { NINETAILED_ANONYMOUS_ID_COOKIE } from '@ninetailed/experience.js-shared';
+import { EDGE_URL_DELIMITER } from '@/lib/constants';
 
-export const dynamicParams = false;
+export const dynamic = 'force-dynamic';
 
 export default async function Page({
   params,
 }: {
   params: { slug: string[] | undefined };
 }) {
+  const edgeEncoder = encodeURIComponent(EDGE_URL_DELIMITER);
   const rawSlug = get(params, 'slug', []) as string[];
-  const slug = rawSlug.join('/');
-  const pagePath = slug === '' ? '/' : slug;
-
-  const headersList = headers();
-  const referer = headersList.get('referer');
-  const userAgent = headersList.get('user-agent');
-
-  const cookieProfileId = cookies().get(NINETAILED_ANONYMOUS_ID_COOKIE);
+  const profileIdSlug = rawSlug[0] || '';
+  const receivedEdgeProfileId = profileIdSlug.startsWith(edgeEncoder); // This will be false in contexts where Edge Middleware is not running
+  const profileId = receivedEdgeProfileId
+    ? profileIdSlug.split(edgeEncoder)[1]
+    : null;
+  const pagePath = receivedEdgeProfileId
+    ? rawSlug.slice(1).join('/')
+    : rawSlug.join('/');
 
   const ninetailedApiClient = new NinetailedApiClient({
     clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || '',
     environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT || '',
-  });
-
-  const pageEvent = buildPageEvent({
-    ctx: {
-      url: new URL(slug, 'https://b2b.demo.ninetailed.io').toString(),
-      locale: 'en-US', // FIXME: Hardcoded
-      referrer: referer || '',
-      userAgent: userAgent || '',
-    },
-    messageId: uuid(),
-    timestamp: Date.now(),
-    properties: {},
-    // TODO: Proxy over the user location in a location object
-    // See Vercel middleware implementation on feature/vercel-edge-middleware branch
   });
 
   const { isEnabled } = draftMode();
@@ -58,10 +39,9 @@ export default async function Page({
       slug: pagePath,
     }),
     getGlobalConfig({ preview: isEnabled }),
-    ninetailedApiClient.upsertProfile({
-      profileId: process.env.DEMO_NINETAILED_ID, // TODO: Read profile ID from cookies. This is static right now for a demo
-      events: [pageEvent],
-    }),
+    profileId
+      ? ninetailedApiClient.getProfile(profileId)
+      : { profile: null, experiences: [] },
   ]);
 
   if (!page) {
@@ -69,10 +49,6 @@ export default async function Page({
   }
 
   setProfile(ninetailedResponse.profile);
-  if (!cookieProfileId) {
-    // TODO: Set profile ID into cookie. This could be done in a server action, route handler, or middleware
-    // One of the latter two makes the most sense
-  }
   setExperiences(ninetailedResponse.experiences);
 
   const { sections = [] } = page.fields;
@@ -80,7 +56,6 @@ export default async function Page({
 
   return (
     <>
-      <RefreshRoute />
       <div className="w-full h-full flex flex-col">
         {banner && <BlockRenderer block={banner} />}
         {navigation && <BlockRenderer block={navigation} />}
@@ -95,21 +70,6 @@ export default async function Page({
   );
 }
 
-export async function generateStaticParams() {
-  const pages = await getPages({ preview: false });
-  const paths = pages
-    .filter((page) => {
-      return page.fields.slug !== '/';
-    })
-    .map((page) => {
-      return {
-        slug: page.fields.slug.split('/'),
-      };
-    });
-  return [...paths, { slug: [''] }];
-}
-
-// TODO: Construct and export metadata from the page function rather than duplicate fetch call
 export async function generateMetadata({
   params,
 }: {
