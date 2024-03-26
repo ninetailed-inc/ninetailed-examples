@@ -61,20 +61,6 @@ export default async function Page({
   );
 }
 
-export async function generateStaticParams() {
-  const pages = await getPages({ preview: false });
-  const paths = pages
-    .filter((page) => {
-      return page.fields.slug !== '/';
-    })
-    .map((page) => {
-      return {
-        slug: page.fields.slug.split('/'),
-      };
-    });
-  return [...paths, { slug: [''] }];
-}
-
 export async function generateMetadata({
   params,
 }: {
