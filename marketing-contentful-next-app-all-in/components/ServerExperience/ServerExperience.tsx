@@ -31,10 +31,8 @@ export const ServerExperience = <
     );
   }
 
-  const experience = experiences.find((experience) =>
-    profileExperiences.some(
-      (profileExperience) => profileExperience.experienceId === experience.id
-    )
+  const experience = experiences.find(
+    (experience) => profileExperiences[experience.id]
   );
 
   if (!experience) {
@@ -50,15 +48,11 @@ export const ServerExperience = <
     );
   }
 
-  const experienceInfo = profileExperiences.find(
-    (profileExperience) => profileExperience.experienceId === experience.id
-  );
-
   const component = experience.components.find(
     (component) => component.baseline.id === baseline.id
   );
 
-  if (!component || !experienceInfo) {
+  if (!component) {
     return (
       <>
         <ComponentTracker variant={baseline} variantIndex={0} />
@@ -71,8 +65,9 @@ export const ServerExperience = <
     );
   }
 
+  const variantIndex = profileExperiences[experience.id];
   const selectableVariants = [baseline, ...component.variants];
-  const variant = selectableVariants[experienceInfo.variantIndex];
+  const variant = selectableVariants[variantIndex];
 
   if (!variant) {
     return (
@@ -96,7 +91,7 @@ export const ServerExperience = <
       <ComponentTracker
         experience={experience}
         variant={variant}
-        variantIndex={experienceInfo.variantIndex}
+        variantIndex={variantIndex}
       />
       <Component
         {...passthroughProps}

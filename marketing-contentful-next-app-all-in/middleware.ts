@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ipAddress } from '@vercel/edge';
 import { NINETAILED_ANONYMOUS_ID_COOKIE } from '@ninetailed/experience.js-shared';
-import { createRequestContext, sendPageEvent } from './lib/middlewareFunctions';
+import {
+  createRequestContext,
+  encodeExperienceSelections,
+  sendPageEvent,
+} from './lib/middlewareFunctions';
 import { getContinentCode } from './lib/geolocation';
 import { EDGE_URL_DELIMITER } from './lib/constants';
 
@@ -12,7 +16,7 @@ export const config = {
      * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
+     * - favicon (favicon file)
      */
     {
       source: '/((?!api|_next/static|_next/image|favicon).*)',
@@ -22,11 +26,6 @@ export const config = {
       ],
     },
   ],
-};
-
-type VariantSelection = {
-  experienceId: string;
-  variantIndex: number;
 };
 
 export default async function middleware(req: NextRequest) {
@@ -44,26 +43,11 @@ export default async function middleware(req: NextRequest) {
     },
   });
 
-  // TODO: Put pre-selected variants into the path so you don't have to fetch the whole profile again
-  const variantSelections: VariantSelection[] = [
-    ...experiences.map((experience) => {
-      return {
-        experienceId: experience.experienceId,
-        variantIndex: experience.variantIndex,
-      };
-    }),
-  ];
-
-  const variantsPath = variantSelections
-    .map((selection) => {
-      return `${selection.experienceId}=${selection.variantIndex}`;
-    })
-    .sort()
-    .join(',');
+  const experienceSelections = encodeExperienceSelections(experiences);
 
   // Create a rewrite
   const url = req.nextUrl.clone();
-  url.pathname = `/${EDGE_URL_DELIMITER}${profile.id}${url.pathname}`;
+  url.pathname = `/${EDGE_URL_DELIMITER}${experienceSelections}${profile.id}${url.pathname}`;
   url.pathname = url.pathname.replace(/\/$/, ''); // Remove any trailing slash
   const res = NextResponse.rewrite(url);
   res.cookies.set(NINETAILED_ANONYMOUS_ID_COOKIE, profile.id);

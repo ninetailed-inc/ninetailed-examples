@@ -4,6 +4,7 @@ import {
   NinetailedRequestContext,
   NinetailedApiClient,
   NINETAILED_ANONYMOUS_ID_COOKIE,
+  SelectedVariantInfo,
 } from '@ninetailed/experience.js-shared';
 import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 import { v4 as uuid } from 'uuid';
@@ -17,6 +18,8 @@ type SendPagePayload = {
   ip?: string;
   location?: GeoLocation;
 };
+
+export type SelectedVariant = { experienceId: string; variantIndex: number };
 
 export const createRequestContext = (
   request: Request
@@ -55,4 +58,46 @@ export const sendPageEvent = async ({
     },
     { ip }
   );
+};
+
+export const encodeExperienceSelections = (
+  selections: SelectedVariantInfo[]
+): string => {
+  return selections
+    .map((selection) => {
+      return {
+        experienceId: selection.experienceId,
+        variantIndex: selection.variantIndex,
+      };
+    })
+    .map((selection) => {
+      return `${selection.experienceId}=${selection.variantIndex}`;
+    })
+    .sort()
+    .join(',');
+};
+
+export const decodeExperienceSelections = (
+  encodedExperienceVariantsMap: string
+): Record<string, number> => {
+  return encodedExperienceVariantsMap
+    .split(encodeURIComponent(','))
+    .map((experienceIdWithVariant) => {
+      const [experienceId, _variantIndex] = experienceIdWithVariant.split(
+        encodeURIComponent('=')
+      );
+
+      const variantIndex = parseInt(_variantIndex);
+
+      if (!experienceId || !variantIndex) {
+        return null;
+      }
+
+      return { experienceId, variantIndex };
+    })
+    .filter((x): x is SelectedVariant => !!x)
+    .reduce(
+      (acc, curr) => ({ ...acc, [curr.experienceId]: curr.variantIndex }),
+      {}
+    );
 };

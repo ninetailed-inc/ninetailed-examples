@@ -3,53 +3,44 @@ import { draftMode } from 'next/headers';
 import get from 'lodash/get';
 
 import { BlockRenderer } from '@/components/Renderer';
-import { getPage, getGlobalConfig } from '@/lib/api';
+import { getPages, getPage, getGlobalConfig } from '@/lib/api';
 
-import { NinetailedApiClient } from '@ninetailed/experience.js-shared';
-import { setExperiences, setProfile } from '@/lib/ninetailedServerContext';
+import { setExperiences } from '@/lib/ninetailedServerContext';
 import { EDGE_URL_DELIMITER } from '@/lib/constants';
-
-export const dynamic = 'force-dynamic';
+import { decodeExperienceSelections } from '@/lib/middlewareFunctions';
 
 export default async function Page({
   params,
 }: {
   params: { slug: string[] | undefined };
 }) {
-  const edgeEncoder = encodeURIComponent(EDGE_URL_DELIMITER);
+  const edgeDelimiter = encodeURIComponent(EDGE_URL_DELIMITER);
   const rawSlug = get(params, 'slug', []) as string[];
-  const profileIdSlug = rawSlug[0] || '';
-  const receivedEdgeProfileId = profileIdSlug.startsWith(edgeEncoder); // This will be false in contexts where Edge Middleware is not running
-  const profileId = receivedEdgeProfileId
-    ? profileIdSlug.split(edgeEncoder)[1]
+  const selectedExperiencesSlug = rawSlug[0] || '';
+  const computedEdgeProfile = selectedExperiencesSlug.startsWith(edgeDelimiter); // This will be false in contexts where Edge Middleware is not running
+  const selectedExperiences = computedEdgeProfile
+    ? decodeExperienceSelections(
+        selectedExperiencesSlug.split(edgeDelimiter)[1]
+      )
     : null;
-  const pagePath = receivedEdgeProfileId
+  const pagePath = computedEdgeProfile
     ? rawSlug.slice(1).join('/')
     : rawSlug.join('/');
 
-  const ninetailedApiClient = new NinetailedApiClient({
-    clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || '',
-    environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT || '',
-  });
-
   const { isEnabled } = draftMode();
-  const [page, config, ninetailedResponse] = await Promise.all([
+  const [page, config] = await Promise.all([
     getPage({
       preview: isEnabled,
       slug: pagePath,
     }),
     getGlobalConfig({ preview: isEnabled }),
-    profileId
-      ? ninetailedApiClient.getProfile(profileId)
-      : { profile: null, experiences: [] },
   ]);
 
   if (!page) {
     return null;
   }
 
-  setProfile(ninetailedResponse.profile);
-  setExperiences(ninetailedResponse.experiences);
+  setExperiences(selectedExperiences);
 
   const { sections = [] } = page.fields;
   const { banner, navigation, footer } = config.fields;
@@ -68,6 +59,20 @@ export default async function Page({
       </div>
     </>
   );
+}
+
+export async function generateStaticParams() {
+  const pages = await getPages({ preview: false });
+  const paths = pages
+    .filter((page) => {
+      return page.fields.slug !== '/';
+    })
+    .map((page) => {
+      return {
+        slug: page.fields.slug.split('/'),
+      };
+    });
+  return [...paths, { slug: [''] }];
 }
 
 export async function generateMetadata({
