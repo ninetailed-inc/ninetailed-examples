@@ -11,6 +11,7 @@ import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-previe
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights';
 import { IConfig, IPage } from '@/types/contentful';
+import type { NinetailedInstance } from '@ninetailed/experience.js';
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import '@contentful/live-preview/style.css';
@@ -93,6 +94,17 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
         componentViewTrackingThreshold={2000} // Default = 2000
+        onRouteChange={(
+          { isInitialRoute, url }: { isInitialRoute: boolean; url: string },
+          ninetailed: NinetailedInstance
+        ): void => {
+          if (isInitialRoute) {
+            console.log('initial route');
+          }
+          console.log('ding, muthafucka');
+          ninetailed.page();
+        }}
+        useClientSideEvaluation={false}
       >
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">

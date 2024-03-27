@@ -1,10 +1,13 @@
+import { Favicon } from '@/components/Favicon';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <Favicon />
+        </Head>
         <body className="loading">
           {process.env.NEXT_PUBLIC_GTM_ID ? (
             <noscript>

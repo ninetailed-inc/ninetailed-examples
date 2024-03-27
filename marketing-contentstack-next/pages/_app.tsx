@@ -64,6 +64,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
         componentViewTrackingThreshold={2000} // Default = 2000
+        useClientSideEvaluation={false}
       >
         <Script
           id="gtm-base"
