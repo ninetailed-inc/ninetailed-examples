@@ -48,14 +48,12 @@ const PageSections = (props: { data: any }) => {
       const baselineHeroEntry = mapBaselineContentfulEntry(section);
       const mappedExperiences = parseExperiences(section);
       return (
-        <>
-          <Experience
-            baseline={baselineHeroEntry}
-            key={baselineHeroEntry.id}
-            experiences={mappedExperiences}
-            component="Hero"
-          />
-        </>
+        <Experience
+          baseline={baselineHeroEntry}
+          key={baselineHeroEntry.id}
+          experiences={mappedExperiences}
+          component="Hero"
+        />
       );
     }
   });

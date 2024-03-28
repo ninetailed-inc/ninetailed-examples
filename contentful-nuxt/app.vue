@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <button @click="resetProfile">Reset Profile</button>
-    <button @click="becomeEnterprise">Enterprise</button>
-    <button @click="becomeStartup">Startup</button>
-    <nav>
-      <NuxtLink to="/"> Home </NuxtLink>
-      <NuxtLink to="/pricing"> Pricing </NuxtLink>
-    </nav>
-    <NuxtPage />
-  </div>
+  <NuxtLayout>
+    <div>
+      <button @click="resetProfile">Reset Profile</button>
+      <button @click="becomeEnterprise">Enterprise</button>
+      <button @click="becomeStartup">Startup</button>
+      <nav>
+        <NuxtLink to="/"> Home </NuxtLink>
+        <NuxtLink to="/pricing"> Pricing </NuxtLink>
+      </nav>
+      <NuxtPage />
+    </div>
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">
