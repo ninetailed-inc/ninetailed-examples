@@ -8,6 +8,8 @@
 
 import { defineNuxtPlugin } from "nuxt/app";
 import { VueNinetailed, NinetailedKey } from "../vuePlugins/ninetailed";
+import { NinetailedGoogleTagmanagerPlugin } from "@ninetailed/experience.js-plugin-google-tagmanager";
+import { NinetailedInsightsPlugin } from "@ninetailed/experience.js-plugin-insights";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
@@ -16,6 +18,10 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(VueNinetailed, {
     clientId: config.public.ninetailedClientId,
     environment: config.public.ninetailedEnvironment,
+    plugins: [
+      new NinetailedGoogleTagmanagerPlugin(),
+      new NinetailedInsightsPlugin(),
+    ],
   });
 
   const ninetailedInstance = inject(NinetailedKey);

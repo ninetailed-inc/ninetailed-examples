@@ -11,13 +11,12 @@ import type { App } from "vue";
 
 import { NinetailedKey, ProfileStateKey } from "./symbols";
 
-// TODO: Let's export this type from experience.js
 type NinetailedInstantiationOptions = {
   clientId: string;
   environment?: string;
   preview?: boolean;
   url?: string;
-  // FIXME: Deprecated ??
+  // FIXME: Deprecated types?
   plugins?: (NinetailedPlugin | NinetailedPlugin[])[];
   profile?: Profile;
   locale?: Locale;
