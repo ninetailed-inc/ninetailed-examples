@@ -17,6 +17,9 @@ dependencies:
   '@ninetailed/experience.js-plugin-insights':
     specifier: ^7.5.3
     version: 7.5.3(@types/dlv@1.1.4)
+  '@ninetailed/experience.js-plugin-preview':
+    specifier: ^7.5.3
+    version: 7.5.3(@types/dlv@1.1.4)
   '@ninetailed/experience.js-shared':
     specifier: 7.5.2
     version: 7.5.2
@@ -1045,6 +1048,25 @@ packages:
       async-retry: 1.3.3
       ts-toolbelt: 9.6.0
       uuid: 9.0.0
+    transitivePeerDependencies:
+      - '@types/dlv'
+    dev: false
+
+  /@ninetailed/experience.js-plugin-preview@7.5.3(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-85Sb9TeldqgmV81qPpnO6+YxBopfEXSKdMFyb7F3hdCJwTAbJnGl85GDaoTdsH4uXm3XmArTNrA7PU/Ds/LBSA==}
+    dependencies:
+      '@ninetailed/experience.js': 7.5.3(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-preview-bridge': 7.5.3(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-shared': 7.5.3
+    transitivePeerDependencies:
+      - '@types/dlv'
+    dev: false
+
+  /@ninetailed/experience.js-preview-bridge@7.5.3(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-VpgmS4xPw5BEH3tT/Pp64s4Ay+WqJPsvNANRy2xELvdO2v1sxCqKdKgyLf4syTErN9jiPILx4gUyOcHC5KjHag==}
+    dependencies:
+      '@ninetailed/experience.js': 7.5.3(@types/dlv@1.1.4)
+      zoid: 9.0.86
     transitivePeerDependencies:
       - '@types/dlv'
     dev: false
@@ -2438,6 +2460,14 @@ packages:
     dev: false
     optional: true
 
+  /belter@1.0.190:
+    resolution: {integrity: sha512-jz05FHrO+bwitdI6JxV5ESyRdVhTcwMWQ7L4o+q/R4LNJFQrG58sp9EiwsSjhbihhiyYFcmmCMRRagxte6igtw==}
+    dependencies:
+      cross-domain-safe-weakmap: 1.0.29
+      cross-domain-utils: 2.0.38
+      zalgo-promise: 1.0.48
+    dev: false
+
   /big-integer@1.6.52:
     resolution: {integrity: sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==}
     engines: {node: '>=0.6'}
@@ -2858,6 +2888,18 @@ packages:
   /create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
     dev: true
+
+  /cross-domain-safe-weakmap@1.0.29:
+    resolution: {integrity: sha512-VLoUgf2SXnf3+na8NfeUFV59TRZkIJqCIATaMdbhccgtnTlSnHXkyTRwokngEGYdQXx8JbHT9GDYitgR2sdjuA==}
+    dependencies:
+      cross-domain-utils: 2.0.38
+    dev: false
+
+  /cross-domain-utils@2.0.38:
+    resolution: {integrity: sha512-zZfi3+2EIR9l4chrEiXI2xFleyacsJf8YMLR1eJ0Veb5FTMXeJ3DpxDjZkto2FhL/g717WSELqbptNSo85UJDw==}
+    dependencies:
+      zalgo-promise: 1.0.48
+    dev: false
 
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -5252,6 +5294,16 @@ packages:
       mlly: 1.4.2
       pathe: 1.1.1
 
+  /post-robot@10.0.46:
+    resolution: {integrity: sha512-EgVJiuvI4iRWDZvzObWes0X/n8olWBEJWxlSw79zmhpgkigX8UsVL4VOBhVtoJKwf0Y9qP9g2zOONw1rv80QbA==}
+    dependencies:
+      belter: 1.0.190
+      cross-domain-safe-weakmap: 1.0.29
+      cross-domain-utils: 2.0.38
+      universal-serialize: 1.0.10
+      zalgo-promise: 1.0.48
+    dev: false
+
   /postcss-calc@9.0.1(postcss@8.4.31):
     resolution: {integrity: sha512-TipgjGyzP5QzEhsOZUaIkeO5mKeMFpebWzRogWG/ysonUlnHcq5aJe0jOjpfzUU8PeSaBQnrE8ehR0QA5vs8PQ==}
     engines: {node: ^14 || ^16 || >=18.0}
@@ -6505,6 +6557,10 @@ packages:
       imurmurhash: 0.1.4
     dev: true
 
+  /universal-serialize@1.0.10:
+    resolution: {integrity: sha512-FdouA4xSFa0fudk1+z5vLWtxZCoC0Q9lKYV3uUdFl7DttNfolmiw2ASr5ddY+/Yz6Isr68u3IqC9XMSwMP+Pow==}
+    dev: false
+
   /universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
@@ -7032,6 +7088,10 @@ packages:
       yargs-parser: 21.1.1
     dev: true
 
+  /zalgo-promise@1.0.48:
+    resolution: {integrity: sha512-LLHANmdm53+MucY9aOFIggzYtUdkSBFxUsy4glTTQYNyK6B3uCPWTbfiGvSrEvLojw0mSzyFJ1/RRLv+QMNdzQ==}
+    dev: false
+
   /zhead@2.2.4:
     resolution: {integrity: sha512-8F0OI5dpWIA5IGG5NHUg9staDwz/ZPxZtvGVf01j7vHqSyZ0raHY+78atOVxRqb73AotX22uV1pXt3gYSstGag==}
     dev: true
@@ -7047,4 +7107,13 @@ packages:
 
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
+
+  /zoid@9.0.86:
+    resolution: {integrity: sha512-hWcLj0s4cHKErUUn0Nz2bvuCStA9/y3sz/0gFxvAhompu9v54i+Pik0Kx39pWPB8qbiEN7MRyHohv1ZERlHeSg==}
+    dependencies:
+      belter: 1.0.190
+      cross-domain-utils: 2.0.38
+      post-robot: 10.0.46
+      zalgo-promise: 1.0.48
     dev: false
