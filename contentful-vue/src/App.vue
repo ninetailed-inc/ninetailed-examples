@@ -7,15 +7,15 @@ const route = useRoute()
 const ninetailedInstance = inject(NinetailedKey)
 
 function resetProfile() {
-  ninetailed?.reset()
+  ninetailedInstance?.reset()
 }
 
 function becomeEnterprise() {
-  ninetailed?.identify('', { companysize: 'more_than_2000' })
+  ninetailedInstance?.identify('', { companysize: 'more_than_2000' })
 }
 
 function becomeStartup() {
-  ninetailed?.identify('', { companysize: '1-50' })
+  ninetailedInstance?.identify('', { companysize: '1-50' })
 }
 
 if (ninetailedInstance) {

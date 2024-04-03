@@ -70,6 +70,7 @@ const DefaultLoadingComponent = (loadingComponentProps: {
   if (hidden.value) {
     return (
       <div key="hide" style={{ opacity: 0 }}>
+        {/* @ts-ignore */}
         <ExperienceRenderComponent
           {...loadingComponentProps.passthroughProps}
           {...loadingComponentProps.baseline}
@@ -79,10 +80,13 @@ const DefaultLoadingComponent = (loadingComponentProps: {
   }
 
   return (
-    <ExperienceRenderComponent
-      {...loadingComponentProps.passthroughProps}
-      {...loadingComponentProps.baseline}
-    />
+    <>
+      {/* @ts-ignore */}
+      <ExperienceRenderComponent
+        {...loadingComponentProps.passthroughProps}
+        {...loadingComponentProps.baseline}
+      />
+    </>
   )
 }
 
@@ -98,6 +102,7 @@ const Experience = () => {
           variant={props.baseline}
           variantIndex={0}
         />
+        {/* @ts-ignore */}
         <ExperienceRenderComponent
           {...props.passthroughProps}
           {...props.baseline}
@@ -109,12 +114,15 @@ const Experience = () => {
 
   if (experienceState.value.status === 'loading') {
     return (
-      <LoadingComponent
-        key={props.baseline.id}
-        passthroughProps={props.passthroughProps}
-        baseline={props.baseline}
-        experiences={props.component}
-      />
+      <>
+        {/* @ts-ignore */}
+        <LoadingComponent
+          key={props.baseline.id}
+          passthroughProps={props.passthroughProps}
+          baseline={props.baseline}
+          experiences={props.component}
+        />
+      </>
     )
   }
 
@@ -138,6 +146,7 @@ const Experience = () => {
         variant={deepToRaw(experienceState.value.variant)}
         variantIndex={experienceState.value.variantIndex}
       />
+      {/* @ts-ignore */}
       <ExperienceRenderComponent
         key={`${experienceState.value.experience?.id || 'baseline'}-${
           experienceState.value.variant.id
