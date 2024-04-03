@@ -1,0 +1,56 @@
+<template>
+  <div
+    className="nt-cmp-marker"
+    style="
+      display: block !important;
+      height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    "
+    ref="trackingComponent"
+  />
+</template>
+
+<script setup lang="ts">
+import type {
+  ExperienceConfiguration,
+  Reference,
+  VariantRef
+} from '@ninetailed/experience.js-shared'
+import { NinetailedKey } from '@/plugins/ninetailed'
+import { useIntersectionObserver } from '@vueuse/core'
+import { inject, ref, watchEffect } from 'vue'
+
+const props = defineProps<{
+  experience?: ExperienceConfiguration<Reference | VariantRef> | null
+  variant: Reference | VariantRef
+  variantIndex: number
+}>()
+
+const trackingComponent = ref(null)
+const ninetailed = inject(NinetailedKey)!
+const targetIsVisible = ref(false)
+
+const { stop } = useIntersectionObserver(
+  trackingComponent,
+  ([{ isIntersecting }], observerElement) => {
+    targetIsVisible.value = isIntersecting
+  }
+)
+
+watchEffect(() => {
+  if (trackingComponent.value && targetIsVisible.value) {
+    ninetailed.trackComponentView({
+      element: trackingComponent.value,
+      experience: props.experience,
+      audience: props.experience?.audience,
+      variant:
+        'hidden' in props.variant && props.variant.hidden
+          ? { ...props.variant, id: `${props.variant.id}-hidden` }
+          : props.variant,
+      variantIndex: props.variantIndex
+    })
+    stop()
+  }
+})
+</script>

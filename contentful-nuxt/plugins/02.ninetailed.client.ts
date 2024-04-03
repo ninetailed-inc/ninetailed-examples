@@ -10,14 +10,14 @@ import { defineNuxtPlugin } from "nuxt/app";
 import { VueNinetailed, NinetailedKey } from "../vuePlugins/ninetailed";
 import { NinetailedGoogleTagmanagerPlugin } from "@ninetailed/experience.js-plugin-google-tagmanager";
 import { NinetailedInsightsPlugin } from "@ninetailed/experience.js-plugin-insights";
-// import { NinetailedPreviewPlugin } from "@ninetailed/experience.js-plugin-preview";
+import { NinetailedPreviewPlugin } from "@ninetailed/experience.js-plugin-preview";
+
 import {
   ExperienceMapper,
   type ExperienceEntryLike,
   type AudienceEntryLike,
   AudienceMapper,
 } from "@ninetailed/experience.js-utils-contentful";
-import NinetailedPreviewPlugin from "@ninetailed/experience.js-plugin-preview";
 
 export default defineNuxtPlugin({
   name: "ninetailed",
