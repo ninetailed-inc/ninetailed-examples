@@ -13,10 +13,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@ninetailed/experience.js": "^7.5.3",
-    "@ninetailed/experience.js-plugin-preview": "^7.5.3",
-    "@ninetailed/experience.js-shared": "^7.5.3",
-    "@ninetailed/experience.js-utils-contentful": "^7.5.3",
+    "@ninetailed/experience.js": "^7.6.0-beta.6",
+    "@ninetailed/experience.js-plugin-preview": "^7.6.0-beta.6",
+    "@ninetailed/experience.js-shared": "^7.6.0-beta.6",
+    "@ninetailed/experience.js-utils-contentful": "^7.6.0-beta.6",
     "@vueuse/core": "^10.9.0",
     "contentful": "^10.8.6",
     "contentful-rich-text-vue-renderer": "^3.1.0",
