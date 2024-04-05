@@ -2,6 +2,9 @@
   "name": "@ninetailed/contentful-nuxt",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=18 <=20"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
