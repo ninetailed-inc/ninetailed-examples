@@ -38,7 +38,6 @@ watch(() => route.params, fetchPageData, { immediate: true })
 function PageSections(props: { data: any }) {
   return props.data.fields.sections.map((section: SingularBlock) => {
     if (section.sys.contentType?.sys.id === 'hero') {
-      console.log(section)
       const baselineHeroEntry = mapBaselineContentfulEntry(section)
       const mappedExperiences = parseExperiences(section)
       return (

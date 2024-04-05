@@ -1,5 +1,6 @@
 import { shallowRef } from 'vue'
 import { Ninetailed } from '@ninetailed/experience.js'
+import type { NinetailedPlugin } from '@ninetailed/experience.js-plugin-analytics'
 
 import type {
   Profile,
@@ -8,7 +9,7 @@ import type {
   OnLogHandler,
   NinetailedRequestContext
 } from '@ninetailed/experience.js-shared'
-import type { NinetailedPlugin, Storage } from '@ninetailed/experience.js'
+import type { Storage } from '@ninetailed/experience.js'
 import type { App } from 'vue'
 
 import { NinetailedKey, ProfileStateKey } from './symbols'
@@ -18,7 +19,6 @@ type NinetailedInstantiationOptions = {
   environment?: string
   preview?: boolean
   url?: string
-  // FIXME: Deprecated types?
   plugins?: (NinetailedPlugin | NinetailedPlugin[])[]
   profile?: Profile
   locale?: Locale

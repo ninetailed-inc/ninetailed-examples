@@ -1,27 +1,22 @@
-import {
-  selectHasExperienceVariants,
-  selectExperience,
-  selectExperienceVariant
-} from '@ninetailed/experience.js'
+import { selectHasExperienceVariants } from '@ninetailed/experience.js'
 
 import type {
-  Baseline,
   ExperienceConfiguration,
   Profile,
   Reference,
   VariantRef
 } from '@ninetailed/experience.js'
 
-import { ProfileStateKey } from '@/plugins/ninetailed'
-import { type ComputedRef, inject, computed } from 'vue'
+import { NinetailedKey } from '@/plugins/ninetailed'
+import { inject, shallowRef, watchEffect, type ShallowRef } from 'vue'
 
-type Load<Variant extends Reference> = {
+type Load<TBaseline extends Reference> = {
   status: 'loading'
   loading: boolean
   hasVariants: boolean
-  baseline: Baseline
+  baseline: TBaseline
   experience: null
-  variant: Variant
+  variant: TBaseline
   variantIndex: 0
   audience: null
   isPersonalized: boolean
@@ -29,13 +24,13 @@ type Load<Variant extends Reference> = {
   error: null
 }
 
-type Success<Variant extends Reference> = {
+type Success<TBaseline extends Reference, TVariant extends Reference> = {
   status: 'success'
   loading: boolean
   hasVariants: boolean
-  baseline: Baseline
-  experience: ExperienceConfiguration<Variant> | null
-  variant: Variant
+  baseline: TBaseline
+  experience: ExperienceConfiguration<TVariant> | null
+  variant: TVariant
   variantIndex: number
   audience: { id: string } | null
   isPersonalized: boolean
@@ -43,13 +38,13 @@ type Success<Variant extends Reference> = {
   error: null
 }
 
-type Fail<Variant extends Reference> = {
+type Fail<TBaseline extends Reference> = {
   status: 'error'
   loading: boolean
   hasVariants: boolean
-  baseline: Baseline
+  baseline: TBaseline
   experience: null
-  variant: Variant
+  variant: TBaseline
   variantIndex: 0
   audience: null
   isPersonalized: boolean
@@ -57,81 +52,47 @@ type Fail<Variant extends Reference> = {
   error: Error
 }
 
-type UseExperienceArgs<Variant extends Reference> = {
-  baseline: Baseline
-  experiences: ExperienceConfiguration<Variant>[]
+type UseExperienceArgs<TBaseline extends Reference, TVariant extends Reference> = {
+  baseline: TBaseline
+  experiences: ExperienceConfiguration<TVariant>[]
 }
 
-type UseExperienceResponse<Variant extends Reference> =
-  | Load<Variant | VariantRef>
-  | Success<Variant | VariantRef>
-  | Fail<Variant | VariantRef>
+type UseExperienceReturn<TBaseline extends Reference, TVariant extends Reference> =
+  | Load<TBaseline>
+  | Success<TBaseline, TVariant | VariantRef>
+  | Fail<TBaseline>
 
 // TODO: Figure out return typing
-export const useExperience = <Variant extends Reference>({
+export const useExperience = <TBaseline extends Reference, TVariant extends Reference>({
   baseline,
   experiences
-}: UseExperienceArgs<Variant>): ComputedRef<UseExperienceResponse<Variant>> => {
-  const profileState = inject(ProfileStateKey)
+}: UseExperienceArgs<TBaseline, TVariant>): ShallowRef<
+  UseExperienceReturn<TBaseline, TVariant>
+> => {
+  const ninetailed = inject(NinetailedKey)
+
   const hasVariants = experiences
     .map((experience) => selectHasExperienceVariants(experience, baseline))
     .reduce((acc, curr) => acc || curr, false)
 
-  const baseReturn = {
-    ...profileState?.value,
+  const experience = shallowRef<UseExperienceReturn<TBaseline, TVariant | VariantRef>>({
     hasVariants,
-    baseline
-  }
-
-  const emptyReturn = {
-    ...baseReturn,
+    baseline,
+    error: null,
+    loading: true,
+    status: 'loading',
     experience: null,
     variant: baseline,
     variantIndex: 0,
     audience: null,
     isPersonalized: false,
     profile: null
-  }
-
-  const experienceState = computed(() => {
-    if (
-      profileState?.value.status === 'loading' ||
-      profileState?.value.status === 'error' ||
-      !profileState?.value.profile
-    ) {
-      return emptyReturn
-    }
-
-    const experience = selectExperience({
-      experiences,
-      profile: profileState.value.profile
-    })
-
-    if (!experience) {
-      // @ts-ignore
-      return { ...emptyReturn, profile: profileState.value.profile }
-    }
-
-    const { variant, index } = selectExperienceVariant({
-      baseline,
-      experience,
-      profile: profileState.value.profile
-    })
-
-    return {
-      ...baseReturn,
-      status: 'success',
-      loading: false,
-      error: null,
-      experience,
-      variant,
-      variantIndex: index,
-      audience: experience.audience ? experience.audience : null,
-      profile: profileState.value.profile,
-      isPersonalized: true
-    }
   })
 
-  // @ts-ignore
-  return experienceState
+  ninetailed?.onSelectVariant({ baseline, experiences }, (newExperienceState) => {
+    console.log(newExperienceState)
+    experience.value = newExperienceState as UseExperienceReturn<TBaseline, TVariant>
+  })
+
+  return experience
 }
