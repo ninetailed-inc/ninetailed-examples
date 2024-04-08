@@ -10,7 +10,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "serve": "node .output/server/index.mjs"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -21,11 +22,12 @@
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^16.3.0",
-    "@ninetailed/experience.js": "7.5.2",
-    "@ninetailed/experience.js-plugin-google-tagmanager": "7.5.2",
+    "@ninetailed/experience.js": "^7.5.3",
+    "@ninetailed/experience.js-plugin-google-tagmanager": "^7.5.3",
     "@ninetailed/experience.js-plugin-insights": "^7.5.3",
-    "@ninetailed/experience.js-shared": "7.5.2",
-    "@ninetailed/experience.js-utils-contentful": "7.5.2",
+    "@ninetailed/experience.js-plugin-preview": "^7.5.3",
+    "@ninetailed/experience.js-shared": "^7.5.3",
+    "@ninetailed/experience.js-utils-contentful": "^7.5.3",
     "@nuxt/image": "^1.1.0",
     "@vueuse/core": "^10.9.0",
     "contentful": "^10.6.12",

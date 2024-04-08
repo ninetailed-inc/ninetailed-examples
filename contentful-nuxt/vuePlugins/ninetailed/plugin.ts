@@ -6,6 +6,7 @@ import type {
   NinetailedRequestContext,
 } from "@ninetailed/experience.js-shared";
 import { Ninetailed } from "@ninetailed/experience.js";
+import { NinetailedPreviewPlugin } from "@ninetailed/experience.js-plugin-preview";
 import type { NinetailedPlugin, Storage } from "@ninetailed/experience.js";
 import type { App } from "vue";
 

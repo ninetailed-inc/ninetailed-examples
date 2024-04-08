@@ -3,6 +3,8 @@
 </template>
 
 <script setup lang="ts">
+import { NinetailedKey } from "~/vuePlugins/ninetailed";
+
 useHead({
   script: [
     {
@@ -14,4 +16,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     },
   ],
 });
+
+if (process.client) {
+  const route = useRoute();
+  const ninetailedInstance = inject(NinetailedKey);
+
+  if (ninetailedInstance) {
+    const { page } = ninetailedInstance;
+    watch(
+      () => route.fullPath,
+      () => {
+        page();
+      },
+      { immediate: true }
+    );
+  }
+}
 </script>
