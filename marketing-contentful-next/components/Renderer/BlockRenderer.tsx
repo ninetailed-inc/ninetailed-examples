@@ -78,11 +78,11 @@ const ComponentRenderer = (props: Component) => {
 export const BlockRenderer = ({ block }: { block: singularOrArrayBlock }) => {
   if (Array.isArray(block)) {
     return (
-      <>
+      <div>
         {block.map((b) => {
           return <BlockRenderer key={`block-${b.sys.id}`} block={b} />;
         })}
-      </>
+      </div>
     );
   }
 

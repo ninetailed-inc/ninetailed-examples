@@ -17,6 +17,7 @@ import '@contentful/live-preview/style.css';
 import SettingsProviderWrapper from '@/lib/SettingsProvider';
 import Style from '@/components/Style/Style';
 import { parseExperiences } from '@/lib/experiences';
+import NinetailedSegmentPlugin from '@ninetailed/experience.js-plugin-segment';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -45,6 +46,15 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
       <NinetailedProvider
         plugins={[
           new NinetailedInsightsPlugin(),
+          ...(process.env.NEXT_PUBLIC_SEGMENT_ID
+            ? [
+                new NinetailedSegmentPlugin({
+                  template: {
+                    ninetailed_audience_name: '{{ audience.name }}',
+                  },
+                }),
+              ]
+            : []),
           ...(process.env.NEXT_PUBLIC_GTM_ID
             ? [
                 new NinetailedGoogleTagmanagerPlugin({
@@ -92,7 +102,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         ]}
         clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
-        componentViewTrackingThreshold={2000} // Default = 2000
+        componentViewTrackingThreshold={0} // Default = 2000
       >
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
@@ -122,6 +132,20 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
   })(window,document,'script','dataLayer','${
     process.env.NEXT_PUBLIC_GTM_ID || ''
   }');`,
+                }}
+              />
+            ) : (
+              ''
+            )}
+            {process.env.NEXT_PUBLIC_SEGMENT_ID ? (
+              <Script
+                id="segment"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                  __html: `!function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="${process.env.NEXT_PUBLIC_SEGMENT_ID}";;analytics.SNIPPET_VERSION="5.2.0";
+                  analytics.load("${process.env.NEXT_PUBLIC_SEGMENT_ID}");
+                  analytics.page();
+                  }}();`,
                 }}
               />
             ) : (
