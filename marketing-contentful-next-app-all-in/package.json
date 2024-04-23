@@ -44,6 +44,7 @@
     "contentful-export": "7.18.16",
     "contentful-import": "8.3.0",
     "contentful-management": "10.15.1",
+    "contentful-resolve-response": "^1.8.1",
     "contentful-typescript-codegen": "3.2.3",
     "dotenv": "16.0.1",
     "graphql": "^16.8.1",
@@ -59,6 +60,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/contentful-resolve-response": "^0.1.33",
     "@types/dlv": "^1.0.0",
     "@types/lodash": "4.14.181",
     "@types/node": "18.0.0",

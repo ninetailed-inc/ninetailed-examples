@@ -5,14 +5,8 @@ import {
   IPageFields,
   IPdp,
   IPdpFields,
+  IRedirect,
 } from '@/types/contentful';
-// import {
-//   AudienceEntryLike,
-//   AudienceMapper,
-//   ExperienceEntryLike,
-//   ExperienceMapper,
-//   // ExperimentEntry,
-// } from '@ninetailed/experience.js-utils-contentful';
 
 const contentfulClient = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ?? '',
@@ -107,6 +101,23 @@ export async function getGlobalConfig(QueryParams: IQueryParams) {
   const client = getClient(QueryParams.preview as boolean);
   const entries = await client.getEntries(query);
   return entries.items[0] as IConfig;
+}
+
+export async function getRedirect({ slug, preview }: IPagelikeQueryParams) {
+  const query = {
+    limit: 1,
+    include: 2,
+    'fields.from': slug,
+    content_type: 'redirect',
+  };
+  const client = getClient(Boolean(preview));
+  const entries = await client.getEntries<IRedirect>(query);
+
+  if (!entries.items.length) {
+    return null;
+  }
+
+  return entries.items[0];
 }
 
 // For the preview widget

@@ -658,6 +658,40 @@ export interface IProductPolicy extends Entry<IProductPolicyFields> {
   };
 }
 
+export interface IRedirectFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Description */
+  description?: string | undefined;
+
+  /** From */
+  from: string;
+
+  /** To */
+  to: string;
+
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
+}
+
+export interface IRedirect extends Entry<IRedirectFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'redirect';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export interface ISectionsGroupFields {
   /** Internal Name */
   internalName: string;
@@ -804,6 +838,7 @@ export type CONTENT_TYPE =
   | 'productDetail'
   | 'productInfoBlock'
   | 'productPolicy'
+  | 'redirect'
   | 'sectionsGroup'
   | 'seo'
   | 'setting'
