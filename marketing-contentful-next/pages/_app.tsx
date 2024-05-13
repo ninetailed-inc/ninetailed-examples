@@ -5,11 +5,7 @@ import Script from 'next/script';
 import {
   Experience,
   ExperienceConfiguration,
-  NinetailedProvider,
 } from '@ninetailed/experience.js-next';
-import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
-import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
-import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights';
 import { IConfig, IPage } from '@/types/contentful';
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
@@ -17,7 +13,7 @@ import '@contentful/live-preview/style.css';
 import SettingsProviderWrapper from '@/lib/SettingsProvider';
 import Style from '@/components/Style/Style';
 import { parseExperiences } from '@/lib/experiences';
-import NinetailedSegmentPlugin from '@ninetailed/experience.js-plugin-segment';
+import { getNinetailedProvider } from '@/lib/getNinetailedProvider';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -33,7 +29,7 @@ interface CustomPageProps {
   page: IPage;
   config: IConfig;
   ninetailed?: {
-    preview: {
+    preview?: {
       allExperiences: ExperienceConfiguration[];
       allAudiences: Audience[];
     };
@@ -41,69 +37,11 @@ interface CustomPageProps {
 }
 
 const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
+  const NinetailedProvider = getNinetailedProvider(pageProps);
+
   return (
     <div className="app">
-      <NinetailedProvider
-        plugins={[
-          new NinetailedInsightsPlugin(),
-          ...(process.env.NEXT_PUBLIC_SEGMENT_ID
-            ? [
-                new NinetailedSegmentPlugin({
-                  template: {
-                    ninetailed_audience_name: '{{ audience.name }}',
-                  },
-                }),
-              ]
-            : []),
-          ...(process.env.NEXT_PUBLIC_GTM_ID
-            ? [
-                new NinetailedGoogleTagmanagerPlugin({
-                  template: {
-                    ninetailed_audience_name: '{{ audience.name }}',
-                  },
-                }),
-              ]
-            : []),
-          ...(pageProps.ninetailed?.preview
-            ? [
-                new NinetailedPreviewPlugin({
-                  experiences:
-                    pageProps.ninetailed?.preview.allExperiences || [],
-                  audiences: pageProps.ninetailed?.preview.allAudiences || [],
-                  onOpenExperienceEditor: (experience) => {
-                    if (process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID) {
-                      window.open(
-                        `https://app.contentful.com/spaces/${
-                          process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
-                        }/environments/${
-                          process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT ||
-                          'master'
-                        }/entries/${experience.id}`,
-                        '_blank'
-                      );
-                    }
-                  },
-                  onOpenAudienceEditor: (audience) => {
-                    if (process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID) {
-                      window.open(
-                        `https://app.contentful.com/spaces/${
-                          process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
-                        }/environments/${
-                          process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT ||
-                          'master'
-                        }/entries/${audience.id}`,
-                        '_blank'
-                      );
-                    }
-                  },
-                }),
-              ]
-            : []),
-        ]}
-        clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID ?? ''}
-        environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
-        componentViewTrackingThreshold={0} // Default = 2000
-      >
+      <NinetailedProvider>
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
             {/* Injected style example*/}
