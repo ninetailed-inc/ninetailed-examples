@@ -108,7 +108,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
           <ContentfulLivePreviewProvider locale="en-US">
             {/* Injected style example*/}
             {pageProps.config &&
-              pageProps.config.fields.styles?.length &&
+              pageProps.config.fields?.styles?.length &&
               pageProps.config.fields.styles.map((styleEntry) => {
                 return (
                   <Experience

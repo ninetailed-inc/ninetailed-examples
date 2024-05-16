@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import { useFlag } from '@/lib/experiences';
 
 export const Hero = ({ sys, fields }: IHero) => {
-  const expFlag = useFlag('heroLayout');
+  const expFlag = useFlag('heroLayout') || 0;
 
   const updatedHero = useContentfulLiveUpdates({ sys, fields }) as IHero;
   const layoutStyles = [
@@ -43,7 +43,7 @@ export const Hero = ({ sys, fields }: IHero) => {
                   fieldId: 'headline',
                 })}
                 className={classNames(
-                  'font-extrabold text-gray-900 tracking-tight hero__headline'
+                  'font-extrabold text-gray-900 text-5xl tracking-tight hero__headline'
                 )}
                 richTextDocument={updatedHero.fields.headline}
               />

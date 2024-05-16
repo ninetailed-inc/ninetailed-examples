@@ -39,11 +39,11 @@ export const hoistId = (entry: singularBlock) => {
 // Feature flagging example
 export const useFlag = (flag: string) => {
   const settings = useContext(SettingsContext);
-  const setting = settings[flag] || {};
+  const setting = settings[flag];
 
   const { variantIndex } = useExperience({
-    baseline: hoistId(setting),
-    experiences: parseExperiences(setting),
+    baseline: setting ? hoistId(setting) : { id: '' },
+    experiences: setting ? parseExperiences(setting) : [],
   });
 
   return variantIndex;
