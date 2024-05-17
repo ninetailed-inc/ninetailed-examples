@@ -18,6 +18,7 @@ import Style from '@/components/Style/Style';
 import { parseExperiences } from '@/lib/experiences';
 import NinetailedSegmentPlugin from '@ninetailed/experience.js-plugin-segment';
 import { ThirdPartyScripts } from '@/components/ThirdPartyScripts';
+import { LyticsTracker } from '@/components/LyticsTracker';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -121,6 +122,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
                 );
               })}
             <ThirdPartyScripts />
+            <LyticsTracker />
             <Component {...pageProps} />
           </ContentfulLivePreviewProvider>
         </SettingsProviderWrapper>
