@@ -107,20 +107,6 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
       >
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
-            {/* Injected style example*/}
-            {pageProps.config &&
-              pageProps.config.fields?.styles?.length &&
-              pageProps.config.fields.styles.map((styleEntry) => {
-                return (
-                  <Experience
-                    key={styleEntry.sys.id}
-                    id={styleEntry.sys.id}
-                    {...styleEntry}
-                    component={Style}
-                    experiences={parseExperiences(styleEntry || [])}
-                  />
-                );
-              })}
             <ThirdPartyScripts />
             <LyticsTracker />
             <Component {...pageProps} />

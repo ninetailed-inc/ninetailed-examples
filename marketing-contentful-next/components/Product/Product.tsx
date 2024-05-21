@@ -20,7 +20,7 @@ export const Product = ({
 }) => {
   const productImages = flattenConnection(product.images);
   const productVariants = flattenConnection(product.variants);
-  const [selectedSize, setSelectedSize] = useState(productVariants[2].title);
+  const [selectedSize, setSelectedSize] = useState(productVariants[0].title);
 
   // TODO: Store as metafield or CMS content
   const productRating = 4.2;
@@ -118,52 +118,55 @@ export const Product = ({
               className={`mt-8 lg:col-span-5 ${pdpLayoutStyles[expFlag][0]}`}
             >
               <form>
-                {/* Size picker */}
-                <div className="mt-8">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium text-gray-900">Size</h2>
-                    <button className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                      See sizing chart
-                    </button>
-                  </div>
-
-                  <RadioGroup
-                    value={selectedSize}
-                    onChange={setSelectedSize}
-                    className="mt-2"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Choose a size
-                    </RadioGroup.Label>
-                    <div className="flex gap-3">
-                      {productVariants.map((productVariant) => (
-                        <RadioGroup.Option
-                          key={productVariant.id}
-                          value={productVariant.title}
-                          className={({ active, checked }) =>
-                            classNames(
-                              productVariant.availableForSale
-                                ? 'cursor-pointer focus:outline-none'
-                                : 'cursor-not-allowed opacity-25',
-                              active
-                                ? 'ring-2 ring-indigo-500 ring-offset-2'
-                                : '',
-                              checked
-                                ? 'border-transparent bg-indigo-600 text-white hover:bg-indigo-700'
-                                : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
-                              'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase flex-1'
-                            )
-                          }
-                          disabled={!productVariant.availableForSale}
-                        >
-                          <RadioGroup.Label as="span">
-                            {productVariant.title}
-                          </RadioGroup.Label>
-                        </RadioGroup.Option>
-                      ))}
+                {/* Option picker */}
+                {product.options &&
+                product.options.length >= 0 &&
+                product.options[0].name !== 'Title' ? (
+                  <div className="mt-8">
+                    <div className="flex items-center justify-between">
+                      <h2 className="text-sm font-medium text-gray-900">
+                        {product.options[0].name}
+                      </h2>
                     </div>
-                  </RadioGroup>
-                </div>
+
+                    <RadioGroup
+                      value={selectedSize}
+                      onChange={setSelectedSize}
+                      className="mt-2"
+                    >
+                      <RadioGroup.Label className="sr-only">
+                        Choose a {product.options[0].name}
+                      </RadioGroup.Label>
+                      <div className="flex gap-3">
+                        {productVariants.map((productVariant) => (
+                          <RadioGroup.Option
+                            key={productVariant.id}
+                            value={productVariant.title}
+                            className={({ active, checked }) =>
+                              classNames(
+                                productVariant.availableForSale
+                                  ? 'cursor-pointer focus:outline-none'
+                                  : 'cursor-not-allowed opacity-25',
+                                active
+                                  ? 'ring-2 ring-indigo-500 ring-offset-2'
+                                  : '',
+                                checked
+                                  ? 'border-transparent bg-indigo-600 text-white hover:bg-indigo-700'
+                                  : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
+                                'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase flex-1'
+                              )
+                            }
+                            disabled={!productVariant.availableForSale}
+                          >
+                            <RadioGroup.Label as="span">
+                              {productVariant.title}
+                            </RadioGroup.Label>
+                          </RadioGroup.Option>
+                        ))}
+                      </div>
+                    </RadioGroup>
+                  </div>
+                ) : null}
 
                 <button
                   type="submit"

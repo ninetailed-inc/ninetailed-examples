@@ -87,9 +87,6 @@ export interface IConfigFields {
   /** Settings */
   settings?: ISetting[] | undefined;
 
-  /** Styles */
-  styles: IStyle[];
-
   /** Footer */
   footer?: IFooter | undefined;
 }
@@ -283,6 +280,9 @@ export interface IHubspotForm extends Entry<IHubspotFormFields> {
 export interface INavigationFields {
   /** Internal title */
   internalTitle?: string | undefined;
+
+  /** Logo */
+  logo?: Asset | undefined;
 
   /** Navigation links */
   navigationLinks: IButton[];

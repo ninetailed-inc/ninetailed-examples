@@ -7,6 +7,7 @@ type SendEventOptions = {
   timestamp?: number;
 };
 
+// TODO: Type for Lytics
 type CdpWebhookPayload = {
   ownername?: string;
   lifecyclestage?: string;
@@ -31,7 +32,7 @@ async function upsertProfileViaIdentify(
   return response;
 }
 
-export default async function handler(
+export default function handler(
   request: ApiRequest,
   response: NextApiResponse
 ) {
@@ -46,20 +47,20 @@ export default async function handler(
     });
   }
 
-  const apiClient = new NinetailedAPIClient({
-    clientId: request.body.ninetailed_organization_id,
-    environment: request.body.ninetailed_environment,
-  });
+  // const apiClient = new NinetailedAPIClient({
+  //   clientId: request.body.ninetailed_organization_id,
+  //   environment: request.body.ninetailed_environment,
+  // });
 
-  const ninetailedResponse = await upsertProfileViaIdentify(apiClient, {
-    id: request.body.ninetailedid,
-    traits: {
-      ...(request.body.lifecyclestage && {
-        lifecyclestage: request.body.lifecyclestage,
-      }),
-      ...(request.body.ownername && { ownername: request.body.ownername }),
-    },
-  });
+  // const ninetailedResponse = await upsertProfileViaIdentify(apiClient, {
+  //   id: request.body.ninetailedid,
+  //   traits: {
+  //     ...(request.body.lifecyclestage && {
+  //       lifecyclestage: request.body.lifecyclestage,
+  //     }),
+  //     ...(request.body.ownername && { ownername: request.body.ownername }),
+  //   },
+  // });
 
-  return response.status(200).json(ninetailedResponse);
+  return response.status(200).json({ lyticsPayload: request.body });
 }

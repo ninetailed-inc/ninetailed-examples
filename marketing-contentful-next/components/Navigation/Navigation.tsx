@@ -7,7 +7,7 @@ import Logo from '@/public/logo.svg';
 
 import classNames from 'classnames';
 
-import { handleErrors } from '@/lib/helperfunctions';
+import { ContentfulImageLoader, handleErrors } from '@/lib/helperfunctions';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 
 export const Navigation = ({ fields }: INavigation) => {
@@ -34,7 +34,22 @@ export const Navigation = ({ fields }: INavigation) => {
           <div className="flex justify-start">
             <Link href="/">
               <span className="sr-only">Workflow</span>
-              <Image src={Logo as string} width={175} height={57} alt="Logo" />
+              {fields.logo?.fields.file.url ? (
+                <Image
+                  loader={ContentfulImageLoader}
+                  src={`https:${fields.logo?.fields.file.url}`}
+                  width={175}
+                  height={57}
+                  alt="Logo"
+                />
+              ) : (
+                <Image
+                  src={Logo as string}
+                  width={175}
+                  height={57}
+                  alt="Logo"
+                />
+              )}
             </Link>
           </div>
 
