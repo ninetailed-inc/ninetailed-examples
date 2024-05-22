@@ -2,7 +2,6 @@ import React from 'react';
 import '@/styles/globals.css';
 import { AppProps as NextAppProps } from 'next/app';
 import {
-  Experience,
   ExperienceConfiguration,
   NinetailedProvider,
 } from '@ninetailed/experience.js-next';
@@ -14,8 +13,6 @@ import { IConfig, IPage } from '@/types/contentful';
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import '@contentful/live-preview/style.css';
 import SettingsProviderWrapper from '@/lib/SettingsProvider';
-import Style from '@/components/Style/Style';
-import { parseExperiences } from '@/lib/experiences';
 import NinetailedSegmentPlugin from '@ninetailed/experience.js-plugin-segment';
 import { ThirdPartyScripts } from '@/components/ThirdPartyScripts';
 import { LyticsTracker } from '@/components/LyticsTracker';
