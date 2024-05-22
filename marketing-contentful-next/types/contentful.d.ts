@@ -319,7 +319,7 @@ export interface INavigationFields {
   logo?: Asset | undefined;
 
   /** Navigation links */
-  navigationLinks: IButton[];
+  navigationLinks: INavLink[];
 
   /** Ninetailed */
   nt_experiences?: INtExperience[] | undefined;
@@ -335,6 +335,51 @@ export interface INavigation extends Entry<INavigationFields> {
     contentType: {
       sys: {
         id: 'navigation';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface INavLinkFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Name */
+  name: string;
+
+  /** Icon */
+  icon?:
+    | 'ArrowPathIcon'
+    | 'ChartPieIcon'
+    | 'CursorArrowRaysIcon'
+    | 'FingerPrintIcon'
+    | 'SquaresPlusIcon'
+    | 'PlayCircleIcon'
+    | 'PhoneIcon'
+    | undefined;
+
+  /** URL */
+  url: string;
+
+  /** Links */
+  links?: INavLink[] | undefined;
+
+  /** Description */
+  description?: string | undefined;
+}
+
+export interface INavLink extends Entry<INavLinkFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'navLink';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -801,6 +846,7 @@ export type CONTENT_TYPE =
   | 'hero'
   | 'hubspotForm'
   | 'navigation'
+  | 'navLink'
   | 'nt_audience'
   | 'nt_experience'
   | 'nt_mergetag'
