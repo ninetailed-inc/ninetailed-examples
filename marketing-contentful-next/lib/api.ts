@@ -1,5 +1,7 @@
 import { ContentfulClientApi, createClient } from 'contentful';
 import {
+  IArticle,
+  IArticleFields,
   IConfig,
   IPage,
   IPageFields,
@@ -11,7 +13,6 @@ import {
   AudienceMapper,
   ExperienceEntryLike,
   ExperienceMapper,
-  // ExperimentEntry,
 } from '@ninetailed/experience.js-utils-contentful';
 
 const contentfulClient = createClient({
@@ -58,6 +59,15 @@ const getProductDisplayPageQuery = (pageParams: IPagelikeQueryParams) => {
   };
 };
 
+const getArticleQuery = (pageParams: IPagelikeQueryParams) => {
+  return {
+    limit: 1,
+    include: 10,
+    'fields.slug': pageParams.slug,
+    content_type: 'article',
+  };
+};
+
 export async function getPage(
   pageParams: IPagelikeQueryParams
 ): Promise<IPage> {
@@ -96,6 +106,27 @@ export async function getProductPages(
   const pdps = entries.items as IPdp[];
 
   return pdps || [];
+}
+
+export async function getArticle(
+  pageParams: IPagelikeQueryParams
+): Promise<IArticle> {
+  const query = getArticleQuery(pageParams);
+  const client = getClient(pageParams.preview as boolean);
+  const entries = await client.getEntries<IArticleFields>(query);
+  const [article] = entries.items as IArticle[];
+  return article;
+}
+
+export async function getArticles(
+  QueryParams: IQueryParams
+): Promise<IArticle[]> {
+  const query = { content_type: 'article' };
+  const client = getClient(QueryParams.preview as boolean);
+  const entries = await client.getEntries<IArticleFields>(query);
+  const articles = entries.items as IArticle[];
+
+  return articles || [];
 }
 
 export async function getGlobalConfig(QueryParams: IQueryParams) {

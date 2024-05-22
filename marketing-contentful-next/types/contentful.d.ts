@@ -3,6 +3,40 @@
 import { Asset, Entry } from 'contentful';
 import { Document } from '@contentful/rich-text-types';
 
+export interface IArticleFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Slug */
+  slug: string;
+
+  /** SEO */
+  seo?: ISeo | undefined;
+
+  /** Title */
+  title: string;
+
+  /** Body */
+  body?: Document | undefined;
+}
+
+export interface IArticle extends Entry<IArticleFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'article';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export interface IBannerFields {
   /** Internal title */
   internalTitle: string;
@@ -756,35 +790,8 @@ export interface ISetting extends Entry<ISettingFields> {
   };
 }
 
-export interface IStyleFields {
-  /** Internal Name */
-  name: string;
-
-  /** CSS */
-  css?: string | undefined;
-
-  /** Ninetailed */
-  nt_experiences?: INtExperience[] | undefined;
-}
-
-export interface IStyle extends Entry<IStyleFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: 'style';
-        linkType: 'ContentType';
-        type: 'Link';
-      };
-    };
-  };
-}
-
 export type CONTENT_TYPE =
+  | 'article'
   | 'banner'
   | 'button'
   | 'config'
@@ -806,8 +813,7 @@ export type CONTENT_TYPE =
   | 'productPolicy'
   | 'sectionsGroup'
   | 'seo'
-  | 'setting'
-  | 'style';
+  | 'setting';
 
 export type LOCALE_CODE = 'en-US';
 

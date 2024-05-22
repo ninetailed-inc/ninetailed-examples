@@ -86,8 +86,6 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
         )
       : null;
 
-  console.log(productInfo?.product.options);
-
   return {
     props: {
       pdp,
