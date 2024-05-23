@@ -53,5 +53,7 @@ export default function handler(
   //   },
   // });
 
+  console.log(request.body);
+
   return response.status(200).json({ lyticsPayload: request.body });
 }
