@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 // };
 
 type ApiRequest = Omit<NextApiRequest, 'body'> & {
-  body: any;
+  body: Record<string, string>;
 };
 
 // async function upsertProfileViaIdentify(
