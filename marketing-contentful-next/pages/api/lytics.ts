@@ -81,7 +81,7 @@ export default async function handler(
   } = request.body.data;
 
   // This option loops over the triggering events to add/remove
-  // for (const event of _) {
+  // for (const event of events) {
   //   switch (event.event) {
   //     case "enter":
   //       traitsPayload[event.slug] = true;
@@ -98,6 +98,8 @@ export default async function handler(
     clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || '',
     environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT,
   });
+
+  console.log(`lytics _uid`, userId);
 
   const ninetailedResponse = await apiClient.sendIdentifyEvent(userId, traits);
 
