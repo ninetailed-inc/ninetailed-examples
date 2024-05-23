@@ -1,59 +1,114 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-// import { NinetailedAPIClient } from '@ninetailed/experience.js-node';
-// import { Traits } from '@ninetailed/experience.js-shared';
+import { NinetailedAPIClient } from '@ninetailed/experience.js-node';
+import { Traits } from '@ninetailed/experience.js-shared';
 
-// type SendEventOptions = {
-//   anonymousId?: string;
-//   timestamp?: number;
-// };
-
-type ApiRequest = Omit<NextApiRequest, 'body'> & {
-  body: Record<string, string>;
+type SendEventOptions = {
+  anonymousId?: string;
+  timestamp?: number;
 };
 
-// async function upsertProfileViaIdentify(
-//   apiClient: NinetailedAPIClient,
-//   {
-//     id,
-//     traits,
-//     options,
-//   }: { id: string; traits: Traits; options?: SendEventOptions }
-// ) {
-//   const response = await apiClient.sendIdentifyEvent(id, traits, options);
-//   return response;
-// }
+type ApiRequest = Omit<NextApiRequest, 'body'> & {
+  body: LyticsPayload;
+};
 
-export default function handler(
+export type LyticsPayload = {
+  id: string;
+  data: {
+    _segments: String[];
+    _uid: string;
+    channels: String[];
+    domains: String[];
+    score_consistency: number;
+    score_frequency: number;
+    score_intensity: number;
+    score_maturity: number;
+    score_momentum: number;
+    score_propensity: number;
+    score_quantity: number;
+    score_recency: number;
+    score_volatility: number;
+    segment_events: SegmentEvent[];
+    segment_prediction: Record<string, number>;
+  };
+  meta: {
+    object: 'user';
+    subscription_id: string;
+    timestamp: string;
+  };
+};
+
+type BaseSegmentEvent = {
+  id: string;
+  slug: string;
+};
+
+interface EnterSegmentEvent extends BaseSegmentEvent {
+  event: 'enter';
+  enter: string;
+}
+
+interface ExitSegmentEvent extends BaseSegmentEvent {
+  event: 'exit';
+  exit: string;
+}
+
+interface ChangeSegmentEvent extends BaseSegmentEvent {
+  event: 'change';
+}
+
+type SegmentEvent = EnterSegmentEvent | ExitSegmentEvent | ChangeSegmentEvent;
+
+export default async function handler(
   request: ApiRequest,
   response: NextApiResponse
 ) {
-  // if (
-  //   request.headers['x-ninetailed-secret'] !== process.env.WEBHOOK_CLIENT_SECRET
-  // ) {
-  //   return response.status(403).json({
-  //     error: {
-  //       code: 'Forbidden',
-  //       message: 'Not authorized',
-  //     },
-  //   });
+  if (
+    request.headers['x-ninetailed-secret'] !== process.env.WEBHOOK_CLIENT_SECRET
+  ) {
+    console.error('Unauthortized');
+    return response.status(403).json({
+      error: {
+        code: 'Forbidden',
+        message: 'Not authorized',
+      },
+    });
+  }
+
+  console.log(`request`, request.body);
+
+  const USER_ID_KEY = '_uid';
+  const EVENTS_KEY = 'segment_events';
+  const SEGMENTS_KEY = '_segments';
+  const {
+    [USER_ID_KEY]: userId,
+    [EVENTS_KEY]: events,
+    [SEGMENTS_KEY]: lyticsSegments,
+    ...rest
+  } = request.body.data;
+
+  // This option loops over the triggering events to add/remove
+  // for (const event of events) {
+  //   switch (event.event) {
+  //     case "enter":
+  //       traitsPayload[event.slug] = true;
+  //       break;
+  //     case "exit":
+  //       traitsPayload[event.slug] = false;
+  //   }
   // }
 
-  // const apiClient = new NinetailedAPIClient({
-  //   clientId: request.body.ninetailed_organization_id,
-  //   environment: request.body.ninetailed_environment,
-  // });
+  // Or just get it directly from _segments
+  const traits = { lyticsSegments, ...rest };
 
-  // const ninetailedResponse = await upsertProfileViaIdentify(apiClient, {
-  //   id: request.body.ninetailedid,
-  //   traits: {
-  //     ...(request.body.lifecyclestage && {
-  //       lifecyclestage: request.body.lifecyclestage,
-  //     }),
-  //     ...(request.body.ownername && { ownername: request.body.ownername }),
-  //   },
-  // });
+  const apiClient = new NinetailedAPIClient({
+    clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || '',
+    environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT,
+  });
 
-  console.log(request.body);
+  // @ts-ignore
+  const ninetailedResponse = await apiClient.sendIdentifyEvent(userId, traits);
 
-  return response.status(200).json({ lyticsPayload: request.body });
+  console.log(`9t-response`, ninetailedResponse);
+
+  return response.status(200).json(ninetailedResponse);
 }
