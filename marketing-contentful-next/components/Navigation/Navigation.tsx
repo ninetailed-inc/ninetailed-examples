@@ -11,20 +11,8 @@ import {
   PopoverPanel,
   Transition,
 } from '@headlessui/react';
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from '@heroicons/react/20/solid';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 import Image from 'next/image';
 import { INavigation } from '@/types/contentful';
@@ -34,44 +22,6 @@ import classNames from 'classnames';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 import { handleErrors } from '@/lib/helperfunctions';
 import Link from 'next/link';
-
-const products = [
-  {
-    name: 'Analytics',
-    description: 'Get a better understanding of your traffic',
-    href: '#',
-    icon: ChartPieIcon,
-  },
-  {
-    name: 'Engagement',
-    description: 'Speak directly to your customers',
-    href: '#',
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: 'Security',
-    description: 'Your customers’ data will be safe and secure',
-    href: '#',
-    icon: FingerPrintIcon,
-  },
-  {
-    name: 'Integrations',
-    description: 'Connect with third-party tools',
-    href: '#',
-    icon: SquaresPlusIcon,
-  },
-  {
-    name: 'Automations',
-    description: 'Build strategic funnels that will convert',
-    href: '#',
-    icon: ArrowPathIcon,
-  },
-];
-
-const callsToAction = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon },
-];
 
 export function Navigation({ fields }: INavigation) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -84,7 +34,7 @@ export function Navigation({ fields }: INavigation) {
     setLoggingIn(true);
     // This is a hard-coded Segment user_id for demo purposes
     // FIXME: This will not work on anything other than the main B2B demo env
-    await identify('6468b4e5', { pricingplan: 'growth' });
+    await identify('testLytics001');
     setLoggingIn(false);
   });
 
@@ -262,16 +212,17 @@ export function Navigation({ fields }: INavigation) {
                               />
                             </DisclosureButton>
                             <DisclosurePanel className="mt-2 space-y-2">
-                              {navLink.fields.links!.map((link) => (
-                                <DisclosureButton
-                                  key={link.fields.name}
-                                  as="a"
-                                  href={link.fields.url}
-                                  className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                >
-                                  {link.fields.name}
-                                </DisclosureButton>
-                              ))}
+                              {navLink.fields.links &&
+                                navLink.fields.links.map((link) => (
+                                  <DisclosureButton
+                                    key={link.fields.name}
+                                    as="a"
+                                    href={link.fields.url}
+                                    className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                  >
+                                    {link.fields.name}
+                                  </DisclosureButton>
+                                ))}
                             </DisclosurePanel>
                           </>
                         )}

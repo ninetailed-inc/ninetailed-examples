@@ -1,11 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { NinetailedAPIClient } from '@ninetailed/experience.js-node';
-import { Traits } from '@ninetailed/experience.js-shared';
-
-type SendEventOptions = {
-  anonymousId?: string;
-  timestamp?: number;
-};
 
 type ApiRequest = Omit<NextApiRequest, 'body'> & {
   body: LyticsPayload;
@@ -81,13 +75,13 @@ export default async function handler(
   const SEGMENTS_KEY = '_segments';
   const {
     [USER_ID_KEY]: userId,
-    [EVENTS_KEY]: events,
+    [EVENTS_KEY]: _,
     [SEGMENTS_KEY]: lyticsSegments,
     ...rest
   } = request.body.data;
 
   // This option loops over the triggering events to add/remove
-  // for (const event of events) {
+  // for (const event of _) {
   //   switch (event.event) {
   //     case "enter":
   //       traitsPayload[event.slug] = true;
