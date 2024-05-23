@@ -14,10 +14,10 @@ type ApiRequest = Omit<NextApiRequest, 'body'> & {
 export type LyticsPayload = {
   id: string;
   data: {
-    _segments: String[];
+    _segments: string[];
     _uid: string;
-    channels: String[];
-    domains: String[];
+    channels: string[];
+    domains: string[];
     score_consistency: number;
     score_frequency: number;
     score_intensity: number;
@@ -105,7 +105,6 @@ export default async function handler(
     environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT,
   });
 
-  // @ts-ignore
   const ninetailedResponse = await apiClient.sendIdentifyEvent(userId, traits);
 
   console.log(`9t-response`, ninetailedResponse);
