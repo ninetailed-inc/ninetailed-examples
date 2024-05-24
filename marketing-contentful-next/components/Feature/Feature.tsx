@@ -102,13 +102,13 @@ export const Feature = ({ fields }: IFeature) => {
               width={
                 (fields.image.fields.file.details.image.width *
                   Math.min(
-                    320,
+                    710,
                     fields.image.fields.file.details.image.height
                   )) /
                 fields.image.fields.file.details.image.height
               }
               height={Math.min(
-                320,
+                710,
                 fields.image.fields.file.details.image.height
               )}
               className={`w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:max-w-full ${
