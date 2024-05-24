@@ -53,7 +53,7 @@ export function Navigation({ fields }: INavigation) {
               <Image
                 loader={ContentfulImageLoader}
                 src={`https:${fields.logo?.fields.file.url}`}
-                width={175}
+                width={57}
                 height={57}
                 alt="Logo"
               />
@@ -166,7 +166,7 @@ export function Navigation({ fields }: INavigation) {
                 <Image
                   loader={ContentfulImageLoader}
                   src={`https:${fields.logo?.fields.file.url}`}
-                  width={175}
+                  width={57}
                   height={57}
                   alt="Logo"
                 />

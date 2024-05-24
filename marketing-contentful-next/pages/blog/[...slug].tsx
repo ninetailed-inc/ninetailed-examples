@@ -31,7 +31,13 @@ const Article = ({
   const articleRenderOptions = {
     [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
       // eslint-disable-next-line
-      if (node.data.target.sys.contentType.sys.id === ('cta' || 'feature')) {
+      if (
+        // TODO: Write type guard
+        // eslint-disable-next-line
+        node.data.target.sys.contentType.sys.id === 'cta' ||
+        // eslint-disable-next-line
+        node.data.target.sys.contentType.sys.id === 'feature'
+      ) {
         // eslint-disable-next-line
         return <BlockRenderer block={node.data.target} />;
       }
@@ -51,14 +57,17 @@ const Article = ({
       <main className="grow">
         <div className="mx-auto py-12 sm:py-24 px-6">
           {title && (
-            <h1 className="max-w-2xl mx-auto mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 className="max-w-3xl mx-auto mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               {title}
             </h1>
           )}
           {body && (
             <RichText
               richTextDocument={body}
-              className="mt-10 max-w-2xl mx-auto"
+              className="mt-5 max-w-3xl mx-auto"
+              classNames={{
+                h2: 'mt-2 text-2xl font-extrabold text-gray-900 tracking-tight',
+              }}
               renderNode={articleRenderOptions}
             />
           )}

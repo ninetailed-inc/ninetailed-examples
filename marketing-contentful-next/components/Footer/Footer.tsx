@@ -4,9 +4,46 @@ import { useNinetailed } from '@ninetailed/experience.js-next';
 
 import { RichText } from '@/components/RichText';
 import { IFooter } from '@/types/contentful';
+import { handleErrors } from '@/lib/helperfunctions';
 
 export const Footer = ({ fields }: IFooter) => {
-  const { reset } = useNinetailed();
+  const { reset, identify } = useNinetailed();
+
+  // Demo traits functions
+  const becomePeruser = handleErrors(async () => {
+    reset();
+    console.log(`Ninetailed: Simulating Peruser`);
+    await identify('', {
+      lyticsSegments: ['ly_casual', 'smt_new'],
+      score_consistency: 30,
+      score_frequency: 80,
+      score_intensity: 10,
+      score_maturity: 0,
+      score_momentum: 10,
+      score_propensity: 5,
+      score_quantity: 20,
+      score_recency: 70,
+      score_volatility: 5,
+    });
+  });
+
+  const becomeEngager = handleErrors(async () => {
+    reset();
+    console.log(`Ninetailed: Simulating Highly Engaged User`);
+    await identify('', {
+      lyticsSegments: ['ly_deeply_engaged', 'smt_power'],
+      score_consistency: 30,
+      score_frequency: 60,
+      score_intensity: 85,
+      score_maturity: 40,
+      score_momentum: 40,
+      score_propensity: 80,
+      score_quantity: 50,
+      score_recency: 50,
+      score_volatility: 60,
+    });
+  });
+
   return (
     <footer className="bg-gray-800">
       <div className="max-w-7xl mt-16 mx-auto py-12 px-2 overflow-hidden sm:px-6 lg:px-8">
@@ -32,10 +69,9 @@ export const Footer = ({ fields }: IFooter) => {
               <div key={link.sys.id} className="px-5 py-2">
                 <Link
                   href={link.fields.slug}
-                  className="text-base text-gray-300 hover:text-white">
-
+                  className="text-base text-gray-300 hover:text-white"
+                >
                   {link.fields.buttonText}
-
                 </Link>
               </div>
             );
@@ -46,7 +82,26 @@ export const Footer = ({ fields }: IFooter) => {
               className="text-base text-gray-300 hover:text-white cursor-pointer"
               onClick={reset}
             >
-              Reset Personalization
+              DEMO: Start Over
+            </button>
+          </div>
+          {/* Hardcoded Lytics demos */}
+          <div className="px-5 py-2">
+            <button
+              type="button"
+              className="text-base text-gray-300 hover:text-white cursor-pointer"
+              onClick={becomePeruser}
+            >
+              DEMO: Peruser
+            </button>
+          </div>
+          <div className="px-5 py-2">
+            <button
+              type="button"
+              className="text-base text-gray-300 hover:text-white cursor-pointer"
+              onClick={becomeEngager}
+            >
+              DEMO: Engaged user
             </button>
           </div>
         </nav>

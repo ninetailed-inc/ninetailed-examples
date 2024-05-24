@@ -91,7 +91,7 @@ export const Hero = ({ sys, fields }: IHero) => {
                 className={classNames(
                   'absolute inset-y-0 left-1/2  rounded-l-3xl xl:left-80 xl:right-0',
                   {
-                    'bg-gray-50 w-screen': expFlag === 0,
+                    'bg-indigo-200 w-screen': expFlag === 0,
                   },
                   {
                     'bg-amber-200 blur-2xl m-20 w-full': expFlag === 1,

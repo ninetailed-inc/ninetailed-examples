@@ -15,7 +15,6 @@ import '@contentful/live-preview/style.css';
 import SettingsProviderWrapper from '@/lib/SettingsProvider';
 import NinetailedSegmentPlugin from '@ninetailed/experience.js-plugin-segment';
 import { ThirdPartyScripts } from '@/components/ThirdPartyScripts';
-import { LyticsTracker } from '@/components/LyticsTracker';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -105,7 +104,6 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
             <ThirdPartyScripts />
-            <LyticsTracker />
             <Component {...pageProps} />
           </ContentfulLivePreviewProvider>
         </SettingsProviderWrapper>

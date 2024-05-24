@@ -7,24 +7,39 @@ import { ContentfulImageLoader } from '@/lib/helperfunctions';
 
 import { IFeature } from '@/types/contentful';
 
+import classNames from 'classnames';
+
 export const Feature = ({ fields }: IFeature) => {
   return (
     <div className="relative max-w-xl mx-auto lg:max-w-7xl px-4 sm:max-w-3xl sm:px-6 sm:py-6 lg:px-12">
-      <div className="relative mt-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
+      <div
+        className={classNames(
+          'relative mt-8 lg:grid lg:gap-12 lg:items-center contentcenter',
+          { 'lg:grid-cols-2 lg:gap-24': fields.imagePosition !== 'center' }
+        )}
+      >
         <div
           className={`relative ${
             fields.imagePosition !== 'right' ? '' : ' order-last'
           }`}
         >
           <RichText
-            className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
+            className={`text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl ${
+              fields.imagePosition == 'center' ? 'text-center' : ''
+            }`}
             richTextDocument={fields.headline}
           />
           <RichText
-            className="mt-6 text-xl text-gray-500"
+            className={`mt-6 text-xl text-gray-500 ${
+              fields.imagePosition == 'center' ? 'text-center' : ''
+            }`}
             richTextDocument={fields.subline}
           />
-          <div className="mt-5 mx-auto flex flex-col sm:flex-row md:mt-8 sm:w-full">
+          <div
+            className={`mt-5 mx-auto flex flex-col sm:flex-row md:mt-8 sm:w-full ${
+              fields.imagePosition == 'center' ? 'justify-center' : ''
+            }`}
+          >
             {fields.button && fields.button[0].fields.slug && (
               <div>
                 <Link
@@ -96,7 +111,9 @@ export const Feature = ({ fields }: IFeature) => {
                 320,
                 fields.image.fields.file.details.image.height
               )}
-              className="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-full"
+              className={`w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:max-w-full ${
+                fields.imagePosition === 'center' ? 'lg:m-auto lg:w-3/5' : ''
+              }`}
               alt=""
             />
           )}

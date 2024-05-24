@@ -193,7 +193,7 @@ export interface IFeatureFields {
   image: Asset;
 
   /** Image position */
-  imagePosition?: 'right' | 'left' | undefined;
+  imagePosition?: 'right' | 'left' | 'center' | undefined;
 
   /** Ninetailed */
   nt_experiences?: INtExperience[] | undefined;
