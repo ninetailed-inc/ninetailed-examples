@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { RadioGroup } from '@headlessui/react';
 import { ProductDetails } from '../ProductDetails';
 import { ProductPolicies } from '../ProductPolicies';
 import { flattenConnection, ProductPrice } from '@shopify/hydrogen-react';
 import Image from 'next/image';
-import { ShopifyImageLoader } from '@/lib/helperfunctions';
+import { handleErrors, ShopifyImageLoader } from '@/lib/helperfunctions';
 import classNames from 'classnames';
 import { IPdp } from '@/types/contentful';
 import type { Product as IProduct } from '@shopify/hydrogen-react/storefront-api-types';
 import { useFlag } from '@/lib/experiences';
+import { useNinetailed } from '@ninetailed/experience.js-next';
 
 export const Product = ({
   pdp,
@@ -21,6 +22,21 @@ export const Product = ({
   const productImages = flattenConnection(product.images);
   const productVariants = flattenConnection(product.variants);
   const [selectedSize, setSelectedSize] = useState(productVariants[0].title);
+
+  const { track } = useNinetailed();
+
+  // Track product add
+  const trackAddToCart = handleErrors(
+    async (e: FormEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      const line_item = productVariants[0].sku || product.title || '';
+      console.log(`Tracking added item: ${line_item}`);
+      await track('add_to_cart', {
+        line_item,
+        quantity: 1,
+      });
+    }
+  );
 
   // TODO: Store as metafield or CMS content
   const productRating = 4.2;
@@ -171,6 +187,7 @@ export const Product = ({
                 <button
                   type="submit"
                   className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  onClick={trackAddToCart}
                 >
                   Add to cart
                 </button>

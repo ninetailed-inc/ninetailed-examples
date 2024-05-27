@@ -81,8 +81,8 @@ export interface IButtonFields {
   /** Button text */
   buttonText: string;
 
-  /** Icon */
-  icon?: Asset | undefined;
+  /** Event Name */
+  eventName?: string | undefined;
 
   /** Variant */
   variant: 'primary' | 'secondary' | 'loud';

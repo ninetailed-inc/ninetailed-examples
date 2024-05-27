@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { RichText } from '@/components/RichText';
-import { Button, ButtonVariant } from '@/components/Button';
+import { Button } from '@/components/Button';
 import { ContentfulImageLoader } from '@/lib/helperfunctions';
 
 import { IFeature } from '@/types/contentful';
@@ -50,8 +50,8 @@ export const Feature = ({ fields }: IFeature) => {
                   <Button
                     as="a"
                     type="button"
-                    variant={fields.button[0].fields.variant as ButtonVariant}
                     size="large"
+                    {...fields.button[0].fields}
                   >
                     {fields.button[0].fields.buttonText}
                   </Button>

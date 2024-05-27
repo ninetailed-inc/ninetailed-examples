@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { CheckIcon } from '@heroicons/react/24/solid';
-import { Button, ButtonVariant } from '@/components/Button';
+import { Button } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { IPricingPlan } from '@/types/contentful';
 
@@ -63,12 +63,7 @@ export const PricingPlan = ({ fields }: IPricingPlan) => {
       {button.fields.slug && (
         <div className="mt-auto">
           <Link passHref href={button.fields.slug} legacyBehavior>
-            <Button
-              as="a"
-              type="button"
-              variant={button.fields.variant as ButtonVariant}
-              size="large"
-            >
+            <Button as="a" type="button" size="large" {...button.fields}>
               {button.fields.buttonText}
             </Button>
           </Link>

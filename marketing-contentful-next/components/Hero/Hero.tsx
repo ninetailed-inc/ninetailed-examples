@@ -68,8 +68,8 @@ export const Hero = ({ sys, fields }: IHero) => {
                       <Button
                         as="a"
                         type="button"
-                        variant={button.fields.variant as ButtonVariant}
                         size="large"
+                        {...button.fields}
                       >
                         {button.fields.buttonText}
                       </Button>
@@ -150,6 +150,7 @@ export const Hero = ({ sys, fields }: IHero) => {
             >
               {updatedHero.fields.image.fields?.file.details.image && (
                 <Image
+                  priority={true}
                   loader={ContentfulImageLoader}
                   src={`https:${updatedHero.fields.image.fields.file.url}`}
                   width={

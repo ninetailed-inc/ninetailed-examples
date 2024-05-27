@@ -1,21 +1,23 @@
 import React from 'react';
 import classNames from 'classnames';
-
-export type IconProps = 'some SVG icon props';
+import { handleErrors } from '@/lib/helperfunctions';
+import { IButtonFields } from '@/types/contentful';
+import { useNinetailed } from '@ninetailed/experience.js-next';
 
 export type ButtonType = 'button' | 'submit' | 'reset';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'loud';
+export type ButtonVariant = IButtonFields['variant'];
 
 export interface ButtonProps {
   as?: React.ElementType;
   type: ButtonType;
   size: ButtonSize;
   variant: ButtonVariant;
+  eventName?: IButtonFields['eventName'];
+  href?: string;
   children: string;
-  /* icon: (props: IconProps) => JSX.Element; */
 }
 
 export const Button: React.FC<ButtonProps> = React.forwardRef(
@@ -25,14 +27,30 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
       type,
       size,
       variant,
+      eventName,
       children,
-      ...rest
+      href,
     } = props;
+
+    const { track } = useNinetailed();
+
+    const trackButtonClick = handleErrors(async (e: Event) => {
+      if (eventName) {
+        if (type === 'submit') {
+          e.preventDefault();
+        }
+        await track(eventName);
+      } else {
+        console.log('Button without event clicked');
+      }
+    });
+
     return (
       <Component
-        {...rest}
+        href={href}
         type={type}
         ref={ref}
+        onClick={trackButtonClick}
         className={classNames(
           `w-full 
             flex  
@@ -50,8 +68,6 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
             'text-white bg-amber-600 hover:bg-amber-700 font-medium rounded shadow-sm':
               variant === 'loud',
           },
-          // {"text-gray-300 hover:text-white font-light": props.variant === "footerLink"},
-          // {"text-gray-300 hover:text-white font-medium": props.variant === "navLink"},
           { 'px-3 py-1 text-sm': size === 'small' },
           { 'px-4 py-2 text-base': size === 'medium' },
           { 'px-6 py-3 text-base': size === 'large' }
