@@ -10,9 +10,9 @@ export const Footer = ({ fields }: IFooter) => {
   const { reset, identify } = useNinetailed();
 
   // Demo traits functions
-  const becomePeruser = handleErrors(async () => {
+  const becomeCasual = handleErrors(async () => {
     reset();
-    console.log(`Ninetailed: Simulating Peruser`);
+    console.log(`Ninetailed: Simulating Casual User`);
     await identify('', {
       lyticsSegments: ['ly_casual', 'smt_new'],
       score_consistency: 30,
@@ -90,9 +90,9 @@ export const Footer = ({ fields }: IFooter) => {
             <button
               type="button"
               className="text-base text-gray-300 hover:text-white cursor-pointer"
-              onClick={becomePeruser}
+              onClick={becomeCasual}
             >
-              DEMO: Peruser
+              DEMO: Casual User
             </button>
           </div>
           <div className="px-5 py-2">

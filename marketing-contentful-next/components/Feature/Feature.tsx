@@ -42,20 +42,14 @@ export const Feature = ({ fields }: IFeature) => {
           >
             {fields.button && fields.button[0].fields.slug && (
               <div>
-                <Link
-                  passHref
+                <Button
+                  type="button"
+                  size="large"
+                  {...fields.button[0].fields}
                   href={fields.button[0].fields.slug}
-                  legacyBehavior
                 >
-                  <Button
-                    as="a"
-                    type="button"
-                    size="large"
-                    {...fields.button[0].fields}
-                  >
-                    {fields.button[0].fields.buttonText}
-                  </Button>
-                </Link>
+                  {fields.button[0].fields.buttonText}
+                </Button>
               </div>
             )}
           </div>

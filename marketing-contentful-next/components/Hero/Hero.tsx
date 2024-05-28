@@ -64,16 +64,14 @@ export const Hero = ({ sys, fields }: IHero) => {
 
                 return (
                   <div key={button.sys.id} className="shadow">
-                    <Link passHref href={button.fields.slug} legacyBehavior>
-                      <Button
-                        as="a"
-                        type="button"
-                        size="large"
-                        {...button.fields}
-                      >
-                        {button.fields.buttonText}
-                      </Button>
-                    </Link>
+                    <Button
+                      type="button"
+                      size="large"
+                      {...button.fields}
+                      href={button.fields.slug}
+                    >
+                      {button.fields.buttonText}
+                    </Button>
                   </div>
                 );
               })}

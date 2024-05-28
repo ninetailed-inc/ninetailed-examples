@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { handleErrors } from '@/lib/helperfunctions';
 import { IButtonFields } from '@/types/contentful';
 import { useNinetailed } from '@ninetailed/experience.js-next';
+import Link from 'next/link';
 
 export type ButtonType = 'button' | 'submit' | 'reset';
 
@@ -11,7 +12,7 @@ export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonVariant = IButtonFields['variant'];
 
 export interface ButtonProps {
-  as?: React.ElementType;
+  as?: React.ElementType | typeof Link;
   type: ButtonType;
   size: ButtonSize;
   variant: ButtonVariant;
@@ -23,7 +24,7 @@ export interface ButtonProps {
 export const Button: React.FC<ButtonProps> = React.forwardRef(
   (props: ButtonProps, ref) => {
     const {
-      as: Component = 'button',
+      as: Component = Link,
       type,
       size,
       variant,
@@ -40,6 +41,7 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
           e.preventDefault();
         }
         await track(eventName);
+        console.log(`Performed Ninetailed event track:${eventName}`);
       } else {
         console.log('Button without event clicked');
       }
@@ -79,7 +81,7 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
   }
 );
 Button.defaultProps = {
-  as: 'a',
+  as: Link,
 };
 
 Button.displayName = 'Button';
