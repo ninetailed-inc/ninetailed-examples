@@ -46,7 +46,7 @@ export function Navigation({ fields }: INavigation) {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="/" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             {/* TODO: Pull from site settings */}
             <span className="sr-only">Ninetailed</span>
             {fields.logo?.fields.file.url ? (
@@ -60,7 +60,7 @@ export function Navigation({ fields }: INavigation) {
             ) : (
               <Image src={Logo as string} width={175} height={57} alt="Logo" />
             )}
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
