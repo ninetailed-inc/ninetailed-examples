@@ -1,6 +1,7 @@
 import { ContentfulClientApi, createClient } from 'contentful';
 import {
   IConfig,
+  IHero,
   IPage,
   IPageFields,
   IPdp,
@@ -57,6 +58,19 @@ const getProductDisplayPageQuery = (pageParams: IPagelikeQueryParams) => {
     content_type: 'pdp',
   };
 };
+
+// JUST FOR TESTING LOLZ
+export async function getStaticHero(): Promise<IHero> {
+  const client = getClient(false);
+  const entries = await client.getEntries({
+    limit: 1,
+    include: 10,
+    'sys.id': '5PTqt6FlT0cMJ3TAN3O8RB',
+    content_type: 'hero',
+  });
+  const [hero] = entries.items as IHero[];
+  return hero;
+}
 
 export async function getPage(
   pageParams: IPagelikeQueryParams
