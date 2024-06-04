@@ -15,7 +15,7 @@ dependencies:
     specifier: 7.7.0
     version: 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
   '@ninetailed/experience.js-plugin-google-tagmanager':
-    specifier: ^7.7.0
+    specifier: 7.7.0
     version: 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
   '@ninetailed/experience.js-plugin-insights':
     specifier: 7.7.0
