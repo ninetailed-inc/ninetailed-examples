@@ -8,7 +8,7 @@ import type {
 } from '@ninetailed/experience.js'
 
 import { NinetailedKey } from '@/plugins/ninetailed'
-import { inject, shallowRef, watchEffect, type ShallowRef } from 'vue'
+import { inject, shallowRef, type ShallowRef } from 'vue'
 
 type Load<TBaseline extends Reference> = {
   status: 'loading'
@@ -90,7 +90,6 @@ export const useExperience = <TBaseline extends Reference, TVariant extends Refe
   })
 
   ninetailed?.onSelectVariant({ baseline, experiences }, (newExperienceState) => {
-    console.log(newExperienceState)
     experience.value = newExperienceState as UseExperienceReturn<TBaseline, TVariant>
   })
 

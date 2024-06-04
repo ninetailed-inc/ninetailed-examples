@@ -4,9 +4,14 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import { createGtm } from '@gtm-support/vue-gtm'
+
 import { VueNinetailed } from './plugins/ninetailed'
 import { VueContentful } from './plugins/contentful'
 import NinetailedPreviewPlugin from '@ninetailed/experience.js-plugin-preview'
+import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights'
+import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager'
+
 import {
   ExperienceMapper,
   type ExperienceEntryLike,
@@ -20,6 +25,15 @@ import Hero from '@/components/Hero.vue'
 const app = createApp(App)
 
 app.use(router)
+
+app.use(
+  // @ts-ignore
+  createGtm({
+    id: import.meta.env.VITE_GTM_ID,
+    // @ts-ignore
+    vueRouter: router
+  })
+)
 
 app.use(VueContentful, {
   client: contentfulClient
@@ -47,15 +61,19 @@ const mappedAudiences = (audiences || [])
   .filter((entry) => AudienceMapper.isAudienceEntry(entry))
   .map((entry) => AudienceMapper.mapAudience(entry))
 
+// @ts-ignore
 app.use(VueNinetailed, {
   clientId: import.meta.env.VITE_NINETAILED_CLIENT_ID,
   environment: import.meta.env.VITE_NINETAILED_ENV,
   plugins: [
-    new NinetailedPreviewPlugin({
-      experiences: mappedExperiences,
-      // @ts-ignore
-      audiences: mappedAudiences
-    })
+    // TODO: NX version error
+    // new NinetailedPreviewPlugin({
+    //   experiences: mappedExperiences,
+    //   // @ts-ignore
+    //   audiences: mappedAudiences
+    // }),
+    new NinetailedInsightsPlugin(),
+    new NinetailedGoogleTagmanagerPlugin()
   ]
 })
 

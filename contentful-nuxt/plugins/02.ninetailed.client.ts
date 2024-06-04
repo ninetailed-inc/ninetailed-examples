@@ -10,7 +10,7 @@ import { defineNuxtPlugin } from "nuxt/app";
 import { VueNinetailed, NinetailedKey } from "../vuePlugins/ninetailed";
 import { NinetailedGoogleTagmanagerPlugin } from "@ninetailed/experience.js-plugin-google-tagmanager";
 import { NinetailedInsightsPlugin } from "@ninetailed/experience.js-plugin-insights";
-import { NinetailedPreviewPlugin } from "@ninetailed/experience.js-plugin-preview";
+// import { NinetailedPreviewPlugin } from "@ninetailed/experience.js-plugin-preview";
 
 import {
   ExperienceMapper,
@@ -48,11 +48,6 @@ export default defineNuxtPlugin({
       .filter((entry) => AudienceMapper.isAudienceEntry(entry))
       .map((entry) => AudienceMapper.mapAudience(entry));
 
-    // FIXME:
-    // Good: I can get and map the Ninetailed CMS data
-    // Bad: The preview plugin doesn't like the iframe bridge?
-    console.log(mappedExperiences, mappedAudiences);
-
     nuxtApp.vueApp.use(VueNinetailed, {
       clientId: config.public.ninetailedClientId,
       environment: config.public.ninetailedEnvironment,
@@ -60,10 +55,12 @@ export default defineNuxtPlugin({
         new NinetailedGoogleTagmanagerPlugin(),
         new NinetailedInsightsPlugin(),
         // FIXME: This throws
-        new NinetailedPreviewPlugin({
-          experiences: [],
-          audiences: [],
-        }),
+        // Good: I can get and map the Ninetailed CMS data
+        // Bad: The preview plugin doesn't like the iframe bridge?
+        // new NinetailedPreviewPlugin({
+        //   experiences: [],
+        //   audiences: [],
+        // }),
       ],
     });
   },

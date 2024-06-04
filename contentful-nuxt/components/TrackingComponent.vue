@@ -26,21 +26,13 @@ const props = defineProps<{
   variantIndex: number;
 }>();
 
-const trackingComponent = ref(null);
+const trackingComponent = ref<null | Element>(null);
 const ninetailed = inject(NinetailedKey)!;
-const targetIsVisible = ref(false);
-
-const { stop } = useIntersectionObserver(
-  trackingComponent,
-  ([{ isIntersecting }], observerElement) => {
-    targetIsVisible.value = isIntersecting;
-  }
-);
-
-watchEffect(() => {
-  if (trackingComponent.value && targetIsVisible.value) {
-    ninetailed.trackComponentView({
-      element: trackingComponent.value,
+watchEffect((onCleanup) => {
+  const element = trackingComponent.value;
+  if (element !== null) {
+    ninetailed.observeElement({
+      element,
       experience: props.experience,
       audience: props.experience?.audience,
       variant:
@@ -49,7 +41,7 @@ watchEffect(() => {
           : props.variant,
       variantIndex: props.variantIndex,
     });
-    stop();
+    onCleanup(() => ninetailed.unobserveElement(element));
   }
 });
 </script>

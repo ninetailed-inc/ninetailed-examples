@@ -5,21 +5,30 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@gtm-support/vue-gtm':
+    specifier: ^3.0.1
+    version: 3.0.1(vue@3.4.21)
   '@ninetailed/experience.js':
-    specifier: 7.6.0-beta.7
-    version: 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+    specifier: 7.7.0
+    version: 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
   '@ninetailed/experience.js-plugin-analytics':
-    specifier: ^7.6.0-beta.7
-    version: 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+    specifier: 7.7.0
+    version: 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+  '@ninetailed/experience.js-plugin-google-tagmanager':
+    specifier: ^7.7.0
+    version: 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+  '@ninetailed/experience.js-plugin-insights':
+    specifier: 7.7.0
+    version: 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
   '@ninetailed/experience.js-plugin-preview':
-    specifier: 7.6.0-beta.7
-    version: 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+    specifier: 7.7.0
+    version: 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
   '@ninetailed/experience.js-shared':
-    specifier: 7.6.0-beta.7
-    version: 7.6.0-beta.7(@faker-js/faker@7.6.0)
+    specifier: 7.7.0
+    version: 7.7.0(@faker-js/faker@7.6.0)
   '@ninetailed/experience.js-utils-contentful':
-    specifier: 7.6.0-beta.7
-    version: 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+    specifier: 7.7.0
+    version: 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
   '@vueuse/core':
     specifier: ^10.9.0
     version: 10.9.0(vue@3.4.21)
@@ -710,6 +719,24 @@ packages:
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
     dev: false
 
+  /@gtm-support/core@3.0.1:
+    resolution: {integrity: sha512-SctcoqvvAbGAgZzOb7DZ4wjbZF3ZS7Las3qIEByv6g7mzPf4E9LpRXcQzjmywYLcUx2jys7PWJAa3s5slvj/0w==}
+    dev: false
+
+  /@gtm-support/vue-gtm@3.0.1(vue@3.4.21):
+    resolution: {integrity: sha512-SeLN3R+5gHJ+1AtJPP4/+2lJ6vOfXo1pL094//GcKY7RrMk3ltxIS/CJ3PSlL2Dpxjr9UAov0m4K1SdvYj3Xzw==}
+    peerDependencies:
+      vue: '>= 3.2.0 < 4.0.0'
+    peerDependenciesMeta:
+      vue-router:
+        optional: true
+    dependencies:
+      '@gtm-support/core': 3.0.1
+      vue: 3.4.21(typescript@5.4.4)
+    optionalDependencies:
+      vue-router: 4.3.0(vue@3.4.21)
+    dev: false
+
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
@@ -759,37 +786,65 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@ninetailed/experience.js-plugin-analytics@7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
-    resolution: {integrity: sha512-4WIoP5tHdBhJO+in8a8QOQkhpTFnKUq5kQJ/0AgUJGOnVCDC25DgszAQknguseCPRVaez9ipPuOTtYrQlYfM2Q==}
+  /@ninetailed/experience.js-plugin-analytics@7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-qWpk8mNAa5YGQuoSqXuqBdz1zB6s/qXP2ouwyUszEA4CdV8ZagADC3EhTstOvpu8iOvDPTvUTQxqqrO6C/Vtqg==}
     dependencies:
       '@anatine/zod-mock': 3.8.1(@faker-js/faker@7.6.0)
-      '@ninetailed/experience.js-shared': 7.6.0-beta.7(@faker-js/faker@7.6.0)
+      '@ninetailed/experience.js-shared': 7.7.0(@faker-js/faker@7.6.0)
       analytics: 0.8.1(@types/dlv@1.1.4)
       radash: 10.9.0
-      zod: 3.21.4
+      zod: 3.23.0
     transitivePeerDependencies:
       - '@faker-js/faker'
       - '@types/dlv'
       - encoding
     dev: false
 
-  /@ninetailed/experience.js-plugin-preview@7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
-    resolution: {integrity: sha512-dUQT59Ax+fbbrbazFkZbAnJ/Zk81FTjlmwYTJLkzOvlzXc0YJYhQ1WKyhMbMDtgi0NHdyYQ9w7yYSX2VZYkuGA==}
+  /@ninetailed/experience.js-plugin-google-tagmanager@7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-Jbgu/PPmmYlZIE22Dc4ZwX18Fl4sSv+goLqX0TCEib9oR7PmvU86MTmnAvIKCkOeGjEAOq7aOdPB/MxIShYFNw==}
     dependencies:
-      '@ninetailed/experience.js': 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
-      '@ninetailed/experience.js-plugin-analytics': 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
-      '@ninetailed/experience.js-preview-bridge': 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
-      '@ninetailed/experience.js-shared': 7.6.0-beta.7(@faker-js/faker@7.6.0)
+      '@ninetailed/experience.js': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-plugin-analytics': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-shared': 7.7.0(@faker-js/faker@7.6.0)
+      tslib: 2.4.1
     transitivePeerDependencies:
       - '@faker-js/faker'
       - '@types/dlv'
       - encoding
     dev: false
 
-  /@ninetailed/experience.js-preview-bridge@7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
-    resolution: {integrity: sha512-E6lrF/BJi/Boj/j041V3kLSb6+kOlqNvReAYDWBHWWLd80Mz9KqdSEiUMZnnYRp8HrrFt6JLwh3ESs7CrDTQCA==}
+  /@ninetailed/experience.js-plugin-insights@7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-sF/EMGgNNo0vajD+WMp8MeLheFynlhd37Wmz4cdFFFcUjYdErEWwO3GFaERBFBkgZrZNPHyoS9fuGPcAvnvzcA==}
     dependencies:
-      '@ninetailed/experience.js': 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-plugin-analytics': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-shared': 7.7.0(@faker-js/faker@7.6.0)
+      async-retry: 1.3.3
+      radash: 10.9.0
+      uuid: 9.0.0
+    transitivePeerDependencies:
+      - '@faker-js/faker'
+      - '@types/dlv'
+      - encoding
+    dev: false
+
+  /@ninetailed/experience.js-plugin-preview@7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-OJhBEmXToNQy024jgciYC9eCznZ8l59WUf52orIQXEYwNfi2xKbYUZalXQ1gSMtrG6ZBj0VPKoT1DAC0GlGSkA==}
+    dependencies:
+      '@ninetailed/experience.js': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-plugin-analytics': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-preview-bridge': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-shared': 7.7.0(@faker-js/faker@7.6.0)
+    transitivePeerDependencies:
+      - '@faker-js/faker'
+      - '@types/dlv'
+      - encoding
+    dev: false
+
+  /@ninetailed/experience.js-preview-bridge@7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-8z5+oa63zd1CWhaGX0JjtyAVHlWUUbng7tCNz2bVqR5M/KgvX4vHiJuFhEKZxXtTygvjShyLfKc3bOuQBoidhw==}
+    dependencies:
+      '@ninetailed/experience.js': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
       zoid: 9.0.86
     transitivePeerDependencies:
       - '@faker-js/faker'
@@ -797,8 +852,8 @@ packages:
       - encoding
     dev: false
 
-  /@ninetailed/experience.js-shared@7.6.0-beta.7(@faker-js/faker@7.6.0):
-    resolution: {integrity: sha512-Q9xWfX/sIDFOc/Q1oRNJSeTxwFDWgcgZ0zpmwuEIZIu6EbD52BXt2BQKQ73z8K0Bu1ec7i45mNjWTkMORUnOPg==}
+  /@ninetailed/experience.js-shared@7.7.0(@faker-js/faker@7.6.0):
+    resolution: {integrity: sha512-93b5E+rNmj5lIT53n5GisM028Emt/Dp7At/bxPxkamBYZcOLQS1QMv3LuzcUKtoZ24sbd2Thz/X2bUX3+lQhmA==}
     dependencies:
       '@anatine/zod-mock': 3.8.1(@faker-js/faker@7.6.0)
       async-retry: 1.3.3
@@ -808,21 +863,21 @@ packages:
       murmurhash-js: 1.0.0
       radash: 10.9.0
       ts-toolbelt: 9.6.0
-      zod: 3.21.4
+      zod: 3.23.0
     transitivePeerDependencies:
       - '@faker-js/faker'
       - encoding
     dev: false
 
-  /@ninetailed/experience.js-utils-contentful@7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
-    resolution: {integrity: sha512-hdh/5hFWKuUkATiiCDEfvG/VjJJboCxHyHDw8o87JpQAk3EOu+BO8ccvE25QsrLjpdppOQcnal+Udu78Xw9ZYw==}
+  /@ninetailed/experience.js-utils-contentful@7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-fLWPsnwf2iLO35QrwcpzxssFnaDCHLHdxPkR34RsYUrl+wks+aeSG7UsL6rJzmDbOREkIxZK98jpMaZzT5+JzQ==}
     dependencies:
       '@contentful/rich-text-types': 16.2.0
-      '@ninetailed/experience.js': 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
-      '@ninetailed/experience.js-shared': 7.6.0-beta.7(@faker-js/faker@7.6.0)
-      '@ninetailed/experience.js-utils': 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-shared': 7.7.0(@faker-js/faker@7.6.0)
+      '@ninetailed/experience.js-utils': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
       contentful: 9.3.6
-      zod: 3.21.4
+      zod: 3.23.0
     transitivePeerDependencies:
       - '@faker-js/faker'
       - '@types/dlv'
@@ -830,23 +885,23 @@ packages:
       - encoding
     dev: false
 
-  /@ninetailed/experience.js-utils@7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
-    resolution: {integrity: sha512-oXcEbHBdMfUKs3En/tpQn4vLYlaRwg0nTLV/NoyU6cred3izOBEYkm6JNgBju00P3I+v1FaDRy2Pe9bwZWKD4w==}
+  /@ninetailed/experience.js-utils@7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-GZBE1JZjtTMluiR5Rcgidy1Ea9Sj9ScDKZiwy3FKzWZc6gLoO9W+mj9Yz3hi2e7kSw+SEjFt/PK4fC5f/8LaqQ==}
     dependencies:
-      '@ninetailed/experience.js': 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
-      '@ninetailed/experience.js-shared': 7.6.0-beta.7(@faker-js/faker@7.6.0)
-      zod: 3.21.4
+      '@ninetailed/experience.js': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-shared': 7.7.0(@faker-js/faker@7.6.0)
+      zod: 3.23.0
     transitivePeerDependencies:
       - '@faker-js/faker'
       - '@types/dlv'
       - encoding
     dev: false
 
-  /@ninetailed/experience.js@7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
-    resolution: {integrity: sha512-PYBRR+Df4NQCNy7wWzIohdbOiwmPcAgWjyinOHi9dGK1IvmmxZQGRV/eo85iQnyrALxFJXbEpPzDxFoPh3A/iA==}
+  /@ninetailed/experience.js@7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4):
+    resolution: {integrity: sha512-ljDVe2ujy99b+6V5VstCiLjiHZh/IbNHG4t2TP82EmitnpZQVpRbWL5X53aohtNYeHgp4BL9J2qkTukNMty8fg==}
     dependencies:
-      '@ninetailed/experience.js-plugin-analytics': 7.6.0-beta.7(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
-      '@ninetailed/experience.js-shared': 7.6.0-beta.7(@faker-js/faker@7.6.0)
+      '@ninetailed/experience.js-plugin-analytics': 7.7.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.4)
+      '@ninetailed/experience.js-shared': 7.7.0(@faker-js/faker@7.6.0)
       analytics: 0.8.1(@types/dlv@1.1.4)
       uuid: 9.0.0
     transitivePeerDependencies:
@@ -1684,7 +1739,7 @@ packages:
     engines: {node: '>=12'}
     requiresBuild: true
     dependencies:
-      '@contentful/rich-text-types': 16.2.0
+      '@contentful/rich-text-types': 16.3.5
       axios: 1.6.8
       contentful-resolve-response: 1.8.1
       contentful-sdk-core: 7.1.0
@@ -2883,6 +2938,10 @@ packages:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
     dev: false
 
+  /tslib@2.4.1:
+    resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
+    dev: false
+
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
@@ -3100,8 +3159,8 @@ packages:
     resolution: {integrity: sha512-LLHANmdm53+MucY9aOFIggzYtUdkSBFxUsy4glTTQYNyK6B3uCPWTbfiGvSrEvLojw0mSzyFJ1/RRLv+QMNdzQ==}
     dev: false
 
-  /zod@3.21.4:
-    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+  /zod@3.23.0:
+    resolution: {integrity: sha512-OFLT+LTocvabn6q76BTwVB0hExEBS0IduTr3cqZyMqEDbOnYmcU+y0tUAYbND4uwclpBGi4I4UUBGzylWpjLGA==}
     dev: false
 
   /zoid@9.0.86:
