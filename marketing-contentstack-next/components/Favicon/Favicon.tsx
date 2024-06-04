@@ -20,7 +20,6 @@ export const Favicon: React.FC = () => {
         sizes="16x16"
         href="/favicon/favicon-16x16.png"
       />
-      <link rel="manifest" href="/favicon/site.webmanifest" />
       <link
         rel="mask-icon"
         href="/favicon/safari-pinned-tab.svg"

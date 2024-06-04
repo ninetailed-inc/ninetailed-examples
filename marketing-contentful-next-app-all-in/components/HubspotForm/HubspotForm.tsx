@@ -1,7 +1,7 @@
 // This has client-side interactivity, so you have to opt in
 'use client';
 
-// import { useNinetailed, useProfile } from '@ninetailed/experience.js-next';
+// import { useNinetailed, useProfile } from '@ninetailed/experience.js-react';
 import { IHubspotForm } from '@/types/contentful';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import classNames from 'classnames';

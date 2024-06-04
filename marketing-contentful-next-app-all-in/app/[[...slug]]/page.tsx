@@ -31,7 +31,7 @@ export default async function Page({
   const [page, config] = await Promise.all([
     getPage({
       preview: isEnabled,
-      slug: pagePath,
+      slug: pagePath === '' ? '/' : pagePath,
     }),
     getGlobalConfig({ preview: isEnabled }),
   ]);

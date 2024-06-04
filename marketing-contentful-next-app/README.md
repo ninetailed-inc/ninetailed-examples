@@ -19,7 +19,7 @@ The illustrated website example demonstrates the Ninetailed content personalizat
 
 ## Live Demo
 
-This project is deployed live [here](https://b2b.demo.ninetailed.io/).
+This project is deployed live [here](https://9t-ctfl-demo-app.vercel.app/).
 
 ## Deploy Your Own Starter
 
@@ -71,7 +71,7 @@ This project is deployed live [here](https://b2b.demo.ninetailed.io/).
 
 - Click on **Deploy with Vercel** below and populate the required environment variables.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fninetailed-inc%2Fninetailed-examples%2Ftree%2Fmain%2Fmarketing-contentful-next&env=NEXT_PUBLIC_NINETAILED_CLIENT_ID,NEXT_PUBLIC_NINETAILED_ENVIRONMENT,NEXT_PUBLIC_CONTENTFUL_SPACE_ID,NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,CONTENTFUL_TOKEN,CONTENTFUL_PREVIEW_TOKEN,CONTENTFUL_MANAGEMENT_TOKEN&project-name=ninetailed-marketing-contentful-next&repository-name=ninetailed-marketing-contentful-next&build-command=npm%20run%20build-and-setup)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fninetailed-inc%2Fninetailed-examples%2Ftree%2Fmain%2Fmarketing-contentful-next-app&env=NEXT_PUBLIC_NINETAILED_CLIENT_ID,NEXT_PUBLIC_NINETAILED_ENVIRONMENT,NEXT_PUBLIC_CONTENTFUL_SPACE_ID,NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT,CONTENTFUL_TOKEN,CONTENTFUL_PREVIEW_TOKEN,CONTENTFUL_MANAGEMENT_TOKEN&project-name=ninetailed-marketing-contentful-next-app&repository-name=ninetailed-marketing-contentful-next-app&build-command=npm%20run%20build-and-setup)
 
 ```bash
 NEXT_PUBLIC_NINETAILED_CLIENT_ID = "API Key" # Gathered in step 4
