@@ -18,14 +18,18 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon (favicon file)
      */
-
     {
       source: '/((?!api|_next/static|_next/image|favicon).*)',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+      ],
     },
   ],
 };
 
 export default async function middleware(req: NextRequest) {
+  console.log('request', req.url);
   const { profile, experiences } = await sendPageEvent({
     ctx: createRequestContext(req),
     clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || '',
