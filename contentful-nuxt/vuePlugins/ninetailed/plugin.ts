@@ -6,18 +6,18 @@ import type {
   NinetailedRequestContext,
 } from "@ninetailed/experience.js-shared";
 import { Ninetailed } from "@ninetailed/experience.js";
+import { NinetailedPreviewPlugin } from "@ninetailed/experience.js-plugin-preview";
 import type { NinetailedPlugin, Storage } from "@ninetailed/experience.js";
 import type { App } from "vue";
 
 import { NinetailedKey, ProfileStateKey } from "./symbols";
 
-// TODO: Let's export this type from experience.js
 type NinetailedInstantiationOptions = {
   clientId: string;
   environment?: string;
   preview?: boolean;
   url?: string;
-  // FIXME: Deprecated ??
+  // FIXME: Deprecated types?
   plugins?: (NinetailedPlugin | NinetailedPlugin[])[];
   profile?: Profile;
   locale?: Locale;

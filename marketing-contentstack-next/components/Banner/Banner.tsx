@@ -4,6 +4,7 @@ import { XIcon } from '@heroicons/react/solid';
 
 import { RichText } from '@/components/RichText';
 import { Banner as IBanner } from '@/types/contentstack';
+import classNames from 'classnames';
 
 export type Handler = () => void;
 
@@ -15,7 +16,13 @@ export const Banner: React.FC<IBanner> = (props) => {
   };
 
   return (
-    <div className={show ? 'relative bg-indigo-600' : 'hidden'}>
+    <div
+      className={classNames(
+        show ? 'relative bg-indigo-600' : 'hidden',
+        { 'bg-indigo-600': props.variant === 'primary' },
+        { 'bg-orange-600': props.variant === 'loud' }
+      )}
+    >
       <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
         <div className="pr-16 sm:text-center sm:px-16">
           <div className="font-medium text-white">

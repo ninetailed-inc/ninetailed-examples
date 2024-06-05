@@ -10,6 +10,8 @@ import type {
   Reference,
 } from "@ninetailed/experience.js";
 import { NinetailedKey } from "~/vuePlugins/ninetailed";
+import { deepToRaw } from "~/lib/helpers";
+import TrackingComponent from "./TrackingComponent.vue";
 
 type ComponentDefintion = string | (() => JSX.Element); // Pass a string to be resolved (must be globally registered) or a rendering function
 
@@ -22,7 +24,7 @@ const props = defineProps<{
   passthroughProps?: any;
 }>();
 
-const { observeElement, unobserveElement, logger } = inject(NinetailedKey)!;
+const { logger } = inject(NinetailedKey)!;
 
 const resolveRenderingComponent = (
   component: ComponentDefintion | undefined
@@ -38,42 +40,6 @@ const resolveRenderingComponent = (
 const experienceState = useExperience({
   baseline: props.baseline,
   experiences: props.experiences,
-});
-
-const trackingElement = ref();
-
-watchEffect((onCleanup) => {
-  if (trackingElement.value && !(trackingElement.value instanceof Element)) {
-    const isObject =
-      typeof trackingElement.value === "object" &&
-      trackingElement.value !== null;
-    const constructorName = isObject
-      ? (trackingElement.value as any).constructor.name
-      : "";
-    const isConstructorNameNotObject =
-      constructorName && constructorName !== "Object";
-
-    logger.warn(
-      `The component ref being in Experience is an invalid element. Expected an Element but got ${typeof trackingElement.value}${
-        isConstructorNameNotObject ? ` of type ${constructorName}` : ""
-      }. This component won't be observed.`
-    );
-  }
-
-  if (trackingElement.value) {
-    observeElement({
-      element: trackingElement.value,
-      experience: experienceState.value.experience,
-      audience: experienceState.value.audience,
-      variant: experienceState.value.variant,
-      variantIndex: experienceState.value.variantIndex,
-    });
-
-    onCleanup(() => {
-      // FIXME: This throws when navigating away
-      // unobserveElement(trackingElement.value);
-    });
-  }
 });
 
 // WARNING: This implementation requires that any possible resolved components are globally registered. See ~/plugins/possibleExperienceComponents.ts
@@ -131,11 +97,15 @@ const Experience = () => {
   if (!experienceState.value.hasVariants) {
     return (
       <>
+        <TrackingComponent
+          experience={experienceState.value.experience}
+          variant={props.baseline}
+          variantIndex={0}
+        />
         <ExperienceRenderComponent
           {...props.passthroughProps}
           {...props.baseline}
           key={props.baseline.id}
-          ref={trackingElement}
         />
       </>
     );
@@ -148,7 +118,6 @@ const Experience = () => {
         passthroughProps={props.passthroughProps}
         baseline={props.baseline}
         experiences={props.component}
-        ref={trackingElement}
       />
     );
   }
@@ -159,16 +128,21 @@ const Experience = () => {
 
   if (isVariantHidden) {
     return (
-      <div
-        class="nt-cmp-marker"
-        ref={trackingElement}
-        style={{ display: "none !important" }}
+      <TrackingComponent
+        experience={experienceState.value.experience}
+        variant={deepToRaw(experienceState.value.variant)}
+        variantIndex={experienceState.value.variantIndex}
       />
     );
   }
 
   return (
     <>
+      <TrackingComponent
+        experience={experienceState.value.experience}
+        variant={deepToRaw(experienceState.value.variant)}
+        variantIndex={experienceState.value.variantIndex}
+      />
       <ExperienceRenderComponent
         key={`${experienceState.value.experience?.id || "baseline"}-${
           experienceState.value.variant.id
@@ -181,7 +155,6 @@ const Experience = () => {
         }}
         {...props.passthroughProps}
         {...experienceState.value.variant}
-        ref={trackingElement}
       />
     </>
   );

@@ -1,11 +1,13 @@
 <template>
-  <h1>Content Entry Title: {{ fields.internalName }}</h1>
-  <RichTextRenderer :document="fields.headline" />
-  <NuxtImg
-    :src="fields.image.fields.file.url"
-    width="500"
-    provider="contentful"
-  />
+  <div>
+    <h1>Content Entry Title: {{ fields.internalName }}</h1>
+    <RichTextRenderer :document="fields.headline" />
+    <NuxtImg
+      :src="fields.image.fields.file.url"
+      width="500"
+      provider="contentful"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">

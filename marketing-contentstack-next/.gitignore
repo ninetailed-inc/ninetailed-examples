@@ -173,5 +173,8 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/nextjs,vercel,webstorm,visualstudiocode
 
-# Contentstack
-/logs/
+# Contentstack import/export
+/logs
+/contentstack/data/logs/**
+/temp
+/_backup_*

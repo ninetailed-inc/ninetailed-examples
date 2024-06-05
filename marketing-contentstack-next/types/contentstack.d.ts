@@ -39,7 +39,7 @@ export interface Taxonomy {
 /** A field group for specifying SEO data on an associated page entry. */
 export interface Seo {
   /** Version */
-  version: 1;
+  version: 3;
   /** Meta Title */
   meta_title?: string;
   /** Meta Description */
@@ -53,7 +53,7 @@ export interface Seo {
 /** Ninetailed Experience */
 export interface NtExperience {
   /** Version */
-  version: 3;
+  version: 6;
   /** Name */
   nt_name: string;
   /** Description */
@@ -62,18 +62,18 @@ export interface NtExperience {
   nt_type: 'nt_experiment' | 'nt_personalization';
   /** Audience */
   nt_audience?: NtAudience[];
-  /** Config */
+  /** Ninetailed */
   nt_config: any;
-  /** Variants */
-  nt_variants?: (Banner | Navigation)[];
   /** Title */
   title: string;
+  /** Variants */
+  nt_variants?: (Banner | Navigation | LandingPage)[];
 }
 
 /** Ninetailed Merge Tag */
 export interface NtMergetag {
   /** Version */
-  version: 2;
+  version: 4;
   /** Name */
   nt_name: string;
   /** Fallback */
@@ -87,7 +87,7 @@ export interface NtMergetag {
 /** Ninetailed Audience */
 export interface NtAudience {
   /** Version */
-  version: 2;
+  version: 4;
   /** Name */
   nt_name: string;
   /** Description */
@@ -102,7 +102,7 @@ export interface NtAudience {
 
 export interface PricingPlan {
   /** Version */
-  version: 3;
+  version: 5;
   /** Internal Title */
   title: string;
   /** Title */
@@ -141,7 +141,7 @@ export interface Config {
 
 export interface LandingPage {
   /** Version */
-  version: 23;
+  version: 24;
   /** Title */
   title: string;
   /** SEO */
@@ -294,13 +294,13 @@ export interface LandingPage {
               buttons?: [
                 {
                   /** Button Link */
-                  button_link?: Link;
+                  button_link: Link;
                   /** Button Variant */
                   button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
                 },
                 {
                   /** Button Link */
-                  button_link?: Link;
+                  button_link: Link;
                   /** Button Variant */
                   button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
                 }
@@ -324,13 +324,13 @@ export interface LandingPage {
               buttons?: [
                 {
                   /** Button Link */
-                  button_link?: Link;
+                  button_link: Link;
                   /** Button Variant */
                   button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
                 },
                 {
                   /** Button Link */
-                  button_link?: Link;
+                  button_link: Link;
                   /** Button Variant */
                   button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
                 }
@@ -351,7 +351,7 @@ export interface LandingPage {
               /** Buttons */
               buttons?: {
                 /** Button Link */
-                button_link?: Link;
+                button_link: Link;
                 /** Button Variant */
                 button_variant?: ('Primary' | 'Secondary' | 'Loud') | null;
               }[];
@@ -416,7 +416,7 @@ export interface Footer {
 
 export interface Navigation {
   /** Version */
-  version: 7;
+  version: 8;
   /** Title */
   title: string;
   /** Navigation Items */
@@ -433,13 +433,15 @@ export interface Navigation {
 /** A dismissible call-to-cation displayed at the top of the viewport. */
 export interface Banner {
   /** Version */
-  version: 5;
+  version: 8;
   /** Title */
   title: string;
   /** Text */
   text?: any;
   /** Link */
   link?: Link;
+  /** Variant */
+  variant?: ('primary' | 'loud') | null;
   /** Ninetailed */
   nt_experiences?: NtExperience[];
 }

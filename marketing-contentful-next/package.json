@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "18"
+    "node": ">=18 <=20"
   },
   "scripts": {
     "dev": "next dev",
@@ -28,12 +28,13 @@
     "@contentful/rich-text-types": "15.14.1",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
-    "@ninetailed/experience.js-next": "7.5.2",
-    "@ninetailed/experience.js-node": "7.5.2",
-    "@ninetailed/experience.js-plugin-google-tagmanager": "7.5.2",
-    "@ninetailed/experience.js-plugin-insights": "7.5.2",
-    "@ninetailed/experience.js-plugin-preview": "7.5.2",
-    "@ninetailed/experience.js-utils-contentful": "7.5.2",
+    "@ninetailed/experience.js-next": "7.6.1",
+    "@ninetailed/experience.js-node": "7.6.1",
+    "@ninetailed/experience.js-plugin-google-tagmanager": "7.6.1",
+    "@ninetailed/experience.js-plugin-insights": "7.6.1",
+    "@ninetailed/experience.js-plugin-preview": "7.6.1",
+    "@ninetailed/experience.js-plugin-segment": "7.6.1",
+    "@ninetailed/experience.js-utils-contentful": "7.6.1",
     "@shopify/hydrogen-react": "2024.1.0",
     "@tailwindcss/typography": "^0.5.10",
     "classnames": "2.3.1",
@@ -56,8 +57,8 @@
   "devDependencies": {
     "@types/dlv": "^1.0.0",
     "@types/lodash": "4.14.181",
-    "@types/node": "18.0.0",
-    "@types/react": "17.0.43",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
     "autoprefixer": "10.4.4",

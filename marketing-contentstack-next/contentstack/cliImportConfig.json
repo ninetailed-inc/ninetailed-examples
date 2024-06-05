@@ -1,0 +1,14 @@
+{
+  "master_locale": {
+    "name": "English - United States",
+    "code": "en-us"
+  },
+  "data": "./contentstack/data/starter",
+  "moduleName": "assets environments locales extensions marketplace-apps webhooks taxonomies global-fields content-types entries labels",
+  "concurrency": 1,
+  "importConcurrency": 5,
+  "fetchConcurrency": 5,
+  "writeConcurrency": 5,
+  "securedAssets": false,
+  "developerHubBaseUrl": ""
+}
