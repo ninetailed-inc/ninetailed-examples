@@ -3,7 +3,7 @@
     "name": "English - United States",
     "code": "en-us"
   },
-  "data": "./contentstack/data/starter",
+  "data": "./contentstack/data/main",
   "moduleName": "assets environments locales extensions marketplace-apps webhooks taxonomies global-fields content-types entries labels",
   "concurrency": 1,
   "importConcurrency": 5,

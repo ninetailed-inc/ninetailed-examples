@@ -13,6 +13,7 @@
     "nextlint:fix": "next lint --fix",
     "format": "prettier --write .",
     "cs:import": "source .env.local && csdx cm:stacks:import -a $CONTENTSTACK_CLI_MGMT_IMPORT_TOKEN_ALIAS -c ./contentstack/cliImportConfig.json -y --branch $NEXT_PUBLIC_CONTENTSTACK_BRANCH",
+    "cs:update": "source .env.local && csdx cm:stacks:migration -a $CONTENTSTACK_CLI_MGMT_IMPORT_TOKEN_ALIAS --file-path ./contentstack/05-Update-reference-entry-from-mapper.js --config-file ./contentstack/cliReferenceMapConfig.json --branch $NEXT_PUBLIC_CONTENTSTACK_BRANCH",
     "cs:export": "source .env.local && csdx cm:stacks:export -a $CONTENTSTACK_CLI_MGMT_EXPORT_TOKEN_ALIAS -c ./contentstack/cliExportConfig.json -y --branch $NEXT_PUBLIC_CONTENTSTACK_BRANCH",
     "typegen": "source .env.local && csdx tsgen -a $CONTENTSTACK_CLI_DELIVERY_TOKEN_ALIAS -o 'types/contentstack.d.ts'"
   },
@@ -38,6 +39,8 @@
     "react-hook-form": "^7.46.0"
   },
   "devDependencies": {
+    "@contentstack/cli": "^1.18.2",
+    "@contentstack/cli-utilities": "^1.6.2",
     "@types/lodash": "4.14.181",
     "@types/node": "20.0.0",
     "@types/react": "^18.0.0",
