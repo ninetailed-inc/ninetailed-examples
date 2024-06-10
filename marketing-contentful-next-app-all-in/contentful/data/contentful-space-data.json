@@ -6982,7 +6982,7 @@
         "id": "44jIanEK8sjH9SoJ5AOa7m",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:25.833Z",
-        "updatedAt": "2024-06-05T18:29:13.930Z",
+        "updatedAt": "2024-06-10T18:27:20.884Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -6990,8 +6990,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 28,
-        "publishedAt": "2024-06-05T18:29:13.930Z",
+        "publishedVersion": 35,
+        "publishedAt": "2024-06-10T18:27:20.884Z",
         "firstPublishedAt": "2023-07-18T17:14:54.328Z",
         "createdBy": {
           "sys": {
@@ -7007,8 +7007,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 12,
-        "version": 29,
+        "publishedCounter": 13,
+        "version": 36,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -7036,7 +7036,7 @@
           "en-US": "[Experiment | A/B] Hide Trust CTAs"
         },
         "nt_description": {
-          "en-US": "Multiple components are hidden in this A/B Test. The variant is shown to all. You can change the variant distribution in the experiment to show the control variant."
+          "en-US": "Hiding a component used across pages to determine if doing so boosts conversion metrics"
         },
         "nt_type": {
           "en-US": "nt_experiment"
@@ -7338,7 +7338,7 @@
         "id": "64ducOq8OgG6N0zK3SuRnq",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:25.878Z",
-        "updatedAt": "2024-06-05T17:43:48.488Z",
+        "updatedAt": "2024-06-10T18:25:25.575Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -7346,8 +7346,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 20,
-        "publishedAt": "2024-06-05T17:43:48.488Z",
+        "publishedVersion": 25,
+        "publishedAt": "2024-06-10T18:25:25.575Z",
         "firstPublishedAt": "2023-07-10T22:35:54.980Z",
         "createdBy": {
           "sys": {
@@ -7363,8 +7363,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 7,
-        "version": 21,
+        "publishedCounter": 8,
+        "version": 26,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -7392,7 +7392,7 @@
           "en-US": "All Visitors"
         },
         "nt_description": {
-          "en-US": ""
+          "en-US": "Visitors who have visited any page or performed any event"
         },
         "nt_rules": {
           "en-US": {
@@ -7429,11 +7429,11 @@
               {
                 "all": [
                   {
+                    "key": "",
                     "type": "track",
                     "count": "1",
-                    "key": "",
-                    "operator": "greaterThanInclusive",
                     "value": "*",
+                    "operator": "greaterThanInclusive",
                     "conditions": []
                   }
                 ]
@@ -7467,7 +7467,7 @@
         "id": "6jlfnsz75fz0oE0mPj982O",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:25.895Z",
-        "updatedAt": "2024-06-05T17:43:48.776Z",
+        "updatedAt": "2024-06-10T18:24:59.268Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -7475,8 +7475,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 22,
-        "publishedAt": "2024-06-05T17:43:48.776Z",
+        "publishedVersion": 25,
+        "publishedAt": "2024-06-10T18:24:59.268Z",
         "firstPublishedAt": "2023-07-10T22:35:54.025Z",
         "createdBy": {
           "sys": {
@@ -7492,8 +7492,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 7,
-        "version": 23,
+        "publishedCounter": 8,
+        "version": 26,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -7521,7 +7521,7 @@
           "en-US": "North America Visitors"
         },
         "nt_description": {
-          "en-US": "Visitors from North America"
+          "en-US": "Users visiting from the continent of North America"
         },
         "nt_rules": {
           "en-US": {
@@ -8948,7 +8948,7 @@
         "id": "51AL1dMNXkvx1BkQd3wPR1",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:30.836Z",
-        "updatedAt": "2024-06-05T17:43:52.804Z",
+        "updatedAt": "2024-06-10T18:24:40.681Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -8956,8 +8956,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 23,
-        "publishedAt": "2024-06-05T17:43:52.804Z",
+        "publishedVersion": 28,
+        "publishedAt": "2024-06-10T18:24:40.681Z",
         "firstPublishedAt": "2023-07-10T22:36:09.758Z",
         "createdBy": {
           "sys": {
@@ -8973,8 +8973,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 5,
-        "version": 24,
+        "publishedCounter": 6,
+        "version": 29,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -9002,7 +9002,7 @@
           "en-US": "Europe Visitors"
         },
         "nt_description": {
-          "en-US": ""
+          "en-US": "Users visiting from the continent of Europe"
         },
         "nt_rules": {
           "en-US": {
@@ -9048,7 +9048,7 @@
         "id": "9dD2bUqMKGEu5piomilr7",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:30.847Z",
-        "updatedAt": "2024-06-05T17:43:53.045Z",
+        "updatedAt": "2024-06-10T18:24:11.620Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -9056,8 +9056,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 7,
-        "publishedAt": "2024-06-05T17:43:53.045Z",
+        "publishedVersion": 14,
+        "publishedAt": "2024-06-10T18:24:11.620Z",
         "firstPublishedAt": "2023-07-10T22:36:08.894Z",
         "createdBy": {
           "sys": {
@@ -9073,8 +9073,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 4,
-        "version": 8,
+        "publishedCounter": 5,
+        "version": 15,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -9102,7 +9102,7 @@
           "en-US": "Lifecycle Stage: Opportunity"
         },
         "nt_description": {
-          "en-US": "Opportunity based on a lifecycle stage trait from a customer data source, such as a CRM."
+          "en-US": "Visitors who submitted the lead generation form and were upgraded to a lifecycle stage of \"Opportunity\" in the connected CRM"
         },
         "nt_rules": {
           "en-US": {
@@ -9148,7 +9148,7 @@
         "id": "4IBSwLRvM1gdBidtnsh4h",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:30.858Z",
-        "updatedAt": "2024-06-05T17:43:53.287Z",
+        "updatedAt": "2024-06-10T18:23:27.035Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -9156,8 +9156,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 79,
-        "publishedAt": "2024-06-05T17:43:53.287Z",
+        "publishedVersion": 91,
+        "publishedAt": "2024-06-10T18:23:27.035Z",
         "firstPublishedAt": "2023-07-10T22:36:10.251Z",
         "createdBy": {
           "sys": {
@@ -9173,8 +9173,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 16,
-        "version": 80,
+        "publishedCounter": 17,
+        "version": 92,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -9202,7 +9202,7 @@
           "en-US": "Enterprise Lead"
         },
         "nt_description": {
-          "en-US": "Visitors from an enterprise companies based on the size of the company trait from a customer data source, such as a CRM."
+          "en-US": "Visitors who have submitted the lead generation form and indicated they belong to a company of more than 1000 employees"
         },
         "nt_rules": {
           "en-US": {
@@ -9234,11 +9234,11 @@
               {
                 "all": [
                   {
+                    "key": "is_vegetarian",
                     "type": "identify",
                     "count": "1",
-                    "key": "is_vegetarian",
-                    "operator": "equal",
                     "value": "true",
+                    "operator": "equal",
                     "conditions": []
                   }
                 ]
@@ -9391,7 +9391,7 @@
         "id": "7IRVaTD9GpZVprP7A8tSiE",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:30.867Z",
-        "updatedAt": "2024-06-05T17:43:53.799Z",
+        "updatedAt": "2024-06-10T18:22:00.545Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -9399,8 +9399,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 17,
-        "publishedAt": "2024-06-05T17:43:53.799Z",
+        "publishedVersion": 21,
+        "publishedAt": "2024-06-10T18:22:00.545Z",
         "firstPublishedAt": "2023-07-10T22:36:10.639Z",
         "createdBy": {
           "sys": {
@@ -9416,8 +9416,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 7,
-        "version": 18,
+        "publishedCounter": 8,
+        "version": 22,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -9445,7 +9445,7 @@
           "en-US": "Pricing Intent"
         },
         "nt_description": {
-          "en-US": "Visitors with an interest in pricing."
+          "en-US": "Visitors to the /pricing page, indicating reasonably high intent to purchase"
         },
         "nt_rules": {
           "en-US": {
@@ -9455,6 +9455,7 @@
                   {
                     "key": "",
                     "type": "page",
+                    "count": "1",
                     "value": "",
                     "operator": "greaterThanInclusive",
                     "conditions": [
@@ -9471,11 +9472,10 @@
                             "label": "URL"
                           }
                         },
-                        "operator": "contains",
-                        "value": "pricing"
+                        "value": "pricing",
+                        "operator": "contains"
                       }
-                    ],
-                    "count": "1"
+                    ]
                   }
                 ]
               }
@@ -10379,7 +10379,7 @@
         "id": "dlEFnUIcMrAfKqalqu3DP",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:34.312Z",
-        "updatedAt": "2024-06-05T17:43:57.015Z",
+        "updatedAt": "2024-06-10T18:21:35.755Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -10387,8 +10387,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 44,
-        "publishedAt": "2024-06-05T17:43:57.015Z",
+        "publishedVersion": 51,
+        "publishedAt": "2024-06-10T18:21:35.755Z",
         "firstPublishedAt": "2023-07-10T22:36:19.008Z",
         "createdBy": {
           "sys": {
@@ -10404,8 +10404,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 11,
-        "version": 45,
+        "publishedCounter": 12,
+        "version": 52,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -10431,6 +10431,9 @@
       "fields": {
         "nt_name": {
           "en-US": "Applicant Tracking Interest"
+        },
+        "nt_description": {
+          "en-US": "Visitors who have visited the site with a particular UTM parameter indicating interest in an Applicant Tracking feature of EasyHR"
         },
         "nt_rules": {
           "en-US": {
@@ -10643,7 +10646,7 @@
         "id": "6El21GWHfSq0I81lRza1So",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:35.303Z",
-        "updatedAt": "2024-06-05T17:43:58.603Z",
+        "updatedAt": "2024-06-10T18:26:35.126Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -10651,8 +10654,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 14,
-        "publishedAt": "2024-06-05T17:43:58.603Z",
+        "publishedVersion": 21,
+        "publishedAt": "2024-06-10T18:26:35.126Z",
         "firstPublishedAt": "2023-07-10T22:36:21.385Z",
         "createdBy": {
           "sys": {
@@ -10668,8 +10671,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 7,
-        "version": 15,
+        "publishedCounter": 8,
+        "version": 22,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -10695,6 +10698,9 @@
       "fields": {
         "nt_name": {
           "en-US": "[Campaign] PPC Applicant Tracking"
+        },
+        "nt_description": {
+          "en-US": "Surfacing up content to users who visited the website by clicking on an advertisement about the Applicant Tracking product feature."
         },
         "nt_type": {
           "en-US": "nt_personalization"
@@ -11151,7 +11157,7 @@
         "id": "1YjFMh5409sdAxHBf3Na5P",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:36.333Z",
-        "updatedAt": "2024-06-05T17:43:59.740Z",
+        "updatedAt": "2024-06-10T18:36:32.788Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -11159,8 +11165,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 16,
-        "publishedAt": "2024-06-05T17:43:59.740Z",
+        "publishedVersion": 24,
+        "publishedAt": "2024-06-10T18:36:32.788Z",
         "firstPublishedAt": "2023-07-10T22:36:25.436Z",
         "createdBy": {
           "sys": {
@@ -11176,8 +11182,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 7,
-        "version": 17,
+        "publishedCounter": 10,
+        "version": 25,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -11205,7 +11211,7 @@
           "en-US": "[Behaviour] Interest in Pricing"
         },
         "nt_description": {
-          "en-US": "This personalization campaign shows a different banner for visitors with a pricing intent behaviour. You can change the holdout in the personalization to show the baseline."
+          "en-US": "This personalization campaign shows a different banner for visitors who have visited the /pricing page, a high intent purchasing behaviour"
         },
         "nt_type": {
           "en-US": "nt_personalization"
@@ -11307,6 +11313,11 @@
         },
         "nt_experience_id": {
           "en-US": "1YjFMh5409sdAxHBf3Na5P"
+        },
+        "nt_metadata": {
+          "en-US": {
+            "type": "origin"
+          }
         }
       }
     },
@@ -11440,7 +11451,7 @@
         "id": "CHLlJkxjtvr5xHgGCme8R",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:36.339Z",
-        "updatedAt": "2024-06-05T17:44:00.334Z",
+        "updatedAt": "2024-06-10T18:35:56.021Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -11448,8 +11459,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 54,
-        "publishedAt": "2024-06-05T17:44:00.334Z",
+        "publishedVersion": 56,
+        "publishedAt": "2024-06-10T18:35:56.021Z",
         "firstPublishedAt": "2023-07-10T22:36:25.003Z",
         "createdBy": {
           "sys": {
@@ -11465,8 +11476,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 10,
-        "version": 55,
+        "publishedCounter": 11,
+        "version": 57,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -11494,7 +11505,7 @@
           "en-US": "[Location] North America"
         },
         "nt_description": {
-          "en-US": ""
+          "en-US": "Show different content to users visiting the website from Europe"
         },
         "nt_type": {
           "en-US": "nt_personalization"
@@ -11853,7 +11864,7 @@
         "id": "31ywFPATXKsR6quIjlU4t2",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:36.466Z",
-        "updatedAt": "2024-06-05T17:44:21.049Z",
+        "updatedAt": "2024-06-10T18:27:38.889Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -11861,8 +11872,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 37,
-        "publishedAt": "2024-06-05T17:44:21.049Z",
+        "publishedVersion": 40,
+        "publishedAt": "2024-06-10T18:27:38.889Z",
         "firstPublishedAt": "2023-07-10T22:36:26.695Z",
         "createdBy": {
           "sys": {
@@ -11878,8 +11889,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 13,
-        "version": 38,
+        "publishedCounter": 14,
+        "version": 41,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -11907,7 +11918,7 @@
           "en-US": "[Campaign] Enterprises"
         },
         "nt_description": {
-          "en-US": "This personalization campaign shows different components for enterprise companies. You can change the holdout in the personalization to show the baseline."
+          "en-US": "This personalization campaign shows different content to Enterprise companies"
         },
         "nt_type": {
           "en-US": "nt_personalization"
@@ -13411,7 +13422,7 @@
         "id": "6I2DJ44yM0v5rzHVa1f1GM",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:39.318Z",
-        "updatedAt": "2024-06-05T17:44:02.445Z",
+        "updatedAt": "2024-06-10T18:35:38.815Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -13419,8 +13430,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 15,
-        "publishedAt": "2024-06-05T17:44:02.445Z",
+        "publishedVersion": 20,
+        "publishedAt": "2024-06-10T18:35:38.815Z",
         "firstPublishedAt": "2023-07-10T22:36:38.476Z",
         "createdBy": {
           "sys": {
@@ -13436,8 +13447,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 8,
-        "version": 16,
+        "publishedCounter": 9,
+        "version": 21,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -13463,6 +13474,9 @@
       "fields": {
         "nt_name": {
           "en-US": "[Lead Stage] Opportunity"
+        },
+        "nt_description": {
+          "en-US": "Personalize a banner to show the account owner assigned to visitors who have been upgraded to a lifecycle stage of \"Opportunity\" in the connected CRM"
         },
         "nt_type": {
           "en-US": "nt_personalization"
@@ -13690,7 +13704,7 @@
         "id": "2kT7B3F1GH3sDBo2glpywy",
         "type": "Entry",
         "createdAt": "2023-07-10T22:35:40.309Z",
-        "updatedAt": "2024-06-05T17:44:03.375Z",
+        "updatedAt": "2024-06-10T18:35:04.940Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -13698,8 +13712,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 9,
-        "publishedAt": "2024-06-05T17:44:03.375Z",
+        "publishedVersion": 14,
+        "publishedAt": "2024-06-10T18:35:04.940Z",
         "firstPublishedAt": "2023-07-10T22:36:39.048Z",
         "createdBy": {
           "sys": {
@@ -13715,8 +13729,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 5,
-        "version": 10,
+        "publishedCounter": 6,
+        "version": 15,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -13744,7 +13758,7 @@
           "en-US": "[Location] Europe"
         },
         "nt_description": {
-          "en-US": "Location based experience."
+          "en-US": "Show different content to users visiting the website from Europe"
         },
         "nt_type": {
           "en-US": "nt_personalization"
@@ -16146,7 +16160,7 @@
         "id": "1mLOjh6K55nVpsuQ9y70Ou",
         "type": "Entry",
         "createdAt": "2023-07-13T21:09:58.093Z",
-        "updatedAt": "2024-06-05T17:44:07.081Z",
+        "updatedAt": "2024-06-10T18:20:57.999Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -16154,8 +16168,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 15,
-        "publishedAt": "2024-06-05T17:44:07.081Z",
+        "publishedVersion": 22,
+        "publishedAt": "2024-06-10T18:20:57.999Z",
         "firstPublishedAt": "2023-07-13T21:10:24.862Z",
         "createdBy": {
           "sys": {
@@ -16171,8 +16185,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 5,
-        "version": 16,
+        "publishedCounter": 6,
+        "version": 23,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -16199,6 +16213,9 @@
         "nt_name": {
           "en-US": "Segment User"
         },
+        "nt_description": {
+          "en-US": "An existing user who has engaged with marketing emails and uses at least one product feature frequently"
+        },
         "nt_rules": {
           "en-US": {
             "any": [
@@ -16213,11 +16230,11 @@
                     "conditions": []
                   },
                   {
+                    "key": "most_frequent_product_feature_viewed",
                     "type": "identify",
                     "count": "1",
-                    "key": "most_frequent_product_feature_viewed",
-                    "operator": "equal",
                     "value": "*",
+                    "operator": "equal",
                     "conditions": []
                   }
                 ]
@@ -16251,7 +16268,7 @@
         "id": "1izx9ylITQURQPVjjLVMlc",
         "type": "Entry",
         "createdAt": "2023-07-13T21:11:06.486Z",
-        "updatedAt": "2024-06-05T17:44:07.334Z",
+        "updatedAt": "2024-06-10T18:20:16.968Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -16259,8 +16276,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 10,
-        "publishedAt": "2024-06-05T17:44:07.334Z",
+        "publishedVersion": 18,
+        "publishedAt": "2024-06-10T18:20:16.968Z",
         "firstPublishedAt": "2023-07-13T21:11:25.336Z",
         "createdBy": {
           "sys": {
@@ -16276,8 +16293,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 4,
-        "version": 11,
+        "publishedCounter": 5,
+        "version": 19,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -16303,6 +16320,9 @@
       "fields": {
         "nt_name": {
           "en-US": "[Segment] Process Management"
+        },
+        "nt_description": {
+          "en-US": "Existing customers who have access to a Process Management feature of EasyHR"
         },
         "nt_rules": {
           "en-US": {
@@ -16491,7 +16511,7 @@
         "id": "7hzGunjYhjHVYcvLR7gdFs",
         "type": "Entry",
         "createdAt": "2023-07-13T21:14:35.195Z",
-        "updatedAt": "2024-06-05T17:44:17.441Z",
+        "updatedAt": "2024-06-10T18:28:35.368Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -16499,8 +16519,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 21,
-        "publishedAt": "2024-06-05T17:44:17.441Z",
+        "publishedVersion": 31,
+        "publishedAt": "2024-06-10T18:28:35.368Z",
         "firstPublishedAt": "2023-07-13T21:17:01.577Z",
         "createdBy": {
           "sys": {
@@ -16516,8 +16536,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 6,
-        "version": 22,
+        "publishedCounter": 8,
+        "version": 32,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -16543,6 +16563,9 @@
       "fields": {
         "nt_name": {
           "en-US": "[Segment] Last Email Inquiry"
+        },
+        "nt_description": {
+          "en-US": "Show a banner to users who have engaged with email marketing materials to ask their sentiment about the last email they read"
         },
         "nt_type": {
           "en-US": "nt_personalization"
@@ -16591,6 +16614,11 @@
         },
         "nt_experience_id": {
           "en-US": "7hzGunjYhjHVYcvLR7gdFs"
+        },
+        "nt_metadata": {
+          "en-US": {
+            "type": "origin"
+          }
         }
       }
     },
@@ -16822,7 +16850,7 @@
         "id": "73I7TI1pg9b2aeLwbGd6qc",
         "type": "Entry",
         "createdAt": "2023-07-13T21:18:14.565Z",
-        "updatedAt": "2024-06-05T17:44:17.156Z",
+        "updatedAt": "2024-06-10T18:29:38.503Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -16830,8 +16858,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 22,
-        "publishedAt": "2024-06-05T17:44:17.156Z",
+        "publishedVersion": 32,
+        "publishedAt": "2024-06-10T18:29:38.503Z",
         "firstPublishedAt": "2023-07-13T21:19:20.817Z",
         "createdBy": {
           "sys": {
@@ -16847,8 +16875,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 7,
-        "version": 23,
+        "publishedCounter": 8,
+        "version": 33,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -16874,6 +16902,9 @@
       "fields": {
         "nt_name": {
           "en-US": "[Segment] Most Frequent Product Upsell"
+        },
+        "nt_description": {
+          "en-US": "Changes the pricing page to show only pricing plans that are priced higher than the user's current plan, in an effort to upsell them. Shows content dynamic to whatever product feature the current user uses most often."
         },
         "nt_type": {
           "en-US": "nt_personalization"
@@ -17343,7 +17374,7 @@
         "id": "4aSQ6HYCrSQP2UktnEGq3X",
         "type": "Entry",
         "createdAt": "2023-07-14T19:45:04.700Z",
-        "updatedAt": "2024-06-05T17:44:09.600Z",
+        "updatedAt": "2024-06-10T18:34:34.027Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -17351,8 +17382,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 82,
-        "publishedAt": "2024-06-05T17:44:09.600Z",
+        "publishedVersion": 93,
+        "publishedAt": "2024-06-10T18:34:34.027Z",
         "firstPublishedAt": "2023-07-14T19:45:28.494Z",
         "createdBy": {
           "sys": {
@@ -17368,8 +17399,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 27,
-        "version": 83,
+        "publishedCounter": 28,
+        "version": 94,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -17397,7 +17428,7 @@
           "en-US": "[Experiment | Feature Flag] Alternate Hero Layout"
         },
         "nt_description": {
-          "en-US": ""
+          "en-US": "A demonstration of using Ninetailed to control component layout by serving an application different variations of a feature flag. Feature flag variants are modelled as a content type"
         },
         "nt_type": {
           "en-US": "nt_experiment"
@@ -17625,7 +17656,7 @@
         "id": "5iilfy11dHaR6hfRE8hfzw",
         "type": "Entry",
         "createdAt": "2023-07-21T19:42:25.117Z",
-        "updatedAt": "2024-06-05T17:44:10.300Z",
+        "updatedAt": "2024-06-10T18:33:12.008Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -17633,8 +17664,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 30,
-        "publishedAt": "2024-06-05T17:44:10.300Z",
+        "publishedVersion": 38,
+        "publishedAt": "2024-06-10T18:33:12.008Z",
         "firstPublishedAt": "2023-07-21T19:43:05.165Z",
         "createdBy": {
           "sys": {
@@ -17650,8 +17681,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 11,
-        "version": 31,
+        "publishedCounter": 12,
+        "version": 39,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -17677,6 +17708,9 @@
       "fields": {
         "nt_name": {
           "en-US": "[Experiment | Feature Flag] Alternate Styles"
+        },
+        "nt_description": {
+          "en-US": "An experimental demonstration of running an A/B test of layout and presentation by injecting different CSS styles"
         },
         "nt_type": {
           "en-US": "nt_experiment"
@@ -17744,7 +17778,7 @@
         "id": "7vcF8ZU2nqrsyF5vtIennw",
         "type": "Entry",
         "createdAt": "2023-10-31T21:02:33.187Z",
-        "updatedAt": "2024-06-05T17:44:11.570Z",
+        "updatedAt": "2024-06-10T18:32:13.049Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -17752,8 +17786,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 29,
-        "publishedAt": "2024-06-05T17:44:11.570Z",
+        "publishedVersion": 35,
+        "publishedAt": "2024-06-10T18:32:13.049Z",
         "firstPublishedAt": "2023-10-31T21:03:40.744Z",
         "createdBy": {
           "sys": {
@@ -17769,8 +17803,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 9,
-        "version": 30,
+        "publishedCounter": 11,
+        "version": 36,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -17796,6 +17830,9 @@
       "fields": {
         "nt_name": {
           "en-US": "[Segment] Process Management"
+        },
+        "nt_description": {
+          "en-US": "Changes content for users who have access to the Process Management feature of EasyHR"
         },
         "nt_type": {
           "en-US": "nt_experiment"
@@ -17844,6 +17881,11 @@
         },
         "nt_experience_id": {
           "en-US": "7vcF8ZU2nqrsyF5vtIennw"
+        },
+        "nt_metadata": {
+          "en-US": {
+            "type": "origin"
+          }
         }
       }
     },
@@ -18102,7 +18144,7 @@
         "id": "6df0DI1BG9GTb9qIcjfkmh",
         "type": "Entry",
         "createdAt": "2024-02-14T19:25:04.196Z",
-        "updatedAt": "2024-06-05T17:44:15.464Z",
+        "updatedAt": "2024-06-10T18:30:06.541Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -18110,8 +18152,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 29,
-        "publishedAt": "2024-06-05T17:44:15.464Z",
+        "publishedVersion": 34,
+        "publishedAt": "2024-06-10T18:30:06.541Z",
         "firstPublishedAt": "2024-02-14T19:27:15.833Z",
         "createdBy": {
           "sys": {
@@ -18127,8 +18169,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 10,
-        "version": 30,
+        "publishedCounter": 11,
+        "version": 35,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -18156,7 +18198,7 @@
           "en-US": "[Experiment | A/B] New Visitors"
         },
         "nt_description": {
-          "en-US": ""
+          "en-US": "A classic A/B test to show different content to new visitors."
         },
         "nt_type": {
           "en-US": "nt_experiment"
@@ -18322,7 +18364,7 @@
         "id": "1g2FXnBQzxcQfhnaM2NRkn",
         "type": "Entry",
         "createdAt": "2024-02-14T19:49:16.890Z",
-        "updatedAt": "2024-06-05T17:44:14.939Z",
+        "updatedAt": "2024-06-10T18:19:27.310Z",
         "environment": {
           "sys": {
             "id": "backup_2024-06-05",
@@ -18330,8 +18372,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 7,
-        "publishedAt": "2024-06-05T17:44:14.939Z",
+        "publishedVersion": 14,
+        "publishedAt": "2024-06-10T18:19:27.310Z",
         "firstPublishedAt": "2024-02-14T19:49:27.153Z",
         "createdBy": {
           "sys": {
@@ -18347,8 +18389,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 3,
-        "version": 8,
+        "publishedCounter": 4,
+        "version": 15,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -18375,17 +18417,20 @@
         "nt_name": {
           "en-US": "New Visitors"
         },
+        "nt_description": {
+          "en-US": "Users who are visiting for the first time"
+        },
         "nt_rules": {
           "en-US": {
             "any": [
               {
                 "all": [
                   {
+                    "key": "",
                     "type": "isReturningVisitor",
                     "count": "1",
-                    "key": "",
-                    "operator": "equal",
                     "value": false,
+                    "operator": "equal",
                     "conditions": []
                   }
                 ]
