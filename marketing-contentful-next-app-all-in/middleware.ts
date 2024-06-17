@@ -29,7 +29,8 @@ export const config = {
 };
 
 export default async function middleware(req: NextRequest) {
-  console.log('request', req.url);
+  console.log('request geo', req.geo);
+  console.log('request ip', req.geo);
   const { profile, experiences } = await sendPageEvent({
     ctx: createRequestContext(req),
     clientId: process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || '',
@@ -37,10 +38,14 @@ export default async function middleware(req: NextRequest) {
     cookies: req.cookies,
     ip: ipAddress(req),
     location: {
-      city: req.geo?.city,
-      region: req.geo?.region,
-      country: req.geo?.country,
-      continent: getContinentCode(req.geo?.country),
+      ...(req.geo?.city ? { city: req.geo?.city } : {}),
+      ...(req.geo?.region ? { region: req.geo?.region } : {}),
+      ...(req.geo?.country
+        ? {
+            country: req.geo?.country,
+            continent: getContinentCode(req.geo?.country),
+          }
+        : {}),
     },
   });
 
