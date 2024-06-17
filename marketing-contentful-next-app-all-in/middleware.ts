@@ -29,6 +29,7 @@ export const config = {
 };
 
 export default async function middleware(req: NextRequest) {
+  console.log('request', req);
   console.log('request geo', req.geo);
   console.log('request ip', req.geo);
   const { profile, experiences } = await sendPageEvent({
