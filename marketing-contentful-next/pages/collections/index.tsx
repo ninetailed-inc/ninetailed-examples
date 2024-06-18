@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import {
   Dialog,
   DialogPanel,
@@ -13,21 +13,10 @@ import {
   PopoverButton,
   PopoverGroup,
   PopoverPanel,
-  Tab,
-  TabGroup,
-  TabList,
-  TabPanel,
-  TabPanels,
   Transition,
   TransitionChild,
 } from '@headlessui/react';
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-  QuestionMarkCircleIcon,
-  ShoppingBagIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { GetStaticProps } from 'next';
 import { getAllAudiences, getAllExperiences, getGlobalConfig } from '@/lib/api';
@@ -35,6 +24,8 @@ import get from 'lodash/get';
 import { IConfig } from '@/types/contentful';
 import { BlockRenderer } from '@/components/Renderer';
 import classNames from 'classnames';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const sortOptions = [
   { name: 'Most Popular', href: '#' },
@@ -272,7 +263,6 @@ export default function Plp({ config }: { config: IConfig }) {
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
                                     type="checkbox"
-                                    defaultChecked={option.checked}
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                   />
                                   <label
@@ -339,7 +329,7 @@ export default function Plp({ config }: { config: IConfig }) {
                   <MenuItems className="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
                       {sortOptions.map((option) => (
-                        <MenuItem key={option}>
+                        <MenuItem key={option.name}>
                           {({ focus }) => (
                             <a
                               href={option.href}
@@ -408,7 +398,6 @@ export default function Plp({ config }: { config: IConfig }) {
                                 id={`filter-${section.id}-${optionIdx}`}
                                 name={`${section.id}[]`}
                                 defaultValue={option.value}
-                                defaultChecked={option.checked}
                                 type="checkbox"
                                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                               />
@@ -439,7 +428,8 @@ export default function Plp({ config }: { config: IConfig }) {
               {products1.map((product) => (
                 <a key={product.id} href={product.href} className="group">
                   <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2">
-                    <img
+                    <Image
+                      fill={true}
                       src={product.imageSrc}
                       alt={product.imageAlt}
                       className="h-full w-full object-cover object-center group-hover:opacity-75"
@@ -462,7 +452,8 @@ export default function Plp({ config }: { config: IConfig }) {
             className="relative mt-16 overflow-hidden rounded-lg lg:h-96"
           >
             <div className="absolute inset-0">
-              <img
+              <Image
+                fill={true}
                 src="https://tailwindui.com/img/ecommerce-images/category-page-01-featured-collection.jpg"
                 alt=""
                 className="h-full w-full object-cover object-center"
@@ -489,12 +480,13 @@ export default function Plp({ config }: { config: IConfig }) {
                   clear-minded.
                 </p>
               </div>
-              <a
+              {/* TODO: Replace with <Button> */}
+              <Link
                 href="#"
                 className="mt-6 flex flex-shrink-0 items-center justify-center rounded-md border border-white border-opacity-25 bg-white bg-opacity-0 px-4 py-3 text-base font-medium text-white hover:bg-opacity-10 sm:ml-8 sm:mt-0 lg:ml-0 lg:w-full"
               >
                 View the collection
-              </a>
+              </Link>
             </div>
           </section>
 
@@ -510,7 +502,8 @@ export default function Plp({ config }: { config: IConfig }) {
               {products2.map((product) => (
                 <a key={product.id} href={product.href} className="group">
                   <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2">
-                    <img
+                    <Image
+                      fill={true}
                       src={product.imageSrc}
                       alt={product.imageAlt}
                       className="h-full w-full object-cover object-center group-hover:opacity-75"

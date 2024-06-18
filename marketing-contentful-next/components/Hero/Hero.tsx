@@ -1,7 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { Button, ButtonVariant } from '@/components/Button';
+import { Button } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { ContentfulImageLoader } from '@/lib/helperfunctions';
 import { IHero } from '@/types/contentful';

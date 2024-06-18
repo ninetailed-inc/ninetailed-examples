@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { Button } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { ICta } from '@/types/contentful';

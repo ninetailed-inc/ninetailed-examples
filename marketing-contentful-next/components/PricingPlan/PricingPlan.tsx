@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { CheckIcon } from '@heroicons/react/24/solid';
 import { Button } from '@/components/Button';
