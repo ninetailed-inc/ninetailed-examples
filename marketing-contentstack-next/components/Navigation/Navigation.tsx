@@ -15,7 +15,19 @@ export const Navigation: React.FC<INavigation> = (props) => {
   const { track, identify } = useNinetailed();
   const handleLogin = handleErrors(async () => {
     setLoggingIn(true);
-    await identify('', { pricingplan: 'lite' });
+    // This is a hard-coded set of Segment audiences and computed traits for demonstration purposes
+    await identify('', {
+      pricingplan: 'growth',
+      last_email_opened_subject_line: 'HR Made Easy',
+      list_of_blog_topics_read: [
+        'Benefits',
+        'Compensation',
+        'Management Skills',
+      ],
+      most_frequent_product_feature_viewed: 'Edits & Approvals',
+      purchased_product_features: ['Edits & Approvals', 'Process Management'],
+      thought_leadership_engagers: true,
+    });
     setLoggingIn(false);
   });
 
