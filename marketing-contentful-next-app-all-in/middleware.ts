@@ -48,7 +48,7 @@ export default async function middleware(req: NextRequest) {
 
   // Create a rewrite
   const url = req.nextUrl.clone();
-  url.pathname = `/${EDGE_URL_DELIMITER}${experienceSelections}${profile.id}${url.pathname}`;
+  url.pathname = `/${EDGE_URL_DELIMITER}${experienceSelections}${url.pathname}`;
   url.pathname = url.pathname.replace(/\/$/, ''); // Remove any trailing slash
   const res = NextResponse.rewrite(url);
   res.cookies.set(NINETAILED_ANONYMOUS_ID_COOKIE, profile.id);
