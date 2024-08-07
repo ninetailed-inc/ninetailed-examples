@@ -80,18 +80,6 @@ export default async function handler(
     ...rest
   } = request.body.data;
 
-  // This option loops over the triggering events to add/remove
-  // for (const event of events) {
-  //   switch (event.event) {
-  //     case "enter":
-  //       traitsPayload[event.slug] = true;
-  //       break;
-  //     case "exit":
-  //       traitsPayload[event.slug] = false;
-  //   }
-  // }
-
-  // Or just get it directly from _segments
   const traits = { lyticsSegments, ...rest };
 
   const apiClient = new NinetailedAPIClient({
@@ -99,7 +87,7 @@ export default async function handler(
     environment: process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT,
   });
 
-  console.log(`lytics _uid`, userId);
+  console.log(`lytics_uid`, userId);
 
   const ninetailedResponse = await apiClient.sendIdentifyEvent(userId, traits);
 

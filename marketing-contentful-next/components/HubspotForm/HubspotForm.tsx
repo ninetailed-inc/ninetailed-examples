@@ -187,7 +187,7 @@ export const HubspotForm = ({ fields }: IHubspotForm) => {
               <option value="51-200">51-200</option>
               <option value="201-500">201-500</option>
               <option value="501-1000">501-1000</option>
-              <option value="1000-2000">1000-2000</option>
+              <option value="1001-2000">1001-2000</option>
               <option value="more_than_2000">More than 2000</option>
             </select>
             {errors.companysize && (
