@@ -4,45 +4,9 @@ import { useNinetailed } from '@ninetailed/experience.js-next';
 
 import { RichText } from '@/components/RichText';
 import { IFooter } from '@/types/contentful';
-import { handleErrors } from '@/lib/helperfunctions';
 
 export const Footer = ({ fields }: IFooter) => {
-  const { reset, identify } = useNinetailed();
-
-  // Demo traits functions
-  const becomeCasual = handleErrors(async () => {
-    reset();
-    console.log(`Ninetailed: Simulating Casual User`);
-    await identify('', {
-      lyticsSegments: ['ly_casual', 'smt_new'],
-      score_consistency: 30,
-      score_frequency: 80,
-      score_intensity: 10,
-      score_maturity: 0,
-      score_momentum: 10,
-      score_propensity: 5,
-      score_quantity: 20,
-      score_recency: 70,
-      score_volatility: 5,
-    });
-  });
-
-  const becomeEngager = handleErrors(async () => {
-    reset();
-    console.log(`Ninetailed: Simulating Highly Engaged User`);
-    await identify('', {
-      lyticsSegments: ['ly_deeply_engaged', 'smt_power'],
-      score_consistency: 30,
-      score_frequency: 60,
-      score_intensity: 85,
-      score_maturity: 40,
-      score_momentum: 40,
-      score_propensity: 80,
-      score_quantity: 50,
-      score_recency: 50,
-      score_volatility: 60,
-    });
-  });
+  const { reset } = useNinetailed();
 
   return (
     <footer className="bg-gray-800">
@@ -83,25 +47,6 @@ export const Footer = ({ fields }: IFooter) => {
               onClick={reset}
             >
               DEMO: Start Over
-            </button>
-          </div>
-          {/* Hardcoded Lytics demos */}
-          <div className="px-5 py-2">
-            <button
-              type="button"
-              className="text-base text-gray-300 hover:text-white cursor-pointer"
-              onClick={becomeCasual}
-            >
-              DEMO: Casual User
-            </button>
-          </div>
-          <div className="px-5 py-2">
-            <button
-              type="button"
-              className="text-base text-gray-300 hover:text-white cursor-pointer"
-              onClick={becomeEngager}
-            >
-              DEMO: Engaged user
             </button>
           </div>
         </nav>
