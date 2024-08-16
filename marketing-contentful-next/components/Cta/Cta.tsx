@@ -1,6 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
-import { Button, ButtonVariant } from '@/components/Button';
+import { Button } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { ICta } from '@/types/contentful';
 
@@ -23,16 +22,14 @@ export const CTA = ({ fields }: ICta) => {
             }
             return (
               <div key={button.sys.id} className="shadow w-full">
-                <Link passHref href={button.fields.slug} legacyBehavior>
-                  <Button
-                    as="a"
-                    type="button"
-                    variant={button.fields.variant as ButtonVariant}
-                    size="large"
-                  >
-                    {button.fields.buttonText}
-                  </Button>
-                </Link>
+                <Button
+                  type="button"
+                  size="large"
+                  {...button.fields}
+                  href={button.fields.slug}
+                >
+                  {button.fields.buttonText}
+                </Button>
               </div>
             );
           })}

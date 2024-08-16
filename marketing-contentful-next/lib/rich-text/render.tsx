@@ -20,6 +20,7 @@ export type RenderRichTextOptions = {
   classNames?: {
     ul?: string;
     li?: string;
+    h2?: string;
   };
   renderNode?: RenderNode;
 };
@@ -36,9 +37,22 @@ export const renderRichText = (
     renderNode: {
       [INLINES.EMBEDDED_ENTRY]: (node) => {
         if (isMergeTag(node.data.target)) {
-          return <MergeTag id={node.data.target.fields.nt_mergetag_id} />;
+          return (
+            <MergeTag
+              id={node.data.target.fields.nt_mergetag_id}
+              fallback={node.data.target.fields.nt_fallback}
+            />
+          );
         }
         return null;
+      },
+      [BLOCKS.HEADING_2]: (node, children) => {
+        return (
+          // FIXME: Why does className get cleared on the top level?
+          <div>
+            <h2 className={options.classNames?.h2}>{children}</h2>
+          </div>
+        );
       },
       [BLOCKS.UL_LIST]: (node, children) => {
         return <ul className={options.classNames?.ul}>{children}</ul>;

@@ -3,6 +3,40 @@
 import { Asset, Entry } from 'contentful';
 import { Document } from '@contentful/rich-text-types';
 
+export interface IArticleFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Slug */
+  slug: string;
+
+  /** SEO */
+  seo?: ISeo | undefined;
+
+  /** Title */
+  title: string;
+
+  /** Body */
+  body?: Document | undefined;
+}
+
+export interface IArticle extends Entry<IArticleFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'article';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export interface IBannerFields {
   /** Internal title */
   internalTitle: string;
@@ -47,8 +81,8 @@ export interface IButtonFields {
   /** Button text */
   buttonText: string;
 
-  /** Icon */
-  icon?: Asset | undefined;
+  /** Event Name */
+  eventName?: string | undefined;
 
   /** Variant */
   variant: 'primary' | 'secondary' | 'loud';
@@ -86,9 +120,6 @@ export interface IConfigFields {
 
   /** Settings */
   settings?: ISetting[] | undefined;
-
-  /** Styles */
-  styles: IStyle[];
 
   /** Footer */
   footer?: IFooter | undefined;
@@ -162,7 +193,7 @@ export interface IFeatureFields {
   image: Asset;
 
   /** Image position */
-  imagePosition?: 'right' | 'left' | undefined;
+  imagePosition?: 'right' | 'left' | 'center' | undefined;
 
   /** Ninetailed */
   nt_experiences?: INtExperience[] | undefined;
@@ -284,8 +315,11 @@ export interface INavigationFields {
   /** Internal title */
   internalTitle?: string | undefined;
 
+  /** Logo */
+  logo?: Asset | undefined;
+
   /** Navigation links */
-  navigationLinks: IButton[];
+  navigationLinks: INavigationLink[];
 
   /** Ninetailed */
   nt_experiences?: INtExperience[] | undefined;
@@ -301,6 +335,51 @@ export interface INavigation extends Entry<INavigationFields> {
     contentType: {
       sys: {
         id: 'navigation';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface INavigationLinkFields {
+  /** Internal Name */
+  internalName: string;
+
+  /** Name */
+  name: string;
+
+  /** Icon */
+  icon?:
+    | 'ArrowPathIcon'
+    | 'ChartPieIcon'
+    | 'CursorArrowRaysIcon'
+    | 'FingerPrintIcon'
+    | 'SquaresPlusIcon'
+    | 'PlayCircleIcon'
+    | 'PhoneIcon'
+    | undefined;
+
+  /** URL */
+  url: string;
+
+  /** Links */
+  links?: INavigationLink[] | undefined;
+
+  /** Description */
+  description?: string | undefined;
+}
+
+export interface INavigationLink extends Entry<INavigationLinkFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'navigationLink';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -756,35 +835,8 @@ export interface ISetting extends Entry<ISettingFields> {
   };
 }
 
-export interface IStyleFields {
-  /** Internal Name */
-  name: string;
-
-  /** CSS */
-  css?: string | undefined;
-
-  /** Ninetailed */
-  nt_experiences?: INtExperience[] | undefined;
-}
-
-export interface IStyle extends Entry<IStyleFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: 'style';
-        linkType: 'ContentType';
-        type: 'Link';
-      };
-    };
-  };
-}
-
 export type CONTENT_TYPE =
+  | 'article'
   | 'banner'
   | 'button'
   | 'config'
@@ -794,6 +846,7 @@ export type CONTENT_TYPE =
   | 'hero'
   | 'hubspotForm'
   | 'navigation'
+  | 'navigationLink'
   | 'nt_audience'
   | 'nt_experience'
   | 'nt_mergetag'
@@ -806,8 +859,7 @@ export type CONTENT_TYPE =
   | 'productPolicy'
   | 'sectionsGroup'
   | 'seo'
-  | 'setting'
-  | 'style';
+  | 'setting';
 
 export type LOCALE_CODE = 'en-US';
 
