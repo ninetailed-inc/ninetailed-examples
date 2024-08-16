@@ -6,9 +6,12 @@ html {
   min-height: 100%;
   display: flex;
 }
-body, #__next {
-    display: flex;
+body,
+#__next {
+  display: flex;
 }
-body, #__next, .app {
-    flex-grow: 1;
+body,
+#__next,
+.app {
+  flex-grow: 1;
 }

@@ -20,6 +20,7 @@ export type RenderRichTextOptions = {
   classNames?: {
     ul?: string;
     li?: string;
+    h2?: string;
   };
   renderNode?: RenderNode;
 };
@@ -44,6 +45,14 @@ export const renderRichText = (
           );
         }
         return null;
+      },
+      [BLOCKS.HEADING_2]: (node, children) => {
+        return (
+          // FIXME: Why does className get cleared on the top level?
+          <div>
+            <h2 className={options.classNames?.h2}>{children}</h2>
+          </div>
+        );
       },
       [BLOCKS.UL_LIST]: (node, children) => {
         return <ul className={options.classNames?.ul}>{children}</ul>;

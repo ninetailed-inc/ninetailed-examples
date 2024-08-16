@@ -1,7 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { Button, ButtonVariant } from '@/components/Button';
+import { Button } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { ContentfulImageLoader } from '@/lib/helperfunctions';
 import { IHero } from '@/types/contentful';
@@ -17,25 +16,25 @@ export const Hero = ({ sys, fields }: IHero) => {
   const updatedHero = useContentfulLiveUpdates({ sys, fields }) as IHero;
   const layoutStyles = [
     {
-      direction: 'lg:flex-row',
+      direction: 'xl:flex-row',
       transform: '',
     },
     {
-      direction: 'lg:flex-row-reverse',
-      transform: 'lg:-scale-x-100',
+      direction: 'xl:flex-row-reverse',
+      transform: 'xl:-scale-x-100',
     },
   ];
   return (
-    <div className="bg-white lg:pb-12 hero">
-      <div className="pt-8 sm:pt-12 lg:relative lg:py-6">
+    <div className="bg-white xl:pb-12 hero">
+      <div className="pt-8 sm:pt-12 xl:relative xl:py-6">
         {/* Hero section */}
         <div
           className={classNames(
-            'mx-auto max-w-md px-4 sm:max-w-3xl lg:px-8 lg:max-w-7xl flex flex-col items-center lg:flex-row lg:gap-24',
+            'mx-auto max-w-md px-4 sm:max-w-3xl md:px-8 xl:max-w-7xl flex flex-col items-center xl:gap-24',
             layoutStyles[expFlag].direction
           )}
         >
-          <div className="lg:mt-20 lg:w-1/2">
+          <div className="xl:mt-20 xl:w-1/2">
             <div className="mt-6">
               <RichText
                 {...ContentfulLivePreview.getProps({
@@ -64,16 +63,14 @@ export const Hero = ({ sys, fields }: IHero) => {
 
                 return (
                   <div key={button.sys.id} className="shadow">
-                    <Link passHref href={button.fields.slug} legacyBehavior>
-                      <Button
-                        as="a"
-                        type="button"
-                        variant={button.fields.variant as ButtonVariant}
-                        size="large"
-                      >
-                        {button.fields.buttonText}
-                      </Button>
-                    </Link>
+                    <Button
+                      type="button"
+                      size="large"
+                      {...button.fields}
+                      href={button.fields.slug}
+                    >
+                      {button.fields.buttonText}
+                    </Button>
                   </div>
                 );
               })}
@@ -82,16 +79,16 @@ export const Hero = ({ sys, fields }: IHero) => {
           {/* Image */}
           <div
             className={classNames(
-              'py-12 sm:relative sm:mt-12 sm:pt-16 lg:inset-y-0 lg:right-0 lg:w-1/2',
+              'py-12 sm:relative sm:mt-12 sm:pt-16 xl:inset-y-0 xl:right-0 xl:w-1/2',
               layoutStyles[expFlag].transform
             )}
           >
             <div className="hidden sm:block">
               <div
                 className={classNames(
-                  'absolute inset-y-0 left-1/2  rounded-l-3xl lg:left-80 lg:right-0',
+                  'absolute inset-y-0 left-1/2  rounded-l-3xl xl:left-80 xl:right-0',
                   {
-                    'bg-gray-50 w-screen': expFlag === 0,
+                    'bg-indigo-200 w-screen': expFlag === 0,
                   },
                   {
                     'bg-amber-200 blur-2xl m-20 w-full': expFlag === 1,
@@ -100,7 +97,7 @@ export const Hero = ({ sys, fields }: IHero) => {
               />
               <svg
                 className={classNames(
-                  'absolute top-8 right-1/2 -mr-3 lg:m-0 lg:left-0',
+                  'absolute top-8 right-1/2 -mr-3 xl:m-0 xl:left-0',
                   { hidden: expFlag === 1 }
                 )}
                 width={404}
@@ -142,7 +139,7 @@ export const Hero = ({ sys, fields }: IHero) => {
             </div>
 
             <div
-              className="relative sm:mx-auto lg:pl-12 max-w-full"
+              className="relative sm:mx-auto xl:pl-12 max-w-full"
               {...ContentfulLivePreview.getProps({
                 entryId: updatedHero.sys.id,
                 fieldId: 'image',
@@ -150,6 +147,7 @@ export const Hero = ({ sys, fields }: IHero) => {
             >
               {updatedHero.fields.image.fields?.file.details.image && (
                 <Image
+                  priority={true}
                   loader={ContentfulImageLoader}
                   src={`https:${updatedHero.fields.image.fields.file.url}`}
                   width={
@@ -165,7 +163,7 @@ export const Hero = ({ sys, fields }: IHero) => {
                     590,
                     updatedHero.fields.image.fields.file.details.image.height
                   )}
-                  className="w-full rounded lg:w-auto lg:max-w-none object-cover"
+                  className="w-full rounded xl:w-auto xl:max-w-none object-cover"
                   style={{
                     width:
                       (updatedHero.fields.image.fields.file.details.image

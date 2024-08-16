@@ -191,11 +191,12 @@ export const productInfoQuery = gql`
         }
       }
       requiresSellingPlan
-      variants(first: 10) {
+      variants(first: 1) {
         edges {
           node {
             id
             title
+            sku
             selectedOptions {
               name
               value

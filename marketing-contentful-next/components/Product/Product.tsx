@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { RadioGroup } from '@headlessui/react';
 import { ProductDetails } from '../ProductDetails';
 import { ProductPolicies } from '../ProductPolicies';
 import { flattenConnection, ProductPrice } from '@shopify/hydrogen-react';
 import Image from 'next/image';
-import { ShopifyImageLoader } from '@/lib/helperfunctions';
+import { handleErrors, ShopifyImageLoader } from '@/lib/helperfunctions';
 import classNames from 'classnames';
 import { IPdp } from '@/types/contentful';
 import type { Product as IProduct } from '@shopify/hydrogen-react/storefront-api-types';
 import { useFlag } from '@/lib/experiences';
+import { useNinetailed } from '@ninetailed/experience.js-next';
 
 export const Product = ({
   pdp,
@@ -20,7 +21,22 @@ export const Product = ({
 }) => {
   const productImages = flattenConnection(product.images);
   const productVariants = flattenConnection(product.variants);
-  const [selectedSize, setSelectedSize] = useState(productVariants[2].title);
+  const [selectedSize, setSelectedSize] = useState(productVariants[0].title);
+
+  const { track } = useNinetailed();
+
+  // Track product add
+  const trackAddToCart = handleErrors(
+    async (e: FormEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      const line_item = productVariants[0].sku || product.title || '';
+      console.log(`Tracking added item: ${line_item}`);
+      await track('add_to_cart', {
+        line_item,
+        quantity: 1,
+      });
+    }
+  );
 
   // TODO: Store as metafield or CMS content
   const productRating = 4.2;
@@ -118,56 +134,60 @@ export const Product = ({
               className={`mt-8 lg:col-span-5 ${pdpLayoutStyles[expFlag][0]}`}
             >
               <form>
-                {/* Size picker */}
-                <div className="mt-8">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium text-gray-900">Size</h2>
-                    <button className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                      See sizing chart
-                    </button>
-                  </div>
-
-                  <RadioGroup
-                    value={selectedSize}
-                    onChange={setSelectedSize}
-                    className="mt-2"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Choose a size
-                    </RadioGroup.Label>
-                    <div className="flex gap-3">
-                      {productVariants.map((productVariant) => (
-                        <RadioGroup.Option
-                          key={productVariant.id}
-                          value={productVariant.title}
-                          className={({ active, checked }) =>
-                            classNames(
-                              productVariant.availableForSale
-                                ? 'cursor-pointer focus:outline-none'
-                                : 'cursor-not-allowed opacity-25',
-                              active
-                                ? 'ring-2 ring-indigo-500 ring-offset-2'
-                                : '',
-                              checked
-                                ? 'border-transparent bg-indigo-600 text-white hover:bg-indigo-700'
-                                : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
-                              'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase flex-1'
-                            )
-                          }
-                          disabled={!productVariant.availableForSale}
-                        >
-                          <RadioGroup.Label as="span">
-                            {productVariant.title}
-                          </RadioGroup.Label>
-                        </RadioGroup.Option>
-                      ))}
+                {/* Option picker */}
+                {product.options &&
+                product.options.length >= 0 &&
+                product.options[0].name !== 'Title' ? (
+                  <div className="mt-8">
+                    <div className="flex items-center justify-between">
+                      <h2 className="text-sm font-medium text-gray-900">
+                        {product.options[0].name}
+                      </h2>
                     </div>
-                  </RadioGroup>
-                </div>
+
+                    <RadioGroup
+                      value={selectedSize}
+                      onChange={setSelectedSize}
+                      className="mt-2"
+                    >
+                      <RadioGroup.Label className="sr-only">
+                        Choose a {product.options[0].name}
+                      </RadioGroup.Label>
+                      <div className="flex gap-3">
+                        {productVariants.map((productVariant) => (
+                          <RadioGroup.Option
+                            key={productVariant.id}
+                            value={productVariant.title}
+                            className={({ active, checked }) =>
+                              classNames(
+                                productVariant.availableForSale
+                                  ? 'cursor-pointer focus:outline-none'
+                                  : 'cursor-not-allowed opacity-25',
+                                active
+                                  ? 'ring-2 ring-indigo-500 ring-offset-2'
+                                  : '',
+                                checked
+                                  ? 'border-transparent bg-indigo-600 text-white hover:bg-indigo-700'
+                                  : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
+                                'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase flex-1'
+                              )
+                            }
+                            disabled={!productVariant.availableForSale}
+                          >
+                            <RadioGroup.Label as="span">
+                              {productVariant.title}
+                            </RadioGroup.Label>
+                          </RadioGroup.Option>
+                        ))}
+                      </div>
+                    </RadioGroup>
+                  </div>
+                ) : null}
 
                 <button
                   type="submit"
                   className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  onClick={trackAddToCart}
                 >
                   Add to cart
                 </button>

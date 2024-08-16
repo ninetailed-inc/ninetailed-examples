@@ -105,7 +105,7 @@ export const HubspotForm = ({ fields }: IHubspotForm) => {
   };
 
   return (
-    <div className="mx-auto max-w-md -mt-10 px-4 sm:max-w-3xl sm:px-6 lg:px-12 lg:max-w-7xl">
+    <div className="mx-auto max-w-md -mt-10 px-4 sm:max-w-3xl sm:px-6 lg:px-12 lg:max-w-7xl mb-10 lg:mb-20">
       {isSubmitSuccessful && (
         <p className="p-2 w-full text-center bg-green-200 rounded border-green-400 border-2">
           Thanks for your submission!
@@ -187,7 +187,7 @@ export const HubspotForm = ({ fields }: IHubspotForm) => {
               <option value="51-200">51-200</option>
               <option value="201-500">201-500</option>
               <option value="501-1000">501-1000</option>
-              <option value="1000-2000">1000-2000</option>
+              <option value="1001-2000">1001-2000</option>
               <option value="more_than_2000">More than 2000</option>
             </select>
             {errors.companysize && (
