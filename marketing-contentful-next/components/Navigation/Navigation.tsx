@@ -54,14 +54,14 @@ export function Navigation({ fields }: INavigation) {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5 relative w-[150px] h-[60px]">
             {fields.logo?.fields.file.url ? (
               <Image
                 loader={ContentfulImageLoader}
                 src={`https:${fields.logo?.fields.file.url}`}
-                width={150}
-                height={50}
+                fill={true}
                 alt="Logo"
+                className="!w-auto"
               />
             ) : (
               <Image src={Logo as string} width={175} height={57} alt="Logo" />
