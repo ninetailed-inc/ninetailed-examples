@@ -2,7 +2,7 @@
 
 ![](docs/marketing-contentful-next.png)
 
-The illustrated website example demonstrates the Ninetailed content personalization integration for Contentful using Next.js as the web framework.
+> ℹ️ **INFO:** An 🚧 experimental 🚧 demo using Vercel Edge Middleware and React Server Components to render all Ninetailed Experience content server-side.
 
 - [Live Demo](#live-demo)
 - [Deploy Your Own Playground Without Code](#deploy-your-own-playground-without-code)

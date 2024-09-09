@@ -2,7 +2,7 @@
 
 ![](docs/marketing-contentful-next.png)
 
-The illustrated website example demonstrates the Ninetailed content personalization integration for Contentful using Next.js as the web framework.
+> ℹ️ **INFO:** A similar demo to `marketing-contentful-next`, but showcases using Ninetailed with the Next.js App router by converting all Ninetailed components to client components using `use client`.
 
 - [Live Demo](#live-demo)
 - [Deploy Your Own Playground Without Code](#deploy-your-own-playground-without-code)

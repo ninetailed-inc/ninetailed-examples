@@ -2,7 +2,7 @@
 
 ![](docs/marketing-contentful-next.png)
 
-The illustrated website example demonstrates the Ninetailed content personalization integration for Contentful using Next.js as the web framework.
+> ℹ️ **INFO:** This is Ninetailed's flagship demo, deployed to <https://b2b.demo.ninetailed.io>. It is a statically generated site built on the Next.js Pages router with Ninetailed operating client-side.
 
 - [Live Demo](#live-demo)
 - [Deploy Your Own Playground Without Code](#deploy-your-own-playground-without-code)
