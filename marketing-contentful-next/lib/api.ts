@@ -141,13 +141,13 @@ export async function getGlobalConfig(QueryParams: IQueryParams) {
 }
 
 // For the preview widget
-export async function getAllExperiences() {
+export async function getAllExperiences({ preview }: { preview: boolean }) {
   const query = {
     content_type: 'nt_experience',
     include: 1,
   };
 
-  const client = getClient(true);
+  const client = getClient(preview);
 
   const entries = await client.getEntries(query);
   const experiences = entries.items as ExperienceEntryLike[];
@@ -159,12 +159,12 @@ export async function getAllExperiences() {
   return mappedExperiences;
 }
 
-export async function getAllAudiences() {
+export async function getAllAudiences({ preview }: { preview: boolean }) {
   const query = {
     content_type: 'nt_audience',
   };
 
-  const client = getClient(true);
+  const client = getClient(preview);
 
   const entries = await client.getEntries(query);
   const audiences = entries.items as AudienceEntryLike[];

@@ -49,8 +49,8 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
       slug: slug === '' ? '/' : slug,
     }),
     getGlobalConfig({ preview: draftMode }),
-    getAllExperiences(),
-    getAllAudiences(),
+    getAllExperiences({ preview: draftMode }),
+    getAllAudiences({ preview: draftMode }),
   ]);
   return {
     props: {
