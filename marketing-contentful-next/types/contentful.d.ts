@@ -81,8 +81,14 @@ export interface IButtonFields {
   /** Button text */
   buttonText: string;
 
+  /** Event Type */
+  eventType?: 'track' | 'identify' | undefined;
+
   /** Event Name */
   eventName?: string | undefined;
+
+  /** Event Payload */
+  eventPayload?: Record<string, any> | undefined;
 
   /** Variant */
   variant: 'primary' | 'secondary' | 'loud';
@@ -319,7 +325,7 @@ export interface INavigationFields {
   logo?: Asset | undefined;
 
   /** Navigation links */
-  navigationLinks: INavigationLink[];
+  navigationLinks: INavLink[];
 
   /** Ninetailed */
   nt_experiences?: INtExperience[] | undefined;
@@ -342,7 +348,7 @@ export interface INavigation extends Entry<INavigationFields> {
   };
 }
 
-export interface INavigationLinkFields {
+export interface INavLinkFields {
   /** Internal Name */
   internalName: string;
 
@@ -364,13 +370,13 @@ export interface INavigationLinkFields {
   url: string;
 
   /** Links */
-  links?: INavigationLink[] | undefined;
+  links?: INavLink[] | undefined;
 
   /** Description */
   description?: string | undefined;
 }
 
-export interface INavigationLink extends Entry<INavigationLinkFields> {
+export interface INavLink extends Entry<INavLinkFields> {
   sys: {
     id: string;
     type: string;
@@ -379,7 +385,7 @@ export interface INavigationLink extends Entry<INavigationLinkFields> {
     locale: string;
     contentType: {
       sys: {
-        id: 'navigationLink';
+        id: 'navLink';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -662,6 +668,9 @@ export interface IProductDetailFields {
 
   /** Body */
   body?: Document | undefined;
+
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
 }
 
 export interface IProductDetail extends Entry<IProductDetailFields> {
@@ -687,6 +696,9 @@ export interface IProductInfoBlockFields {
 
   /** Copy */
   copy?: Document | undefined;
+
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
 }
 
 export interface IProductInfoBlock extends Entry<IProductInfoBlockFields> {
@@ -718,6 +730,9 @@ export interface IProductPolicyFields {
 
   /** Description */
   description?: Document | undefined;
+
+  /** Ninetailed */
+  nt_experiences?: INtExperience[] | undefined;
 }
 
 export interface IProductPolicy extends Entry<IProductPolicyFields> {
@@ -846,7 +861,7 @@ export type CONTENT_TYPE =
   | 'hero'
   | 'hubspotForm'
   | 'navigation'
-  | 'navigationLink'
+  | 'navLink'
   | 'nt_audience'
   | 'nt_experience'
   | 'nt_mergetag'

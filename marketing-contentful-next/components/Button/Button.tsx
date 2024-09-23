@@ -26,7 +26,9 @@ export interface ButtonProps {
   as?: React.ElementType | typeof Link;
   children: string;
   disabled?: boolean;
+  eventType?: IButtonFields['eventType'];
   eventName?: IButtonFields['eventName'];
+  eventPayload?: IButtonFields['eventPayload'];
   href?: string;
   size: ButtonSize;
   type: ButtonType;
@@ -39,22 +41,44 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
       as: Component = 'button',
       size: size = 'large',
       children,
+      eventType,
       eventName,
+      eventPayload,
       disabled,
       href,
       variant,
       type,
     } = props;
 
-    const { track } = useNinetailed();
+    const { track, identify } = useNinetailed();
 
     const trackButtonClick = handleErrors(async (e: Event) => {
-      if (eventName) {
+      if (eventType) {
         if (type === 'submit') {
           e.preventDefault();
         }
-        await track(eventName);
-        console.log(`Performed Ninetailed event track:${eventName}`);
+        switch (eventType) {
+          case 'track':
+            if (eventName) {
+              await track(eventName, eventPayload);
+              console.log(
+                `Sent Ninetailed track event with event name ${eventName} and properties:`,
+                `${JSON.stringify(eventPayload, null, 2)}`
+              );
+            } else {
+              ('No event name provided, skipped track call');
+            }
+            break;
+          case 'identify':
+            await identify(eventName ?? '', eventPayload);
+            console.log(
+              `Sent Ninetailed identify event with ${
+                eventName ? `userId ${eventName}` : 'no userId'
+              } and traits:`,
+              `${JSON.stringify(eventPayload, null, 2)}`
+            );
+            break;
+        }
       } else {
         console.log('Button without event clicked');
       }

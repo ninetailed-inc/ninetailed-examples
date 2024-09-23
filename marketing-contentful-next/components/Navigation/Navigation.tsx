@@ -60,7 +60,9 @@ export function Navigation({ fields }: INavigation) {
                 loader={ContentfulImageLoader}
                 src={`https:${fields.logo?.fields.file.url}`}
                 fill={true}
+                sizes="150px"
                 alt="Logo"
+                priority
                 className="!w-auto"
               />
             ) : (
