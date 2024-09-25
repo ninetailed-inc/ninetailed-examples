@@ -1,10 +1,10 @@
 import { BlockRenderer } from '../Renderer';
-import { IProductPolicy } from '@/types/contentful';
+import type { TypeProductPolicyWithoutUnresolvableLinksResponse } from '@/types/TypeProductPolicy';
 
 export const ProductPolicies = ({
   policies,
 }: {
-  policies: IProductPolicy[] | undefined;
+  policies: TypeProductPolicyWithoutUnresolvableLinksResponse[] | undefined;
 }) => {
   if (!policies) {
     return null;

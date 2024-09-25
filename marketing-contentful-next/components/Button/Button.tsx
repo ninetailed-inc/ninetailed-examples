@@ -1,15 +1,15 @@
 import React from 'react';
 
 import { handleErrors } from '@/lib/helperfunctions';
-import { IButtonFields } from '@/types/contentful';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 import Link from 'next/link';
 
+import type { TypeButtonWithoutUnresolvableLinksResponse } from '@/types/TypeButton';
+
 export type ButtonType = 'button' | 'submit' | 'reset';
-
 export type ButtonSize = 'small' | 'large';
-
-export type ButtonVariant = IButtonFields['variant'];
+export type ButtonVariant =
+  TypeButtonWithoutUnresolvableLinksResponse['fields']['variant'];
 
 const variantMap = {
   primary: 'bg-indigo-600 text-white',
@@ -26,7 +26,7 @@ export interface ButtonProps {
   as?: React.ElementType | typeof Link;
   children: string;
   disabled?: boolean;
-  eventName?: IButtonFields['eventName'];
+  eventName?: TypeButtonWithoutUnresolvableLinksResponse['fields']['eventName'];
   href?: string;
   size: ButtonSize;
   type: ButtonType;

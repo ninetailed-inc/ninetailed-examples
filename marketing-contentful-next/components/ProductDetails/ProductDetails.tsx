@@ -1,10 +1,10 @@
-import { IProductDetail } from '@/types/contentful';
+import { TypeProductDetailWithoutUnresolvableLinksResponse } from '@/types/TypeProductDetail';
 import { BlockRenderer } from '../Renderer';
 
 export const ProductDetails = ({
   details,
 }: {
-  details: IProductDetail[] | undefined;
+  details: TypeProductDetailWithoutUnresolvableLinksResponse[] | undefined;
 }) => {
   if (!details) {
     return null;

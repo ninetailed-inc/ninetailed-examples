@@ -3,17 +3,16 @@ import Image from 'next/image';
 import { Button } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 import { ContentfulImageLoader } from '@/lib/helperfunctions';
-import { IHero } from '@/types/contentful';
 
 import { ContentfulLivePreview } from '@contentful/live-preview';
-import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
+// import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 import classNames from 'classnames';
 import { useFlag } from '@/lib/experiences';
+import type { TypeHeroWithoutUnresolvableLinksResponse } from '@/types/TypeHero';
 
-export const Hero = ({ sys, fields }: IHero) => {
+export const Hero = (hero: TypeHeroWithoutUnresolvableLinksResponse) => {
   const expFlag = useFlag('heroLayout') || 0;
 
-  const updatedHero = useContentfulLiveUpdates({ sys, fields }) as IHero;
   const layoutStyles = [
     {
       direction: 'xl:flex-row',
@@ -38,26 +37,26 @@ export const Hero = ({ sys, fields }: IHero) => {
             <div className="mt-6">
               <RichText
                 {...ContentfulLivePreview.getProps({
-                  entryId: updatedHero.sys.id,
+                  entryId: hero.sys.id,
                   fieldId: 'headline',
                 })}
                 className={classNames(
                   'font-extrabold text-gray-900 text-5xl tracking-tight hero__headline'
                 )}
-                richTextDocument={updatedHero.fields.headline}
+                richTextDocument={hero.fields.headline}
               />
               <RichText
                 {...ContentfulLivePreview.getProps({
-                  entryId: updatedHero.sys.id,
+                  entryId: hero.sys.id,
                   fieldId: 'subline',
                 })}
                 className="mt-6 text-xl text-gray-500"
-                richTextDocument={updatedHero.fields.subline}
+                richTextDocument={hero.fields.subline}
               />
             </div>
             <div className="mt-5 mx-auto flex flex-col sm:flex-row justify-start md:mt-8 space-y-5 sm:w-full sm:space-x-5 sm:space-y-0">
-              {updatedHero.fields.buttons?.map((button) => {
-                if (!button.fields.slug) {
+              {hero.fields.buttons?.map((button) => {
+                if (!button || !button.fields.slug) {
                   return null;
                 }
 
@@ -141,41 +140,38 @@ export const Hero = ({ sys, fields }: IHero) => {
             <div
               className="relative sm:mx-auto xl:pl-12 max-w-full"
               {...ContentfulLivePreview.getProps({
-                entryId: updatedHero.sys.id,
+                entryId: hero.sys.id,
                 fieldId: 'image',
               })}
             >
-              {updatedHero.fields.image.fields?.file.details.image && (
+              {hero.fields?.image?.fields?.file?.details.image && (
                 <Image
                   priority={true}
                   loader={ContentfulImageLoader}
-                  src={`https:${updatedHero.fields.image.fields.file.url}`}
+                  src={`https:${hero.fields.image.fields.file.url}`}
                   width={
-                    (updatedHero.fields.image.fields.file.details.image.width *
+                    (hero.fields.image.fields.file.details.image.width *
                       Math.min(
                         590,
-                        updatedHero.fields.image.fields.file.details.image
-                          .height
+                        hero.fields.image.fields.file.details.image.height
                       )) /
-                    updatedHero.fields.image.fields.file.details.image.height
+                    hero.fields.image.fields.file.details.image.height
                   }
                   height={Math.min(
                     590,
-                    updatedHero.fields.image.fields.file.details.image.height
+                    hero.fields.image.fields.file.details.image.height
                   )}
                   className="w-full rounded xl:w-auto xl:max-w-none object-cover"
                   style={{
                     width:
-                      (updatedHero.fields.image.fields.file.details.image
-                        .width *
+                      (hero.fields.image.fields.file.details.image.width *
                         Math.min(
                           590,
-                          updatedHero.fields.image.fields.file.details.image
-                            .height
+                          hero.fields.image.fields.file.details.image.height
                         )) /
-                      updatedHero.fields.image.fields.file.details.image.height,
+                      hero.fields.image.fields.file.details.image.height,
                   }}
-                  alt={updatedHero.fields.image.fields.description || ''}
+                  alt={hero.fields.image.fields.description || ''}
                 />
               )}
             </div>

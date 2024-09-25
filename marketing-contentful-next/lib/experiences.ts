@@ -30,10 +30,12 @@ export const parseExperiences = (entry: singularBlock) => {
 };
 
 export const hoistId = (entry: singularBlock) => {
-  return {
-    ...entry,
-    id: entry.sys.id,
-  };
+  if (entry) {
+    return {
+      ...entry,
+      id: entry.sys.id,
+    };
+  }
 };
 
 // Feature flagging example
