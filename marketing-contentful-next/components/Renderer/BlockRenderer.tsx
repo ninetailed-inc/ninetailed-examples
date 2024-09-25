@@ -75,11 +75,7 @@ const ComponentRenderer = (props: Component) => {
   return <Component {...props} />;
 };
 
-export const BlockRenderer = ({
-  block,
-}: {
-  block: singularOrArrayBlock | undefined[];
-}) => {
+export const BlockRenderer = ({ block }: { block: singularOrArrayBlock }) => {
   if (Array.isArray(block)) {
     return (
       <div>

@@ -4,7 +4,9 @@ import type { TypeProductPolicyWithoutUnresolvableLinksResponse } from '@/types/
 export const ProductPolicies = ({
   policies,
 }: {
-  policies: TypeProductPolicyWithoutUnresolvableLinksResponse[] | undefined;
+  policies:
+    | (TypeProductPolicyWithoutUnresolvableLinksResponse | undefined)[]
+    | undefined;
 }) => {
   if (!policies) {
     return null;
@@ -17,7 +19,10 @@ export const ProductPolicies = ({
         </h2>
 
         <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-          {policies?.map((policy) => {
+          {policies.map((policy) => {
+            if (!policy) {
+              return null;
+            }
             return <BlockRenderer block={policy} key={policy.sys.id} />;
           })}
         </dl>

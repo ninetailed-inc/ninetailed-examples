@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "check-types": "tsc --noemit",
     "lint": "eslint . ",
     "lint:fix": "eslint . --fix",
     "nextlint": "next lint",

@@ -89,6 +89,8 @@ export default async function handler(
 
   console.log(`lytics_uid`, userId);
 
+  // eslint-disable-next-line
+  // @ts-ignore
   const ninetailedResponse = await apiClient.sendIdentifyEvent(userId, traits);
 
   console.log(`9t-response`, ninetailedResponse);
