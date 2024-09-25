@@ -1,9 +1,12 @@
 import React from 'react';
 import { PricingPlan } from '@/components/PricingPlan';
-import { IPricingTable } from '@/types/contentful';
 import { RichText } from '../RichText/RichText';
+import { TypePricingTableWithoutUnresolvableLinksResponse } from '@/types/TypePricingTable';
 
-export const PricingTable = ({ fields }: IPricingTable) => {
+export const PricingTable = (
+  pricingTable: TypePricingTableWithoutUnresolvableLinksResponse
+) => {
+  const { fields } = pricingTable;
   return (
     <div className="max-w-7xl mx-auto py-24 px-4 bg-white sm:px-6 lg:px-8">
       <RichText
@@ -18,6 +21,9 @@ export const PricingTable = ({ fields }: IPricingTable) => {
       {/* Tiers */}
       <div className="mt-24 space-y-12 lg:space-y-0 flex flex-col lg:flex-row lg:gap-x-8">
         {fields.pricingPlans.map((plan) => {
+          if (!plan) {
+            return null;
+          }
           return (
             <div key={plan.sys.id} className="flex-1">
               <PricingPlan {...plan} />

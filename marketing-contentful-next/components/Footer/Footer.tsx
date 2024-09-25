@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 
 import { RichText } from '@/components/RichText';
-import { IFooter } from '@/types/contentful';
+import type { TypeFooterWithoutUnresolvableLinksResponse } from '@/types/TypeFooter';
 
-export const Footer = ({ fields }: IFooter) => {
+export const Footer = (footer: TypeFooterWithoutUnresolvableLinksResponse) => {
+  const { fields } = footer;
   const { reset } = useNinetailed();
 
   return (
@@ -16,6 +17,9 @@ export const Footer = ({ fields }: IFooter) => {
           aria-label="Footer"
         >
           {fields.footerLinks?.map((link) => {
+            if (!link) {
+              return null;
+            }
             if (!link.fields.slug) {
               return (
                 <div key={link.sys.id} className="px-5 py-2">

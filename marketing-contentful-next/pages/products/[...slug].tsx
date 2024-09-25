@@ -17,17 +17,18 @@ import {
   productInfoQuery,
 } from '@/lib/shopifyApi';
 
-import { IConfig, IPdp } from '@/types/contentful';
 import type { Product as IProduct } from '@shopify/hydrogen-react/storefront-api-types';
 import { request } from 'graphql-request';
+import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
+import { TypePdpWithoutUnresolvableLinksResponse } from '@/types/TypePdp';
 
 const Pdp = ({
   pdp,
   config,
   product,
 }: {
-  pdp: IPdp;
-  config: IConfig;
+  pdp: TypePdpWithoutUnresolvableLinksResponse;
+  config: TypeConfigWithoutUnresolvableLinksResponse;
   product: Partial<IProduct>;
 }) => {
   if (!pdp || !product) {
@@ -65,8 +66,8 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
       slug,
     }),
     getGlobalConfig({ preview: draftMode }),
-    getAllExperiences(),
-    getAllAudiences(),
+    getAllExperiences({ preview: draftMode }),
+    getAllAudiences({ preview: draftMode }),
   ]);
 
   const productInfoQueryVariables = {

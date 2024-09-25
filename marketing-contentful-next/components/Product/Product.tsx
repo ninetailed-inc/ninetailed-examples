@@ -7,16 +7,16 @@ import { flattenConnection, ProductPrice } from '@shopify/hydrogen-react';
 import Image from 'next/image';
 import { handleErrors, ShopifyImageLoader } from '@/lib/helperfunctions';
 import classNames from 'classnames';
-import { IPdp } from '@/types/contentful';
 import type { Product as IProduct } from '@shopify/hydrogen-react/storefront-api-types';
 import { useFlag } from '@/lib/experiences';
 import { useNinetailed } from '@ninetailed/experience.js-next';
+import { TypePdpWithoutUnresolvableLinksResponse } from '@/types/TypePdp';
 
 export const Product = ({
   pdp,
   product,
 }: {
-  pdp: IPdp;
+  pdp: TypePdpWithoutUnresolvableLinksResponse;
   product: Partial<IProduct>;
 }) => {
   const productImages = flattenConnection(product.images);

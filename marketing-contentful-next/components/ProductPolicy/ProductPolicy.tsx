@@ -1,4 +1,3 @@
-import { IProductPolicy } from '@/types/contentful';
 import { RichText } from '../RichText';
 
 import {
@@ -6,12 +5,17 @@ import {
   GlobeAmericasIcon,
 } from '@heroicons/react/24/outline';
 
+import type { TypeProductPolicyWithoutUnresolvableLinksResponse } from '@/types/TypeProductPolicy';
+
 const policyIcons = {
   Shipping: GlobeAmericasIcon,
   Loyalty: CurrencyDollarIcon,
 };
 
-export const ProductPolicy = ({ fields }: IProductPolicy) => {
+export const ProductPolicy = (
+  productPolicy: TypeProductPolicyWithoutUnresolvableLinksResponse
+) => {
+  const { fields } = productPolicy;
   const IconElement = policyIcons[fields.policyType];
   return (
     <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">

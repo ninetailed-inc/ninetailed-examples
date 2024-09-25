@@ -4,11 +4,14 @@ import { RichText } from '@/components/RichText';
 import { Button } from '@/components/Button';
 import { ContentfulImageLoader } from '@/lib/helperfunctions';
 
-import { IFeature } from '@/types/contentful';
-
 import classNames from 'classnames';
 
-export const Feature = ({ fields }: IFeature) => {
+import type { TypeFeatureWithoutUnresolvableLinksResponse } from '@/types/TypeFeature';
+
+export const Feature = (
+  feature: TypeFeatureWithoutUnresolvableLinksResponse
+) => {
+  const { fields } = feature;
   return (
     <div className="relative max-w-xl mx-auto lg:max-w-7xl px-4 sm:max-w-3xl sm:px-6 sm:py-6 lg:px-12">
       <div
@@ -39,7 +42,7 @@ export const Feature = ({ fields }: IFeature) => {
               fields.imagePosition == 'center' ? 'justify-center' : ''
             }`}
           >
-            {fields.button && fields.button[0].fields.slug && (
+            {fields.button && fields.button[0]?.fields.slug && (
               <div>
                 <Button
                   type="button"
@@ -88,7 +91,7 @@ export const Feature = ({ fields }: IFeature) => {
               fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)"
             />
           </svg>
-          {fields.image.fields?.file.details.image && (
+          {fields.image?.fields?.file?.details.image && (
             <Image
               loader={ContentfulImageLoader}
               src={`https:${fields.image.fields.file.url}`}

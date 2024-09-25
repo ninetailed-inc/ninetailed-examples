@@ -15,7 +15,6 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 import Image from 'next/image';
-import { INavigation } from '@/types/contentful';
 import { ContentfulImageLoader } from '@/lib/helperfunctions';
 import Logo from '@/public/logo.svg';
 import classNames from 'classnames';
@@ -23,7 +22,13 @@ import { useNinetailed } from '@ninetailed/experience.js-next';
 import { handleErrors } from '@/lib/helperfunctions';
 import Link from 'next/link';
 
-export function Navigation({ fields }: INavigation) {
+import type { TypeNavigationWithoutUnresolvableLinksResponse } from '@/types/TypeNavigation';
+
+export function Navigation(
+  navigation: TypeNavigationWithoutUnresolvableLinksResponse
+) {
+  const { fields } = navigation;
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loggingIn, setLoggingIn] = useState<boolean>(false);
   const { identify } = useNinetailed();
@@ -55,7 +60,7 @@ export function Navigation({ fields }: INavigation) {
       >
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 relative w-[150px] h-[60px]">
-            {fields.logo?.fields.file.url ? (
+            {fields.logo?.fields.file?.url ? (
               <Image
                 loader={ContentfulImageLoader}
                 src={`https:${fields.logo?.fields.file.url}`}
@@ -82,6 +87,9 @@ export function Navigation({ fields }: INavigation) {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12 lg:flex-wrap">
           {fields.navigationLinks.map((navLink) => {
+            if (!navLink) {
+              return null;
+            }
             if (navLink.fields.links?.length) {
               return (
                 <Popover className="relative" key={navLink.fields.name}>
@@ -104,27 +112,34 @@ export function Navigation({ fields }: INavigation) {
                   >
                     <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                       <div className="p-4">
-                        {navLink.fields.links.map((link) => (
-                          <div
-                            key={link.fields.name}
-                            className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
-                          >
-                            <div className="flex-auto">
-                              <Link
-                                href={link.fields.url}
-                                className="block font-semibold text-gray-900"
+                        {navLink.fields.links.map((link) => {
+                          if (!link) {
+                            return null;
+                          }
+                          {
+                            return (
+                              <div
+                                key={link.fields.name}
+                                className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                               >
-                                {link.fields.name}
-                                <span className="absolute inset-0" />
-                              </Link>
-                              {link.fields.description && (
-                                <p className="mt-1 text-gray-600">
-                                  {link.fields.description}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        ))}
+                                <div className="flex-auto">
+                                  <Link
+                                    href={link.fields.url}
+                                    className="block font-semibold text-gray-900"
+                                  >
+                                    {link.fields.name}
+                                    <span className="absolute inset-0" />
+                                  </Link>
+                                  {link.fields.description && (
+                                    <p className="mt-1 text-gray-600">
+                                      {link.fields.description}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          }
+                        })}
                       </div>
                     </PopoverPanel>
                   </Transition>
@@ -170,7 +185,7 @@ export function Navigation({ fields }: INavigation) {
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Ninetailed</span>
-              {fields.logo?.fields.file.url ? (
+              {fields.logo?.fields.file?.url ? (
                 <Image
                   loader={ContentfulImageLoader}
                   src={`https:${fields.logo?.fields.file.url}`}
@@ -200,6 +215,9 @@ export function Navigation({ fields }: INavigation) {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 {fields.navigationLinks.map((navLink) => {
+                  if (!navLink) {
+                    return null;
+                  }
                   if (navLink.fields.links?.length) {
                     return (
                       <Disclosure
@@ -221,16 +239,21 @@ export function Navigation({ fields }: INavigation) {
                             </DisclosureButton>
                             <DisclosurePanel className="mt-2 space-y-2">
                               {navLink.fields.links &&
-                                navLink.fields.links.map((link) => (
-                                  <DisclosureButton
-                                    key={link.fields.name}
-                                    as="a"
-                                    href={link.fields.url}
-                                    className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                  >
-                                    {link.fields.name}
-                                  </DisclosureButton>
-                                ))}
+                                navLink.fields.links.map((link) => {
+                                  if (!link) {
+                                    return;
+                                  }
+                                  return (
+                                    <DisclosureButton
+                                      key={link.fields.name}
+                                      as="a"
+                                      href={link.fields.url}
+                                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                    >
+                                      {link.fields.name}
+                                    </DisclosureButton>
+                                  );
+                                })}
                             </DisclosurePanel>
                           </>
                         )}

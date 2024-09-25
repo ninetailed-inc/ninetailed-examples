@@ -3,12 +3,13 @@ import Link from 'next/link';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 
 import { RichText } from '@/components/RichText';
-import { IBanner } from '@/types/contentful';
+import type { TypeBannerWithoutUnresolvableLinksResponse } from '@/types/TypeBanner';
 import classNames from 'classnames';
 
 export type Handler = () => void;
 
-export const Banner = ({ fields }: IBanner) => {
+export const Banner = (banner: TypeBannerWithoutUnresolvableLinksResponse) => {
+  const { fields } = banner;
   const [show, setShow] = React.useState<boolean>(true);
 
   const handleCloseBanner: Handler = () => {

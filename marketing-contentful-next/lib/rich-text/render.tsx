@@ -6,11 +6,10 @@ import {
 } from '@contentful/rich-text-react-renderer';
 import { MergeTag } from '@ninetailed/experience.js-next';
 
-import { INtMergetag } from '@/types/contentful';
-
 import React from 'react';
+import { TypeNt_mergetagWithoutUnresolvableLinksResponse } from '@/types/TypeNt_mergetag';
 
-export const isRichText = (x: Document | unknown): x is Document => {
+export const isRichText = (x: unknown): x is Document => {
   return ['data', 'content', 'nodeType'].every((prop) => {
     return has(x, prop);
   });
@@ -25,8 +24,13 @@ export type RenderRichTextOptions = {
   renderNode?: RenderNode;
 };
 
-function isMergeTag(nodeTarget: unknown): nodeTarget is INtMergetag {
-  return (nodeTarget as INtMergetag).sys.contentType.sys.id === 'nt_mergetag';
+function isMergeTag(
+  nodeTarget: unknown
+): nodeTarget is TypeNt_mergetagWithoutUnresolvableLinksResponse {
+  return (
+    (nodeTarget as TypeNt_mergetagWithoutUnresolvableLinksResponse).sys
+      .contentType.sys.id === 'nt_mergetag'
+  );
 }
 
 export const renderRichText = (

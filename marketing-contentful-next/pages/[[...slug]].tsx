@@ -10,9 +10,16 @@ import {
   getGlobalConfig,
   getAllAudiences,
 } from '@/lib/api';
-import { IConfig, IPage } from '@/types/contentful';
+import { TypePageWithoutUnresolvableLinksResponse } from '@/types/TypePage';
+import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
 
-const Page = ({ page, config }: { page: IPage; config: IConfig }) => {
+const Page = ({
+  page,
+  config,
+}: {
+  page: TypePageWithoutUnresolvableLinksResponse;
+  config: TypeConfigWithoutUnresolvableLinksResponse;
+}) => {
   if (!page) {
     return null;
   }

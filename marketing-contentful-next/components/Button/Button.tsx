@@ -1,15 +1,15 @@
 import React from 'react';
 
 import { handleErrors } from '@/lib/helperfunctions';
-import { IButtonFields } from '@/types/contentful';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 import Link from 'next/link';
 
+import type { TypeButtonWithoutUnresolvableLinksResponse } from '@/types/TypeButton';
+
 export type ButtonType = 'button' | 'submit' | 'reset';
-
 export type ButtonSize = 'small' | 'large';
-
-export type ButtonVariant = IButtonFields['variant'];
+export type ButtonVariant =
+  TypeButtonWithoutUnresolvableLinksResponse['fields']['variant'];
 
 const variantMap = {
   primary: 'bg-indigo-600 text-white',
@@ -26,9 +26,9 @@ export interface ButtonProps {
   as?: React.ElementType | typeof Link;
   children: string;
   disabled?: boolean;
-  eventType?: IButtonFields['eventType'];
-  eventName?: IButtonFields['eventName'];
-  eventPayload?: IButtonFields['eventPayload'];
+  eventType?: TypeButtonWithoutUnresolvableLinksResponse['fields']['eventType'];
+  eventName?: TypeButtonWithoutUnresolvableLinksResponse['fields']['eventName'];
+  eventPayload?: TypeButtonWithoutUnresolvableLinksResponse['fields']['eventPayload'];
   href?: string;
   size: ButtonSize;
   type: ButtonType;
@@ -60,17 +60,29 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
         switch (eventType) {
           case 'track':
             if (eventName) {
-              await track(eventName, eventPayload);
+              await track(
+                eventName,
+                (eventPayload as Record<
+                  PropertyKey,
+                  string | number | (string | number)[]
+                >) ?? {}
+              );
               console.log(
                 `Sent Ninetailed track event with event name ${eventName} and properties:`,
                 `${JSON.stringify(eventPayload, null, 2)}`
               );
             } else {
-              ('No event name provided, skipped track call');
+              console.log('No event name provided, skipped track call');
             }
             break;
           case 'identify':
-            await identify(eventName ?? '', eventPayload);
+            await identify(
+              eventName ?? '',
+              (eventPayload as Record<
+                PropertyKey,
+                string | number | (string | number)[]
+              >) ?? {}
+            );
             console.log(
               `Sent Ninetailed identify event with ${
                 eventName ? `userId ${eventName}` : 'no userId'

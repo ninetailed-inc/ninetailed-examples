@@ -16,22 +16,22 @@ import { ProductDetail } from '@/components/ProductDetail';
 import { ProductPolicy } from '@/components/ProductPolicy';
 import { SectionsGroup } from '@/components/SectionsGroup';
 
-import {
-  IBanner,
-  ICta,
-  IFooter,
-  IHero,
-  IHubspotForm,
-  INavigation,
-  IPricingPlan,
-  IPricingTable,
-  IProductDetail,
-  IProductPolicy,
-  ISectionsGroup,
-} from '@/types/contentful';
-
 import { ComponentContentTypes } from '@/lib/constants';
 import { parseExperiences, singularOrArrayBlock } from '@/lib/experiences';
+
+import type {
+  TypeBannerWithoutUnresolvableLinksResponse,
+  TypeCtaWithoutUnresolvableLinksResponse,
+  TypeFooterWithoutUnresolvableLinksResponse,
+  TypeHeroWithoutUnresolvableLinksResponse,
+  TypeHubspotFormWithoutUnresolvableLinksResponse,
+  TypeNavigationWithoutUnresolvableLinksResponse,
+  TypePricingPlanWithoutUnresolvableLinksResponse,
+  TypePricingTableWithoutUnresolvableLinksResponse,
+  TypeProductDetailWithoutUnresolvableLinksResponse,
+  TypeProductPolicyWithoutUnresolvableLinksResponse,
+  TypeSectionsGroupWithoutUnresolvableLinksResponse,
+} from '../../types';
 
 const ContentTypeMap = {
   [ComponentContentTypes.Banner]: Banner,
@@ -49,17 +49,17 @@ const ContentTypeMap = {
 };
 
 type Component =
-  | IBanner
-  | ICta
-  | IFooter
-  | IHero
-  | IHubspotForm
-  | INavigation
-  | IPricingPlan
-  | IPricingTable
-  | IProductDetail
-  | IProductPolicy
-  | ISectionsGroup;
+  | TypeBannerWithoutUnresolvableLinksResponse
+  | TypeCtaWithoutUnresolvableLinksResponse
+  | TypeFooterWithoutUnresolvableLinksResponse
+  | TypeHeroWithoutUnresolvableLinksResponse
+  | TypeHubspotFormWithoutUnresolvableLinksResponse
+  | TypeNavigationWithoutUnresolvableLinksResponse
+  | TypePricingPlanWithoutUnresolvableLinksResponse
+  | TypePricingTableWithoutUnresolvableLinksResponse
+  | TypeProductDetailWithoutUnresolvableLinksResponse
+  | TypeProductPolicyWithoutUnresolvableLinksResponse
+  | TypeSectionsGroupWithoutUnresolvableLinksResponse;
 
 const ComponentRenderer = (props: Component) => {
   const contentTypeId = props.sys.contentType.sys.id;
@@ -80,10 +80,17 @@ export const BlockRenderer = ({ block }: { block: singularOrArrayBlock }) => {
     return (
       <div>
         {block.map((b) => {
+          if (!b) {
+            return null;
+          }
           return <BlockRenderer key={`block-${b.sys.id}`} block={b} />;
         })}
       </div>
     );
+  }
+
+  if (!block) {
+    return null;
   }
 
   const contentTypeId = get(block, 'sys.contentType.sys.id') as string;
