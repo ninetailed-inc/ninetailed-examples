@@ -27,7 +27,6 @@ const previewClient = createClient({
   accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN ?? '',
   environment: process.env.NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT ?? 'master',
   host: 'preview.contentful.com',
-  includeContentSourceMaps: true,
 });
 
 const getClient = (preview: boolean) => {

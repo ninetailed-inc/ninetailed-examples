@@ -12,14 +12,18 @@ import {
 } from '@/lib/api';
 import { TypePageWithoutUnresolvableLinksResponse } from '@/types/TypePage';
 import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
+import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 
 const Page = ({
-  page,
-  config,
+  page: initialPage,
+  config: initialConfig,
 }: {
   page: TypePageWithoutUnresolvableLinksResponse;
   config: TypeConfigWithoutUnresolvableLinksResponse;
 }) => {
+  const page = useContentfulLiveUpdates(initialPage);
+  const config = useContentfulLiveUpdates(initialConfig);
+
   if (!page) {
     return null;
   }

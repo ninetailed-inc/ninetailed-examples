@@ -23,6 +23,7 @@ import { handleErrors } from '@/lib/helperfunctions';
 import Link from 'next/link';
 
 import type { TypeNavigationWithoutUnresolvableLinksResponse } from '@/types/TypeNavigation';
+import { ContentfulLivePreview } from '@contentful/live-preview';
 
 export function Navigation(
   navigation: TypeNavigationWithoutUnresolvableLinksResponse
@@ -57,6 +58,10 @@ export function Navigation(
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
+        {...ContentfulLivePreview.getProps({
+          entryId: navigation.sys.id,
+          fieldId: 'navigationLinks',
+        })}
       >
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 relative w-[150px] h-[60px]">
@@ -92,7 +97,14 @@ export function Navigation(
             }
             if (navLink.fields.links?.length) {
               return (
-                <Popover className="relative" key={navLink.fields.name}>
+                <Popover
+                  className="relative"
+                  key={navLink.fields.name}
+                  {...ContentfulLivePreview.getProps({
+                    entryId: navLink.sys.id,
+                    fieldId: 'name',
+                  })}
+                >
                   <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
                     {navLink.fields.name}
                     <ChevronDownIcon
@@ -151,6 +163,10 @@ export function Navigation(
                   key={navLink.fields.name}
                   href={navLink.fields.url}
                   className="text-sm font-semibold leading-6 text-gray-900"
+                  {...ContentfulLivePreview.getProps({
+                    entryId: navLink.sys.id,
+                    fieldId: 'name',
+                  })}
                 >
                   {navLink.fields.name}
                 </Link>

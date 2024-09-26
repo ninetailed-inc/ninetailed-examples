@@ -6,6 +6,8 @@ import { RichText } from '@/components/RichText';
 import type { TypeBannerWithoutUnresolvableLinksResponse } from '@/types/TypeBanner';
 import classNames from 'classnames';
 
+import { ContentfulLivePreview } from '@contentful/live-preview';
+
 export type Handler = () => void;
 
 export const Banner = (banner: TypeBannerWithoutUnresolvableLinksResponse) => {
@@ -24,7 +26,13 @@ export const Banner = (banner: TypeBannerWithoutUnresolvableLinksResponse) => {
         { 'bg-orange-600': fields.variant === 'Loud' }
       )}
     >
-      <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+      <div
+        className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8"
+        {...ContentfulLivePreview.getProps({
+          entryId: banner.sys.id,
+          fieldId: 'text',
+        })}
+      >
         <div className="pr-16 sm:text-center sm:px-16">
           <div className="font-medium text-white">
             <RichText className="inline" richTextDocument={fields.text} />

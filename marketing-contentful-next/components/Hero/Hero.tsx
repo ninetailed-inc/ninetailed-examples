@@ -5,7 +5,6 @@ import { RichText } from '@/components/RichText';
 import { ContentfulImageLoader } from '@/lib/helperfunctions';
 
 import { ContentfulLivePreview } from '@contentful/live-preview';
-// import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 import classNames from 'classnames';
 import { useFlag } from '@/lib/experiences';
 import type { TypeHeroWithoutUnresolvableLinksResponse } from '@/types/TypeHero';
@@ -61,7 +60,14 @@ export const Hero = (hero: TypeHeroWithoutUnresolvableLinksResponse) => {
                 }
 
                 return (
-                  <div key={button.sys.id} className="shadow">
+                  <div
+                    key={button.sys.id}
+                    className="shadow"
+                    {...ContentfulLivePreview.getProps({
+                      entryId: button.sys.id,
+                      fieldId: 'buttons',
+                    })}
+                  >
                     <Button
                       type="button"
                       size="large"
