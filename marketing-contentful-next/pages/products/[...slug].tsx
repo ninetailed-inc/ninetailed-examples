@@ -23,7 +23,7 @@ import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
 import { TypePdpWithoutUnresolvableLinksResponse } from '@/types/TypePdp';
 
 import superjson from 'superjson';
-import { useContentfulLiveUpdates } from '@contentful/live-preview/dist/react';
+import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 
 const Pdp = ({
   pdp: safePdp,

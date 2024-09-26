@@ -14,7 +14,7 @@ import { RichText } from '@/components/RichText';
 import { BLOCKS, Block, Inline } from '@contentful/rich-text-types';
 import { TypeArticleWithoutUnresolvableLinksResponse } from '@/types/TypeArticle';
 import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
-import { useContentfulLiveUpdates } from '@contentful/live-preview/dist/react';
+import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 import superjson from 'superjson';
 
 const Article = ({
