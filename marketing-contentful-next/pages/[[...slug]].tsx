@@ -2,10 +2,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import get from 'lodash/get';
 
-import superjson from 'superjson';
-
-import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
-
 import { BlockRenderer } from '@/components/Renderer';
 import {
   getPages,
@@ -16,19 +12,15 @@ import {
 } from '@/lib/api';
 import { TypePageWithoutUnresolvableLinksResponse } from '@/types/TypePage';
 import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
+import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 
 const Page = ({
-  page: safePage,
-  config: safeConfig,
+  page: initialPage,
+  config: initialConfig,
 }: {
-  page: string;
-  config: string;
+  page: TypePageWithoutUnresolvableLinksResponse;
+  config: TypeConfigWithoutUnresolvableLinksResponse;
 }) => {
-  const initialPage =
-    superjson.parse<TypePageWithoutUnresolvableLinksResponse>(safePage);
-  const initialConfig =
-    superjson.parse<TypeConfigWithoutUnresolvableLinksResponse>(safeConfig);
-
   const page = useContentfulLiveUpdates(initialPage);
   const config = useContentfulLiveUpdates(initialConfig);
 
@@ -73,12 +65,12 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   ]);
   return {
     props: {
-      page: superjson.stringify(page),
-      config: superjson.stringify(config),
+      page,
+      config,
       ninetailed: {
         preview: {
-          allExperiences: superjson.stringify(allExperiences),
-          allAudiences: superjson.stringify(allAudiences),
+          allExperiences,
+          allAudiences,
         },
       },
     },

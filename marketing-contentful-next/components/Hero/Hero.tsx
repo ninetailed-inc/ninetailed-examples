@@ -60,7 +60,14 @@ export const Hero = (hero: TypeHeroWithoutUnresolvableLinksResponse) => {
                 }
 
                 return (
-                  <div key={button.sys.id} className="shadow">
+                  <div
+                    key={button.sys.id}
+                    className="shadow"
+                    {...ContentfulLivePreview.getProps({
+                      entryId: button.sys.id,
+                      fieldId: 'buttons',
+                    })}
+                  >
                     <Button
                       type="button"
                       size="large"

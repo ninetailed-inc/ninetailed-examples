@@ -14,24 +14,14 @@ import { RichText } from '@/components/RichText';
 import { BLOCKS, Block, Inline } from '@contentful/rich-text-types';
 import { TypeArticleWithoutUnresolvableLinksResponse } from '@/types/TypeArticle';
 import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
-import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
-import superjson from 'superjson';
 
 const Article = ({
-  article: safeArticle,
-  config: safeConfig,
+  article,
+  config,
 }: {
-  article: string;
-  config: string;
+  article: TypeArticleWithoutUnresolvableLinksResponse;
+  config: TypeConfigWithoutUnresolvableLinksResponse;
 }) => {
-  const initialArticle =
-    superjson.parse<TypeArticleWithoutUnresolvableLinksResponse>(safeArticle);
-  const initialConfig =
-    superjson.parse<TypeConfigWithoutUnresolvableLinksResponse>(safeConfig);
-
-  const article = useContentfulLiveUpdates(initialArticle);
-  const config = useContentfulLiveUpdates(initialConfig);
-
   if (!article) {
     return null;
   }

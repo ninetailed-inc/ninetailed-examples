@@ -13,9 +13,8 @@ import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import SettingsProviderWrapper from '@/lib/SettingsProvider';
 import NinetailedSegmentPlugin from '@ninetailed/experience.js-plugin-segment';
 import { ThirdPartyScripts } from '@/components/ThirdPartyScripts';
+import { TypePage } from '@/types/TypePage';
 import { TypeConfig } from '../types';
-
-import superjson from 'superjson';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -29,32 +28,17 @@ type Audience = {
 };
 
 interface CustomPageProps {
-  config: string;
-  ninetailed: {
+  page: TypePage<'WITHOUT_UNRESOLVABLE_LINKS'>;
+  config: TypeConfig<'WITHOUT_UNRESOLVABLE_LINKS'>;
+  ninetailed?: {
     preview: {
-      allExperiences: string;
-      allAudiences: string;
+      allExperiences: ExperienceConfiguration[];
+      allAudiences: Audience[];
     };
   };
 }
 
 const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
-  const {
-    config: safeConfig,
-    ninetailed: {
-      preview: {
-        allExperiences: safeAllExperiences,
-        allAudiences: safeAllAudiences,
-      },
-    },
-  } = pageProps;
-
-  const config =
-    superjson.parse<TypeConfig<'WITHOUT_UNRESOLVABLE_LINKS'>>(safeConfig);
-  const allExperiences =
-    superjson.parse<ExperienceConfiguration[]>(safeAllExperiences);
-  const allAudiences = superjson.parse<Audience[]>(safeAllAudiences);
-
   return (
     <div className="app">
       <NinetailedProvider
@@ -78,11 +62,12 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
                 }),
               ]
             : []),
-          ...(allAudiences && allExperiences
+          ...(pageProps.ninetailed?.preview
             ? [
                 new NinetailedPreviewPlugin({
-                  experiences: allExperiences || [],
-                  audiences: allAudiences || [],
+                  experiences:
+                    pageProps.ninetailed?.preview.allExperiences || [],
+                  audiences: pageProps.ninetailed?.preview.allAudiences || [],
                   onOpenExperienceEditor: (experience) => {
                     if (process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID) {
                       window.open(
@@ -117,7 +102,7 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT ?? 'main'}
         componentViewTrackingThreshold={0} // Default = 2000
       >
-        <SettingsProviderWrapper config={config}>
+        <SettingsProviderWrapper config={pageProps.config}>
           <ContentfulLivePreviewProvider locale="en-US">
             <ThirdPartyScripts />
             <Component {...pageProps} />

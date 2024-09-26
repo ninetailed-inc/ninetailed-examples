@@ -22,26 +22,15 @@ import { request } from 'graphql-request';
 import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
 import { TypePdpWithoutUnresolvableLinksResponse } from '@/types/TypePdp';
 
-import superjson from 'superjson';
-import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
-
 const Pdp = ({
-  pdp: safePdp,
-  config: safeConfig,
+  pdp,
+  config,
   product,
 }: {
-  pdp: string;
-  config: string;
+  pdp: TypePdpWithoutUnresolvableLinksResponse;
+  config: TypeConfigWithoutUnresolvableLinksResponse;
   product: Partial<IProduct>;
 }) => {
-  const initialPdp =
-    superjson.parse<TypePdpWithoutUnresolvableLinksResponse>(safePdp);
-  const initialConfig =
-    superjson.parse<TypeConfigWithoutUnresolvableLinksResponse>(safeConfig);
-
-  const pdp = useContentfulLiveUpdates(initialPdp);
-  const config = useContentfulLiveUpdates(initialConfig);
-
   if (!pdp || !product) {
     return null;
   }
@@ -97,13 +86,13 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
 
   return {
     props: {
-      pdp: superjson.stringify(pdp),
-      config: superjson.stringify(config),
+      pdp,
+      config,
       product: productInfo && productInfo.product,
       ninetailed: {
         preview: {
-          allExperiences: superjson.stringify(allExperiences),
-          allAudiences: superjson.stringify(allAudiences),
+          allExperiences,
+          allAudiences,
         },
       },
     },
