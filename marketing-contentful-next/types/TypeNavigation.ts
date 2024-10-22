@@ -6,6 +6,7 @@ export interface TypeNavigationFields {
     internalTitle?: EntryFieldTypes.Symbol;
     logo?: EntryFieldTypes.AssetLink;
     navigationLinks: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeNavLinkSkeleton>>;
+    loginTraits: EntryFieldTypes.Object;
     nt_experiences?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeNt_experienceSkeleton>>;
 }
 
