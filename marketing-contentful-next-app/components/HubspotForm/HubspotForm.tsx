@@ -1,3 +1,5 @@
+'use client';
+
 import { useNinetailed, useProfile } from '@ninetailed/experience.js-next';
 import { IHubspotForm } from '@/types/contentful';
 import { useForm, SubmitHandler } from 'react-hook-form';
