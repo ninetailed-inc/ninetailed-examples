@@ -1,7 +1,10 @@
-import { IProductDetail } from '@/types/contentful';
+import { TypeProductDetailWithoutUnresolvableLinksResponse } from '@/types/TypeProductDetail';
 import { RichText } from '../RichText';
 
-export const ProductDetail = ({ fields }: IProductDetail) => {
+export const ProductDetail = (
+  productDetail: TypeProductDetailWithoutUnresolvableLinksResponse
+) => {
+  const { fields } = productDetail;
   return (
     <>
       <h2 className="text-sm font-medium text-gray-900">{fields.heading}</h2>

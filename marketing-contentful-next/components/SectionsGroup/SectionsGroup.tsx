@@ -1,8 +1,11 @@
 import React from 'react';
-import { ISectionsGroup } from '@/types/contentful';
 import { BlockRenderer } from '../Renderer/BlockRenderer';
+import type { TypeSectionsGroupWithoutUnresolvableLinksResponse } from '@/types/TypeSectionsGroup';
 
-export const SectionsGroup = ({ sys, fields }: ISectionsGroup) => {
+export const SectionsGroup = ({
+  sys,
+  fields,
+}: TypeSectionsGroupWithoutUnresolvableLinksResponse) => {
   return (
     <BlockRenderer
       key={`sectionsGroup-${sys.id}`}

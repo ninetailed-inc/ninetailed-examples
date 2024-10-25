@@ -71,11 +71,11 @@ export default async function handler(
   console.log(`request`, request.body);
 
   const USER_ID_KEY = '_uid';
-  const EVENTS_KEY = 'segment_events';
+  // const EVENTS_KEY = 'segment_events';
   const SEGMENTS_KEY = '_segments';
   const {
     [USER_ID_KEY]: userId,
-    [EVENTS_KEY]: _,
+    // [EVENTS_KEY]: _,
     [SEGMENTS_KEY]: lyticsSegments,
     ...rest
   } = request.body.data;
@@ -89,6 +89,8 @@ export default async function handler(
 
   console.log(`lytics_uid`, userId);
 
+  // eslint-disable-next-line
+  // @ts-ignore
   const ninetailedResponse = await apiClient.sendIdentifyEvent(userId, traits);
 
   console.log(`9t-response`, ninetailedResponse);

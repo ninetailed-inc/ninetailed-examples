@@ -1,15 +1,15 @@
 import React from 'react';
 
 import { handleErrors } from '@/lib/helperfunctions';
-import { IButtonFields } from '@/types/contentful';
 import { useNinetailed } from '@ninetailed/experience.js-next';
 import Link from 'next/link';
 
+import type { TypeButtonWithoutUnresolvableLinksResponse } from '@/types/TypeButton';
+
 export type ButtonType = 'button' | 'submit' | 'reset';
-
 export type ButtonSize = 'small' | 'large';
-
-export type ButtonVariant = IButtonFields['variant'];
+export type ButtonVariant =
+  TypeButtonWithoutUnresolvableLinksResponse['fields']['variant'];
 
 const variantMap = {
   primary: 'bg-indigo-600 text-white',
@@ -26,7 +26,9 @@ export interface ButtonProps {
   as?: React.ElementType | typeof Link;
   children: string;
   disabled?: boolean;
-  eventName?: IButtonFields['eventName'];
+  eventType?: TypeButtonWithoutUnresolvableLinksResponse['fields']['eventType'];
+  eventName?: TypeButtonWithoutUnresolvableLinksResponse['fields']['eventName'];
+  eventPayload?: TypeButtonWithoutUnresolvableLinksResponse['fields']['eventPayload'];
   href?: string;
   size: ButtonSize;
   type: ButtonType;
@@ -39,22 +41,56 @@ export const Button: React.FC<ButtonProps> = React.forwardRef(
       as: Component = 'button',
       size: size = 'large',
       children,
+      eventType,
       eventName,
+      eventPayload,
       disabled,
       href,
       variant,
       type,
     } = props;
 
-    const { track } = useNinetailed();
+    const { track, identify } = useNinetailed();
 
     const trackButtonClick = handleErrors(async (e: Event) => {
-      if (eventName) {
+      if (eventType) {
         if (type === 'submit') {
           e.preventDefault();
         }
-        await track(eventName);
-        console.log(`Performed Ninetailed event track:${eventName}`);
+        switch (eventType) {
+          case 'track':
+            if (eventName) {
+              await track(
+                eventName,
+                (eventPayload as Record<
+                  PropertyKey,
+                  string | number | (string | number)[]
+                >) ?? {}
+              );
+              console.log(
+                `Sent Ninetailed track event with event name ${eventName} and properties:`,
+                `${JSON.stringify(eventPayload, null, 2)}`
+              );
+            } else {
+              console.log('No event name provided, skipped track call');
+            }
+            break;
+          case 'identify':
+            await identify(
+              eventName ?? '',
+              (eventPayload as Record<
+                PropertyKey,
+                string | number | (string | number)[]
+              >) ?? {}
+            );
+            console.log(
+              `Sent Ninetailed identify event with ${
+                eventName ? `userId ${eventName}` : 'no userId'
+              } and traits:`,
+              `${JSON.stringify(eventPayload, null, 2)}`
+            );
+            break;
+        }
       } else {
         console.log('Button without event clicked');
       }

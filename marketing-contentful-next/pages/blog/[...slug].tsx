@@ -11,15 +11,16 @@ import {
   getArticles,
 } from '@/lib/api';
 import { RichText } from '@/components/RichText';
-import { IArticle, IConfig } from '@/types/contentful';
 import { BLOCKS, Block, Inline } from '@contentful/rich-text-types';
+import { TypeArticleWithoutUnresolvableLinksResponse } from '@/types/TypeArticle';
+import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
 
 const Article = ({
   article,
   config,
 }: {
-  article: IArticle;
-  config: IConfig;
+  article: TypeArticleWithoutUnresolvableLinksResponse;
+  config: TypeConfigWithoutUnresolvableLinksResponse;
 }) => {
   if (!article) {
     return null;
@@ -87,8 +88,8 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
       slug,
     }),
     getGlobalConfig({ preview: draftMode }),
-    getAllExperiences(),
-    getAllAudiences(),
+    getAllExperiences({ preview: draftMode }),
+    getAllAudiences({ preview: draftMode }),
   ]);
 
   return {

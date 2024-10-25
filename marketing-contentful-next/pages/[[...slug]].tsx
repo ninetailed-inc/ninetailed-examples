@@ -10,9 +10,20 @@ import {
   getGlobalConfig,
   getAllAudiences,
 } from '@/lib/api';
-import { IConfig, IPage } from '@/types/contentful';
+import { TypePageWithoutUnresolvableLinksResponse } from '@/types/TypePage';
+import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
+import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 
-const Page = ({ page, config }: { page: IPage; config: IConfig }) => {
+const Page = ({
+  page: initialPage,
+  config: initialConfig,
+}: {
+  page: TypePageWithoutUnresolvableLinksResponse;
+  config: TypeConfigWithoutUnresolvableLinksResponse;
+}) => {
+  const page = useContentfulLiveUpdates(initialPage);
+  const config = useContentfulLiveUpdates(initialConfig);
+
   if (!page) {
     return null;
   }
@@ -49,8 +60,8 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
       slug: slug === '' ? '/' : slug,
     }),
     getGlobalConfig({ preview: draftMode }),
-    getAllExperiences(),
-    getAllAudiences(),
+    getAllExperiences({ preview: draftMode }),
+    getAllAudiences({ preview: draftMode }),
   ]);
   return {
     props: {

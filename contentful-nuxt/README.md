@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# contentful-nuxt
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> ℹ️ **INFO:** A proof-of-concept demonstration of taking the plugin created in `contentful-vue` and using it as a client-side plugin in Nuxt.
 
 ## Setup
 

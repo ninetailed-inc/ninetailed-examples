@@ -3,9 +3,12 @@ import { BLOCKS } from '@contentful/rich-text-types';
 import { CheckIcon } from '@heroicons/react/24/solid';
 import { Button } from '@/components/Button';
 import { RichText } from '@/components/RichText';
-import { IPricingPlan } from '@/types/contentful';
 
-export const PricingPlan = ({ fields }: IPricingPlan) => {
+import type { TypePricingPlanWithoutUnresolvableLinksResponse } from '@/types/TypePricingPlan';
+
+export const PricingPlan = (
+  pricingPlan: TypePricingPlanWithoutUnresolvableLinksResponse
+) => {
   const {
     title,
     price,
@@ -14,7 +17,7 @@ export const PricingPlan = ({ fields }: IPricingPlan) => {
     description,
     button,
     mostPopular,
-  } = fields;
+  } = pricingPlan.fields;
 
   return (
     <div className="relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
@@ -59,7 +62,7 @@ export const PricingPlan = ({ fields }: IPricingPlan) => {
           }}
         />
       </div>
-      {button.fields.slug && (
+      {button?.fields.slug && (
         <div className="mt-auto">
           <Button
             type="button"

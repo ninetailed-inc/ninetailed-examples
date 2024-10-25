@@ -1,6 +1,6 @@
-# ninetailed-vue
+# contentful-vue
 
-This template should help get you started developing with Vue 3 in Vite.
+> ℹ️ **INFO:** A proof-of-concept using Ninetailed's JavaScript SDK to create a Vue Composition API plugin implemetaion of Ninetailed. Includes a `useExperience` composoable and a single file `Experience.vue` component to mimic the developer experience of working with Ninetailed's React SDK `useExperience` hook and `Experience.tsx` component.
 
 ## Recommended IDE Setup
 

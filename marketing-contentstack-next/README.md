@@ -2,7 +2,7 @@
 
 ![](docs/marketing-contentstack-next.png)
 
-The illustrated website example demonstrates the Ninetailed content personalization integration for Contentstack using Next.js as the web framework.
+> ℹ️ **INFO:** Ninetailed's flagship demo but with Contentstack as a source CMS.
 
 - [Live Demo](#live-demo)
 - [Deploy Your Own Playground Without Code](#deploy-your-own-playground-without-code)

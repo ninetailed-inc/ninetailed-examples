@@ -20,12 +20,12 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { GetStaticProps } from 'next';
 import { getAllAudiences, getAllExperiences, getGlobalConfig } from '@/lib/api';
-import get from 'lodash/get';
-import { IConfig } from '@/types/contentful';
+// import get from 'lodash/get';
 import { BlockRenderer } from '@/components/Renderer';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
+import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
 
 const sortOptions = [
   { name: 'Most Popular', href: '#' },
@@ -154,13 +154,14 @@ const products2 = [
   // More products...
 ];
 
-export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
-  const rawSlug = get(params, 'slug', []) as string[];
-  const slug = rawSlug.join('/');
+export const getStaticProps: GetStaticProps = async ({ draftMode }) => {
+  // Eventually use these when generating dynamic PLPs
+  // const rawSlug = get(params, 'slug', []) as string[];
+  // const slug = rawSlug.join('/');
   const [config, allExperiences, allAudiences] = await Promise.all([
     getGlobalConfig({ preview: draftMode }),
-    getAllExperiences(),
-    getAllAudiences(),
+    getAllExperiences({ preview: draftMode }),
+    getAllAudiences({ preview: draftMode }),
   ]);
 
   return {
@@ -177,7 +178,11 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   };
 };
 
-export default function Plp({ config }: { config: IConfig }) {
+export default function Plp({
+  config,
+}: {
+  config: TypeConfigWithoutUnresolvableLinksResponse;
+}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const { banner, navigation, footer } = config.fields;

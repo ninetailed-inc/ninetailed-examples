@@ -3,12 +3,15 @@ import Link from 'next/link';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 
 import { RichText } from '@/components/RichText';
-import { IBanner } from '@/types/contentful';
+import type { TypeBannerWithoutUnresolvableLinksResponse } from '@/types/TypeBanner';
 import classNames from 'classnames';
+
+import { ContentfulLivePreview } from '@contentful/live-preview';
 
 export type Handler = () => void;
 
-export const Banner = ({ fields }: IBanner) => {
+export const Banner = (banner: TypeBannerWithoutUnresolvableLinksResponse) => {
+  const { fields } = banner;
   const [show, setShow] = React.useState<boolean>(true);
 
   const handleCloseBanner: Handler = () => {
@@ -23,7 +26,13 @@ export const Banner = ({ fields }: IBanner) => {
         { 'bg-orange-600': fields.variant === 'Loud' }
       )}
     >
-      <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+      <div
+        className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8"
+        {...ContentfulLivePreview.getProps({
+          entryId: banner.sys.id,
+          fieldId: 'text',
+        })}
+      >
         <div className="pr-16 sm:text-center sm:px-16">
           <div className="font-medium text-white">
             <RichText className="inline" richTextDocument={fields.text} />

@@ -8,13 +8,13 @@ import {
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights';
-import { IConfig, IPage } from '@/types/contentful';
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
-import '@contentful/live-preview/style.css';
 import SettingsProviderWrapper from '@/lib/SettingsProvider';
 import NinetailedSegmentPlugin from '@ninetailed/experience.js-plugin-segment';
 import { ThirdPartyScripts } from '@/components/ThirdPartyScripts';
+import { TypePage } from '@/types/TypePage';
+import { TypeConfig } from '../types';
 
 type AppProps<P = unknown> = {
   pageProps: P;
@@ -26,9 +26,10 @@ type Audience = {
   description?: string | undefined;
   id: string;
 };
+
 interface CustomPageProps {
-  page: IPage;
-  config: IConfig;
+  page: TypePage<'WITHOUT_UNRESOLVABLE_LINKS'>;
+  config: TypeConfig<'WITHOUT_UNRESOLVABLE_LINKS'>;
   ninetailed?: {
     preview: {
       allExperiences: ExperienceConfiguration[];
