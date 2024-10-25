@@ -18850,7 +18850,7 @@
         "id": "61hV55zlmABBaJEipVlnvx",
         "type": "Entry",
         "createdAt": "2024-05-16T18:36:06.161Z",
-        "updatedAt": "2024-10-25T15:58:14.964Z",
+        "updatedAt": "2024-10-25T20:02:57.287Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -18858,8 +18858,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 139,
-        "publishedAt": "2024-10-25T15:58:14.964Z",
+        "publishedVersion": 141,
+        "publishedAt": "2024-10-25T20:02:57.287Z",
         "firstPublishedAt": "2024-05-16T18:36:33.012Z",
         "createdBy": {
           "sys": {
@@ -18875,8 +18875,8 @@
             "id": "0kSCJNqwfy3USaGrGQ3HHA"
           }
         },
-        "publishedCounter": 62,
-        "version": 140,
+        "publishedCounter": 63,
+        "version": 142,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -18962,17 +18962,6 @@
               "id": "1Zf4VCPAAL6MFnzYxfTJ00"
             }
           }
-        },
-        "nt_experiences": {
-          "en-US": [
-            {
-              "sys": {
-                "type": "Link",
-                "linkType": "Entry",
-                "id": "1CjBJK9aE0zcOZXIvK4ANX"
-              }
-            }
-          ]
         }
       }
     },
