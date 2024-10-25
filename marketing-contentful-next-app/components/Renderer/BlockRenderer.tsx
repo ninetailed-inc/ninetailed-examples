@@ -1,22 +1,20 @@
 'use client';
 
 import React from 'react';
-import { Experience } from '@/components/Client/ClientExperience';
+import { Experience } from '@ninetailed/experience.js-react';
 
 import get from 'lodash/get';
 
-import {
-  ClientBanner,
-  ClientCta,
-  ClientHero,
-  ClientHubspotForm,
-  ClientFeature,
-  ClientFooter,
-  ClientNavigation,
-  ClientPricingPlan,
-  ClientPricingTable,
-  ClientSectionsGroup,
-} from '@/components/Client/ClientBlocks';
+import { Banner } from '@/components/Banner';
+import { Cta } from '@/components/Cta';
+import { Feature } from '@/components/Feature';
+import { Footer } from '@/components/Footer';
+import { Hero } from '@/components/Hero';
+import { HubspotForm } from '@/components/HubspotForm';
+import { Navigation } from '@/components/Navigation';
+import { PricingPlan } from '@/components/PricingPlan';
+import { PricingTable } from '@/components/PricingTable';
+import { SectionsGroup } from '@/components/SectionsGroup';
 
 import {
   IBanner,
@@ -34,16 +32,16 @@ import { ComponentContentTypes } from '@/lib/constants';
 import { parseExperiences, singularOrArrayBlock } from '@/lib/experiences';
 
 const ContentTypeMap = {
-  [ComponentContentTypes.Banner]: ClientBanner,
-  [ComponentContentTypes.CTA]: ClientCta,
-  [ComponentContentTypes.Hero]: ClientHero,
-  [ComponentContentTypes.HubspotForm]: ClientHubspotForm,
-  [ComponentContentTypes.Feature]: ClientFeature,
-  [ComponentContentTypes.Footer]: ClientFooter,
-  [ComponentContentTypes.Navigation]: ClientNavigation,
-  [ComponentContentTypes.PricingPlan]: ClientPricingPlan,
-  [ComponentContentTypes.PricingTable]: ClientPricingTable,
-  [ComponentContentTypes.SectionsGroup]: ClientSectionsGroup,
+  [ComponentContentTypes.Banner]: Banner,
+  [ComponentContentTypes.CTA]: Cta,
+  [ComponentContentTypes.Hero]: Hero,
+  [ComponentContentTypes.HubspotForm]: HubspotForm,
+  [ComponentContentTypes.Feature]: Feature,
+  [ComponentContentTypes.Footer]: Footer,
+  [ComponentContentTypes.Navigation]: Navigation,
+  [ComponentContentTypes.PricingPlan]: PricingPlan,
+  [ComponentContentTypes.PricingTable]: PricingTable,
+  [ComponentContentTypes.SectionsGroup]: SectionsGroup,
 };
 
 type Component =
