@@ -12,6 +12,8 @@ type FormValues = {
   ninetailedid: string;
   ninetailed_organization_id: string;
   ninetailed_environment: string;
+  role?: string;
+  boss?: string;
 };
 
 export const HubspotForm = (
@@ -20,7 +22,16 @@ export const HubspotForm = (
   const { fields } = hubspotForm;
 
   const { profile } = useProfile();
-  const { identify } = useNinetailed();
+  const {
+    identify,
+    profileState: { experiences },
+    observeElement,
+    trackComponentView,
+  } = useNinetailed();
+
+  const featureFlag = experiences?.find(
+    (experience) => experience.experienceId === '1uujS7XHaB7p9RQhXkArcd'
+  );
 
   const {
     register,
@@ -127,6 +138,10 @@ export const HubspotForm = (
           onSubmit={(...args) => void handleSubmit(onSubmit)(...args)}
           className="flex flex-col space-y-4 items-start"
         >
+          <pre>
+            You're in bucket {(featureFlag?.variantIndex || 0) + 1} of the
+            feature flag
+          </pre>
           <fieldset className="flex flex-row w-full gap-4 flex-wrap">
             <div className="flex flex-col flex-1">
               <label htmlFor="firstname" className="text-sm font-bold">
@@ -217,6 +232,30 @@ export const HubspotForm = (
               <p className="text-orange-500 text-sm">Email is required.</p>
             )}
           </fieldset>
+          {featureFlag?.variantIndex === 1 && (
+            <>
+              <fieldset className="flex flex-col w-full">
+                <label htmlFor="role" className="text-sm font-bold">
+                  Company Role
+                </label>
+                <input
+                  id="role"
+                  className="border-2 h-10 px-3 rounded focus:outline-amber-500 border-indigo-300"
+                  {...register('role', {})}
+                />
+              </fieldset>
+              <fieldset className="flex flex-col w-full">
+                <label htmlFor="role" className="text-sm font-bold">
+                  Boss' Name
+                </label>
+                <input
+                  id="boss"
+                  className="border-2 h-10 px-3 rounded focus:outline-amber-500 border-indigo-300"
+                  {...register('boss', {})}
+                />
+              </fieldset>
+            </>
+          )}
           <input
             id="ninetailedid"
             className="hidden"
