@@ -1,10 +1,8 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
-import type { TypeNt_experienceSkeleton } from "./TypeNt_experience";
 
 export interface TypeProductInfoBlockFields {
     title: EntryFieldTypes.Symbol;
     copy?: EntryFieldTypes.RichText;
-    nt_experiences?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeNt_experienceSkeleton>>;
 }
 
 export type TypeProductInfoBlockSkeleton = EntrySkeletonType<TypeProductInfoBlockFields, "productInfoBlock">;

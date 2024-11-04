@@ -1,11 +1,11 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
-import type { TypeNavLinkSkeleton } from "./TypeNavLink";
+import type { TypeNavigationLinkSkeleton } from "./TypeNavigationLink";
 import type { TypeNt_experienceSkeleton } from "./TypeNt_experience";
 
 export interface TypeNavigationFields {
     internalTitle?: EntryFieldTypes.Symbol;
     logo?: EntryFieldTypes.AssetLink;
-    navigationLinks: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeNavLinkSkeleton>>;
+    navigationLinks: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeNavigationLinkSkeleton>>;
     loginTraits: EntryFieldTypes.Object;
     nt_experiences?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeNt_experienceSkeleton>>;
 }

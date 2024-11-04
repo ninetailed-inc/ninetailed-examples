@@ -14,7 +14,9 @@ import {
   type TypeConfigSkeleton,
   type TypeNt_experienceSkeleton,
   type TypeNt_audienceSkeleton,
+  type TypeFlexibleSectionSkeleton,
 } from '../types';
+import { fetchBySlug } from '@contentful/experiences-sdk-react';
 
 const contentfulClient = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ?? '',
@@ -130,6 +132,29 @@ export async function getArticles(QueryParams: IQueryParams) {
   const articles = entries.items;
 
   return articles || [];
+}
+
+export async function getFlexibleSection(pageParams: IPagelikeQueryParams) {
+  const flexibleSection = await fetchBySlug({
+    client: getClient(pageParams.preview as boolean),
+    slug: pageParams.slug,
+    experienceTypeId: 'flexibleSection',
+    localeCode: 'en-US',
+  });
+  return flexibleSection;
+}
+
+export async function getFlexibleSections(QueryParams: IQueryParams) {
+  const client = getClient(QueryParams.preview as boolean);
+  const entries =
+    await client.withoutUnresolvableLinks.getEntries<TypeFlexibleSectionSkeleton>(
+      {
+        content_type: 'flexibleSection',
+      }
+    );
+  const flexibleSections = entries.items;
+
+  return flexibleSections || [];
 }
 
 export async function getGlobalConfig(QueryParams: IQueryParams) {

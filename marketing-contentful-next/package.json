@@ -26,6 +26,7 @@
     "production-clean-then-build-and-setup": "if [ \"$VERCEL_ENV\" == \"production\" ]; then echo \"production environment\" && npx contentful-clean-space --space-id $NEXT_PUBLIC_CONTENTFUL_SPACE_ID --env $NEXT_PUBLIC_CONTENTFUL_ENVIRONMENT --accesstoken $CONTENTFUL_MANAGEMENT_TOKEN --content-types=true --assets=true --yes=true --verbose=true && PATH_TO_ENV_FILE=.env.local node ./contentful/setup.js; else echo \"not production environment, so won't touch Contentful\"; fi; next build"
   },
   "dependencies": {
+    "@contentful/experiences-sdk-react": "^1.20.0",
     "@contentful/live-preview": "4.5.6",
     "@contentful/rich-text-react-renderer": "15.22.11",
     "@contentful/rich-text-types": "16.8.5",
@@ -43,7 +44,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "classnames": "2.3.1",
-    "contentful": "11.0.3",
+    "contentful": "^11.2.0",
     "contentful-clean-space": "^0.9.0",
     "contentful-export": "7.18.16",
     "contentful-import": "8.3.0",

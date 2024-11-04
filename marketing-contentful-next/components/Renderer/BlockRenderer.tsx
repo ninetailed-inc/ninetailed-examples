@@ -6,6 +6,7 @@ import get from 'lodash/get';
 import { Banner } from '@/components/Banner';
 import { CTA } from '@/components/Cta';
 import { Feature } from '@/components/Feature';
+import { FlexibleSection } from '@/components/Studio';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
 import { HubspotForm } from '@/components/HubspotForm';
@@ -22,6 +23,8 @@ import { parseExperiences, singularOrArrayBlock } from '@/lib/experiences';
 import type {
   TypeBannerWithoutUnresolvableLinksResponse,
   TypeCtaWithoutUnresolvableLinksResponse,
+  TypeFeatureWithoutUnresolvableLinksResponse,
+  TypeFlexibleSectionWithoutUnresolvableLinksResponse,
   TypeFooterWithoutUnresolvableLinksResponse,
   TypeHeroWithoutUnresolvableLinksResponse,
   TypeHubspotFormWithoutUnresolvableLinksResponse,
@@ -39,6 +42,7 @@ const ContentTypeMap = {
   [ComponentContentTypes.Hero]: Hero,
   [ComponentContentTypes.HubspotForm]: HubspotForm,
   [ComponentContentTypes.Feature]: Feature,
+  [ComponentContentTypes.FlexibleSection]: FlexibleSection,
   [ComponentContentTypes.Footer]: Footer,
   [ComponentContentTypes.Navigation]: Navigation,
   [ComponentContentTypes.PricingPlan]: PricingPlan,
@@ -51,6 +55,8 @@ const ContentTypeMap = {
 type Component =
   | TypeBannerWithoutUnresolvableLinksResponse
   | TypeCtaWithoutUnresolvableLinksResponse
+  | TypeFeatureWithoutUnresolvableLinksResponse
+  | TypeFlexibleSectionWithoutUnresolvableLinksResponse
   | TypeFooterWithoutUnresolvableLinksResponse
   | TypeHeroWithoutUnresolvableLinksResponse
   | TypeHubspotFormWithoutUnresolvableLinksResponse

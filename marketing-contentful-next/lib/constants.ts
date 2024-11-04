@@ -3,6 +3,7 @@ export const ComponentContentTypes = {
   CTA: 'cta',
   Hero: 'hero',
   Feature: 'feature',
+  FlexibleSection: 'flexibleSection',
   Footer: 'footer',
   HubspotForm: 'hubspotForm',
   Navigation: 'navigation',

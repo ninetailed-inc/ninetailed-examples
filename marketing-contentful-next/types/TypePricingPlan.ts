@@ -1,5 +1,6 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 import type { TypeButtonSkeleton } from "./TypeButton";
+import type { TypeNt_experienceSkeleton } from "./TypeNt_experience";
 
 export interface TypePricingPlanFields {
     internalName?: EntryFieldTypes.Symbol;
@@ -10,6 +11,7 @@ export interface TypePricingPlanFields {
     description?: EntryFieldTypes.RichText;
     button: EntryFieldTypes.EntryLink<TypeButtonSkeleton>;
     mostPopular?: EntryFieldTypes.Boolean;
+    nt_experiences?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeNt_experienceSkeleton>>;
 }
 
 export type TypePricingPlanSkeleton = EntrySkeletonType<TypePricingPlanFields, "pricingPlan">;

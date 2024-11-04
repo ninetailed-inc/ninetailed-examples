@@ -9,10 +9,13 @@ import {
   getAllExperiences,
   getGlobalConfig,
   getAllAudiences,
+  getFlexibleSection,
 } from '@/lib/api';
 import { TypePageWithoutUnresolvableLinksResponse } from '@/types/TypePage';
 import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
 import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
+
+import { extendContentfulEntries } from '@/lib/extendContentfulEntries';
 
 const Page = ({
   page: initialPage,
@@ -54,7 +57,7 @@ const Page = ({
 export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
-  const [page, config, allExperiences, allAudiences] = await Promise.all([
+  const [rawPage, config, allExperiences, allAudiences] = await Promise.all([
     getPage({
       preview: draftMode,
       slug: slug === '' ? '/' : slug,
@@ -63,6 +66,26 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
     getAllExperiences({ preview: draftMode }),
     getAllAudiences({ preview: draftMode }),
   ]);
+
+  // Inject Studio experience payloads
+  const page = await extendContentfulEntries(
+    rawPage,
+    'flexibleSection',
+    async (entry: any) => {
+      const additionalData = await getFlexibleSection({
+        preview: draftMode,
+        slug: entry.fields.slug,
+      });
+      return {
+        ...entry,
+        fields: {
+          ...entry.fields,
+          studio: JSON.stringify(additionalData),
+        },
+      };
+    }
+  );
+
   return {
     props: {
       page,
