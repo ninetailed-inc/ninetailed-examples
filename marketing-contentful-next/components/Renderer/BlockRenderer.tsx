@@ -95,7 +95,7 @@ export const BlockRenderer = ({ block }: { block: singularOrArrayBlock }) => {
     );
   }
 
-  if (!block) {
+  if (!block || !block.fields) {
     return null;
   }
 

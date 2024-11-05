@@ -1,11 +1,10 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetServerSideProps } from 'next';
 import get from 'lodash/get';
 
 import {
-  getAllExperiences,
-  getAllAudiences,
-  getFlexibleSection,
-  getFlexibleSections,
+  // getAllExperiences,
+  // getAllAudiences,
+  getFlexibleSection
 } from '@/lib/api';
 
 import { FlexibleSection } from '@/components/Studio';
@@ -18,49 +17,32 @@ const StudioExperience = ({ flexibleSection }: { flexibleSection: string }) => {
   return <FlexibleSection fields={{ studio: flexibleSection }} />;
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
+export const getServerSideProps = (async ({ params }) => {
   const rawSlug = get(params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
-  const [flexibleSection, allExperiences, allAudiences] = await Promise.all([
+  // Purposely remove preview widget from Studio canvas
+  // Rely on it's presence when viewing the whole page
+  // const [flexibleSection, allExperiences, allAudiences] = await Promise.all([
+  const [flexibleSection] = await Promise.all([
     getFlexibleSection({
       preview: true,
       slug,
     }),
-    getAllExperiences({ preview: draftMode }),
-    getAllAudiences({ preview: draftMode }),
+    // getAllExperiences({ preview: true }),
+    // getAllAudiences({ preview: true }),
   ]);
 
   return {
     props: {
       flexibleSection: JSON.stringify(flexibleSection),
-      ninetailed: {
-        preview: {
-          allExperiences,
-          allAudiences,
-        },
-      },
+      // ninetailed: {
+      //   preview: {
+      //     allExperiences,
+      //     allAudiences,
+      //   },
+      // },
     },
-    revalidate: 5,
   };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const studioExperiences = await getFlexibleSections({ preview: false });
-
-  const paths = studioExperiences
-    .filter((studioExperience) => {
-      return studioExperience.fields.slug !== '/';
-    })
-    .map((studioExperience) => {
-      return {
-        params: { slug: studioExperience.fields.slug.split('/') },
-      };
-    });
-
-  return {
-    paths: paths,
-    fallback: false,
-  };
-};
+}) satisfies GetServerSideProps
 
 export default StudioExperience;

@@ -5,6 +5,8 @@
  * @param {Function} transformer - Async function to transform matching entries
  * @returns {Promise<Object>} - The transformed object
  */
+
+// TODO: Convert to typescript
 export const extendContentfulEntries = async (
   obj,
   targetContentTypeId,

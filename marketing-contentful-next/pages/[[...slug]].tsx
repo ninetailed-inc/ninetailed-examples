@@ -16,6 +16,7 @@ import { TypeConfigWithoutUnresolvableLinksResponse } from '@/types/TypeConfig';
 import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
 
 import { extendContentfulEntries } from '@/lib/extendContentfulEntries';
+import { TypeFlexibleSectionWithoutUnresolvableLinksResponse } from '../types';
 
 const Page = ({
   page: initialPage,
@@ -71,7 +72,7 @@ export const getStaticProps: GetStaticProps = async ({ params, draftMode }) => {
   const page = await extendContentfulEntries(
     rawPage,
     'flexibleSection',
-    async (entry: any) => {
+    async (entry: TypeFlexibleSectionWithoutUnresolvableLinksResponse) => {
       const additionalData = await getFlexibleSection({
         preview: draftMode,
         slug: entry.fields.slug,
