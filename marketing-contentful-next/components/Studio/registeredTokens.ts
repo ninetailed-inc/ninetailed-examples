@@ -5,20 +5,11 @@ defineDesignTokens({
   spacing: { XS: '4px', S: '16px', M: '32px', L: '64px', XL: '128px' },
   sizing: { XS: '16px', S: '100px', M: '300px', L: '600px', XL: '1024px' },
   color: {
-    Slate: '#94a3b8',
-    Azure: 'azure',
-    Orange: '#fdba74',
-    Blue: '#0000ff',
-  },
-  border: {
-    Azure: { width: '1px', style: 'solid', color: 'azure' },
-    Hero: { width: '2px', style: 'dashed', color: '#ffaabb' },
-    Card: { width: '1px', style: 'solid', color: '#ffccbb' },
-    Carousel: {
-      width: '2px',
-      style: 'dotted',
-      color: 'rgba(30, 25, 25, 0.75)',
-    },
+    Indigo: '#4f46e5',
+    Secondary: '#e0e7ff',
+    Amber: '#ea580c',
+    White: '#ffffff',
+    Text: '#111827',
   },
   fontSize: { XS: '12px', SM: '14px', MD: '16px', LG: '24px', XL: '32px' },
   lineHeight: { XS: '1', SM: '1.25', MD: '1.5', LG: '200%' },
@@ -29,5 +20,5 @@ defineDesignTokens({
     MD: '0.15em',
     LG: '0.2em',
   },
-  textColor: { Dark: '#1a1a1a', Light: '#efefef', Slate: '#94a3b8' },
+  textColor: { Dark: '#111827', White: '#ffffff', Indigo: '#4f46e5' },
 });
