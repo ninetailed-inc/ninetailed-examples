@@ -26,15 +26,15 @@ export const Banner = (banner: TypeBannerWithoutUnresolvableLinksResponse) => {
         { 'bg-orange-600': fields.variant === 'Loud' }
       )}
     >
-      <div
-        className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8"
-        {...ContentfulLivePreview.getProps({
-          entryId: banner.sys.id,
-          fieldId: 'text',
-        })}
-      >
+      <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
         <div className="pr-16 sm:text-center sm:px-16">
-          <div className="font-medium text-white">
+          <div
+            className="font-medium text-white"
+            {...ContentfulLivePreview.getProps({
+              entryId: banner.sys.id,
+              fieldId: 'text',
+            })}
+          >
             <RichText className="inline" richTextDocument={fields.text} />
             {fields.slug && fields.linkText && (
               <>

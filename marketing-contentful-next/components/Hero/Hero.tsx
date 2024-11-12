@@ -143,13 +143,7 @@ export const Hero = (hero: TypeHeroWithoutUnresolvableLinksResponse) => {
               />
             </div>
 
-            <div
-              className="relative sm:mx-auto xl:pl-12 max-w-full"
-              {...ContentfulLivePreview.getProps({
-                entryId: hero.sys.id,
-                fieldId: 'image',
-              })}
-            >
+            <div className="relative sm:mx-auto xl:pl-12 max-w-full">
               {hero.fields?.image?.fields?.file?.details.image && (
                 <Image
                   priority={true}
