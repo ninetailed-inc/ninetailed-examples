@@ -85,8 +85,9 @@ CONTENTFUL_MANAGEMENT_TOKEN= "Personal Access Token" # From Personal Access Toke
 
 ### Step 7. Final Remarks
 
-If you intend to make changes to the source code and publish it in the future, you should first disable the build command override in the project settings on Vercel.\
+If you intend to make changes to the source code and publish it in the future, you should first **disable the build command override** in the project settings on Vercel.\
 Otherwise, the template content is populated with each build and eventually overwrites your changes in Contentful.
+To do this in your Vercel dashboard navigate to your project => Settings => General in left sidebar => Build & Development Settings => Turn off override toggle.
 
 ## Developer Quick Start
 
@@ -102,7 +103,8 @@ Install all packages:
 yarn install
 ```
 
-Provide the required environment variables to your .env file:
+Provide the required environment variables to your .env.local file.
+Copy .env.local.example to .env.local and plug in your settings:
 
 ```bash
 NEXT_PUBLIC_NINETAILED_CLIENT_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
