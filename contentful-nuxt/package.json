@@ -1,6 +1,6 @@
 {
   "name": "@ninetailed/contentful-nuxt",
-  "private": true,
+  "license": "MIT",
   "type": "module",
   "engines": {
     "node": ">=18 <=20"
