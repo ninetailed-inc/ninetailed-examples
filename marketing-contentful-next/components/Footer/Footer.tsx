@@ -4,6 +4,7 @@ import { useNinetailed } from '@ninetailed/experience.js-next';
 
 import { RichText } from '@/components/RichText';
 import type { TypeFooterWithoutUnresolvableLinksResponse } from '@/types/TypeFooter';
+import { Button } from '../Button';
 
 export const Footer = (footer: TypeFooterWithoutUnresolvableLinksResponse) => {
   const { fields } = footer;
@@ -20,19 +21,20 @@ export const Footer = (footer: TypeFooterWithoutUnresolvableLinksResponse) => {
             if (!link) {
               return null;
             }
-            if (!link.fields.slug) {
+            if (link.fields.eventType) {
               return (
-                <div key={link.sys.id} className="px-5 py-2">
-                  <a
-                    className="text-base text-gray-300 hover:text-white"
-                    href="/"
+                <div className="px-5 py-2" key={link.sys.id}>
+                  <Button
+                    size="small"
+                    type="button"
+                    href={link.fields.slug}
+                    {...link.fields}
                   >
                     {link.fields.buttonText}
-                  </a>
+                  </Button>
                 </div>
               );
             }
-
             return (
               <div key={link.sys.id} className="px-5 py-2">
                 <Link
