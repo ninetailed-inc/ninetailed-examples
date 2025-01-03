@@ -14,7 +14,7 @@ export type ButtonVariant =
 const variantMap = {
   primary: 'bg-indigo-600 text-white',
   secondary: 'bg-indigo-100 text-indigo-700',
-  loud: 'bg-amber-600 text-white',
+  loud: 'bg-orange-700 text-white',
 };
 
 const sizeMap = {

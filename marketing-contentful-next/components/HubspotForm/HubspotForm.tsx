@@ -245,7 +245,7 @@ export const HubspotForm = (
             type="submit"
             value={isSubmitting ? 'Submitting...' : 'Submit'}
             className={classNames(
-              'inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75',
+              'inline-block bg-indigo-600 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75',
               { 'bg-opacity-20 hover:bg-opacity-20': isSubmitting }
             )}
           />
