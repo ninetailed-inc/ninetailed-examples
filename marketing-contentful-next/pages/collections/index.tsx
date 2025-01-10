@@ -222,7 +222,7 @@ export default function Plp({
                   <h2 className="text-lg font-medium text-gray-900">Filters</h2>
                   <button
                     type="button"
-                    className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-700"
                     onClick={() => setMobileFiltersOpen(false)}
                   >
                     <span className="sr-only">Close menu</span>
@@ -268,7 +268,7 @@ export default function Plp({
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
                                     type="checkbox"
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    className="h-4 w-4 rounded border-gray-300 text-blue-800 focus:ring-blue-700"
                                   />
                                   <label
                                     htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -404,7 +404,7 @@ export default function Plp({
                                 name={`${section.id}[]`}
                                 defaultValue={option.value}
                                 type="checkbox"
-                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                className="h-4 w-4 rounded border-gray-300 text-blue-800 focus:ring-blue-700"
                               />
                               <label
                                 htmlFor={`filter-${section.id}-${optionIdx}`}

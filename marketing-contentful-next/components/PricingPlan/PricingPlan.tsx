@@ -27,7 +27,7 @@ export const PricingPlan = (
           richTextDocument={title}
         />
         {mostPopular ? (
-          <p className="absolute top-0 py-1.5 px-4 bg-indigo-500 rounded-full text-xs font-semibold uppercase tracking-wide text-white transform -translate-y-1/2">
+          <p className="absolute top-0 py-1.5 px-4 bg-blue-700 rounded-full text-xs font-semibold uppercase tracking-wide text-white transform -translate-y-1/2">
             Most popular
           </p>
         ) : null}
@@ -52,7 +52,7 @@ export const PricingPlan = (
               return (
                 <li className="flex">
                   <CheckIcon
-                    className="flex-shrink-0 w-6 h-6 text-indigo-500"
+                    className="flex-shrink-0 w-6 h-6 text-blue-700"
                     aria-hidden="true"
                   />
                   <span className="ml-3 text-gray-500">{children}</span>

@@ -14,6 +14,10 @@ type FormValues = {
   ninetailed_environment: string;
 };
 
+function wait(milliseconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
 export const HubspotForm = (
   hubspotForm: TypeHubspotFormWithoutUnresolvableLinksResponse
 ) => {
@@ -31,59 +35,8 @@ export const HubspotForm = (
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${fields.hubspotPortalId}/${fields.hubspotFormId}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            fields: [
-              {
-                objectTypeId: '0-1',
-                name: 'firstname',
-                value: data.firstname,
-              },
-              {
-                objectTypeId: '0-1',
-                name: 'lastname',
-                value: data.lastname,
-              },
-              {
-                objectTypeId: '0-2',
-                name: 'name',
-                value: data.companyname,
-              },
-              {
-                objectTypeId: '0-1',
-                name: 'companysize',
-                value: data.companysize,
-              },
-              {
-                objectTypeId: '0-1',
-                name: 'email',
-                value: data.email,
-              },
-              {
-                objectTypeId: '0-1',
-                name: 'ninetailedid',
-                value: data.ninetailedid,
-              },
-              {
-                objectTypeId: '0-1',
-                name: 'ninetailed_organization_id',
-                value: data.ninetailed_organization_id,
-              },
-              {
-                objectTypeId: '0-1',
-                name: 'ninetailed_environment',
-                value: data.ninetailed_environment,
-              },
-            ],
-          }),
-        }
-      );
+      await wait(2000);
+      console.log('ding after 2 seconds');
       const {
         // eslint-disable-next-line
         ninetailedid,
@@ -134,11 +87,11 @@ export const HubspotForm = (
               </label>
               <input
                 id="firstname"
-                className="border-2 h-10 px-3 rounded focus:outline-amber-500 border-indigo-300"
+                className="border-2 h-10 px-3 rounded focus:outline-purple-600 border-blue-300"
                 {...register('firstname', { required: true })}
               />
               {errors.firstname && (
-                <p className="text-orange-500 text-sm">
+                <p className="text-purple-600 text-sm">
                   First name is required.
                 </p>
               )}
@@ -149,11 +102,11 @@ export const HubspotForm = (
               </label>
               <input
                 id="lastname"
-                className="border-2 h-10 px-3 rounded focus:outline-amber-500 border-indigo-300"
+                className="border-2 h-10 px-3 rounded focus:outline-purple-600 border-blue-300"
                 {...register('lastname', { required: true })}
               />
               {errors.lastname && (
-                <p className="text-orange-500 text-sm">
+                <p className="text-purple-600 text-sm">
                   Last name is required.
                 </p>
               )}
@@ -165,11 +118,11 @@ export const HubspotForm = (
             </label>
             <input
               id="companyname"
-              className="border-2 h-10 px-3 rounded focus:outline-amber-500 border-indigo-300"
+              className="border-2 h-10 px-3 rounded focus:outline-purple-600 border-blue-300"
               {...register('companyname', { required: true })}
             />
             {errors.companyname && (
-              <p className="text-orange-500 text-sm">
+              <p className="text-purple-600 text-sm">
                 Company name is required.
               </p>
             )}
@@ -180,7 +133,7 @@ export const HubspotForm = (
             </label>
             <select
               id="companysize"
-              className="border-2 h-10 px-3 rounded focus:outline-amber-500 border-indigo-300"
+              className="border-2 h-10 px-3 rounded focus:outline-purple-600 border-blue-300"
               {...register('companysize', { required: true })}
               defaultValue=""
             >
@@ -195,7 +148,7 @@ export const HubspotForm = (
               <option value="more_than_2000">More than 2000</option>
             </select>
             {errors.companysize && (
-              <p className="text-orange-500 text-sm">
+              <p className="text-purple-600 text-sm">
                 Company size is required.
               </p>
             )}
@@ -206,7 +159,7 @@ export const HubspotForm = (
             </label>
             <input
               id="email"
-              className="border-2 h-10 px-3 rounded focus:outline-amber-500 border-indigo-300"
+              className="border-2 h-10 px-3 rounded focus:outline-purple-600 border-blue-300"
               {...register('email', {
                 required: true,
                 pattern:
@@ -214,7 +167,7 @@ export const HubspotForm = (
               })}
             />
             {errors.email && (
-              <p className="text-orange-500 text-sm">Email is required.</p>
+              <p className="text-purple-600 text-sm">Email is required.</p>
             )}
           </fieldset>
           <input
@@ -245,7 +198,7 @@ export const HubspotForm = (
             type="submit"
             value={isSubmitting ? 'Submitting...' : 'Submit'}
             className={classNames(
-              'inline-block bg-indigo-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75',
+              'inline-block bg-blue-700 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75',
               { 'bg-opacity-20 hover:bg-opacity-20': isSubmitting }
             )}
           />

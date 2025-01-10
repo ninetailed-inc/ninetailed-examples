@@ -94,7 +94,7 @@ export const Product = ({
                   </div>
                   <div className="ml-4 flex">
                     {/* <button
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                      className="text-sm font-medium text-blue-800 hover:text-blue-700"
                     >
                       See all {reviewCount} reviews
                     </button> */}
@@ -164,10 +164,10 @@ export const Product = ({
                                   ? 'cursor-pointer focus:outline-none'
                                   : 'cursor-not-allowed opacity-25',
                                 active
-                                  ? 'ring-2 ring-indigo-500 ring-offset-2'
+                                  ? 'ring-2 ring-blue-700 ring-offset-2'
                                   : '',
                                 checked
-                                  ? 'border-transparent bg-indigo-600 text-white hover:bg-indigo-700'
+                                  ? 'border-transparent bg-blue-800 text-white hover:bg-blue-800'
                                   : 'border-gray-200 bg-white text-gray-900 hover:bg-gray-50',
                                 'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase flex-1'
                               )
@@ -186,7 +186,7 @@ export const Product = ({
 
                 <button
                   type="submit"
-                  className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-800 px-8 py-3 text-base font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2"
                   onClick={trackAddToCart}
                 >
                   Add to cart

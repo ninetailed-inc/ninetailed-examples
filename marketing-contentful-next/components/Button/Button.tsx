@@ -12,9 +12,9 @@ export type ButtonVariant =
   TypeButtonWithoutUnresolvableLinksResponse['fields']['variant'];
 
 const variantMap = {
-  primary: 'bg-indigo-600 text-white',
-  secondary: 'bg-indigo-100 text-indigo-700',
-  loud: 'bg-amber-600 text-white',
+  primary: 'bg-blue-800 text-white',
+  secondary: 'bg-blue-100 text-blue-800',
+  loud: 'bg-purple-600 text-white',
 };
 
 const sizeMap = {

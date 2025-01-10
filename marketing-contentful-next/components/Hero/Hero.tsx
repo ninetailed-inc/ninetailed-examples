@@ -93,10 +93,10 @@ export const Hero = (hero: TypeHeroWithoutUnresolvableLinksResponse) => {
                 className={classNames(
                   'absolute inset-y-0 left-1/2  rounded-l-3xl xl:left-80 xl:right-0',
                   {
-                    'bg-indigo-200 w-screen': expFlag === 0,
+                    'bg-blue-200 w-screen': expFlag === 0,
                   },
                   {
-                    'bg-amber-200 blur-2xl m-20 w-full': expFlag === 1,
+                    'bg-purple-200 blur-2xl m-20 w-full': expFlag === 1,
                   }
                 )}
               />
@@ -137,7 +137,7 @@ export const Hero = (hero: TypeHeroWithoutUnresolvableLinksResponse) => {
               </svg>
               <div
                 className={classNames(
-                  'absolute w-[440px] h-[440px] rounded-full bg-gradient-to-br from-indigo-600 to-indigo-100 bg-blend-normal blur-2xl',
+                  'absolute w-[440px] h-[440px] rounded-full bg-gradient-to-br from-blue-800 to-blue-100 bg-blend-normal blur-2xl',
                   { hidden: expFlag === 0 }
                 )}
               />
