@@ -21,6 +21,7 @@ function wait(milliseconds: number) {
 export const HubspotForm = (
   hubspotForm: TypeHubspotFormWithoutUnresolvableLinksResponse
 ) => {
+  //eslint-disable-next-line
   const { fields } = hubspotForm;
 
   const { profile } = useProfile();
