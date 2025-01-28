@@ -35,7 +35,7 @@ export class NinetailedHeapPlugin extends NinetailedAnalyticsPlugin {
   constructor(private options: NinetailedHeapPluginOptions = {}) {
     super({
       ...options.template,
-      event: 'nt_experience',
+      event: '{{experience.description}}',
       ninetailed_variant: '{{selectedVariantSelector}}',
       ninetailed_experience: '{{experience.id}}',
       ninetailed_experience_name: '{{experience.name}}',

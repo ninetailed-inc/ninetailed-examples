@@ -8,6 +8,7 @@ import {
 import { NinetailedPreviewPlugin } from '@ninetailed/experience.js-plugin-preview';
 import { NinetailedGoogleTagmanagerPlugin } from '@ninetailed/experience.js-plugin-google-tagmanager';
 import { NinetailedInsightsPlugin } from '@ninetailed/experience.js-plugin-insights';
+import { NinetailedHeapPlugin } from 'custom-plugins/ninetailed-heap';
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import SettingsProviderWrapper from '@/lib/SettingsProvider';
@@ -56,6 +57,15 @@ const B2BDemoApp = ({ Component, pageProps }: AppProps<CustomPageProps>) => {
           ...(process.env.NEXT_PUBLIC_GTM_ID
             ? [
                 new NinetailedGoogleTagmanagerPlugin({
+                  template: {
+                    ninetailed_audience_name: '{{ audience.name }}',
+                  },
+                }),
+              ]
+            : []),
+          ...(process.env.NEXT_PUBLIC_HEAP_ID
+            ? [
+                new NinetailedHeapPlugin({
                   template: {
                     ninetailed_audience_name: '{{ audience.name }}',
                   },
