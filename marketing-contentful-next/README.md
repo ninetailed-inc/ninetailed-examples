@@ -58,7 +58,7 @@ This project is deployed live [here](https://b2b.demo.ninetailed.io/).
 
 - Within your Ninetailed account, click on **API Key** in the sidebar.
 - Save the shown **API Key** (NEXT_PUBLIC_NINETAILED_CLIENT_ID) to your notes.
-- Similar to Contentful, Ninetailed offers two self-sufficient working environments. You can choose to work in the 'main' or 'development' environment by selecting either one from the droptown in the upper left of the interface. Choose either one, then note down your choice of either `main` or `development` as your **Ninetailed Environment Name** (NEXT_PUBLIC_NINETAILED_ENVIRONMENT).
+- Similar to Contentful, Ninetailed offers two self-sufficient working environments. You can choose to work in the 'main' or 'development' environment by selecting either one from the dropdown in the upper left of the interface. Choose either one, then note down your choice of either `main` or `development` as your **Ninetailed Environment Name** (NEXT_PUBLIC_NINETAILED_ENVIRONMENT).
 
 ### Step 5. Install Ninetailed in Contentful
 
