@@ -16,8 +16,8 @@ import {
   Transition,
   TransitionChild,
 } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
+import ChevronDownIcon from '@heroicons/react/20/solid/ChevronDownIcon';
 import { GetStaticProps } from 'next';
 import { getAllAudiences, getAllExperiences, getGlobalConfig } from '@/lib/api';
 // import get from 'lodash/get';
