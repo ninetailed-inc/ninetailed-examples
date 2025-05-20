@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { StarIcon } from '@heroicons/react/20/solid';
+import StarIcon from '@heroicons/react/20/solid/StarIcon';
 import { RadioGroup } from '@headlessui/react';
 import { ProductDetails } from '../ProductDetails';
 import { ProductPolicies } from '../ProductPolicies';

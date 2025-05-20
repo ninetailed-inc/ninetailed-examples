@@ -1,9 +1,7 @@
 import { RichText } from '../RichText';
 
-import {
-  CurrencyDollarIcon,
-  GlobeAmericasIcon,
-} from '@heroicons/react/24/outline';
+import CurrencyDollarIcon from '@heroicons/react/24/outline/CurrencyDollarIcon';
+import GlobeAmericasIcon from '@heroicons/react/24/outline/GlobeAmericasIcon';
 
 import type { TypeProductPolicyWithoutUnresolvableLinksResponse } from '@/types/TypeProductPolicy';
 

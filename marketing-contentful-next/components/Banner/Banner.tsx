@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { XMarkIcon } from '@heroicons/react/24/solid';
+import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon';
 
 import { RichText } from '@/components/RichText';
 import type { TypeBannerWithoutUnresolvableLinksResponse } from '@/types/TypeBanner';

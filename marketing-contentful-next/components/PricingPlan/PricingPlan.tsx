@@ -1,6 +1,6 @@
 import React from 'react';
 import { BLOCKS } from '@contentful/rich-text-types';
-import { CheckIcon } from '@heroicons/react/24/solid';
+import CheckIcon from '@heroicons/react/24/solid/CheckIcon';
 import { Button } from '@/components/Button';
 import { RichText } from '@/components/RichText';
 
