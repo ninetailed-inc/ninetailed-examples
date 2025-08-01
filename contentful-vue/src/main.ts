@@ -44,7 +44,8 @@ const experienceData = await contentfulClient.getEntries({
   include: 1
 })
 
-const experiences = experienceData.items as ExperienceEntryLike[]
+// TODO: rectify entry types between Contentful & experience.js SDKs
+const experiences = experienceData.items as unknown as ExperienceEntryLike[]
 
 const mappedExperiences = (experiences || [])
   .filter((entry) => ExperienceMapper.isExperienceEntry(entry))
@@ -55,7 +56,8 @@ const audienceData = await contentfulClient.getEntries({
   include: 1
 })
 
-const audiences = audienceData.items as AudienceEntryLike[]
+// TODO: rectify entry types between Contentful & experience.js SDKs
+const audiences = audienceData.items as unknown as AudienceEntryLike[]
 
 const mappedAudiences = (audiences || [])
   .filter((entry) => AudienceMapper.isAudienceEntry(entry))
@@ -66,12 +68,11 @@ app.use(VueNinetailed, {
   clientId: import.meta.env.VITE_NINETAILED_CLIENT_ID,
   environment: import.meta.env.VITE_NINETAILED_ENV,
   plugins: [
-    // TODO: NX version error
-    // new NinetailedPreviewPlugin({
-    //   experiences: mappedExperiences,
-    //   // @ts-ignore
-    //   audiences: mappedAudiences
-    // }),
+    new NinetailedPreviewPlugin({
+      experiences: mappedExperiences,
+      // @ts-ignore
+      audiences: mappedAudiences
+    }),
     new NinetailedInsightsPlugin(),
     new NinetailedGoogleTagmanagerPlugin()
   ]
@@ -81,7 +82,7 @@ app.use(VueNinetailed, {
 // We need this because of the polymorphism of Experience.vue and the way in which Vue resolves components
 // We cannot pass Vue components as functions in their entirety to children, as we might do in React; Vue wants explicit import and registration
 // We won't know ahead of time **exactly** what components Experience.vue might need, so we make any possibly used components global
-// Likely, this is already being done in customer implemenations using polymorphic content models
+// Likely, this is already being done in customer implementations using polymorphic content models
 
 // eslint-disable-next-line
 app.component('Hero', Hero)

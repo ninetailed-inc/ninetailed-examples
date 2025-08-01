@@ -13,19 +13,19 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@gtm-support/vue-gtm": "^3.0.1",
-    "@ninetailed/experience.js": "7.7.0",
-    "@ninetailed/experience.js-plugin-analytics": "7.7.0",
-    "@ninetailed/experience.js-plugin-google-tagmanager": "7.7.0",
-    "@ninetailed/experience.js-plugin-insights": "7.7.0",
-    "@ninetailed/experience.js-plugin-preview": "7.7.0",
-    "@ninetailed/experience.js-shared": "7.7.0",
-    "@ninetailed/experience.js-utils-contentful": "7.7.0",
-    "@vueuse/core": "^10.9.0",
-    "contentful": "^10.8.6",
+    "@gtm-support/vue-gtm": "^3.1.0",
+    "@ninetailed/experience.js": "7.17.0",
+    "@ninetailed/experience.js-plugin-analytics": "7.17.0",
+    "@ninetailed/experience.js-plugin-google-tagmanager": "7.17.0",
+    "@ninetailed/experience.js-plugin-insights": "7.17.0",
+    "@ninetailed/experience.js-plugin-preview": "7.17.0",
+    "@ninetailed/experience.js-shared": "7.17.0",
+    "@ninetailed/experience.js-utils-contentful": "7.17.0",
+    "@vueuse/core": "^13.6.0",
+    "contentful": "^11.7.15",
     "contentful-rich-text-vue-renderer": "^3.1.0",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue": "^3.5.18",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.3.3",
@@ -33,15 +33,15 @@
     "@types/node": "^20.11.28",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
-    "@vue/eslint-config-prettier": "^8.0.0",
-    "@vue/eslint-config-typescript": "^12.0.0",
-    "@vue/tsconfig": "^0.5.1",
-    "eslint": "^8.49.0",
-    "eslint-plugin-vue": "^9.17.0",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "@vue/tsconfig": "^0.7.0",
+    "eslint": "^9.32.0",
+    "eslint-plugin-vue": "^10.4.0",
     "npm-run-all2": "^6.1.2",
     "prettier": "^3.0.3",
     "typescript": "~5.4.0",
     "vite": "^5.1.6",
-    "vue-tsc": "^2.0.6"
+    "vue-tsc": "^3.0.4"
   }
 }

@@ -1,14 +1,10 @@
 <template>
-  <div
-    className="nt-cmp-marker"
-    style="
+  <div className="nt-cmp-marker" style="
       display: block !important;
       height: 0 !important;
       margin: 0 !important;
       padding: 0 !important;
-    "
-    ref="trackingComponent"
-  />
+    " ref="trackingComponent" />
 </template>
 
 <script setup lang="ts">
@@ -32,6 +28,7 @@ watchEffect((onCleanup) => {
   const element = trackingComponent.value
   if (element !== null) {
     ninetailed.observeElement({
+      componentType: 'Entry',
       element,
       experience: props.experience,
       audience: props.experience?.audience,
