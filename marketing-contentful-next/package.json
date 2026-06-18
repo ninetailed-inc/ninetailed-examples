@@ -54,7 +54,7 @@
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "lodash": "4.17.21",
-    "next": "13.4.8",
+    "next": "14.2.35",
     "next-seo": "6.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -71,7 +71,7 @@
     "autoprefixer": "10.4.4",
     "cf-content-types-generator": "^2.15.5",
     "eslint": "^8.28.0",
-    "eslint-config-next": "12.1.6",
+    "eslint-config-next": "14.2.35",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
@@ -79,6 +79,7 @@
     "postcss": "8.4.12",
     "prettier": "2.6.2",
     "tailwindcss": "3.0.23",
+    "tsutils": "^3.21.0",
     "typescript": "5.6.2"
   }
 }

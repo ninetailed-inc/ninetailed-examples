@@ -26,7 +26,7 @@ export const LyticsTracker: React.FC<React.PropsWithChildren> = () => {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, []);
+  }, [router.asPath, router.events]);
 
   return null;
 };
