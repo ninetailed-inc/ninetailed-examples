@@ -1,14 +1,9 @@
-packages:
-  - .
-
 overrides:
   form-data: 4.0.6
 
 allowBuilds:
+  '@parcel/watcher': set this to true or false
   contentful: set this to true or false
   esbuild: set this to true or false
-
-onlyBuiltDependencies:
-  - contentful
-  - esbuild
-  - vue-demi
+  sharp: set this to true or false
+  vue-demi: set this to true or false
