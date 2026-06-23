@@ -55,6 +55,9 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1"
   },
+  "resolutions": {
+    "form-data": "4.0.6"
+  },
   "devDependencies": {
     "@types/dlv": "^1.0.0",
     "@types/lodash": "4.14.181",
