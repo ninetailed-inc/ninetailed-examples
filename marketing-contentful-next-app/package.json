@@ -61,7 +61,7 @@
   "devDependencies": {
     "@types/dlv": "^1.0.0",
     "@types/lodash": "4.17.24",
-    "@types/node": "18.0.0",
+    "@types/node": "18.19.130",
     "@types/react": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
