@@ -70,8 +70,8 @@ importers:
         specifier: ^14.6.0
         version: 14.9.0(eslint-plugin-vue@10.9.2(@typescript-eslint/parser@8.62.0(eslint@9.39.4(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3))(eslint@9.39.4(supports-color@7.2.0))(vue-eslint-parser@10.4.1(eslint@9.39.4(supports-color@7.2.0))(supports-color@7.2.0)))(eslint@9.39.4(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
       '@vue/tsconfig':
-        specifier: ^0.7.0
-        version: 0.7.0(typescript@5.9.3)(vue@3.5.38(typescript@5.9.3))
+        specifier: ^0.9.0
+        version: 0.9.1(typescript@5.9.3)(vue@3.5.38(typescript@5.9.3))
       eslint:
         specifier: ^9.32.0
         version: 9.39.4(supports-color@7.2.0)
@@ -833,10 +833,10 @@ packages:
   '@vue/shared@3.5.38':
     resolution: {integrity: sha512-FTW0AFZNaK5/mOqvGBwVfUlNLU38TiQn4+DQgIFUnrBBJQ1crMJ82yeGQLV5jyKFsO8yRukpbuP7x+nRbH6aug==}
 
-  '@vue/tsconfig@0.7.0':
-    resolution: {integrity: sha512-ku2uNz5MaZ9IerPPUyOHzyjhXoX2kVJaVf7hL315DC17vS6IiZRmmCPfggNbU16QTvM80+uYYy3eYJB59WCtvg==}
+  '@vue/tsconfig@0.9.1':
+    resolution: {integrity: sha512-buvjm+9NzLCJL29KY1j1991YYJ5e6275OiK+G4jtmfIb+z4POywbdm0wXusT9adVWqe0xqg70TbI7+mRx4uU9w==}
     peerDependencies:
-      typescript: 5.x
+      typescript: '>= 5.8'
       vue: ^3.4.0
     peerDependenciesMeta:
       typescript:
@@ -2671,7 +2671,7 @@ snapshots:
 
   '@vue/shared@3.5.38': {}
 
-  '@vue/tsconfig@0.7.0(typescript@5.9.3)(vue@3.5.38(typescript@5.9.3))':
+  '@vue/tsconfig@0.9.1(typescript@5.9.3)(vue@3.5.38(typescript@5.9.3))':
     optionalDependencies:
       typescript: 5.9.3
       vue: 3.5.38(typescript@5.9.3)
