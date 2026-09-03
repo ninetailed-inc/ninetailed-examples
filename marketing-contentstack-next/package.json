@@ -22,7 +22,7 @@
     "@contentstack/utils": "^1.2.0",
     "@heroicons/react": "1.0.6",
     "@ninetailed/experience.js-next": "7.6.0",
-    "@ninetailed/experience.js-node": "7.6.0",
+    "@ninetailed/experience.js-node": "7.26.0",
     "@ninetailed/experience.js-plugin-google-tagmanager": "7.6.0",
     "@ninetailed/experience.js-plugin-insights": "7.6.0",
     "@ninetailed/experience.js-plugin-preview": "7.6.0",
