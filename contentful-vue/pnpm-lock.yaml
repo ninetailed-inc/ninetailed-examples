@@ -12,8 +12,8 @@ importers:
         specifier: ^3.1.0
         version: 3.2.0(vue@3.5.38(typescript@5.9.3))
       '@ninetailed/experience.js':
-        specifier: 7.17.0
-        version: 7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)
+        specifier: 7.26.0
+        version: 7.26.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)
       '@ninetailed/experience.js-plugin-analytics':
         specifier: 7.17.0
         version: 7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)
@@ -477,6 +477,9 @@ packages:
   '@ninetailed/experience.js-plugin-analytics@7.17.0':
     resolution: {integrity: sha512-UVOPR94ToBasI7FJ/FSOfLStVWYYwsC0bVutYEisjoPVhRLMoyzTRxWRfsITCTjrFDc0C3SbchTtibZI5ftq4w==}
 
+  '@ninetailed/experience.js-plugin-analytics@7.26.0':
+    resolution: {integrity: sha512-I2Z3GgU82SVtkizOH+9TS/KwVdxyL80o6Bww9dpNz+BfEw+IhMXNbe79MjzU0pIV3TaAPulB3Kc+5Jm7Esiu8Q==}
+
   '@ninetailed/experience.js-plugin-google-tagmanager@7.17.0':
     resolution: {integrity: sha512-ClgSmpahLMZTSVgCk3GeHEQbBXH2swUNXBgjh+Sd1DIlnj/vG0pif9CuNwNzjIL2Hho6D0eB0T8gRIUF3FdTXw==}
 
@@ -492,6 +495,9 @@ packages:
   '@ninetailed/experience.js-shared@7.17.0':
     resolution: {integrity: sha512-bDX0bwcuCW2k15NWrp1osWC69ELkme2BoUeEfPvQoRyw63SRbxOacdADmrUQQ4d75r6HorTuj6na/mpL6LE11A==}
 
+  '@ninetailed/experience.js-shared@7.26.0':
+    resolution: {integrity: sha512-0JRIYqe2dTJ8QGcjX8tPxp1LNhGKRBdlAtNFRuS7yRkKpZwb1jIwXuEZShLiR8d9lMoatMSahDi6KfqScLlaOg==}
+
   '@ninetailed/experience.js-utils-contentful@7.17.0':
     resolution: {integrity: sha512-pUhok90r22gwjdf4R1qNtS8/hF1LjgLtAEQdepcI/Zb02pLyOAu8+YsT33s6KGcKzGWhepfzR66tXJLJz7ZUhg==}
 
@@ -500,6 +506,9 @@ packages:
 
   '@ninetailed/experience.js@7.17.0':
     resolution: {integrity: sha512-GM+5Ar+iODTC+zydw6JcpSyBsC1AgENJMJHsYtXaQzGORtcSkWXXqYe+3Wb2wGIBYv5Jzeb9hIpnm2FB+8gTiA==}
+
+  '@ninetailed/experience.js@7.26.0':
+    resolution: {integrity: sha512-R9i7Jrjvhtybm+6j5TlAy1Jk+CjdHjWGxJ3l1TKwaZ8hR6gGYl0k4t/QbUFXbroZ3OTYPa+MN6EcxOjpvcK1zw==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -763,6 +772,11 @@ packages:
 
   '@volar/typescript@2.4.28':
     resolution: {integrity: sha512-Ja6yvWrbis2QtN4ClAKreeUZPVYMARDYZl9LMEv1iQ1QdepB6wn0jTRxA9MftYmYa4DQ4k/DaSZpFPUfxl8giw==}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   '@vue/babel-helper-vue-transform-on@1.5.0':
     resolution: {integrity: sha512-0dAYkerNhhHutHZ34JtTl2czVQHUNWv6xEbkdF5W+Yrv5pCWsqjeORdOgbtW2I9gWlt+wBmVn+ttqN9ZxR5tzA==}
@@ -1150,6 +1164,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -2233,6 +2248,17 @@ snapshots:
       - '@types/dlv'
       - encoding
 
+  '@ninetailed/experience.js-plugin-analytics@7.26.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)':
+    dependencies:
+      '@anatine/zod-mock': 3.8.1(@faker-js/faker@7.6.0)
+      '@ninetailed/experience.js-shared': 7.26.0(@faker-js/faker@7.6.0)
+      analytics: 0.8.1(@types/dlv@1.1.5)
+      zod: 3.23.0
+    transitivePeerDependencies:
+      - '@faker-js/faker'
+      - '@types/dlv'
+      - encoding
+
   '@ninetailed/experience.js-plugin-google-tagmanager@7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)':
     dependencies:
       '@ninetailed/experience.js': 7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)
@@ -2291,6 +2317,20 @@ snapshots:
       - '@faker-js/faker'
       - encoding
 
+  '@ninetailed/experience.js-shared@7.26.0(@faker-js/faker@7.6.0)':
+    dependencies:
+      '@anatine/zod-mock': 3.8.1(@faker-js/faker@7.6.0)
+      async-retry: 1.3.3
+      diary: 0.4.4
+      i18n-iso-countries: 7.5.0
+      jest-fetch-mock: 3.0.3
+      murmurhash-js: 1.0.0
+      ts-toolbelt: 9.6.0
+      zod: 3.23.0
+    transitivePeerDependencies:
+      - '@faker-js/faker'
+      - encoding
+
   '@ninetailed/experience.js-utils-contentful@7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)':
     dependencies:
       '@contentful/rich-text-types': 16.2.0
@@ -2320,6 +2360,17 @@ snapshots:
     dependencies:
       '@ninetailed/experience.js-plugin-analytics': 7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)
       '@ninetailed/experience.js-shared': 7.17.0(@faker-js/faker@7.6.0)
+      analytics: 0.8.1(@types/dlv@1.1.5)
+      uuid: 9.0.0
+    transitivePeerDependencies:
+      - '@faker-js/faker'
+      - '@types/dlv'
+      - encoding
+
+  '@ninetailed/experience.js@7.26.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)':
+    dependencies:
+      '@ninetailed/experience.js-plugin-analytics': 7.26.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)
+      '@ninetailed/experience.js-shared': 7.26.0(@faker-js/faker@7.6.0)
       analytics: 0.8.1(@types/dlv@1.1.5)
       uuid: 9.0.0
     transitivePeerDependencies:
@@ -2548,11 +2599,13 @@ snapshots:
 
   '@volar/source-map@2.4.28': {}
 
-  '@volar/typescript@2.4.28':
+  '@volar/typescript@2.4.28(typescript@5.9.3)':
     dependencies:
       '@volar/language-core': 2.4.28
       path-browserify: 1.0.1
       vscode-uri: 3.1.0
+    optionalDependencies:
+      typescript: 5.9.3
 
   '@vue/babel-helper-vue-transform-on@1.5.0': {}
 
@@ -3616,7 +3669,7 @@ snapshots:
 
   vue-tsc@3.3.5(typescript@5.9.3):
     dependencies:
-      '@volar/typescript': 2.4.28
+      '@volar/typescript': 2.4.28(typescript@5.9.3)
       '@vue/language-core': 3.3.5
       typescript: 5.9.3
 
