@@ -380,6 +380,16 @@
   resolved "https://registry.yarnpkg.com/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-14.2.33.tgz#f1a40062530c17c35a86d8c430b3ae465eb7cea1"
   integrity sha512-nOjfZMy8B94MdisuzZo9/57xuFVLHJaDj5e/xrduJp9CV2/HrfxTRH2fbyLe+K9QT41WBLUd4iXX3R7jBp0EUg==
 
+"@ninetailed/experience.js-plugin-analytics@7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-analytics/-/experience.js-plugin-analytics-7.26.0.tgz#011a8084cd6afc10ac4ea9c3780d775a7ca6a91f"
+  integrity sha512-I2Z3GgU82SVtkizOH+9TS/KwVdxyL80o6Bww9dpNz+BfEw+IhMXNbe79MjzU0pIV3TaAPulB3Kc+5Jm7Esiu8Q==
+  dependencies:
+    "@anatine/zod-mock" "3.8.1"
+    "@ninetailed/experience.js-shared" "7.26.0"
+    analytics "0.8.1"
+    zod "3.23.0"
+
 "@ninetailed/experience.js-plugin-analytics@7.7.0":
   version "7.7.0"
   resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-plugin-analytics/-/experience.js-plugin-analytics-7.7.0.tgz#9ec417aa370cf23a397d1111cc1aff13041f14be"
@@ -438,6 +448,20 @@
     react-intersection-observer "8.34.0"
     react-is "18.2.0"
 
+"@ninetailed/experience.js-shared@7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-shared/-/experience.js-shared-7.26.0.tgz#369173716cd28879a108c7cbf7d98bb4f1c5b172"
+  integrity sha512-0JRIYqe2dTJ8QGcjX8tPxp1LNhGKRBdlAtNFRuS7yRkKpZwb1jIwXuEZShLiR8d9lMoatMSahDi6KfqScLlaOg==
+  dependencies:
+    "@anatine/zod-mock" "3.8.1"
+    async-retry "1.3.3"
+    diary "0.4.4"
+    i18n-iso-countries "7.5.0"
+    jest-fetch-mock "3.0.3"
+    murmurhash-js "1.0.0"
+    ts-toolbelt "9.6.0"
+    zod "3.23.0"
+
 "@ninetailed/experience.js-shared@7.7.0":
   version "7.7.0"
   resolved "https://registry.yarnpkg.com/@ninetailed/experience.js-shared/-/experience.js-shared-7.7.0.tgz#57be800190e9de479a368be6f840fa16d657409a"
@@ -473,6 +497,16 @@
     "@ninetailed/experience.js" "7.7.0"
     "@ninetailed/experience.js-shared" "7.7.0"
     zod "3.23.0"
+
+"@ninetailed/experience.js@7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@ninetailed/experience.js/-/experience.js-7.26.0.tgz#04bacc947d5e76b117e6ba98db9d9f91fbe9d626"
+  integrity sha512-R9i7Jrjvhtybm+6j5TlAy1Jk+CjdHjWGxJ3l1TKwaZ8hR6gGYl0k4t/QbUFXbroZ3OTYPa+MN6EcxOjpvcK1zw==
+  dependencies:
+    "@ninetailed/experience.js-plugin-analytics" "7.26.0"
+    "@ninetailed/experience.js-shared" "7.26.0"
+    analytics "0.8.1"
+    uuid "9.0.0"
 
 "@ninetailed/experience.js@7.7.0":
   version "7.7.0"
