@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^16.3.0",
-    "@ninetailed/experience.js": "7.7.0",
+    "@ninetailed/experience.js": "7.26.0",
     "@ninetailed/experience.js-plugin-google-tagmanager": "7.7.0",
     "@ninetailed/experience.js-plugin-insights": "7.7.0",
     "@ninetailed/experience.js-plugin-preview": "7.7.0",
