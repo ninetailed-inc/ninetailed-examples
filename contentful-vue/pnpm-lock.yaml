@@ -12,8 +12,8 @@ importers:
         specifier: ^3.1.0
         version: 3.2.0(vue@3.5.38(typescript@5.9.3))
       '@ninetailed/experience.js':
-        specifier: 7.17.0
-        version: 7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)
+        specifier: 7.27.0
+        version: 7.27.0(@types/dlv@1.1.5)
       '@ninetailed/experience.js-plugin-analytics':
         specifier: 7.17.0
         version: 7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)
@@ -477,6 +477,9 @@ packages:
   '@ninetailed/experience.js-plugin-analytics@7.17.0':
     resolution: {integrity: sha512-UVOPR94ToBasI7FJ/FSOfLStVWYYwsC0bVutYEisjoPVhRLMoyzTRxWRfsITCTjrFDc0C3SbchTtibZI5ftq4w==}
 
+  '@ninetailed/experience.js-plugin-analytics@7.27.0':
+    resolution: {integrity: sha512-SUAHhI8/bWR8MgNHcNnJxDgntCoSxOsO26VMIbUehikVHayW3/Mi5SHfIXP4vdMbQxobwi71dG5DOaj1jo5bvw==}
+
   '@ninetailed/experience.js-plugin-google-tagmanager@7.17.0':
     resolution: {integrity: sha512-ClgSmpahLMZTSVgCk3GeHEQbBXH2swUNXBgjh+Sd1DIlnj/vG0pif9CuNwNzjIL2Hho6D0eB0T8gRIUF3FdTXw==}
 
@@ -492,6 +495,9 @@ packages:
   '@ninetailed/experience.js-shared@7.17.0':
     resolution: {integrity: sha512-bDX0bwcuCW2k15NWrp1osWC69ELkme2BoUeEfPvQoRyw63SRbxOacdADmrUQQ4d75r6HorTuj6na/mpL6LE11A==}
 
+  '@ninetailed/experience.js-shared@7.27.0':
+    resolution: {integrity: sha512-GYmMYZ28OKyRgPhveOQRmxQviGojd7WQ3zlNkGMYBpSLix/VFDRkcve3Kx3vO+XkY++dLxMhV/UL5EyEFY3OVA==}
+
   '@ninetailed/experience.js-utils-contentful@7.17.0':
     resolution: {integrity: sha512-pUhok90r22gwjdf4R1qNtS8/hF1LjgLtAEQdepcI/Zb02pLyOAu8+YsT33s6KGcKzGWhepfzR66tXJLJz7ZUhg==}
 
@@ -500,6 +506,9 @@ packages:
 
   '@ninetailed/experience.js@7.17.0':
     resolution: {integrity: sha512-GM+5Ar+iODTC+zydw6JcpSyBsC1AgENJMJHsYtXaQzGORtcSkWXXqYe+3Wb2wGIBYv5Jzeb9hIpnm2FB+8gTiA==}
+
+  '@ninetailed/experience.js@7.27.0':
+    resolution: {integrity: sha512-OYDGs27S7ORISpu3EVj3v5WzhkgoGOPsL2TRQxzekQQ3W4RUlHxhLa27bv+yyIgWRhZjFMdemeUZTVvVsFqS4Q==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1150,6 +1159,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -1840,6 +1850,9 @@ packages:
   zod@3.23.0:
     resolution: {integrity: sha512-OFLT+LTocvabn6q76BTwVB0hExEBS0IduTr3cqZyMqEDbOnYmcU+y0tUAYbND4uwclpBGi4I4UUBGzylWpjLGA==}
 
+  zod@4.6.7:
+    resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
+
   zoid@9.0.86:
     resolution: {integrity: sha512-hWcLj0s4cHKErUUn0Nz2bvuCStA9/y3sz/0gFxvAhompu9v54i+Pik0Kx39pWPB8qbiEN7MRyHohv1ZERlHeSg==}
 
@@ -2233,6 +2246,15 @@ snapshots:
       - '@types/dlv'
       - encoding
 
+  '@ninetailed/experience.js-plugin-analytics@7.27.0(@types/dlv@1.1.5)':
+    dependencies:
+      '@ninetailed/experience.js-shared': 7.27.0
+      analytics: 0.8.1(@types/dlv@1.1.5)
+      zod: 4.6.7
+    transitivePeerDependencies:
+      - '@types/dlv'
+      - encoding
+
   '@ninetailed/experience.js-plugin-google-tagmanager@7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)':
     dependencies:
       '@ninetailed/experience.js': 7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)
@@ -2291,6 +2313,18 @@ snapshots:
       - '@faker-js/faker'
       - encoding
 
+  '@ninetailed/experience.js-shared@7.27.0':
+    dependencies:
+      async-retry: 1.3.3
+      diary: 0.4.4
+      i18n-iso-countries: 7.5.0
+      jest-fetch-mock: 3.0.3
+      murmurhash-js: 1.0.0
+      ts-toolbelt: 9.6.0
+      zod: 4.6.7
+    transitivePeerDependencies:
+      - encoding
+
   '@ninetailed/experience.js-utils-contentful@7.17.0(@faker-js/faker@7.6.0)(@types/dlv@1.1.5)(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)':
     dependencies:
       '@contentful/rich-text-types': 16.2.0
@@ -2324,6 +2358,16 @@ snapshots:
       uuid: 9.0.0
     transitivePeerDependencies:
       - '@faker-js/faker'
+      - '@types/dlv'
+      - encoding
+
+  '@ninetailed/experience.js@7.27.0(@types/dlv@1.1.5)':
+    dependencies:
+      '@ninetailed/experience.js-plugin-analytics': 7.27.0(@types/dlv@1.1.5)
+      '@ninetailed/experience.js-shared': 7.27.0
+      analytics: 0.8.1(@types/dlv@1.1.5)
+      uuid: 9.0.0
+    transitivePeerDependencies:
       - '@types/dlv'
       - encoding
 
@@ -3656,6 +3700,8 @@ snapshots:
   zalgo-promise@1.0.48: {}
 
   zod@3.23.0: {}
+
+  zod@4.6.7: {}
 
   zoid@9.0.86:
     dependencies:
