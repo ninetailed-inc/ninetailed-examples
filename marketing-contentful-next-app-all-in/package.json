@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "@contentful/live-preview": "2.4.5",
-    "@contentful/rich-text-react-renderer": "15.12.1",
-    "@contentful/rich-text-types": "15.14.1",
+    "@contentful/rich-text-react-renderer": "15.22.11",
+    "@contentful/rich-text-types": "15.15.1",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@ninetailed/experience.js": "7.7.0",
