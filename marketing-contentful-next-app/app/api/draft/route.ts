@@ -28,7 +28,7 @@ export async function GET(req: Request) {
   }
 
   // Enable Draft Mode by setting the cookies
-  draftMode().enable();
+  (await draftMode()).enable();
 
   const url = page.fields.slug === '/' ? '/' : `/${slug}`;
 
