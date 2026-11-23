@@ -10,10 +10,10 @@ export const dynamicParams = false;
 export default async function Page({
   params,
 }: {
-  params: { slug: string[] | undefined };
+  params: Promise<{ slug: string[] | undefined }>;
 }) {
-  const { isEnabled } = draftMode();
-  const rawSlug = get(params, 'slug', []) as string[];
+  const { isEnabled } = await draftMode();
+  const rawSlug = get(await params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
   const [page, config] = await Promise.all([
     getPage({
@@ -62,10 +62,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string[] | undefined };
+  params: Promise<{ slug: string[] | undefined }>;
 }) {
-  const { isEnabled } = draftMode();
-  const rawSlug = get(params, 'slug', []) as string[];
+  const { isEnabled } = await draftMode();
+  const rawSlug = get(await params, 'slug', []) as string[];
   const slug = rawSlug.join('/');
   const page = await getPage({
     preview: isEnabled,
@@ -82,11 +82,11 @@ export async function generateMetadata({
     title: seo?.fields.title,
     description: seo?.fields.description,
     robots: {
-      follow: !seo?.fields.no_follow ?? false,
-      index: !seo?.fields.no_index ?? false,
+      follow: !seo?.fields.no_follow,
+      index: !seo?.fields.no_index,
       googleBot: {
-        follow: !seo?.fields.no_follow ?? false,
-        index: !seo?.fields.no_index ?? false,
+        follow: !seo?.fields.no_follow,
+        index: !seo?.fields.no_index,
       },
     },
   };

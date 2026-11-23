@@ -2,7 +2,7 @@
   "name": "@ninetailed/marketing-contentful-next-app-all-in",
   "version": "0.1.0",
   "engines": {
-    "node": ">=18 <=20"
+    "node": ">=18.18 <=26"
   },
   "license": "MIT",
   "scripts": {
@@ -50,10 +50,10 @@
     "graphql-request": "^6.1.0",
     "install": "^0.13.0",
     "lodash": "4.17.21",
-    "next": "14.2.35",
+    "next": "15.5.29",
     "next-seo": "6.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-hook-form": "^7.45.1",
     "server-only-context": "^0.1.0",
     "uuid": "^9.0.1"
@@ -65,13 +65,14 @@
     "@types/dlv": "^1.0.0",
     "@types/lodash": "4.17.24",
     "@types/node": "18.0.0",
-    "@types/react": "^18.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
     "autoprefixer": "10.5.2",
     "eslint": "^8.28.0",
-    "eslint-config-next": "14.2.35",
+    "eslint-config-next": "15.5.29",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.5.1",

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ipAddress } from '@vercel/edge';
+import { geolocation, ipAddress } from '@vercel/edge';
 import { NINETAILED_ANONYMOUS_ID_COOKIE } from '@ninetailed/experience.js-shared';
 import {
   createRequestContext,
@@ -29,6 +29,7 @@ export const config = {
 };
 
 export default async function middleware(req: NextRequest) {
+  const geo = geolocation(req);
   console.log('request', req.url);
   const { profile, experiences } = await sendPageEvent({
     ctx: createRequestContext(req),
@@ -37,10 +38,10 @@ export default async function middleware(req: NextRequest) {
     cookies: req.cookies,
     ip: ipAddress(req),
     location: {
-      city: req.geo?.city,
-      region: req.geo?.region,
-      country: req.geo?.country,
-      continent: getContinentCode(req.geo?.country),
+      city: geo.city,
+      region: geo.region,
+      country: geo.country,
+      continent: getContinentCode(geo.country),
     },
   });
 
